@@ -25,7 +25,7 @@ public partial class DutyRotation
 	/// <summary>
 	/// Has a status that is important to the main rotation and should prevent Duty Actions from being executed.
 	/// </summary>
-	public static bool HasLockoutStatus => StatusHelper.PlayerHasStatus(true, StatusHelper.RotationLockoutStatus) && InCombat;
+	public static bool HasLockoutStatus => (StatusHelper.PlayerHasStatus(true, StatusHelper.RotationLockoutStatus) && InCombat) || IsInMeleeCombo;
 
 	/// <summary>
 	/// Able to execute Cleansing.
@@ -51,6 +51,42 @@ public partial class DutyRotation
 	///
 	/// </summary>
 	public static bool NeedsViperBuffs => DataCenter.Job == Job.VPR && (!ViperRotation.HasHunterAndSwift || ViperRotation.WillSwiftEnd || ViperRotation.WillHunterEnd);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public static bool IsInMeleeCombo
+	{
+		get
+		{
+			if (IsLastComboAction(ActionID.RipostePvE, ActionID.EnchantedRipostePvE, ActionID.EnchantedRipostePvE_45960))
+			{
+				return true;
+			}
+
+			if (IsLastComboAction(ActionID.ZwerchhauPvE, ActionID.EnchantedZwerchhauPvE, ActionID.EnchantedZwerchhauPvE_45961))
+			{
+				return true;
+			}
+
+			if (IsLastComboAction(ActionID.RedoublementPvE, ActionID.EnchantedRedoublementPvE, ActionID.EnchantedRedoublementPvE_45962))
+			{
+				return true;
+			}
+
+			if (IsLastComboAction(ActionID.VerholyPvE, ActionID.VerflarePvE))
+			{
+				return true;
+			}
+
+			if (IsLastComboAction(ActionID.ScorchPvE))
+			{
+				return true;
+			}
+
+			return false;
+		}
+	}
 	#endregion
 
 	#region Freelancer
@@ -425,10 +461,12 @@ public partial class DutyRotation
 	{
 		setting.ActionCheck = () => CannoneerLevel >= 6;
 		setting.TargetStatusProvide = [StatusID.SilverSickness];
+		setting.StatusFromSelf = false;
 		setting.IsFriendly = false;
 		setting.CreateConfig = () => new ActionConfig()
 		{
 			AoeCount = 1,
+			StatusRefreshGcdCount = 6,
 		};
 	}
 	#endregion
@@ -876,6 +914,12 @@ public partial class DutyRotation
 	{
 		setting.ActionCheck = () => MysticKnightLevel >= 4;
 		setting.IsFriendly = false;
+		setting.TargetStatusProvide = [StatusID.BlazingBane];
+		setting.StatusFromSelf = false;
+		setting.CreateConfig = () => new ActionConfig()
+		{
+			StatusRefreshGcdCount = 6,
+		};
 	}
 
 	#endregion
@@ -1300,15 +1344,6 @@ public partial class DutyRotation
 	#endregion
 
 	#region Blue Mage
-
-	//public static bool AeroIiUnlocked => Service.GetAdjustedActionId(ActionID.OccultAeroPvE) == ActionID.OccultAeroIiPvE;
-
-	//public static bool AeroIiiUnlocked => Service.GetAdjustedActionId(ActionID.OccultAeroPvE) == ActionID.OccultAeroIiiPvE;
-
-	/// <summary>
-	///
-	/// </summary>
-	public static bool WhiteWindUnlocked => false;
 
 	static partial void ModifyOccultAeroPvE(ref ActionSetting setting)
 	{
