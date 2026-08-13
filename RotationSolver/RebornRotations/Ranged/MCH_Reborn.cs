@@ -1,4 +1,5 @@
-﻿namespace RotationSolver.RebornRotations.Ranged;
+﻿using RotationSolver.Basic.Localization;
+namespace RotationSolver.RebornRotations.Ranged;
 
 [Rotation("Reborn", CombatType.PvE, GameVersion = "7.55")]
 [SourceCode(Path = "main/RebornRotations/Ranged/MCH_Reborn.cs")]
@@ -470,8 +471,8 @@ public sealed class MCH_Reborn : MachinistRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"QueenStep: {_currentStep}");
-		ImGui.Text($"Step Pair Found: {foundStepPair}");
+		ImGui.Text(string.Format(Loc.T("QueenStep: {0}"), _currentStep));
+		ImGui.Text(string.Format(Loc.T("Step Pair Found: {0}"), foundStepPair));
 	}
 	#endregion
 

@@ -241,26 +241,26 @@ public partial class SamuraiRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("HasSetsu: " + HasSetsu.ToString());
-		ImGui.Text("HasGetsu: " + HasGetsu.ToString());
-		ImGui.Text("HasKa: " + HasKa.ToString());
-		ImGui.Text("Kenki: " + Kenki.ToString());
-		ImGui.Text("MeditationStacks: " + MeditationStacks.ToString());
-		ImGui.Text("Kaeshi: " + Kaeshi.ToString());
-		ImGui.Text("SenCount: " + SenCount.ToString());
-		ImGui.Text("HasMoon: " + HasMoon.ToString());
-		ImGui.Text("HasFlower: " + HasFlower.ToString());
-		ImGui.Text("HaveMeikyoShisui: " + HasMeikyoShisui.ToString());
-		ImGui.Text("HiganbanaReady: " + HiganbanaReady.ToString());
-		ImGui.Text("TenkaGokenReady: " + TenkaGokenReady.ToString());
-		ImGui.Text("MidareSetsugekkaReady: " + MidareSetsugekkaReady.ToString());
-		ImGui.Text("KaeshiGokenReady: " + KaeshiGokenReady.ToString());
-		ImGui.Text("KaeshiSetsugekkaReady: " + KaeshiSetsugekkaReady.ToString());
-		ImGui.Text("KaeshiNamikiriReady: " + KaeshiNamikiriReady.ToString());
-		ImGui.Text("TendoGokenReady: " + TendoGokenReady.ToString());
-		ImGui.Text("TendoSetsugekkaReady: " + TendoSetsugekkaReady.ToString());
-		ImGui.Text("TendoKaeshiGokenReady: " + TendoKaeshiGokenReady.ToString());
-		ImGui.Text("TendoKaeshiSetsugekkaReady: " + TendoKaeshiSetsugekkaReady.ToString());
+		ImGui.Text(Loc.T("HasSetsu: ") + HasSetsu.ToString());
+		ImGui.Text(Loc.T("HasGetsu: ") + HasGetsu.ToString());
+		ImGui.Text(Loc.T("HasKa: ") + HasKa.ToString());
+		ImGui.Text(Loc.T("Kenki: ") + Kenki.ToString());
+		ImGui.Text(Loc.T("MeditationStacks: ") + MeditationStacks.ToString());
+		ImGui.Text(Loc.T("Kaeshi: ") + Kaeshi.ToString());
+		ImGui.Text(Loc.T("SenCount: ") + SenCount.ToString());
+		ImGui.Text(Loc.T("HasMoon: ") + HasMoon.ToString());
+		ImGui.Text(Loc.T("HasFlower: ") + HasFlower.ToString());
+		ImGui.Text(Loc.T("HaveMeikyoShisui: ") + HasMeikyoShisui.ToString());
+		ImGui.Text(Loc.T("HiganbanaReady: ") + HiganbanaReady.ToString());
+		ImGui.Text(Loc.T("TenkaGokenReady: ") + TenkaGokenReady.ToString());
+		ImGui.Text(Loc.T("MidareSetsugekkaReady: ") + MidareSetsugekkaReady.ToString());
+		ImGui.Text(Loc.T("KaeshiGokenReady: ") + KaeshiGokenReady.ToString());
+		ImGui.Text(Loc.T("KaeshiSetsugekkaReady: ") + KaeshiSetsugekkaReady.ToString());
+		ImGui.Text(Loc.T("KaeshiNamikiriReady: ") + KaeshiNamikiriReady.ToString());
+		ImGui.Text(Loc.T("TendoGokenReady: ") + TendoGokenReady.ToString());
+		ImGui.Text(Loc.T("TendoSetsugekkaReady: ") + TendoSetsugekkaReady.ToString());
+		ImGui.Text(Loc.T("TendoKaeshiGokenReady: ") + TendoKaeshiGokenReady.ToString());
+		ImGui.Text(Loc.T("TendoKaeshiSetsugekkaReady: ") + TendoKaeshiSetsugekkaReady.ToString());
 	}
 	#endregion
 

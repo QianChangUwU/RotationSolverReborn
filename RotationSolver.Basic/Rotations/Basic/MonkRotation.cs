@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -239,25 +239,25 @@ public partial class MonkRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text($"BeastChakrasAllSame: {BeastChakrasAllSame()}");
-		ImGui.Text($"BeastChakrasContains(BeastChakra.None): {BeastChakrasContains(BeastChakra.None)}");
-		ImGui.Text($"All Beast Chakras filled: {BeastChakrasAllNot(BeastChakra.None)}");
-		ImGui.Text($"CoeurlFury: {CoeurlFury}");
-		ImGui.Text($"RaptorFury: {RaptorFury}");
-		ImGui.Text($"OpoOpoFury: {OpoOpoFury}");
-		ImGui.Text($"NoNadi: {NoNadi}");
-		ImGui.Text($"HasLunar: {HasLunar}");
-		ImGui.Text($"HasSolar: {HasSolar}");
-		ImGui.Text($"Chakra: {Chakra}");
-		ImGui.Text($"BeastChakras: {string.Join(", ", BeastChakras)}");
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("CelestialRevolutionPvEReady: " + CelestialRevolutionPvEReady.ToString());
-		ImGui.Text("FlintStrikePvEReady: " + FlintStrikePvEReady.ToString());
-		ImGui.Text("RisingPhoenixPvEReady: " + RisingPhoenixPvEReady.ToString());
-		ImGui.Text("TornadoKickPvEReady: " + TornadoKickPvEReady.ToString());
-		ImGui.Text("PhantomRushPvEReady: " + PhantomRushPvEReady.ToString());
-		ImGui.Text("ElixirFieldPvEReady: " + ElixirFieldPvEReady.ToString());
-		ImGui.Text("ElixirBurstPvEReady: " + ElixirBurstPvEReady.ToString());
+		ImGui.Text(string.Format(Loc.T("BeastChakrasAllSame: {0}"), BeastChakrasAllSame()));
+		ImGui.Text(string.Format(Loc.T("BeastChakrasContains(BeastChakra.None): {0}"), BeastChakrasContains(BeastChakra.None)));
+		ImGui.Text(string.Format(Loc.T("All Beast Chakras filled: {0}"), BeastChakrasAllNot(BeastChakra.None)));
+		ImGui.Text(string.Format(Loc.T("CoeurlFury: {0}"), CoeurlFury));
+		ImGui.Text(string.Format(Loc.T("RaptorFury: {0}"), RaptorFury));
+		ImGui.Text(string.Format(Loc.T("OpoOpoFury: {0}"), OpoOpoFury));
+		ImGui.Text(string.Format(Loc.T("NoNadi: {0}"), NoNadi));
+		ImGui.Text(string.Format(Loc.T("HasLunar: {0}"), HasLunar));
+		ImGui.Text(string.Format(Loc.T("HasSolar: {0}"), HasSolar));
+		ImGui.Text(string.Format(Loc.T("Chakra: {0}"), Chakra));
+		ImGui.Text(string.Format(Loc.T("BeastChakras: {0}"), string.Join(", ", BeastChakras)));
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(string.Format(Loc.T("CelestialRevolutionPvEReady: {0}"), CelestialRevolutionPvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("FlintStrikePvEReady: {0}"), FlintStrikePvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("RisingPhoenixPvEReady: {0}"), RisingPhoenixPvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("TornadoKickPvEReady: {0}"), TornadoKickPvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("PhantomRushPvEReady: {0}"), PhantomRushPvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("ElixirFieldPvEReady: {0}"), ElixirFieldPvEReady.ToString()));
+		ImGui.Text(string.Format(Loc.T("ElixirBurstPvEReady: {0}"), ElixirBurstPvEReady.ToString()));
 	}
 	#endregion
 

@@ -496,7 +496,7 @@ internal class OtherConfiguration
 			catch (Exception ex)
 			{
 				PluginLog.Warning($"Failed to download {name} from GitHub. Reinitializing to default. Exception: {ex.Message}");
-				_ = BasicWarningHelper.AddSystemWarning($"Github download failed.");
+				_ = BasicWarningHelper.AddSystemWarning(Loc.T("Github download failed."));
 				value = new T(); // Reinitialize to default
 				SavePath(value, path); // Save the default value
 			}

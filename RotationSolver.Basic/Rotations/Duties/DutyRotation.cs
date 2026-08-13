@@ -170,97 +170,97 @@ public partial class DutyRotation : IDisposable
 		if (DataCenter.Orbonne)
 		{
 			ImGui.Spacing();
-			ImGui.Text($"HeavenlyShieldPvE Status: {StatusHelper.PlayerHasStatus(false, StatusID.Shieldbearer)}");
-			ImGui.Text($"HeavenlyShieldPvE Slotted: {HeavenlyShieldPvE.Info.IsOnSlot}");
-			ImGui.Text($"HeavenlyShieldPvE Charges: {HeavenlyShieldPvE.Cooldown.CurrentCharges}");
+			ImGui.Text(string.Format(Loc.T("HeavenlyShieldPvE Status: {0}"), StatusHelper.PlayerHasStatus(false, StatusID.Shieldbearer)));
+			ImGui.Text(string.Format(Loc.T("HeavenlyShieldPvE Slotted: {0}"), HeavenlyShieldPvE.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("HeavenlyShieldPvE Charges: {0}"), HeavenlyShieldPvE.Cooldown.CurrentCharges));
 			ImGui.Spacing();
-			ImGui.Text($"HeavenlySwordPvE Status: {StatusHelper.PlayerHasStatus(false, StatusID.Swordbearer)}");
-			ImGui.Text($"HeavenlySwordPvE Slotted: {HeavenlySwordPvE.Info.IsOnSlot}");
-			ImGui.Text($"HeavenlySwordPvE Charges: {HeavenlySwordPvE.Cooldown.CurrentCharges}");
+			ImGui.Text(string.Format(Loc.T("HeavenlySwordPvE Status: {0}"), StatusHelper.PlayerHasStatus(false, StatusID.Swordbearer)));
+			ImGui.Text(string.Format(Loc.T("HeavenlySwordPvE Slotted: {0}"), HeavenlySwordPvE.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("HeavenlySwordPvE Charges: {0}"), HeavenlySwordPvE.Cooldown.CurrentCharges));
 			ImGui.Spacing();
-			ImGui.Text($"Orbonee Monestary: {InOrbonne}");
+			ImGui.Text(string.Format(Loc.T("Orbonee Monestary: {0}"), InOrbonne));
 			ImGui.Spacing();
-			ImGui.Text($"IsAgriasCastingJudgementBlade: {IsAgriasCastingJudgementBlade}");
+			ImGui.Text(string.Format(Loc.T("IsAgriasCastingJudgementBlade: {0}"), IsAgriasCastingJudgementBlade));
 			ImGui.Spacing();
 		}
 
 		if (DataCenter.IsInMonsterHunterDuty)
 		{
 			ImGui.Spacing();
-			ImGui.Text($"MegaPotionPvE Slotted: {MegaPotionPvE.Info.IsOnSlot}");
-			ImGui.Text($"MegaPotionPvE Charges: {MegaPotionPvE.Cooldown.CurrentCharges}");
+			ImGui.Text(string.Format(Loc.T("MegaPotionPvE Slotted: {0}"), MegaPotionPvE.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("MegaPotionPvE Charges: {0}"), MegaPotionPvE.Cooldown.CurrentCharges));
 			ImGui.Spacing();
-			ImGui.Text($"Rathalos Normal: {RathalosNormal}");
-			ImGui.Text($"Rathalos EX: {RathalosEX}");
+			ImGui.Text(string.Format(Loc.T("Rathalos Normal: {0}"), RathalosNormal));
+			ImGui.Text(string.Format(Loc.T("Rathalos EX: {0}"), RathalosEX));
 			ImGui.Spacing();
 			ImGui.Spacing();
-			ImGui.Text($"MegaPotionPvE_44247 Slotted: {MegaPotionPvE_44247.Info.IsOnSlot}");
-			ImGui.Text($"MegaPotionPvE_44247 Charges: {MegaPotionPvE_44247.Cooldown.CurrentCharges}");
+			ImGui.Text(string.Format(Loc.T("MegaPotionPvE_44247 Slotted: {0}"), MegaPotionPvE_44247.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("MegaPotionPvE_44247 Charges: {0}"), MegaPotionPvE_44247.Cooldown.CurrentCharges));
 			ImGui.Spacing();
-			ImGui.Text($"Arkveld Normal: {ArkveldNormal}");
-			ImGui.Text($"Arkveld EX: {ArkveldEX}");
+			ImGui.Text(string.Format(Loc.T("Arkveld Normal: {0}"), ArkveldNormal));
+			ImGui.Text(string.Format(Loc.T("Arkveld EX: {0}"), ArkveldEX));
 			ImGui.Spacing();
 		}
 
 		if (DataCenter.IsInOccultCrescentOp)
 		{
-			ImGui.Text($"ActivePhantomJob: {ActivePhantomJob ?? "N/A"}");
+			ImGui.Text(string.Format(Loc.T("ActivePhantomJob: {0}"), ActivePhantomJob ?? Loc.T("N/A")));
 			ImGui.Spacing();
 
 			if (string.Equals(ActivePhantomJob, "Oracle", StringComparison.OrdinalIgnoreCase))
 			{
-				ImGui.Text($"HasCleansing: {HasCleansing}");
-				ImGui.Text($"HasStarfall: {HasStarfall}");
-				ImGui.Text($"HasPhantomJudgment: {HasPhantomJudgment}");
-				ImGui.Text($"HasBlessing: {HasBlessing}");
+				ImGui.Text(string.Format(Loc.T("HasCleansing: {0}"), HasCleansing));
+				ImGui.Text(string.Format(Loc.T("HasStarfall: {0}"), HasStarfall));
+				ImGui.Text(string.Format(Loc.T("HasPhantomJudgment: {0}"), HasPhantomJudgment));
+				ImGui.Text(string.Format(Loc.T("HasBlessing: {0}"), HasBlessing));
 			}
 
 			if (string.Equals(ActivePhantomJob, "Samurai", StringComparison.OrdinalIgnoreCase))
 			{
-				ImGui.Text($"Has item for Zeninage: {ZeninageItem.HasIt}");
+				ImGui.Text(string.Format(Loc.T("Has item for Zeninage: {0}"), ZeninageItem.HasIt));
 			}
 
 			if (string.Equals(ActivePhantomJob, "Chemist", StringComparison.OrdinalIgnoreCase))
 			{
-				ImGui.Text($"Has item for Occult Potion: {OccultPotionItem.HasIt}");
-				ImGui.Text($"Has item for Occult Ether: {OccultPotionItem.HasIt}");
-				ImGui.Text($"Has item for Occult Elixir: {OccultElixirItem.HasIt}");
+				ImGui.Text(string.Format(Loc.T("Has item for Occult Potion: {0}"), OccultPotionItem.HasIt));
+				ImGui.Text(string.Format(Loc.T("Has item for Occult Ether: {0}"), OccultPotionItem.HasIt));
+				ImGui.Text(string.Format(Loc.T("Has item for Occult Elixir: {0}"), OccultElixirItem.HasIt));
 			}
 		}
 
 		if (InVariantDungeon)
 		{
-			ImGui.Text($"Variant Spirit Dart Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantSpiritDartSet)}");
-			ImGui.Text($"VariantSpiritDartPvE_46940 Slotted: {VariantSpiritDartPvE_46940.Info.IsOnSlot}");
-			ImGui.Text($"VariantSpiritDartPvE_33863 Slotted: {VariantSpiritDartPvE_33863.Info.IsOnSlot}");
-			ImGui.Text($"VariantSpiritDartPvE Slotted: {VariantSpiritDartPvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Spirit Dart Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantSpiritDartSet)));
+			ImGui.Text(string.Format(Loc.T("VariantSpiritDartPvE_46940 Slotted: {0}"), VariantSpiritDartPvE_46940.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantSpiritDartPvE_33863 Slotted: {0}"), VariantSpiritDartPvE_33863.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantSpiritDartPvE Slotted: {0}"), VariantSpiritDartPvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Rampart Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantRampartSet)}");
-			ImGui.Text($"VariantRampartPvE_46941 Slotted: {VariantRampartPvE_46941.Info.IsOnSlot}");
-			ImGui.Text($"VariantRampartPvE_33864 Slotted: {VariantRampartPvE_33864.Info.IsOnSlot}");
-			ImGui.Text($"VariantRampartPvE Slotted: {VariantRampartPvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Rampart Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantRampartSet)));
+			ImGui.Text(string.Format(Loc.T("VariantRampartPvE_46941 Slotted: {0}"), VariantRampartPvE_46941.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantRampartPvE_33864 Slotted: {0}"), VariantRampartPvE_33864.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantRampartPvE Slotted: {0}"), VariantRampartPvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Cure Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantCureSet)}");
-			ImGui.Text($"VariantCurePvE_46939 Slotted: {VariantCurePvE_46939.Info.IsOnSlot}");
-			ImGui.Text($"VariantCurePvE_33862 Slotted: {VariantCurePvE_33862.Info.IsOnSlot}");
-			ImGui.Text($"VariantCurePvE Slotted: {VariantCurePvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Cure Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantCureSet)));
+			ImGui.Text(string.Format(Loc.T("VariantCurePvE_46939 Slotted: {0}"), VariantCurePvE_46939.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantCurePvE_33862 Slotted: {0}"), VariantCurePvE_33862.Info.IsOnSlot));
+			ImGui.Text(string.Format(Loc.T("VariantCurePvE Slotted: {0}"), VariantCurePvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Raise Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantRaiseSet)}");
-			ImGui.Text($"VariantRaisePvE Slotted: {VariantRaisePvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Raise Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantRaiseSet)));
+			ImGui.Text(string.Format(Loc.T("VariantRaisePvE Slotted: {0}"), VariantRaisePvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Raise Ii Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantRaiseSet)}");
-			ImGui.Text($"VariantRaiseIiPvE Slotted: {VariantRaiseIiPvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Raise Ii Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantRaiseSet)));
+			ImGui.Text(string.Format(Loc.T("VariantRaiseIiPvE Slotted: {0}"), VariantRaiseIiPvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Eagle Eye Shot Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantEagleEyeShotSet)}");
-			ImGui.Text($"VariantEagleEyeShotPvE Slotted: {VariantEagleEyeShotPvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Eagle Eye Shot Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantEagleEyeShotSet)));
+			ImGui.Text(string.Format(Loc.T("VariantEagleEyeShotPvE Slotted: {0}"), VariantEagleEyeShotPvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"Variant Ultimatum Status: {StatusHelper.PlayerHasStatus(true, StatusID.VariantUltimatumSet)}");
-			ImGui.Text($"VariantUltimatumPvE Slotted: {VariantUltimatumPvE.Info.IsOnSlot}");
+			ImGui.Text(string.Format(Loc.T("Variant Ultimatum Status: {0}"), StatusHelper.PlayerHasStatus(true, StatusID.VariantUltimatumSet)));
+			ImGui.Text(string.Format(Loc.T("VariantUltimatumPvE Slotted: {0}"), VariantUltimatumPvE.Info.IsOnSlot));
 			ImGui.Spacing();
-			ImGui.Text($"The Merchant's Tale: {TheMerchantsTale}");
-			ImGui.Text($"Sildihn Subterrane: {SildihnSubterrane}");
-			ImGui.Text($"Mount Rokkon: {MountRokkon}");
-			ImGui.Text($"Aloalo Island: {AloaloIsland}");
+			ImGui.Text(string.Format(Loc.T("The Merchant's Tale: {0}"), TheMerchantsTale));
+			ImGui.Text(string.Format(Loc.T("Sildihn Subterrane: {0}"), SildihnSubterrane));
+			ImGui.Text(string.Format(Loc.T("Mount Rokkon: {0}"), MountRokkon));
+			ImGui.Text(string.Format(Loc.T("Aloalo Island: {0}"), AloaloIsland));
 			ImGui.Spacing();
 		}
 	}

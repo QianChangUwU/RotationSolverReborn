@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Magical;
 
@@ -171,7 +172,7 @@ public sealed class BeirutaRDM : RedMageRotation
 	private bool HasAnyInstantTool => HasSwift || HasDualcast || HasAccelerate || (!IsOpenForGrandImpact && CanGrandImpact);
 	private bool IsBurstLocked => IsAnyMeleeComboInProgress() || InFinisherChain() || ManaStacks == 3;
 
-	private void DrawStatus(string label, object value) => ImGui.Text($"{label}: {value}");
+	private void DrawStatus(string label, object value) => ImGui.Text(string.Format(Loc.T("{0}: {1}"), label, value));
 
 	private static bool TryUse(out IAction? act, params IBaseAction[] actions)
 	{

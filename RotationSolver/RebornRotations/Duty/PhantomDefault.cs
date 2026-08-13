@@ -1,5 +1,6 @@
 ﻿using RotationSolver.Basic.Rotations.Duties;
 using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Duty;
 
@@ -156,7 +157,7 @@ public sealed class PhantomDefault : PhantomRotation
 		base.DisplayDutyStatus();
 		if (string.Equals(ActivePhantomJob, "Oracle", StringComparison.OrdinalIgnoreCase))
 		{
-			ImGui.Text($"Remaining Cards: {_remainingCards.Count}");
+			ImGui.Text(string.Format(Loc.T("Remaining Cards: {0}"), _remainingCards.Count));
 		}
 	}
 

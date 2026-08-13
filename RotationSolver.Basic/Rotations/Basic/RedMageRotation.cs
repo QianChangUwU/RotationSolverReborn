@@ -377,20 +377,20 @@ public partial class RedMageRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("WhiteMana: " + WhiteMana.ToString());
-		ImGui.Text("BlackMana: " + BlackMana.ToString());
-		ImGui.Text("ManaStacks: " + ManaStacks.ToString());
-		ImGui.Text("MoreWhiteMana: " + MoreWhiteMana.ToString());
-		ImGui.Text("Can Heal Single Spell: " + CanHealSingleSpell.ToString());
+		ImGui.Text(Loc.T("WhiteMana: ") + WhiteMana.ToString());
+		ImGui.Text(Loc.T("BlackMana: ") + BlackMana.ToString());
+		ImGui.Text(Loc.T("ManaStacks: ") + ManaStacks.ToString());
+		ImGui.Text(Loc.T("MoreWhiteMana: ") + MoreWhiteMana.ToString());
+		ImGui.Text(Loc.T("Can Heal Single Spell: ") + CanHealSingleSpell.ToString());
 		ImGui.Spacing();
-		ImGui.Text("Embolden RecastTimeRemain: " + EmboldenPvE.Cooldown.RecastTimeRemain.ToString());
-		ImGui.Text("ManaNeededBlack: " + ManaNeededBlack().ToString());
-		ImGui.Text("ManaNeededWhite: " + ManaNeededWhite().ToString());
-		ImGui.Text("EnoughManaComboPooling: " + EnoughManaComboPooling.ToString());
+		ImGui.Text(Loc.T("Embolden RecastTimeRemain: ") + EmboldenPvE.Cooldown.RecastTimeRemain.ToString());
+		ImGui.Text(Loc.T("ManaNeededBlack: ") + ManaNeededBlack().ToString());
+		ImGui.Text(Loc.T("ManaNeededWhite: ") + ManaNeededWhite().ToString());
+		ImGui.Text(Loc.T("EnoughManaComboPooling: ") + EnoughManaComboPooling.ToString());
 		ImGui.Spacing();
-		ImGui.Text("Embolden RecastTimeElapsed: " + EmboldenPvE.Cooldown.RecastTimeElapsed.ToString());
-		ImGui.Text("ManaNeededNoPooling: " + ManaNeededNoPooling().ToString());
-		ImGui.Text("EnoughManaComboNoPooling: " + EnoughManaComboNoPooling.ToString());
+		ImGui.Text(Loc.T("Embolden RecastTimeElapsed: ") + EmboldenPvE.Cooldown.RecastTimeElapsed.ToString());
+		ImGui.Text(Loc.T("ManaNeededNoPooling: ") + ManaNeededNoPooling().ToString());
+		ImGui.Text(Loc.T("EnoughManaComboNoPooling: ") + EnoughManaComboNoPooling.ToString());
 	}
 	#endregion
 

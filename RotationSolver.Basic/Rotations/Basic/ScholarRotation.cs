@@ -1,4 +1,4 @@
-namespace RotationSolver.Basic.Rotations.Basic;
+﻿namespace RotationSolver.Basic.Rotations.Basic;
 
 public partial class ScholarRotation
 {
@@ -75,19 +75,19 @@ public partial class ScholarRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("FairyGauge: " + FairyGauge.ToString());
-		ImGui.Text("HasAetherflow: " + HasAetherflow.ToString());
-		ImGui.Text("SCHAetherFlowStacks: " + SCHAetherFlowStacks.ToString());
-		ImGui.Text("SeraphTime: " + SeraphTime.ToString());
-		ImGui.Text("Has Fairy Out: " + DataCenter.HasPet().ToString());
-		ImGui.Text("FairyDismissed: " + FairyDismissed.ToString());
-		ImGui.Text("ManifestationReady: " + ManifestationReady.ToString());
-		ImGui.Text("AccessionReady: " + AccessionReady.ToString());
-		ImGui.Text($"Excog Target: {ExcogitationPvE.Target.Target.Name}");
-		ImGui.Text($"Recitation on Cooldown: {RecitationPvE.Cooldown.IsCoolingDown}");
-		ImGui.Text($"Excog on cooldown: {ExcogitationPvE.Cooldown.IsCoolingDown}");
-		ImGui.Text($"Whispering Dawn On Cooldown: {WhisperingDawnPvE.Cooldown.IsCoolingDown}");
-		ImGui.Text($"Fey Blessing On Cooldown: {FeyBlessingPvE.Cooldown.IsCoolingDown}");
+		ImGui.Text(Loc.T("FairyGauge: ") + FairyGauge.ToString());
+		ImGui.Text(Loc.T("HasAetherflow: ") + HasAetherflow.ToString());
+		ImGui.Text(Loc.T("SCHAetherFlowStacks: ") + SCHAetherFlowStacks.ToString());
+		ImGui.Text(Loc.T("SeraphTime: ") + SeraphTime.ToString());
+		ImGui.Text(Loc.T("Has Fairy Out: ") + DataCenter.HasPet().ToString());
+		ImGui.Text(Loc.T("FairyDismissed: ") + FairyDismissed.ToString());
+		ImGui.Text(Loc.T("ManifestationReady: ") + ManifestationReady.ToString());
+		ImGui.Text(Loc.T("AccessionReady: ") + AccessionReady.ToString());
+		ImGui.Text(string.Format(Loc.T("Excog Target: {0}"), ExcogitationPvE.Target.Target.Name));
+		ImGui.Text(string.Format(Loc.T("Recitation on Cooldown: {0}"), RecitationPvE.Cooldown.IsCoolingDown));
+		ImGui.Text(string.Format(Loc.T("Excog on cooldown: {0}"), ExcogitationPvE.Cooldown.IsCoolingDown));
+		ImGui.Text(string.Format(Loc.T("Whispering Dawn On Cooldown: {0}"), WhisperingDawnPvE.Cooldown.IsCoolingDown));
+		ImGui.Text(string.Format(Loc.T("Fey Blessing On Cooldown: {0}"), FeyBlessingPvE.Cooldown.IsCoolingDown));
 	}
 	#endregion
 

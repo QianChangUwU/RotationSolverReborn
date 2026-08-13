@@ -1,4 +1,5 @@
 ﻿using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Basic.Rotations.Duties;
 using RotationSolver.Data;
@@ -93,7 +94,7 @@ public static partial class RSCommands
 		var strs = str.Split(' ', 3);
 		if (strs.Length < 2)
 		{
-			Svc.Chat.PrintError("Invalid setting command format.");
+			Svc.Chat.PrintError(Loc.T("Invalid setting command format."));
 			return;
 		}
 
@@ -109,7 +110,7 @@ public static partial class RSCommands
 
 		if (string.IsNullOrEmpty(settingName))
 		{
-			Svc.Chat.PrintError("Invalid setting command format.");
+			Svc.Chat.PrintError(Loc.T("Invalid setting command format."));
 			return;
 		}
 
@@ -149,7 +150,7 @@ public static partial class RSCommands
 				}
 				else
 				{
-					Svc.Chat.PrintError("Failed to parse the value.");
+					Svc.Chat.PrintError(Loc.T("Failed to parse the value."));
 					return;
 				}
 			}
@@ -164,7 +165,7 @@ public static partial class RSCommands
 				}
 				else
 				{
-					Svc.Chat.PrintError("Failed to parse the value as boolean.");
+					Svc.Chat.PrintError(Loc.T("Failed to parse the value as boolean."));
 					return;
 				}
 			}
@@ -174,13 +175,13 @@ public static partial class RSCommands
 
 			if (Service.Config.ShowToggledSettingInChat)
 			{
-				Svc.Chat.Print($"Changed setting {property.Name} to {command}");
+				Svc.Chat.Print(string.Format(Loc.T("Changed setting {0} to {1}"), property.Name, command));
 			}
 
 			return;
 		}
 
-		Svc.Chat.PrintError("Failed to find the config in this rotation, please check it.");
+		Svc.Chat.PrintError(Loc.T("Failed to find the config in this rotation, please check it."));
 	}
 
 	private static bool TryConvertValue(Type type, string? command, out object? convertedValue)
@@ -206,14 +207,14 @@ public static partial class RSCommands
 	{
 		if (string.IsNullOrEmpty(command))
 		{
-			Svc.Chat.PrintError("Invalid command for TargetingTypes.");
+			Svc.Chat.PrintError(Loc.T("Invalid command for TargetingTypes."));
 			return;
 		}
 
 		var commandParts = command.Split(' ', 2);
 		if (commandParts.Length < 1)
 		{
-			Svc.Chat.PrintError("Invalid command format for TargetingTypes.");
+			Svc.Chat.PrintError(Loc.T("Invalid command format for TargetingTypes."));
 			return;
 		}
 
@@ -234,16 +235,16 @@ public static partial class RSCommands
 				Service.Config.TargetingTypes.Clear();
 				if (DataCenter.IsActivated())
 				{
-					Svc.Chat.Print("Removed all TargetingTypes and reset to default list.");
+					Svc.Chat.Print(Loc.T("Removed all TargetingTypes and reset to default list."));
 				}
 				else
 				{
-					Svc.Chat.Print("Removed all TargetingTypes.");
+					Svc.Chat.Print(Loc.T("Removed all TargetingTypes."));
 				}
 				break;
 
 			default:
-				Svc.Chat.PrintError("Invalid action for TargetingTypes.");
+				Svc.Chat.PrintError(Loc.T("Invalid action for TargetingTypes."));
 				break;
 		}
 
@@ -254,7 +255,7 @@ public static partial class RSCommands
 	{
 		if (string.IsNullOrEmpty(value) || !Enum.TryParse(typeof(TargetingType), value, true, out var parsedEnumAdd))
 		{
-			Svc.Chat.PrintError("Invalid TargetingType value.");
+			Svc.Chat.PrintError(Loc.T("Invalid TargetingType value."));
 			return;
 		}
 
@@ -262,11 +263,11 @@ public static partial class RSCommands
 		if (!Service.Config.TargetingTypes.Contains(targetingTypeAdd))
 		{
 			Service.Config.TargetingTypes.Add(targetingTypeAdd);
-			Svc.Chat.Print($"Added {targetingTypeAdd} to TargetingTypes.");
+			Svc.Chat.Print(string.Format(Loc.T("Added {0} to TargetingTypes."), targetingTypeAdd));
 		}
 		else
 		{
-			Svc.Chat.Print($"{targetingTypeAdd} is already in TargetingTypes.");
+			Svc.Chat.Print(string.Format(Loc.T("{0} is already in TargetingTypes."), targetingTypeAdd));
 		}
 	}
 
@@ -274,7 +275,7 @@ public static partial class RSCommands
 	{
 		if (string.IsNullOrEmpty(value) || !Enum.TryParse(typeof(TargetingType), value, true, out var parsedEnumRemove))
 		{
-			Svc.Chat.PrintError("Invalid TargetingType value.");
+			Svc.Chat.PrintError(Loc.T("Invalid TargetingType value."));
 			return;
 		}
 
@@ -282,11 +283,11 @@ public static partial class RSCommands
 		if (Service.Config.TargetingTypes.Contains(targetingTypeRemove))
 		{
 			_ = Service.Config.TargetingTypes.Remove(targetingTypeRemove);
-			Svc.Chat.Print($"Removed {targetingTypeRemove} from TargetingTypes.");
+			Svc.Chat.Print(string.Format(Loc.T("Removed {0} from TargetingTypes."), targetingTypeRemove));
 		}
 		else
 		{
-			Svc.Chat.Print($"{targetingTypeRemove} is not in TargetingTypes.");
+			Svc.Chat.Print(string.Format(Loc.T("{0} is not in TargetingTypes."), targetingTypeRemove));
 		}
 	}
 
@@ -365,7 +366,7 @@ public static partial class RSCommands
 				act.IsEnabled = !act.IsEnabled;
 				if (Service.Config.ShowToggledSettingInChat)
 				{
-					Svc.Chat.Print($"Toggled {act.Name} : {act.IsEnabled}");
+					Svc.Chat.Print(string.Format(Loc.T("Toggled {0} : {1}"), act.Name, act.IsEnabled));
 				}
 				return;
 			}
@@ -375,7 +376,7 @@ public static partial class RSCommands
 				act.IsEnabled = bool.TryParse(flag, out var parse) ? parse : !act.IsEnabled;
 				if (Service.Config.ShowToggledSettingInChat)
 				{
-					Svc.Chat.Print($"Toggled {act.Name} : {act.IsEnabled}");
+					Svc.Chat.Print(string.Format(Loc.T("Toggled {0} : {1}"), act.Name, act.IsEnabled));
 				}
 				return;
 			}
@@ -437,7 +438,7 @@ public static partial class RSCommands
 
 					if (Service.Config.ShowToastsAboutDoAction)
 					{
-						Svc.Toasts.ShowQuest($"Inserted action {iAct.Name} with time {time}",
+						Svc.Toasts.ShowQuest(string.Format(Loc.T("Inserted action {0} with time {1}"), iAct.Name, time),
 							new Dalamud.Game.Gui.Toast.QuestToastOptions()
 							{
 								IconId = iAct.IconID,
@@ -462,7 +463,7 @@ public static partial class RSCommands
 			{
 				if (Service.Config.ShowToggledSettingInChat)
 				{
-					Svc.Chat.Print($"Changed setting {config.DisplayName} to {config.Value}");
+					Svc.Chat.Print(string.Format(Loc.T("Changed setting {0} to {1}"), config.DisplayName, config.Value));
 				}
 				return;
 			}
@@ -481,7 +482,7 @@ public static partial class RSCommands
 			{
 				if (Service.Config.ShowToggledSettingInChat)
 				{
-					Svc.Chat.Print($"Changed setting {config.DisplayName} to {config.Value}");
+					Svc.Chat.Print(string.Format(Loc.T("Changed setting {0} to {1}"), config.DisplayName, config.Value));
 				}
 				return;
 			}

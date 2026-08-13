@@ -1,4 +1,6 @@
-﻿namespace RotationSolver.Basic.Data;
+﻿using RotationSolver.Basic.Localization;
+
+namespace RotationSolver.Basic.Data;
 
 /// <summary>
 /// Special State.
@@ -157,9 +159,9 @@ public static class StateCommandTypeExtensions
 	{
 		return stateCommandType switch
 		{
-			StateCommandType.Off => "关闭",
-			StateCommandType.Auto => "自动目标",
-			StateCommandType.Manual => "手动目标",
+			StateCommandType.Off => Loc.T("Off"),
+			StateCommandType.Auto => Loc.T("Auto"),
+			StateCommandType.Manual => Loc.T("Manual"),
 			_ => stateCommandType.ToString(),
 		};
 	}

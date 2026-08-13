@@ -4,6 +4,7 @@ using Dalamud.Game.Text.SeStringHandling.Payloads;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
+using RotationSolver.Basic.Localization;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -34,7 +35,7 @@ internal static class MiscUpdater
 			}
 			catch
 			{
-				BasicWarningHelper.AddSystemWarning("Unable to add server bar entry");
+				BasicWarningHelper.AddSystemWarning(Loc.T("Unable to add server bar entry"));
 				return;
 			}
 

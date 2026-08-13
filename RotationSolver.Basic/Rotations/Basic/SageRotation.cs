@@ -53,10 +53,10 @@ public partial class SageRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("HasEukrasia: " + HasEukrasia.ToString());
-		ImGui.Text("Addersgall: " + Addersgall.ToString());
-		ImGui.Text("Addersting: " + Addersting.ToString());
-		ImGui.Text("AddersgallTime: " + AddersgallTime.ToString());
+		ImGui.Text(Loc.T("HasEukrasia: ") + HasEukrasia.ToString());
+		ImGui.Text(Loc.T("Addersgall: ") + Addersgall.ToString());
+		ImGui.Text(Loc.T("Addersting: ") + Addersting.ToString());
+		ImGui.Text(Loc.T("AddersgallTime: ") + AddersgallTime.ToString());
 	}
 	#endregion
 

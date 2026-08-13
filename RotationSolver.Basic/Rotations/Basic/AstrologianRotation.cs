@@ -187,10 +187,10 @@ public partial class AstrologianRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text($"DrawnCard: {string.Join(", ", DrawnCard)}");
-		ImGui.Text($"DrawnCrownCard: {DrawnCrownCard}");
-		ImGui.Text($"ActiveDraw: {ActiveDraw}");
-		ImGui.Text($"RaiseMPMinimum: {RaiseMPMinimum}");
+		ImGui.Text(string.Format(Loc.T("DrawnCard: {0}"), string.Join(", ", DrawnCard)));
+		ImGui.Text(string.Format(Loc.T("DrawnCrownCard: {0}"), DrawnCrownCard));
+		ImGui.Text(string.Format(Loc.T("ActiveDraw: {0}"), ActiveDraw));
+		ImGui.Text(string.Format(Loc.T("RaiseMPMinimum: {0}"), RaiseMPMinimum));
 	}
 	#endregion
 

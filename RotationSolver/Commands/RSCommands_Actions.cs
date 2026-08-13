@@ -1,6 +1,7 @@
 ﻿using Dalamud.Game.ClientState.Conditions;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
+using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
 using ECommons.Logging;
 using RotationSolver.Basic.Configuration;
@@ -241,7 +242,7 @@ namespace RotationSolver.Commands
 			catch (Exception ex)
 			{
 				PluginLog.Warning($"Pulse Failed!: {ex.Message}");
-				BasicWarningHelper.AddSystemWarning($"Action bar failed to pulse because: {ex.Message}");
+				BasicWarningHelper.AddSystemWarning(string.Format(Loc.T("Action bar failed to pulse because: {0}"), ex.Message));
 			}
 			finally
 			{

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using RotationSolver.Basic.Localization;
+using System.ComponentModel;
 
 namespace RotationSolver.Data
 {
@@ -677,23 +678,22 @@ namespace RotationSolver.Data
 
 		public static string GetDescription(this Enum value)
 		{
-			if (_enumDescriptions.TryGetValue(value, out var description))
+			if (!_enumDescriptions.TryGetValue(value, out var description))
 			{
-				return description;
+				var field = value.GetType().GetField(value.ToString());
+				if (field == null)
+				{
+					_enumDescriptions[value] = value.ToString();
+					return value.ToString();
+				}
+
+				var attribute = field.GetCustomAttribute<DescriptionAttribute>();
+
+				description = attribute == null ? value.ToString() : attribute.Description;
+				_enumDescriptions[value] = description;
 			}
 
-			var field = value.GetType().GetField(value.ToString());
-			if (field == null)
-			{
-				_enumDescriptions.Add(value, value.ToString());
-				return value.ToString();
-			}
-
-			var attribute = field.GetCustomAttribute<DescriptionAttribute>();
-
-			var descString = attribute == null ? value.ToString() : attribute.Description;
-			_enumDescriptions.Add(value, descString);
-			return descString;
+			return Loc.T(description);
 		}
 	}
 }

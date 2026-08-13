@@ -1,4 +1,5 @@
-﻿namespace RotationSolver.RebornRotations.Magical;
+﻿using RotationSolver.Basic.Localization;
+namespace RotationSolver.RebornRotations.Magical;
 
 [Rotation("Reborn", CombatType.PvE, GameVersion = "7.55")]
 [SourceCode(Path = "main/BasicRotations/Magical/BLM_Default.cs")]
@@ -28,18 +29,18 @@ public class BLM_Default : BlackMageRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"In InFireOrIce Logic: {InFireOrIce(out _, out _)}");
-		ImGui.Text($"In GoFire Logic: {GoFire(out _)}");
-		ImGui.Text($"In MaintainIce Logic: {MaintainIce(out _)}");
-		ImGui.Text($"In DoIce Logic: {DoIce(out _)}");
-		ImGui.Text($"In GoFire Logic: {GoFire(out _)}");
-		ImGui.Text($"In MaintainFire Logic: {MaintainFire(out _)}");
-		ImGui.Text($"In DoFire Logic: {DoFire(out _)}");
-		ImGui.Text($"In UseInstanceSpell Logic: {UseInstanceSpell(out _)}");
-		ImGui.Text($"In AddThunder Logic: {AddThunder(out _)}");
-		ImGui.Text($"In AddElementBase Logic: {AddElementBase(out _)}");
-		ImGui.Text($"In UsePolyglot Logic: {UsePolyglot(out _)}");
-		ImGui.Text($"In MaintainStatus Logic: {MaintainStatus(out _)}");
+		ImGui.Text(string.Format(Loc.T("In InFireOrIce Logic: {0}"), InFireOrIce(out _, out _)));
+		ImGui.Text(string.Format(Loc.T("In GoFire Logic: {0}"), GoFire(out _)));
+		ImGui.Text(string.Format(Loc.T("In MaintainIce Logic: {0}"), MaintainIce(out _)));
+		ImGui.Text(string.Format(Loc.T("In DoIce Logic: {0}"), DoIce(out _)));
+		ImGui.Text(string.Format(Loc.T("In GoFire Logic: {0}"), GoFire(out _)));
+		ImGui.Text(string.Format(Loc.T("In MaintainFire Logic: {0}"), MaintainFire(out _)));
+		ImGui.Text(string.Format(Loc.T("In DoFire Logic: {0}"), DoFire(out _)));
+		ImGui.Text(string.Format(Loc.T("In UseInstanceSpell Logic: {0}"), UseInstanceSpell(out _)));
+		ImGui.Text(string.Format(Loc.T("In AddThunder Logic: {0}"), AddThunder(out _)));
+		ImGui.Text(string.Format(Loc.T("In AddElementBase Logic: {0}"), AddElementBase(out _)));
+		ImGui.Text(string.Format(Loc.T("In UsePolyglot Logic: {0}"), UsePolyglot(out _)));
+		ImGui.Text(string.Format(Loc.T("In MaintainStatus Logic: {0}"), MaintainStatus(out _)));
 	}
 	#endregion
 

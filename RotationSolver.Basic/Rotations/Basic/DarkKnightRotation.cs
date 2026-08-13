@@ -156,19 +156,19 @@ public partial class DarkKnightRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("BloodWeaponStacks: " + BloodWeaponStacks.ToString());
-		ImGui.Text("DeliriumStacks: " + DeliriumStacks.ToString());
-		ImGui.Text("LowDeliriumStacks: " + LowDeliriumStacks.ToString());
-		ImGui.Text("ShadowTime: " + ShadowTime.ToString());
-		ImGui.Text("DarkSideTime: " + DarkSideTime.ToString());
-		ImGui.Text("HasDarkArts: " + HasDarkArts.ToString());
-		ImGui.Text("Blood: " + Blood.ToString());
-		ImGui.Text("HasDelirium: " + HasDelirium.ToString());
-		ImGui.Text("ScarletDeliriumReady: " + ScarletDeliriumReady.ToString());
-		ImGui.Text("ComeuppanceReady: " + ComeuppanceReady.ToString());
-		ImGui.Text("TorcleaverReady: " + TorcleaverReady.ToString());
-		ImGui.Text("ImpalementReady: " + ImpalementReady.ToString());
-		ImGui.Text("DeliriumComboStep: " + DeliriumComboStep.ToString());
+		ImGui.Text(Loc.T("BloodWeaponStacks: ") + BloodWeaponStacks.ToString());
+		ImGui.Text(Loc.T("DeliriumStacks: ") + DeliriumStacks.ToString());
+		ImGui.Text(Loc.T("LowDeliriumStacks: ") + LowDeliriumStacks.ToString());
+		ImGui.Text(Loc.T("ShadowTime: ") + ShadowTime.ToString());
+		ImGui.Text(Loc.T("DarkSideTime: ") + DarkSideTime.ToString());
+		ImGui.Text(Loc.T("HasDarkArts: ") + HasDarkArts.ToString());
+		ImGui.Text(Loc.T("Blood: ") + Blood.ToString());
+		ImGui.Text(Loc.T("HasDelirium: ") + HasDelirium.ToString());
+		ImGui.Text(Loc.T("ScarletDeliriumReady: ") + ScarletDeliriumReady.ToString());
+		ImGui.Text(Loc.T("ComeuppanceReady: ") + ComeuppanceReady.ToString());
+		ImGui.Text(Loc.T("TorcleaverReady: ") + TorcleaverReady.ToString());
+		ImGui.Text(Loc.T("ImpalementReady: ") + ImpalementReady.ToString());
+		ImGui.Text(Loc.T("DeliriumComboStep: ") + DeliriumComboStep.ToString());
 	}
 	#endregion
 

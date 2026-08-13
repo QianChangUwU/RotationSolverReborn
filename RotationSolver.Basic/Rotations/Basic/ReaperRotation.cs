@@ -219,33 +219,33 @@ public partial class ReaperRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("EnshroudedTiemRemaining: " + EnshroudedTiemRemaining.ToString());
-		ImGui.Text("HasEnshrouded: " + HasEnshrouded.ToString());
-		ImGui.Text("HasSoulReaver: " + HasSoulReaver.ToString());
-		ImGui.Text("HasExecutioner: " + HasExecutioner.ToString());
-		ImGui.Text("HasIdealHost: " + HasIdealHost.ToString());
-		ImGui.Text("HasOblatio: " + HasOblatio.ToString());
-		ImGui.Text("HasPerfectioParata: " + HasPerfectioParata.ToString());
-		ImGui.Text("Soul: " + Soul.ToString());
-		ImGui.Text("Shroud: " + Shroud.ToString());
-		ImGui.Text("LemureShroud: " + LemureShroud.ToString());
-		ImGui.Text("VoidShroud: " + VoidShroud.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudOrange, "PvE Actions");
-		ImGui.Text("UnveiledGibbetPvEReady: " + UnveiledGibbetPvEReady.ToString());
-		ImGui.Text("UnveiledGallowsPvEReady: " + UnveiledGallowsPvEReady.ToString());
-		ImGui.Text("RegressPvEIngressReady: " + RegressPvEIngressReady.ToString());
-		ImGui.Text("RegressPvEEgressReady: " + RegressPvEEgressReady.ToString());
-		ImGui.Text("VoidReapingPvEReady: " + VoidReapingPvEReady.ToString());
-		ImGui.Text("CrossReapingPvEReady: " + CrossReapingPvEReady.ToString());
-		ImGui.Text("GrimReapingPvEReady: " + GrimReapingPvEReady.ToString());
-		ImGui.Text("HarvestMoonPvEReady: " + HarvestMoonPvEReady.ToString());
-		ImGui.Text("LemuresSlicePvEReady: " + LemuresSlicePvEReady.ToString());
-		ImGui.Text("LemuresScythePvEReady: " + LemuresScythePvEReady.ToString());
-		ImGui.Text("SacrificiumPvEReady: " + SacrificiumPvEReady.ToString());
-		ImGui.Text("ExecutionersGibbetPvEReady: " + ExecutionersGibbetPvEReady.ToString());
-		ImGui.Text("ExecutionersGallowsPvEReady: " + ExecutionersGallowsPvEReady.ToString());
-		ImGui.Text("ExecutionersGuillotinePvEReady: " + ExecutionersGuillotinePvEReady.ToString());
-		ImGui.Text("PerfectioPvEReady: " + PerfectioPvEReady.ToString());
+		ImGui.Text(Loc.T("EnshroudedTiemRemaining: ") + EnshroudedTiemRemaining.ToString());
+		ImGui.Text(Loc.T("HasEnshrouded: ") + HasEnshrouded.ToString());
+		ImGui.Text(Loc.T("HasSoulReaver: ") + HasSoulReaver.ToString());
+		ImGui.Text(Loc.T("HasExecutioner: ") + HasExecutioner.ToString());
+		ImGui.Text(Loc.T("HasIdealHost: ") + HasIdealHost.ToString());
+		ImGui.Text(Loc.T("HasOblatio: ") + HasOblatio.ToString());
+		ImGui.Text(Loc.T("HasPerfectioParata: ") + HasPerfectioParata.ToString());
+		ImGui.Text(Loc.T("Soul: ") + Soul.ToString());
+		ImGui.Text(Loc.T("Shroud: ") + Shroud.ToString());
+		ImGui.Text(Loc.T("LemureShroud: ") + LemureShroud.ToString());
+		ImGui.Text(Loc.T("VoidShroud: ") + VoidShroud.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudOrange, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("UnveiledGibbetPvEReady: ") + UnveiledGibbetPvEReady.ToString());
+		ImGui.Text(Loc.T("UnveiledGallowsPvEReady: ") + UnveiledGallowsPvEReady.ToString());
+		ImGui.Text(Loc.T("RegressPvEIngressReady: ") + RegressPvEIngressReady.ToString());
+		ImGui.Text(Loc.T("RegressPvEEgressReady: ") + RegressPvEEgressReady.ToString());
+		ImGui.Text(Loc.T("VoidReapingPvEReady: ") + VoidReapingPvEReady.ToString());
+		ImGui.Text(Loc.T("CrossReapingPvEReady: ") + CrossReapingPvEReady.ToString());
+		ImGui.Text(Loc.T("GrimReapingPvEReady: ") + GrimReapingPvEReady.ToString());
+		ImGui.Text(Loc.T("HarvestMoonPvEReady: ") + HarvestMoonPvEReady.ToString());
+		ImGui.Text(Loc.T("LemuresSlicePvEReady: ") + LemuresSlicePvEReady.ToString());
+		ImGui.Text(Loc.T("LemuresScythePvEReady: ") + LemuresScythePvEReady.ToString());
+		ImGui.Text(Loc.T("SacrificiumPvEReady: ") + SacrificiumPvEReady.ToString());
+		ImGui.Text(Loc.T("ExecutionersGibbetPvEReady: ") + ExecutionersGibbetPvEReady.ToString());
+		ImGui.Text(Loc.T("ExecutionersGallowsPvEReady: ") + ExecutionersGallowsPvEReady.ToString());
+		ImGui.Text(Loc.T("ExecutionersGuillotinePvEReady: ") + ExecutionersGuillotinePvEReady.ToString());
+		ImGui.Text(Loc.T("PerfectioPvEReady: ") + PerfectioPvEReady.ToString());
 	}
 	#endregion
 

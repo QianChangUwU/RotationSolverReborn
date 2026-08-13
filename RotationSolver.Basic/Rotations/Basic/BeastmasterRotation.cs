@@ -36,7 +36,7 @@ public partial class BeastmasterRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.TextWrapped($"Beastmaster Data");
+		ImGui.TextWrapped(Loc.T("Beastmaster Data"));
 	}
 	#endregion
 

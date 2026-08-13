@@ -1,4 +1,5 @@
 ﻿using RotationSolver.Updaters;
+using RotationSolver.Basic.Localization;
 using System.ComponentModel;
 
 namespace RotationSolver.ExtraRotations.Melee;
@@ -239,20 +240,20 @@ public sealed class ChurinMNK : MonkRotation
 			return;
 		}
 
-		ImGui.TableSetupColumn("Property");
-		ImGui.TableSetupColumn("Value");
+		ImGui.TableSetupColumn(Loc.T("Property"));
+		ImGui.TableSetupColumn(Loc.T("Value"));
 		ImGui.TableHeadersRow();
 
 		// Header / meta
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("Rotation Snapshot");
+		ImGui.TextUnformatted(Loc.T("Rotation Snapshot"));
 		ImGui.TableSetColumnIndex(1);
-		ImGui.TextDisabled($"Updated: {DateTime.Now:T}");
+		ImGui.TextDisabled(string.Format(Loc.T("Updated: {0:T}"), DateTime.Now));
 
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("— Performance");
+		ImGui.TextUnformatted(Loc.T("— Performance"));
 		ImGui.TableSetColumnIndex(1);
 		ImGui.TextUnformatted(string.Empty);
 
@@ -267,7 +268,7 @@ public sealed class ChurinMNK : MonkRotation
 		// Nadi / Blitz
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("— Nadi & Blitz");
+		ImGui.TextUnformatted(Loc.T("— Nadi & Blitz"));
 		ImGui.TableSetColumnIndex(1);
 		ImGui.TextUnformatted(string.Empty);
 
@@ -290,7 +291,7 @@ public sealed class ChurinMNK : MonkRotation
 		// Forms & Fury
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("— Forms & Fury");
+		ImGui.TextUnformatted(Loc.T("— Forms & Fury"));
 		ImGui.TableSetColumnIndex(1);
 		ImGui.TextUnformatted(string.Empty);
 
@@ -303,7 +304,7 @@ public sealed class ChurinMNK : MonkRotation
 		// GCD / Opo checks
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("— GCD / Opener Hints");
+		ImGui.TextUnformatted(Loc.T("— GCD / Opener Hints"));
 		ImGui.TableSetColumnIndex(1);
 		ImGui.TextUnformatted(string.Empty);
 
@@ -313,7 +314,7 @@ public sealed class ChurinMNK : MonkRotation
 		// Small helper badge row for important cooldowns
 		ImGui.TableNextRow();
 		ImGui.TableSetColumnIndex(0);
-		ImGui.TextUnformatted("Key Cooldowns");
+		ImGui.TextUnformatted(Loc.T("Key Cooldowns"));
 		ImGui.TableSetColumnIndex(1);
 		ImGui.BeginGroup();
 		AddBadge("Brotherhood", BrotherhoodPvE.IsEnabled && BrotherhoodPvE.Cooldown.HasOneCharge, green, gray);

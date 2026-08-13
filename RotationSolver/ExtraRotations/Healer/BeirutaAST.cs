@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Healer;
 
@@ -556,11 +557,11 @@ public sealed class BeirutaAST : AstrologianRotation
 
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Suntouched 1: {StatusHelper.PlayerWillStatusEndGCD(1, 0, true, StatusID.Suntouched)}");
-		ImGui.Text($"Suntouched 2: {StatusHelper.PlayerWillStatusEndGCD(2, 0, true, StatusID.Suntouched)}");
-		ImGui.Text($"Suntouched 3: {StatusHelper.PlayerWillStatusEndGCD(3, 0, true, StatusID.Suntouched)}");
-		ImGui.Text($"Suntouched 4: {StatusHelper.PlayerWillStatusEndGCD(4, 0, true, StatusID.Suntouched)}");
-		ImGui.Text($"Suntouched Time: {StatusHelper.PlayerStatusTime(true, StatusID.Suntouched)}");
+		ImGui.Text(string.Format(Loc.T("Suntouched 1: {0}"), StatusHelper.PlayerWillStatusEndGCD(1, 0, true, StatusID.Suntouched)));
+		ImGui.Text(string.Format(Loc.T("Suntouched 2: {0}"), StatusHelper.PlayerWillStatusEndGCD(2, 0, true, StatusID.Suntouched)));
+		ImGui.Text(string.Format(Loc.T("Suntouched 3: {0}"), StatusHelper.PlayerWillStatusEndGCD(3, 0, true, StatusID.Suntouched)));
+		ImGui.Text(string.Format(Loc.T("Suntouched 4: {0}"), StatusHelper.PlayerWillStatusEndGCD(4, 0, true, StatusID.Suntouched)));
+		ImGui.Text(string.Format(Loc.T("Suntouched Time: {0}"), StatusHelper.PlayerStatusTime(true, StatusID.Suntouched)));
 	}
 
 	#endregion

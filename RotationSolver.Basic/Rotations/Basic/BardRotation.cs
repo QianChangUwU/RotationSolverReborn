@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -126,16 +126,16 @@ public partial class BardRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("Repertoire: " + Repertoire.ToString());
-		ImGui.Text("Song: " + Song.ToString());
-		ImGui.Text("LastSong: " + LastSong.ToString());
-		ImGui.Text("SoulVoice: " + SoulVoice.ToString());
-		ImGui.Text("SongTimeRaw: " + SongTimeRaw.ToString());
-		ImGui.Text("SongTime: " + SongTime.ToString());
-		ImGui.Text("BloodletterMax: " + BloodletterMax.ToString());
-		ImGui.Text("Bloodlettercharges: " + BloodletterPvE.Cooldown.CurrentCharges.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("BlastArrowPvEReady: " + BlastArrowPvEReady.ToString());
+		ImGui.Text(Loc.T("Repertoire: ") + Repertoire.ToString());
+		ImGui.Text(Loc.T("Song: ") + Song.ToString());
+		ImGui.Text(Loc.T("LastSong: ") + LastSong.ToString());
+		ImGui.Text(Loc.T("SoulVoice: ") + SoulVoice.ToString());
+		ImGui.Text(Loc.T("SongTimeRaw: ") + SongTimeRaw.ToString());
+		ImGui.Text(Loc.T("SongTime: ") + SongTime.ToString());
+		ImGui.Text(Loc.T("BloodletterMax: ") + BloodletterMax.ToString());
+		ImGui.Text(Loc.T("Bloodlettercharges: ") + BloodletterPvE.Cooldown.CurrentCharges.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("BlastArrowPvEReady: ") + BlastArrowPvEReady.ToString());
 	}
 	#endregion
 

@@ -1,3 +1,4 @@
+﻿using RotationSolver.Basic.Localization;
 namespace RotationSolver.RebornRotations.Ranged;
 
 [Rotation("Reborn", CombatType.PvE, GameVersion = "7.55")]
@@ -25,12 +26,12 @@ public sealed class DNC_Reborn : DancerRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text("InBurstStatus: " + InBurstStatus.ToString());
-		ImGui.Text("ShouldUseLastDance Logic: " + shouldUseLastDance.ToString());
-		ImGui.Text($"UseStandardStep Logic: {UseStandardStep(out _)}");
-		ImGui.Text($"UseClosedPosition Logic: {UseClosedPosition(out _)}");
-		ImGui.Text($"FinishTheDance Logic: {FinishTheDance(out _)}");
-		ImGui.Text($"HandleTillana Logic: {HandleTillana(out _)}");
+		ImGui.Text(string.Format(Loc.T("InBurstStatus: {0}"), InBurstStatus.ToString()));
+		ImGui.Text(string.Format(Loc.T("ShouldUseLastDance Logic: {0}"), shouldUseLastDance.ToString()));
+		ImGui.Text(string.Format(Loc.T("UseStandardStep Logic: {0}"), UseStandardStep(out _)));
+		ImGui.Text(string.Format(Loc.T("UseClosedPosition Logic: {0}"), UseClosedPosition(out _)));
+		ImGui.Text(string.Format(Loc.T("FinishTheDance Logic: {0}"), FinishTheDance(out _)));
+		ImGui.Text(string.Format(Loc.T("HandleTillana Logic: {0}"), HandleTillana(out _)));
 	}
 	#endregion
 

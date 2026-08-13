@@ -2,6 +2,7 @@
 using Lumina.Excel.Sheets.Experimental;
 using System.ComponentModel;
 using System.Diagnostics;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Magical;
 
@@ -1267,17 +1268,17 @@ public sealed class Rabbs_BLM : BlackMageRotation
 	public unsafe override void DisplayRotationStatus()
 	{
 		//motif
-		ImGui.Text("GCDTime " + GCDTime());
-		ImGui.Text($"Last Action: {(RecordActions != null && RecordActions.Length > 0 ? RecordActions[0].Action.RowId : 0)}");
-		ImGui.Text(" currentmp " + CurrentMp);
-		ImGui.Text(" Player?.CurrentMp " + Player?.CurrentMp);
-		ImGui.Text("iscasting " + IsCasting);
-		ImGui.Text("FlareAoeNumber " + GetAoeCount(FlarePvE));
-		ImGui.Text("falre aoe range " + FlarePvE.Info.EffectRange);
-		ImGui.Text("Player.BaseCastTime " + Player?.BaseCastTime);
-		ImGui.Text("Player.CurrentCastTime) " + Player?.CurrentCastTime);
-		ImGui.Text("Player.TotalCastTime " + Player?.TotalCastTime);
-		ImGui.Text("NextAbilityToNextGCD " + NextAbilityToNextGCD);
+		ImGui.Text(string.Format(Loc.T("GCDTime {0}"), GCDTime()));
+		ImGui.Text(string.Format(Loc.T("Last Action: {0}"), RecordActions != null && RecordActions.Length > 0 ? RecordActions[0].Action.RowId : 0));
+		ImGui.Text(string.Format(Loc.T(" currentmp {0}"), CurrentMp));
+		ImGui.Text(string.Format(Loc.T(" Player?.CurrentMp {0}"), Player?.CurrentMp));
+		ImGui.Text(string.Format(Loc.T("iscasting {0}"), IsCasting));
+		ImGui.Text(string.Format(Loc.T("FlareAoeNumber {0}"), GetAoeCount(FlarePvE)));
+		ImGui.Text(string.Format(Loc.T("falre aoe range {0}"), FlarePvE.Info.EffectRange));
+		ImGui.Text(string.Format(Loc.T("Player.BaseCastTime {0}"), Player?.BaseCastTime));
+		ImGui.Text(string.Format(Loc.T("Player.CurrentCastTime) {0}"), Player?.CurrentCastTime));
+		ImGui.Text(string.Format(Loc.T("Player.TotalCastTime {0}"), Player?.TotalCastTime));
+		ImGui.Text(string.Format(Loc.T("NextAbilityToNextGCD {0}"), NextAbilityToNextGCD));
 
 		base.DisplayRotationStatus();
 	}

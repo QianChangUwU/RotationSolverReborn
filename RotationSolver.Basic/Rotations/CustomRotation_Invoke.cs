@@ -144,7 +144,7 @@ public partial class CustomRotation
 		catch (MissingMethodException ex)
 		{
 			// Log the exception or handle it as needed
-			_ = BasicWarningHelper.AddSystemWarning($"Exception in UpdateDefenseActions method: {ex.Message}");
+			_ = BasicWarningHelper.AddSystemWarning(string.Format(Loc.T("Exception in UpdateDefenseActions method: {0}"), ex.Message));
 			// Optionally, set actions to null in case of an exception
 			ActionDefenseAreaAbility = ActionDefenseSingleAbility = null;
 		}

@@ -1,4 +1,4 @@
-namespace RotationSolver.Basic.Rotations.Basic;
+﻿namespace RotationSolver.Basic.Rotations.Basic;
 
 public partial class WhiteMageRotation
 {
@@ -100,10 +100,10 @@ public partial class WhiteMageRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("SacredSightStacks: " + SacredSightStacks.ToString());
-		ImGui.Text("LilyTime: " + LilyTime.ToString());
-		ImGui.Text("BloodLilyStacks: " + BloodLily.ToString());
-		ImGui.Text("Lily: " + Lily.ToString());
+		ImGui.Text(Loc.T("SacredSightStacks: ") + SacredSightStacks.ToString());
+		ImGui.Text(Loc.T("LilyTime: ") + LilyTime.ToString());
+		ImGui.Text(Loc.T("BloodLilyStacks: ") + BloodLily.ToString());
+		ImGui.Text(Loc.T("Lily: ") + Lily.ToString());
 	}
 	#endregion
 

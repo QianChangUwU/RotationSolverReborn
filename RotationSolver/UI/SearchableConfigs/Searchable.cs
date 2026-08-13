@@ -2,6 +2,7 @@
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using Lumina.Excel.Sheets;
+using RotationSolver.Basic.Localization;
 using RotationSolver.Data;
 
 namespace RotationSolver.UI.SearchableConfigs;
@@ -192,13 +193,13 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 	protected static float Scale => ImGuiHelpers.GlobalScale;
 	public CheckBoxSearch? Parent { get; set; } = null;
 
-	public virtual string SearchingKeys => Name + " " + Description;
+	public virtual string SearchingKeys => Loc.T(Name) + " " + Loc.T(Description);
 	public virtual string Name
 	{
 		get
 		{
 			var ui = _property.GetCustomAttribute<UIAttribute>();
-			return ui == null ? string.Empty : ui.Name;
+			return ui == null ? string.Empty : Loc.T(ui.Name);
 		}
 	}
 
@@ -207,7 +208,7 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 		get
 		{
 			var ui = _property.GetCustomAttribute<UIAttribute>();
-			return ui == null || string.IsNullOrEmpty(ui.Description) ? string.Empty : ui.Description;
+			return ui == null || string.IsNullOrEmpty(ui.Description) ? string.Empty : Loc.T(ui.Description);
 		}
 	}
 

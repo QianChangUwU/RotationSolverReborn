@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Tank;
 
@@ -41,15 +42,15 @@ public sealed class ChurinDRK : DarkKnightRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"HasDisesteem: {HasDisesteem}");
-		ImGui.Text($"CanBurst: {CanBurst}");
-		ImGui.Text($"InBurstWindow: {InBurstWindow}");
-		ImGui.Text($"InOddWindow: {InOddWindow(LivingShadowPvE)}");
-		ImGui.Text($"IsMedicated: {IsMedicated}");
-		ImGui.Text($"NoCombo: {NoCombo}");
-		ImGui.Text($"Delirium Stacks: {DeliriumStacks}");
-		ImGui.Text($"Next Potion Time: {_churinPotions.NextPotionTime}");
-		ImGui.Text($"IsInHighEndDuty: {IsInHighEndDuty}");
+		ImGui.Text(string.Format(Loc.T("HasDisesteem: {0}"), HasDisesteem));
+		ImGui.Text(string.Format(Loc.T("CanBurst: {0}"), CanBurst));
+		ImGui.Text(string.Format(Loc.T("InBurstWindow: {0}"), InBurstWindow));
+		ImGui.Text(string.Format(Loc.T("InOddWindow: {0}"), InOddWindow(LivingShadowPvE)));
+		ImGui.Text(string.Format(Loc.T("IsMedicated: {0}"), IsMedicated));
+		ImGui.Text(string.Format(Loc.T("NoCombo: {0}"), NoCombo));
+		ImGui.Text(string.Format(Loc.T("Delirium Stacks: {0}"), DeliriumStacks));
+		ImGui.Text(string.Format(Loc.T("Next Potion Time: {0}"), _churinPotions.NextPotionTime));
+		ImGui.Text(string.Format(Loc.T("IsInHighEndDuty: {0}"), IsInHighEndDuty));
 	}
 	#endregion
 

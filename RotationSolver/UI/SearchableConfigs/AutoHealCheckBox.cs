@@ -1,4 +1,5 @@
 ﻿using RotationSolver.Basic.Configuration;
+using RotationSolver.Basic.Localization;
 using RotationSolver.Data;
 
 namespace RotationSolver.UI.SearchableConfigs;

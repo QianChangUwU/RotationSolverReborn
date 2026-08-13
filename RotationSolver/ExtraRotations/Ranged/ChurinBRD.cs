@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Ranged;
 
@@ -1025,19 +1026,19 @@ public sealed class ChurinBRD : BardRotation
 
 	public override void DisplayRotationStatus()
               	{
-              		ImGui.Text("===GCD Status===");
-              		ImGui.Text($"Weapon Remain: {WeaponRemain}");
-	                ImGui.Text($"Weapon Elapsed {WeaponElapsed}");
-	                ImGui.Text($"Calculated Action Ahead {DataCenter.CalculatedActionAhead}");
-	                ImGui.Text($"Can Weave {CanWeave}");
-              		ImGui.Text($"Enough Weave Time: {EnoughWeaveTime}");
-	                ImGui.Text($"Late Weave Window: {LateWeaveWindow}");
-              		ImGui.Text($"Can Late Weave: {CanLateWeave}");
-              		ImGui.Text($"Can Early Weave: {CanEarlyWeave}");
-					ImGui.Text($"Empyreal Arrow Recast Remain: {EmpyrealArrowPvE.Cooldown.RecastTimeRemain} - {WeaponRemain} = {Math.Abs(EmpyrealArrowPvE.Cooldown.RecastTimeRemain - WeaponRemain)}");
-	                ImGui.Text($"Target Has Stormbite: {TargetHasDoT(Stormbite)}");
-	                ImGui.Text($"Target Has Caustic Bite: {TargetHasDoT(CausticBite)}");
-			  		ImGui.Text($"In Burst: {InBurst}");
+              		ImGui.Text(Loc.T("===GCD Status==="));
+              		ImGui.Text(string.Format(Loc.T("Weapon Remain: {0}"), WeaponRemain));
+	                ImGui.Text(string.Format(Loc.T("Weapon Elapsed {0}"), WeaponElapsed));
+	                ImGui.Text(string.Format(Loc.T("Calculated Action Ahead {0}"), DataCenter.CalculatedActionAhead));
+	                ImGui.Text(string.Format(Loc.T("Can Weave {0}"), CanWeave));
+              		ImGui.Text(string.Format(Loc.T("Enough Weave Time: {0}"), EnoughWeaveTime));
+	                ImGui.Text(string.Format(Loc.T("Late Weave Window: {0}"), LateWeaveWindow));
+              		ImGui.Text(string.Format(Loc.T("Can Late Weave: {0}"), CanLateWeave));
+              		ImGui.Text(string.Format(Loc.T("Can Early Weave: {0}"), CanEarlyWeave));
+					ImGui.Text(string.Format(Loc.T("Empyreal Arrow Recast Remain: {0} - {1} = {2}"), EmpyrealArrowPvE.Cooldown.RecastTimeRemain, WeaponRemain, Math.Abs(EmpyrealArrowPvE.Cooldown.RecastTimeRemain - WeaponRemain)));
+	                ImGui.Text(string.Format(Loc.T("Target Has Stormbite: {0}"), TargetHasDoT(Stormbite)));
+	                ImGui.Text(string.Format(Loc.T("Target Has Caustic Bite: {0}"), TargetHasDoT(CausticBite)));
+			  		ImGui.Text(string.Format(Loc.T("In Burst: {0}"), InBurst));
               	}
 
 	#endregion

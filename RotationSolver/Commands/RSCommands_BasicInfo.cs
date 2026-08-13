@@ -1,5 +1,6 @@
 ﻿using Dalamud.Game.Command;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
 using RotationSolver.Data;
 
@@ -85,13 +86,13 @@ namespace RotationSolver.Commands
 							Service.Config.TargetingIndex = idx;
 							if (Service.Config.ShowToggledSettingInChat)
 							{
-								Svc.Chat.Print($"Set current TargetingType to {targetingTypeSet}.");
+								Svc.Chat.Print(string.Format(Loc.T("Set current TargetingType to {0}."), targetingTypeSet));
 							}
 							index = idx;
 						}
 						else
 						{
-							Svc.Chat.PrintError($"{targetingTypeSet} is not in TargetingTypes list.");
+							Svc.Chat.PrintError(string.Format(Loc.T("{0} is not in TargetingTypes list."), targetingTypeSet));
 							return;
 						}
 					}

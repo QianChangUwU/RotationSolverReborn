@@ -177,32 +177,32 @@ public partial class DancerRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("IsDancing: " + IsDancing.ToString());
-		ImGui.Text("Esprit: " + Esprit.ToString());
-		ImGui.Text("Feathers: " + Feathers.ToString());
-		ImGui.Text("CompletedSteps: " + CompletedSteps.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("StandardFinishPvEReady: " + StandardFinishPvEReady.ToString());
-		ImGui.Text("TechnicalFinishPvE: " + TechnicalFinishPvE.ToString());
-		ImGui.Text("ImprovisedFinishPvEReady: " + ImprovisedFinishPvEReady.ToString());
-		ImGui.Text("TillanaPvEReady: " + TillanaPvEReady.ToString());
-		ImGui.Text("FinishingMovePvEReady: " + FinishingMovePvEReady.ToString());
-		ImGui.Text("DanceOfTheDawnPvEReady: " + DanceOfTheDawnPvEReady.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudOrange, "Status Tracking");
-		ImGui.Text("HasLastDance: " + HasLastDance.ToString());
-		ImGui.Text("HasSilkenSymmetry: " + HasSilkenSymmetry.ToString());
-		ImGui.Text("HasFlourishingSymmetry: " + HasFlourishingSymmetry.ToString());
-		ImGui.Text("HasSilkenFlow: " + HasSilkenFlow.ToString());
-		ImGui.Text("HasFlourishingFlow: " + HasFlourishingFlow.ToString());
-		ImGui.Text("HasThreefoldFanDance: " + HasThreefoldFanDance.ToString());
-		ImGui.Text("HasFourfoldFanDance: " + HasFourfoldFanDance.ToString());
-		ImGui.Text("HasFlourishingStarfall: " + HasFlourishingStarfall.ToString());
-		ImGui.Text("HasStandardFinish: " + HasStandardFinish.ToString());
-		ImGui.Text("HasStandardStep: " + HasStandardStep.ToString());
-		ImGui.Text("HasTechnicalStep: " + HasTechnicalStep.ToString());
-		ImGui.Text("HasTechnicalFinish: " + HasTechnicalFinish.ToString());
-		ImGui.Text("HasDevilment: " + HasDevilment.ToString());
-		ImGui.Text("HasClosedPosition: " + HasClosedPosition.ToString());
+		ImGui.Text(Loc.T("IsDancing: ") + IsDancing.ToString());
+		ImGui.Text(Loc.T("Esprit: ") + Esprit.ToString());
+		ImGui.Text(Loc.T("Feathers: ") + Feathers.ToString());
+		ImGui.Text(Loc.T("CompletedSteps: ") + CompletedSteps.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("StandardFinishPvEReady: ") + StandardFinishPvEReady.ToString());
+		ImGui.Text(Loc.T("TechnicalFinishPvE: ") + TechnicalFinishPvE.ToString());
+		ImGui.Text(Loc.T("ImprovisedFinishPvEReady: ") + ImprovisedFinishPvEReady.ToString());
+		ImGui.Text(Loc.T("TillanaPvEReady: ") + TillanaPvEReady.ToString());
+		ImGui.Text(Loc.T("FinishingMovePvEReady: ") + FinishingMovePvEReady.ToString());
+		ImGui.Text(Loc.T("DanceOfTheDawnPvEReady: ") + DanceOfTheDawnPvEReady.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudOrange, Loc.T("Status Tracking"));
+		ImGui.Text(Loc.T("HasLastDance: ") + HasLastDance.ToString());
+		ImGui.Text(Loc.T("HasSilkenSymmetry: ") + HasSilkenSymmetry.ToString());
+		ImGui.Text(Loc.T("HasFlourishingSymmetry: ") + HasFlourishingSymmetry.ToString());
+		ImGui.Text(Loc.T("HasSilkenFlow: ") + HasSilkenFlow.ToString());
+		ImGui.Text(Loc.T("HasFlourishingFlow: ") + HasFlourishingFlow.ToString());
+		ImGui.Text(Loc.T("HasThreefoldFanDance: ") + HasThreefoldFanDance.ToString());
+		ImGui.Text(Loc.T("HasFourfoldFanDance: ") + HasFourfoldFanDance.ToString());
+		ImGui.Text(Loc.T("HasFlourishingStarfall: ") + HasFlourishingStarfall.ToString());
+		ImGui.Text(Loc.T("HasStandardFinish: ") + HasStandardFinish.ToString());
+		ImGui.Text(Loc.T("HasStandardStep: ") + HasStandardStep.ToString());
+		ImGui.Text(Loc.T("HasTechnicalStep: ") + HasTechnicalStep.ToString());
+		ImGui.Text(Loc.T("HasTechnicalFinish: ") + HasTechnicalFinish.ToString());
+		ImGui.Text(Loc.T("HasDevilment: ") + HasDevilment.ToString());
+		ImGui.Text(Loc.T("HasClosedPosition: ") + HasClosedPosition.ToString());
 	}
 	#endregion
 

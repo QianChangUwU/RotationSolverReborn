@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Melee;
 
@@ -418,35 +419,35 @@ public sealed class BeirutaNIN : NinjaRotation
 
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Last Ninjutsu Action Cleared From Queue: {_lastNinActionAim}");
-		ImGui.Text($"Current Ninjutsu Action: {_ninActionAim}");
-		ImGui.Text($"Ninjutsu ID: {AdjustId(NinjutsuPvEid)}");
-		ImGui.Text($"Burst Prep Threshold: {BurstPrepThreshold}");
-		ImGui.Text($"Should Queue Burst Prep Suiton/Huton: {ShouldQueueBurstPrepSuitonOrHuton}");
-		ImGui.Text($"In Burst Phase: {InBurstPhase}");
-		ImGui.Text($"Burst Action Recast Remain: {BurstActionRecastRemain}");
-		ImGui.Text($"Kassatsu Charges: {KassatsuPvE.Cooldown.CurrentCharges}");
-		ImGui.Text($"Kassatsu Recast Remain: {KassatsuPvE.Cooldown.RecastTimeRemain}");
-		ImGui.Text($"Ten Charges: {TenPvE.Cooldown.CurrentCharges}");
-		ImGui.Text($"Ten Recast Remain: {TenPvE.Cooldown.RecastTimeRemain}");
+		ImGui.Text(string.Format(Loc.T("Last Ninjutsu Action Cleared From Queue: {0}"), _lastNinActionAim));
+		ImGui.Text(string.Format(Loc.T("Current Ninjutsu Action: {0}"), _ninActionAim));
+		ImGui.Text(string.Format(Loc.T("Ninjutsu ID: {0}"), AdjustId(NinjutsuPvEid)));
+		ImGui.Text(string.Format(Loc.T("Burst Prep Threshold: {0}"), BurstPrepThreshold));
+		ImGui.Text(string.Format(Loc.T("Should Queue Burst Prep Suiton/Huton: {0}"), ShouldQueueBurstPrepSuitonOrHuton));
+		ImGui.Text(string.Format(Loc.T("In Burst Phase: {0}"), InBurstPhase));
+		ImGui.Text(string.Format(Loc.T("Burst Action Recast Remain: {0}"), BurstActionRecastRemain));
+		ImGui.Text(string.Format(Loc.T("Kassatsu Charges: {0}"), KassatsuPvE.Cooldown.CurrentCharges));
+		ImGui.Text(string.Format(Loc.T("Kassatsu Recast Remain: {0}"), KassatsuPvE.Cooldown.RecastTimeRemain));
+		ImGui.Text(string.Format(Loc.T("Ten Charges: {0}"), TenPvE.Cooldown.CurrentCharges));
+		ImGui.Text(string.Format(Loc.T("Ten Recast Remain: {0}"), TenPvE.Cooldown.RecastTimeRemain));
 
-		ImGui.Text($"Self AoE 3+ (Death Blossom): {IsSelfAoe3Plus(DeathBlossomPvE)}");
-		ImGui.Text($"Self AoE 3+ (Doton): {IsSelfAoe3Plus(DotonPvE)}");
-		ImGui.Text($"Target AoE 3+ (Katon): {IsTargetAoe3Plus(KatonPvE)}");
-		ImGui.Text($"Target AoE 3+ (Goka): {IsTargetAoe3Plus(GokaMekkyakuPvE)}");
-		ImGui.Text($"Target AoE 3+ (Hellfrog): {IsTargetAoe3Plus(HellfrogMediumPvE)}");
-		ImGui.Text($"Target AoE 3+ (Huton/Suiton prep): {IsTargetAoe3Plus(HutonPvE)}");
+		ImGui.Text(string.Format(Loc.T("Self AoE 3+ (Death Blossom): {0}"), IsSelfAoe3Plus(DeathBlossomPvE)));
+		ImGui.Text(string.Format(Loc.T("Self AoE 3+ (Doton): {0}"), IsSelfAoe3Plus(DotonPvE)));
+		ImGui.Text(string.Format(Loc.T("Target AoE 3+ (Katon): {0}"), IsTargetAoe3Plus(KatonPvE)));
+		ImGui.Text(string.Format(Loc.T("Target AoE 3+ (Goka): {0}"), IsTargetAoe3Plus(GokaMekkyakuPvE)));
+		ImGui.Text(string.Format(Loc.T("Target AoE 3+ (Hellfrog): {0}"), IsTargetAoe3Plus(HellfrogMediumPvE)));
+		ImGui.Text(string.Format(Loc.T("Target AoE 3+ (Huton/Suiton prep): {0}"), IsTargetAoe3Plus(HutonPvE)));
 
-		ImGui.Text($"Current Ninjutsu Aim: {_ninActionAim}");
-		ImGui.Text($"Last Ninjutsu Aim: {_lastNinActionAim}");
-		ImGui.Text($"Has Kassatsu: {HasKassatsu}");
-		ImGui.Text($"InBurstPhase: {InBurstPhase}");
-		ImGui.Text($"CanQueueDamageMudra: {_ninActionAim == null && TenPvE.CanUse(out _, usedUp: true) && TenPvE.Cooldown.WillHaveXChargesGCD(2, 2)}");
-		ImGui.Text($"ShouldSpendDamageMudraNow: {ShouldSpendDamageMudraNow}");
-		ImGui.Text($"ShouldUseDisengageFallback: {ShouldUseDisengageNinjutsuFallback}");
-		ImGui.Text($"ShouldQueueBurstPrepSuitonOrHuton: {ShouldQueueBurstPrepSuitonOrHuton}");
-		ImGui.Text($"Ten Charges: {TenPvE.Cooldown.CurrentCharges}");
-		ImGui.Text($"Ten Recast Remain: {TenPvE.Cooldown.RecastTimeRemain}");
+		ImGui.Text(string.Format(Loc.T("Current Ninjutsu Aim: {0}"), _ninActionAim));
+		ImGui.Text(string.Format(Loc.T("Last Ninjutsu Aim: {0}"), _lastNinActionAim));
+		ImGui.Text(string.Format(Loc.T("Has Kassatsu: {0}"), HasKassatsu));
+		ImGui.Text(string.Format(Loc.T("InBurstPhase: {0}"), InBurstPhase));
+		ImGui.Text(string.Format(Loc.T("CanQueueDamageMudra: {0}"), _ninActionAim == null && TenPvE.CanUse(out _, usedUp: true) && TenPvE.Cooldown.WillHaveXChargesGCD(2, 2)));
+		ImGui.Text(string.Format(Loc.T("ShouldSpendDamageMudraNow: {0}"), ShouldSpendDamageMudraNow));
+		ImGui.Text(string.Format(Loc.T("ShouldUseDisengageFallback: {0}"), ShouldUseDisengageNinjutsuFallback));
+		ImGui.Text(string.Format(Loc.T("ShouldQueueBurstPrepSuitonOrHuton: {0}"), ShouldQueueBurstPrepSuitonOrHuton));
+		ImGui.Text(string.Format(Loc.T("Ten Charges: {0}"), TenPvE.Cooldown.CurrentCharges));
+		ImGui.Text(string.Format(Loc.T("Ten Recast Remain: {0}"), TenPvE.Cooldown.RecastTimeRemain));
 	}
 
 	#endregion

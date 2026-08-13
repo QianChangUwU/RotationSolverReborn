@@ -1,4 +1,4 @@
-namespace RotationSolver.Basic.Rotations.Basic;
+﻿namespace RotationSolver.Basic.Rotations.Basic;
 
 public partial class ViperRotation
 {
@@ -176,60 +176,60 @@ public partial class ViperRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text($"SerpentOffering: {SerpentOffering}/100");
-		ImGui.Text($"RattlingCoilStacks: {RattlingCoilStacks}/{MaxRattling}");
-		ImGui.Text($"AnguineTributeStacks: {AnguineTributeStacks}/{MaxAnguine}");
-		ImGui.Text($"VicewinderHasCharges: {VicewinderHasCharges}");
-		ImGui.Text($"VicepitHasCharges: {VicepitHasCharges}");
+		ImGui.Text(string.Format(Loc.T("SerpentOffering: {0}/100"), SerpentOffering));
+		ImGui.Text(string.Format(Loc.T("RattlingCoilStacks: {0}/{1}"), RattlingCoilStacks, MaxRattling));
+		ImGui.Text(string.Format(Loc.T("AnguineTributeStacks: {0}/{1}"), AnguineTributeStacks, MaxAnguine));
+		ImGui.Text(string.Format(Loc.T("VicewinderHasCharges: {0}"), VicewinderHasCharges));
+		ImGui.Text(string.Format(Loc.T("VicepitHasCharges: {0}"), VicepitHasCharges));
 		ImGui.Spacing();
-		ImGui.Text("DreadCombo: " + DreadCombo.ToString());
-		ImGui.Text("NODREAD: " + NODREAD.ToString());
-		ImGui.Text("DreadActive: " + DreadActive.ToString());
-		ImGui.Text("SwiftskinsCoilOnly: " + SwiftskinsCoilOnly.ToString());
-		ImGui.Text("HuntersCoilOnly: " + HuntersCoilOnly.ToString());
-		ImGui.Text("PitActive: " + PitActive.ToString());
-		ImGui.Text("SwiftskinsDenOnly: " + SwiftskinsDenOnly.ToString());
-		ImGui.Text("HuntersDenOnly: " + HuntersDenOnly.ToString());
+		ImGui.Text(Loc.T("DreadCombo: ") + DreadCombo.ToString());
+		ImGui.Text(Loc.T("NODREAD: ") + NODREAD.ToString());
+		ImGui.Text(Loc.T("DreadActive: ") + DreadActive.ToString());
+		ImGui.Text(Loc.T("SwiftskinsCoilOnly: ") + SwiftskinsCoilOnly.ToString());
+		ImGui.Text(Loc.T("HuntersCoilOnly: ") + HuntersCoilOnly.ToString());
+		ImGui.Text(Loc.T("PitActive: ") + PitActive.ToString());
+		ImGui.Text(Loc.T("SwiftskinsDenOnly: ") + SwiftskinsDenOnly.ToString());
+		ImGui.Text(Loc.T("HuntersDenOnly: ") + HuntersDenOnly.ToString());
 		ImGui.Spacing();
-		ImGui.Text("SerpentCombo Raw Data: " + SerpentCombo.ToString());
-		ImGui.Text("NoAbilityReady: " + NoAbilityReady.ToString());
-		ImGui.Text("DeathRattleReady: " + DeathRattleReady.ToString());
-		ImGui.Text("LastLashReady: " + LastLashReady.ToString());
-		ImGui.Text("FirstLegacyReady: " + FirstLegacyReady.ToString());
-		ImGui.Text("SecondLegacyReady: " + SecondLegacyReady.ToString());
-		ImGui.Text("ThirdLegacyReady: " + ThirdLegacyReady.ToString());
-		ImGui.Text("FourthLegacyReady: " + FourthLegacyReady.ToString());
-		ImGui.Text("TwinAbilityReady: " + TwinAbilityReady.ToString());
-		ImGui.Text("ThreshAbilityReady: " + ThreshAbilityReady.ToString());
-		ImGui.Text("UncoiledAbilityReady: " + UncoiledAbilityReady.ToString());
+		ImGui.Text(Loc.T("SerpentCombo Raw Data: ") + SerpentCombo.ToString());
+		ImGui.Text(Loc.T("NoAbilityReady: ") + NoAbilityReady.ToString());
+		ImGui.Text(Loc.T("DeathRattleReady: ") + DeathRattleReady.ToString());
+		ImGui.Text(Loc.T("LastLashReady: ") + LastLashReady.ToString());
+		ImGui.Text(Loc.T("FirstLegacyReady: ") + FirstLegacyReady.ToString());
+		ImGui.Text(Loc.T("SecondLegacyReady: ") + SecondLegacyReady.ToString());
+		ImGui.Text(Loc.T("ThirdLegacyReady: ") + ThirdLegacyReady.ToString());
+		ImGui.Text(Loc.T("FourthLegacyReady: ") + FourthLegacyReady.ToString());
+		ImGui.Text(Loc.T("TwinAbilityReady: ") + TwinAbilityReady.ToString());
+		ImGui.Text(Loc.T("ThreshAbilityReady: ") + ThreshAbilityReady.ToString());
+		ImGui.Text(Loc.T("UncoiledAbilityReady: ") + UncoiledAbilityReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("HasHunterAndSwift: " + HasHunterAndSwift.ToString());
-		ImGui.Text("WillSwiftEnd: " + WillSwiftEnd.ToString());
-		ImGui.Text("WillHunterEnd: " + WillHunterEnd.ToString());
-		ImGui.Text("IsSwift: " + IsSwift.ToString());
-		ImGui.Text("SwiftTime: " + SwiftTime.ToString());
-		ImGui.Text("IsHunter: " + IsHunter.ToString());
-		ImGui.Text("HuntersTime: " + HuntersTime.ToString());
-		ImGui.Text("HunterOrSwiftEndsFirst: " + (HunterOrSwiftEndsFirst?.ToString() ?? "null"));
+		ImGui.Text(Loc.T("HasHunterAndSwift: ") + HasHunterAndSwift.ToString());
+		ImGui.Text(Loc.T("WillSwiftEnd: ") + WillSwiftEnd.ToString());
+		ImGui.Text(Loc.T("WillHunterEnd: ") + WillHunterEnd.ToString());
+		ImGui.Text(Loc.T("IsSwift: ") + IsSwift.ToString());
+		ImGui.Text(Loc.T("SwiftTime: ") + SwiftTime.ToString());
+		ImGui.Text(Loc.T("IsHunter: ") + IsHunter.ToString());
+		ImGui.Text(Loc.T("HuntersTime: ") + HuntersTime.ToString());
+		ImGui.Text(Loc.T("HunterOrSwiftEndsFirst: ") + (HunterOrSwiftEndsFirst?.ToString() ?? "null"));
 		ImGui.Spacing();
-		ImGui.Text("MaxAnguine: " + MaxAnguine.ToString());
-		ImGui.Text("HasSteel: " + HasSteel.ToString());
-		ImGui.Text("HasReavers: " + HasReavers.ToString());
-		ImGui.Text("NoHone: " + NoHone.ToString());
-		ImGui.Text("HasHind: " + HasHind.ToString());
-		ImGui.Text("HasFlank: " + HasFlank.ToString());
-		ImGui.Text("HasBane: " + HasBane.ToString());
-		ImGui.Text("HasSting: " + HasSting.ToString());
-		ImGui.Text("HasNoVenom: " + HasNoVenom.ToString());
-		ImGui.Text("HasReadyToReawaken: " + HasReadyToReawaken.ToString());
-		ImGui.Text("HasHunterVenom: " + HasHunterVenom.ToString());
-		ImGui.Text("HasSwiftVenom: " + HasSwiftVenom.ToString());
-		ImGui.Text("HasFellHuntersVenom: " + HasFellHuntersVenom.ToString());
-		ImGui.Text("HasFellSkinsVenom: " + HasFellSkinsVenom.ToString());
-		ImGui.Text("HasPoisedFang: " + HasPoisedFang.ToString());
-		ImGui.Text("HasPoisedBlood: " + HasPoisedBlood.ToString());
-		ImGui.Text("HasGrimHunter: " + HasGrimHunter.ToString());
-		ImGui.Text("HasGrimSkin: " + HasGrimSkin.ToString());
+		ImGui.Text(Loc.T("MaxAnguine: ") + MaxAnguine.ToString());
+		ImGui.Text(Loc.T("HasSteel: ") + HasSteel.ToString());
+		ImGui.Text(Loc.T("HasReavers: ") + HasReavers.ToString());
+		ImGui.Text(Loc.T("NoHone: ") + NoHone.ToString());
+		ImGui.Text(Loc.T("HasHind: ") + HasHind.ToString());
+		ImGui.Text(Loc.T("HasFlank: ") + HasFlank.ToString());
+		ImGui.Text(Loc.T("HasBane: ") + HasBane.ToString());
+		ImGui.Text(Loc.T("HasSting: ") + HasSting.ToString());
+		ImGui.Text(Loc.T("HasNoVenom: ") + HasNoVenom.ToString());
+		ImGui.Text(Loc.T("HasReadyToReawaken: ") + HasReadyToReawaken.ToString());
+		ImGui.Text(Loc.T("HasHunterVenom: ") + HasHunterVenom.ToString());
+		ImGui.Text(Loc.T("HasSwiftVenom: ") + HasSwiftVenom.ToString());
+		ImGui.Text(Loc.T("HasFellHuntersVenom: ") + HasFellHuntersVenom.ToString());
+		ImGui.Text(Loc.T("HasFellSkinsVenom: ") + HasFellSkinsVenom.ToString());
+		ImGui.Text(Loc.T("HasPoisedFang: ") + HasPoisedFang.ToString());
+		ImGui.Text(Loc.T("HasPoisedBlood: ") + HasPoisedBlood.ToString());
+		ImGui.Text(Loc.T("HasGrimHunter: ") + HasGrimHunter.ToString());
+		ImGui.Text(Loc.T("HasGrimSkin: ") + HasGrimSkin.ToString());
 	}
 	#endregion
 

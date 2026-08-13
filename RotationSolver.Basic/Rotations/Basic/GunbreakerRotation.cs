@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -193,47 +193,47 @@ public partial class GunbreakerRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("InGnashingFang: " + InGnashingFang.ToString());
-		ImGui.Text("InReignCombo: " + InReignCombo.ToString());
-		ImGui.Text("HasNoMercy: " + HasNoMercy.ToString());
-		ImGui.Text("HasReadyToBreak: " + HasReadyToBreak.ToString());
-		ImGui.Text("HasReadyToReign: " + HasReadyToReign.ToString());
-		ImGui.Text("HasReadyToRip: " + HasReadyToRip.ToString());
-		ImGui.Text("HasReadyToTear: " + HasReadyToTear.ToString());
-		ImGui.Text("HasReadyToRaze: " + HasReadyToRaze.ToString());
-		ImGui.Text("HasReadyToGouge: " + HasReadyToGouge.ToString());
-		ImGui.Text("HasReadyToBlast: " + HasReadyToBlast.ToString());
+		ImGui.Text(Loc.T("InGnashingFang: ") + InGnashingFang.ToString());
+		ImGui.Text(Loc.T("InReignCombo: ") + InReignCombo.ToString());
+		ImGui.Text(Loc.T("HasNoMercy: ") + HasNoMercy.ToString());
+		ImGui.Text(Loc.T("HasReadyToBreak: ") + HasReadyToBreak.ToString());
+		ImGui.Text(Loc.T("HasReadyToReign: ") + HasReadyToReign.ToString());
+		ImGui.Text(Loc.T("HasReadyToRip: ") + HasReadyToRip.ToString());
+		ImGui.Text(Loc.T("HasReadyToTear: ") + HasReadyToTear.ToString());
+		ImGui.Text(Loc.T("HasReadyToRaze: ") + HasReadyToRaze.ToString());
+		ImGui.Text(Loc.T("HasReadyToGouge: ") + HasReadyToGouge.ToString());
+		ImGui.Text(Loc.T("HasReadyToBlast: ") + HasReadyToBlast.ToString());
 		ImGui.Spacing();
-		//ImGui.Text("NoMercyWindow: " + NoMercyWindow.ToString());
-		ImGui.Text("Ammo: " + Ammo.ToString());
-		ImGui.Text("AmmoComboStep: " + AmmoComboStep.ToString());
-		ImGui.Text("MaxAmmo: " + MaxAmmo().ToString());
-		ImGui.Text("Is Ammo Capped: " + IsAmmoCapped.ToString());
-		ImGui.Text("MaxTimerDuration: " + MaxTimerDuration.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("SavageClawPvEReady: " + SavageClawPvEReady.ToString());
-		ImGui.Text("WickedTalonPvEReady: " + WickedTalonPvEReady.ToString());
+		//ImGui.Text(Loc.T("NoMercyWindow: ") + NoMercyWindow.ToString());
+		ImGui.Text(Loc.T("Ammo: ") + Ammo.ToString());
+		ImGui.Text(Loc.T("AmmoComboStep: ") + AmmoComboStep.ToString());
+		ImGui.Text(Loc.T("MaxAmmo: ") + MaxAmmo().ToString());
+		ImGui.Text(Loc.T("Is Ammo Capped: ") + IsAmmoCapped.ToString());
+		ImGui.Text(Loc.T("MaxTimerDuration: ") + MaxTimerDuration.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("SavageClawPvEReady: ") + SavageClawPvEReady.ToString());
+		ImGui.Text(Loc.T("WickedTalonPvEReady: ") + WickedTalonPvEReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("JugularRipPvEReady: " + JugularRipPvEReady.ToString());
-		ImGui.Text("AbdomenTearPvEReady: " + AbdomenTearPvEReady.ToString());
-		ImGui.Text("EyeGougePvEReady: " + EyeGougePvEReady.ToString());
-		ImGui.Text("HypervelocityPvEReady: " + HypervelocityPvEReady.ToString());
+		ImGui.Text(Loc.T("JugularRipPvEReady: ") + JugularRipPvEReady.ToString());
+		ImGui.Text(Loc.T("AbdomenTearPvEReady: ") + AbdomenTearPvEReady.ToString());
+		ImGui.Text(Loc.T("EyeGougePvEReady: ") + EyeGougePvEReady.ToString());
+		ImGui.Text(Loc.T("HypervelocityPvEReady: ") + HypervelocityPvEReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("FatedBrandPvEReady: " + FatedBrandPvEReady.ToString());
+		ImGui.Text(Loc.T("FatedBrandPvEReady: ") + FatedBrandPvEReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("NobleBloodPvEReady: " + NobleBloodPvEReady.ToString());
-		ImGui.Text("LionHeartPvEReady: " + LionHeartPvEReady.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudYellow, "PvP Actions");
-		ImGui.Text("SavageClawPvPReady: " + SavageClawPvPReady.ToString());
-		ImGui.Text("WickedTalonPvPReady: " + WickedTalonPvPReady.ToString());
+		ImGui.Text(Loc.T("NobleBloodPvEReady: ") + NobleBloodPvEReady.ToString());
+		ImGui.Text(Loc.T("LionHeartPvEReady: ") + LionHeartPvEReady.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T("PvP Actions"));
+		ImGui.Text(Loc.T("SavageClawPvPReady: ") + SavageClawPvPReady.ToString());
+		ImGui.Text(Loc.T("WickedTalonPvPReady: ") + WickedTalonPvPReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("HypervelocityPvPReady: " + HypervelocityPvPReady.ToString());
-		ImGui.Text("FatedBrandPvPReady: " + FatedBrandPvPReady.ToString());
-		ImGui.Text("JugularRipPvPReady: " + JugularRipPvPReady.ToString());
-		ImGui.Text("AbdomenTearPvPReady: " + AbdomenTearPvPReady.ToString());
-		ImGui.Text("EyeGougePvPReady: " + EyeGougePvPReady.ToString());
+		ImGui.Text(Loc.T("HypervelocityPvPReady: ") + HypervelocityPvPReady.ToString());
+		ImGui.Text(Loc.T("FatedBrandPvPReady: ") + FatedBrandPvPReady.ToString());
+		ImGui.Text(Loc.T("JugularRipPvPReady: ") + JugularRipPvPReady.ToString());
+		ImGui.Text(Loc.T("AbdomenTearPvPReady: ") + AbdomenTearPvPReady.ToString());
+		ImGui.Text(Loc.T("EyeGougePvPReady: ") + EyeGougePvPReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("HasTerminalTrigger: " + HasTerminalTrigger.ToString());
+		ImGui.Text(Loc.T("HasTerminalTrigger: ") + HasTerminalTrigger.ToString());
 	}
 	#endregion
 

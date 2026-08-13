@@ -101,15 +101,15 @@ public partial class DragoonRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("EyeCount: " + EyeCount.ToString());
-		ImGui.Text("FocusCount: " + FocusCount.ToString());
-		ImGui.Text("LOTDTimeRaw: " + LOTDTimeRaw.ToString());
-		ImGui.Text("LOTDTime: " + LOTDTime.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("DrakesbanePvEFangReady: " + DrakesbanePvEFangReady.ToString());
-		ImGui.Text("DrakesbanePvEWheelingReady: " + DrakesbanePvEWheelingReady.ToString());
-		ImGui.Text("RaidenThrustPvEReady: " + RaidenThrustPvEReady.ToString());
-		ImGui.Text("DraconianFuryPvEReady: " + DraconianFuryPvEReady.ToString());
+		ImGui.Text(Loc.T("EyeCount: ") + EyeCount.ToString());
+		ImGui.Text(Loc.T("FocusCount: ") + FocusCount.ToString());
+		ImGui.Text(Loc.T("LOTDTimeRaw: ") + LOTDTimeRaw.ToString());
+		ImGui.Text(Loc.T("LOTDTime: ") + LOTDTime.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("DrakesbanePvEFangReady: ") + DrakesbanePvEFangReady.ToString());
+		ImGui.Text(Loc.T("DrakesbanePvEWheelingReady: ") + DrakesbanePvEWheelingReady.ToString());
+		ImGui.Text(Loc.T("RaidenThrustPvEReady: ") + RaidenThrustPvEReady.ToString());
+		ImGui.Text(Loc.T("DraconianFuryPvEReady: ") + DraconianFuryPvEReady.ToString());
 	}
 	#endregion
 

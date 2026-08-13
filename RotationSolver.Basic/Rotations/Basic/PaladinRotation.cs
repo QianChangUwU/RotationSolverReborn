@@ -99,22 +99,22 @@ public partial class PaladinRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("RequiescatStacks: " + RequiescatStacks.ToString());
-		ImGui.Text("OathGauge: " + OathGauge.ToString());
-		ImGui.Text("HasDivineMight: " + HasDivineMight.ToString());
-		ImGui.Text("HasFightOrFlight: " + HasFightOrFlight.ToString());
-		ImGui.Text("Can Heal Area Ability: " + CanHealAreaAbility.ToString());
-		ImGui.Text("Can Heal Single Spell: " + CanHealSingleSpell.ToString());
+		ImGui.Text(Loc.T("RequiescatStacks: ") + RequiescatStacks.ToString());
+		ImGui.Text(Loc.T("OathGauge: ") + OathGauge.ToString());
+		ImGui.Text(Loc.T("HasDivineMight: ") + HasDivineMight.ToString());
+		ImGui.Text(Loc.T("HasFightOrFlight: ") + HasFightOrFlight.ToString());
+		ImGui.Text(Loc.T("Can Heal Area Ability: ") + CanHealAreaAbility.ToString());
+		ImGui.Text(Loc.T("Can Heal Single Spell: ") + CanHealSingleSpell.ToString());
 		ImGui.Spacing();
-		ImGui.Text("HasConfiteorReady: " + HasConfiteorReady.ToString());
-		ImGui.Text("BladeOfFaithReady: " + BladeOfFaithReady.ToString());
-		ImGui.Text("BladeOfTruthReady: " + BladeOfTruthReady.ToString());
-		ImGui.Text("BladeOfValorReady: " + BladeOfValorReady.ToString());
-		ImGui.Text("BladeOfHonorReady: " + BladeOfHonorReady.ToString());
+		ImGui.Text(Loc.T("HasConfiteorReady: ") + HasConfiteorReady.ToString());
+		ImGui.Text(Loc.T("BladeOfFaithReady: ") + BladeOfFaithReady.ToString());
+		ImGui.Text(Loc.T("BladeOfTruthReady: ") + BladeOfTruthReady.ToString());
+		ImGui.Text(Loc.T("BladeOfValorReady: ") + BladeOfValorReady.ToString());
+		ImGui.Text(Loc.T("BladeOfHonorReady: ") + BladeOfHonorReady.ToString());
 		ImGui.Spacing();
-		ImGui.Text("HasAtonementReady: " + HasAtonementReady.ToString());
-		ImGui.Text("SupplicationReady: " + SupplicationReady.ToString());
-		ImGui.Text("SepulchreReady: " + SepulchreReady.ToString());
+		ImGui.Text(Loc.T("HasAtonementReady: ") + HasAtonementReady.ToString());
+		ImGui.Text(Loc.T("SupplicationReady: ") + SupplicationReady.ToString());
+		ImGui.Text(Loc.T("SepulchreReady: ") + SepulchreReady.ToString());
 	}
 
 	#endregion

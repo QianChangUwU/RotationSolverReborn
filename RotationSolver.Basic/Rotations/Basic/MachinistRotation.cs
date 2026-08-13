@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -129,19 +129,19 @@ public partial class MachinistRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("IsOverheated: " + IsOverheated.ToString());
-		ImGui.Text("IsRobotActive: " + IsRobotActive.ToString());
-		ImGui.Text("Heat: " + Heat.ToString());
-		ImGui.Text("Battery: " + Battery.ToString());
-		ImGui.Text("LastSummonBatteryPower: " + LastSummonBatteryPower.ToString());
-		ImGui.Text("SummonTimeRemainingRaw: " + SummonTimeRemainingRaw.ToString());
-		ImGui.Text("SummonTime: " + SummonTime.ToString());
-		ImGui.Text("OverheatTimeRemainingRaw: " + OverheatTimeRemainingRaw.ToString());
-		ImGui.Text("OverheatTime: " + OverheatTime.ToString());
-		ImGui.Text("OverheatedStacks: " + OverheatedStacks.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("DetonatorPvEReady: " + DetonatorPvEReady.ToString());
-		ImGui.Text("ExcavatorPvEReady: " + ExcavatorPvEReady.ToString());
+		ImGui.Text(Loc.T("IsOverheated: ") + IsOverheated.ToString());
+		ImGui.Text(Loc.T("IsRobotActive: ") + IsRobotActive.ToString());
+		ImGui.Text(Loc.T("Heat: ") + Heat.ToString());
+		ImGui.Text(Loc.T("Battery: ") + Battery.ToString());
+		ImGui.Text(Loc.T("LastSummonBatteryPower: ") + LastSummonBatteryPower.ToString());
+		ImGui.Text(Loc.T("SummonTimeRemainingRaw: ") + SummonTimeRemainingRaw.ToString());
+		ImGui.Text(Loc.T("SummonTime: ") + SummonTime.ToString());
+		ImGui.Text(Loc.T("OverheatTimeRemainingRaw: ") + OverheatTimeRemainingRaw.ToString());
+		ImGui.Text(Loc.T("OverheatTime: ") + OverheatTime.ToString());
+		ImGui.Text(Loc.T("OverheatedStacks: ") + OverheatedStacks.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("DetonatorPvEReady: ") + DetonatorPvEReady.ToString());
+		ImGui.Text(Loc.T("ExcavatorPvEReady: ") + ExcavatorPvEReady.ToString());
 		ImGui.Spacing();
 	}
 	#endregion

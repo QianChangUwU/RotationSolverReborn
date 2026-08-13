@@ -1,5 +1,6 @@
 ﻿using Dalamud.Game.Config;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
 using RotationSolver.IPC;
 using RotationSolver.Updaters;
@@ -316,7 +317,7 @@ namespace RotationSolver.Commands
 					DataCenter.TargetingTypeOverride = null;
 					Service.CanMove = true;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Off"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Off")); }
 					break;
 
 				case StateCommandType.Auto:
@@ -329,7 +330,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Auto Targeting : {DataCenter.TargetingType}"); }
+					{ Svc.Chat.Print(string.Format(Loc.T("Auto Targeting : {0}"), DataCenter.TargetingType)); }
 					break;
 
 				case StateCommandType.TargetOnly:
@@ -342,7 +343,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Auto Targeting Only : {DataCenter.TargetingType}"); }
+					{ Svc.Chat.Print(string.Format(Loc.T("Auto Targeting Only : {0}"), DataCenter.TargetingType)); }
 					break;
 
 				case StateCommandType.Manual:
@@ -355,7 +356,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Manual"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Manual")); }
 					break;
 
 				case StateCommandType.AutoDuty:
@@ -368,7 +369,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : AutoDuty"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : AutoDuty")); }
 					break;
 
 				case StateCommandType.Henched:
@@ -381,7 +382,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Henched"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Henched")); }
 					break;
 
 				case StateCommandType.PvP:
@@ -394,7 +395,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = TargetingType.LowHP;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : PvP"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : PvP")); }
 					break;
 			}
 
@@ -419,7 +420,7 @@ namespace RotationSolver.Commands
 					DataCenter.TargetingTypeOverride = null;
 					Service.CanMove = true;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Off"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Off")); }
 					break;
 
 				case StateCommandType.Auto:
@@ -432,7 +433,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Auto Targeting : {DataCenter.TargetingType}"); }
+					{ Svc.Chat.Print(string.Format(Loc.T("Auto Targeting : {0}"), DataCenter.TargetingType)); }
 					break;
 
 				case StateCommandType.TargetOnly:
@@ -445,7 +446,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = targetingType;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Auto Targeting Only : {DataCenter.TargetingType}"); }
+					{ Svc.Chat.Print(string.Format(Loc.T("Auto Targeting Only : {0}"), DataCenter.TargetingType)); }
 					break;
 
 				case StateCommandType.Manual:
@@ -458,7 +459,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Manual"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Manual")); }
 					break;
 
 				case StateCommandType.AutoDuty:
@@ -471,7 +472,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = targetingType;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : AutoDuty"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : AutoDuty")); }
 					break;
 
 				case StateCommandType.Henched:
@@ -484,7 +485,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = null;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : Henched"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : Henched")); }
 					break;
 
 				case StateCommandType.PvP:
@@ -497,7 +498,7 @@ namespace RotationSolver.Commands
 					ActionUpdater.AutoCancelTime = DateTime.MinValue;
 					DataCenter.TargetingTypeOverride = TargetingType.LowHP;
 					if (Service.Config.ShowToggledSettingInChat)
-					{ Svc.Chat.Print($"Targeting : PvP"); }
+					{ Svc.Chat.Print(Loc.T("Targeting : PvP")); }
 					break;
 			}
 

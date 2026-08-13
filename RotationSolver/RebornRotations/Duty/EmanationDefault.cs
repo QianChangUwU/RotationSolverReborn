@@ -1,4 +1,5 @@
 ﻿using RotationSolver.Basic.Rotations.Duties;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Duty;
 
@@ -9,11 +10,11 @@ internal class EmanationDefault : EmanationRotation
 	public override void DisplayDutyStatus()
 	{
 		ImGui.Spacing();
-		ImGui.Text($"VrilPvE Slotted: {VrilPvE.Info.IsOnSlot}");
-		ImGui.Text($"VrilPvE Charges: {VrilPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("VrilPvE Slotted: {0}"), VrilPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("VrilPvE Charges: {0}"), VrilPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"VrilPvE_9345 Slotted: {VrilPvE_9345.Info.IsOnSlot}");
-		ImGui.Text($"VrilPvE_9345 Charges: {VrilPvE_9345.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("VrilPvE_9345 Slotted: {0}"), VrilPvE_9345.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("VrilPvE_9345 Charges: {0}"), VrilPvE_9345.Cooldown.CurrentCharges));
 		ImGui.Spacing();
 	}
 

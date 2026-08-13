@@ -2,6 +2,7 @@
 using ECommons.GameFunctions;
 using System.ComponentModel;
 using CombatRole = ECommons.GameFunctions.CombatRole;
+using RotationSolver.Basic.Localization;
 
 
 namespace RotationSolver.ExtraRotations.Ranged;
@@ -1337,7 +1338,7 @@ public sealed class ChurinDNC : DancerRotation
 
 	public override void DisplayRotationStatus()
 	{
-		if (ImGui.CollapsingHeader("Core"))
+		if (ImGui.CollapsingHeader(Loc.T("Core")))
 		{
 			ValueRow("Weapon Total", $"{WeaponTotal:F2}");
 			ValueRow("Completed Steps", CompletedSteps);
@@ -1349,12 +1350,12 @@ public sealed class ChurinDNC : DancerRotation
 			ColoredTextRow("Can Weave", CanWeave);
 		}
 
-		if (ImGui.CollapsingHeader("Step Logic"))
+		if (ImGui.CollapsingHeader(Loc.T("Step Logic")))
 		{
 			ValueRow("Tech Hold Strategy", TechHoldStrategy);
 			BoolRow("Tech Hold Check", CanUseStepHoldCheck(TechHoldStrategy));
 
-			if (ImGui.TreeNode("Technical Step Blocking Reasons"))
+			if (ImGui.TreeNode(Loc.T("Technical Step Blocking Reasons")))
 			{
 				var canUseTechStep = CanUseTechStep;
 				ColoredTextRow("Can Use Technical Step", canUseTechStep);
@@ -1373,7 +1374,7 @@ public sealed class ChurinDNC : DancerRotation
 			BoolRow("Standard Hold Check", CanUseStepHoldCheck(StandardHoldStrategy));
 			ValueRow("Esprit Threshold", EspritThreshold);
 			ValueRow("Current Esprit", Esprit);
-			if (ImGui.TreeNode("Standard Step Blocking Reasons"))
+			if (ImGui.TreeNode(Loc.T("Standard Step Blocking Reasons")))
 			{
 				var canUseStandard = CanUseActiveStandard;
 				ColoredTextRow("Can Use Standard Step or Finishing Move", canUseStandard);
@@ -1387,7 +1388,7 @@ public sealed class ChurinDNC : DancerRotation
 			}
 		}
 
-		if (ImGui.CollapsingHeader("Saber Dance Blocking"))
+		if (ImGui.CollapsingHeader(Loc.T("Saber Dance Blocking")))
 		{
 			var isSaberPrimed = IsSaberDancePrimed;
 			ColoredTextRow("Saber Dance Primed", isSaberPrimed);
@@ -1407,12 +1408,12 @@ public sealed class ChurinDNC : DancerRotation
 			if (showtime)
 			{
 				ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudRed);
-				ImGui.Text("Saber Dance blocked by Showtime (active dance/recent dance action)");
+				ImGui.Text(Loc.T("Saber Dance blocked by Showtime (active dance/recent dance action)"));
 				ImGui.PopStyleColor();
 			}
 		}
 
-		if (ImGui.CollapsingHeader("Burst / Proc"))
+		if (ImGui.CollapsingHeader(Loc.T("Burst / Proc")))
 		{
 			BoolRow("Saber Dance Primed", IsSaberDancePrimed);
 			BoolRow("Has Any Proc", HasAnyProc);
@@ -1423,7 +1424,7 @@ public sealed class ChurinDNC : DancerRotation
 			BoolRow("TryUseSaberDance - Blocked (Tech/Dancing)", CanUseTechStep || IsDancing);
 		}
 
-		if (ImGui.CollapsingHeader("Potions"))
+		if (ImGui.CollapsingHeader(Loc.T("Potions")))
 		{
 			BoolRow("Potion Usage Enabled", PotionUsageEnabled);
 			ValueRow("Potion Usage Preset", PotionUsagePresets);
@@ -1434,17 +1435,17 @@ public sealed class ChurinDNC : DancerRotation
 			}
 			catch (Exception ex)
 			{
-				ImGui.Text($"Error evaluating potion conditions: {ex.Message}");
+				ImGui.Text(string.Format(Loc.T("Error evaluating potion conditions: {0}"), ex.Message));
 			}
 		}
 
-		if (ImGui.CollapsingHeader("Dance Partner"))
+		if (ImGui.CollapsingHeader(Loc.T("Dance Partner")))
 		{
 			ColoredTextRow("Should Swap Dance Partner?", ShouldSwapDancePartner);
 			ColoredTextRow("Has Available Dance Partner?", HasAvailableDancePartner(RestrictDPTarget));
 		}
 
-		if (ImGui.CollapsingHeader("Method Checks"))
+		if (ImGui.CollapsingHeader(Loc.T("Method Checks")))
 		{
 			ColoredTextRow("GeneralGCD -> Burst Path", IsBurstPhase);
 			ColoredTextRow("GeneralGCD -> Step Path", !IsDancing && (CanUseTechStep || CanUseActiveStandard));
@@ -1461,24 +1462,24 @@ public sealed class ChurinDNC : DancerRotation
 
 	private static void BoolRow(string label, bool value)
 	{
-		ImGui.Text($"{label}: {(value ? "Yes" : "No")}");
+		ImGui.Text(string.Format(Loc.T("{0}: {1}"), label, value ? Loc.T("Yes") : Loc.T("No")));
 	}
 	private static void ColoredTextRow(string label, bool value)
 	{
 		var color = value ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed;
 		ImGui.PushStyleColor(ImGuiCol.Text, color);
-		ImGui.Text($"{label}: {(value ? "Yes" : "No")}");
+		ImGui.Text(string.Format(Loc.T("{0}: {1}"), label, value ? Loc.T("Yes") : Loc.T("No")));
 		ImGui.PopStyleColor();
 	}
 	private static void ValueRow<T>(string label, T value)
 	{
 		if (value == null)
 		{
-			ImGui.Text($"{label}: N/A");
+			ImGui.Text(string.Format(Loc.T("{0}: N/A"), label));
 			return;
 		}
 
-		ImGui.Text($"{label}: {value}");
+		ImGui.Text(string.Format(Loc.T("{0}: {1}"), label, value));
 	}
 
 	#endregion

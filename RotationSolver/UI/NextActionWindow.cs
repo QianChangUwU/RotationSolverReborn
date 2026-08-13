@@ -1,6 +1,7 @@
 ﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using RotationSolver.Updaters;
@@ -132,7 +133,7 @@ internal class NextActionWindow : Window
 
 		if (ImGui.IsItemHovered() && !isSelf)
 		{
-			ImGui.SetTooltip("Click to target");
+			ImGui.SetTooltip(Loc.T("Click to target"));
 		}
 	}
 

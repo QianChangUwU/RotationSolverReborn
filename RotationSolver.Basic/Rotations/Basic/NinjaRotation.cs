@@ -173,27 +173,27 @@ public partial class NinjaRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text($"Ninki: {Ninki}");
-		ImGui.Text($"Kazematoi: {Kazematoi}");
-		ImGui.Text($"HasJin: {HasJin}");
-		ImGui.Text($"InTrickAttack: {InTrickAttack}");
-		ImGui.Text($"InMug: {InMug}");
-		ImGui.Text($"NoNinjutsu: {NoNinjutsu}");
-		ImGui.Text($"RaijuStacks: {RaijuStacks}");
-		ImGui.Text($"ShadowWalkerNeeded: {ShadowWalkerNeeded}");
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("FumaShurikenPvEReady: " + FumaShurikenPvEReady.ToString());
-		ImGui.Text("KatonPvEReady: " + KatonPvEReady.ToString());
-		ImGui.Text("RaitonPvEReady: " + RaitonPvEReady.ToString());
-		ImGui.Text("HyotonPvEReady: " + HyotonPvEReady.ToString());
-		ImGui.Text("HutonPvEReady: " + HutonPvEReady.ToString());
-		ImGui.Text("DotonPvEReady: " + DotonPvEReady.ToString());
-		ImGui.Text("SuitonPvEReady: " + SuitonPvEReady.ToString());
-		ImGui.Text("GokaMekkyakuPvEReady: " + GokaMekkyakuPvEReady.ToString());
-		ImGui.Text("HyoshoRanryuPvEReady: " + HyoshoRanryuPvEReady.ToString());
-		ImGui.Text("DeathfrogMediumPvEReady: " + DeathfrogMediumPvEReady.ToString());
-		ImGui.Text("ZeshoMeppoPvEReady: " + ZeshoMeppoPvEReady.ToString());
-		ImGui.Text("TenriJindoPvEReady: " + TenriJindoPvEReady.ToString());
+		ImGui.Text(string.Format(Loc.T("Ninki: {0}"), Ninki));
+		ImGui.Text(string.Format(Loc.T("Kazematoi: {0}"), Kazematoi));
+		ImGui.Text(string.Format(Loc.T("HasJin: {0}"), HasJin));
+		ImGui.Text(string.Format(Loc.T("InTrickAttack: {0}"), InTrickAttack));
+		ImGui.Text(string.Format(Loc.T("InMug: {0}"), InMug));
+		ImGui.Text(string.Format(Loc.T("NoNinjutsu: {0}"), NoNinjutsu));
+		ImGui.Text(string.Format(Loc.T("RaijuStacks: {0}"), RaijuStacks));
+		ImGui.Text(string.Format(Loc.T("ShadowWalkerNeeded: {0}"), ShadowWalkerNeeded));
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("FumaShurikenPvEReady: ") + FumaShurikenPvEReady.ToString());
+		ImGui.Text(Loc.T("KatonPvEReady: ") + KatonPvEReady.ToString());
+		ImGui.Text(Loc.T("RaitonPvEReady: ") + RaitonPvEReady.ToString());
+		ImGui.Text(Loc.T("HyotonPvEReady: ") + HyotonPvEReady.ToString());
+		ImGui.Text(Loc.T("HutonPvEReady: ") + HutonPvEReady.ToString());
+		ImGui.Text(Loc.T("DotonPvEReady: ") + DotonPvEReady.ToString());
+		ImGui.Text(Loc.T("SuitonPvEReady: ") + SuitonPvEReady.ToString());
+		ImGui.Text(Loc.T("GokaMekkyakuPvEReady: ") + GokaMekkyakuPvEReady.ToString());
+		ImGui.Text(Loc.T("HyoshoRanryuPvEReady: ") + HyoshoRanryuPvEReady.ToString());
+		ImGui.Text(Loc.T("DeathfrogMediumPvEReady: ") + DeathfrogMediumPvEReady.ToString());
+		ImGui.Text(Loc.T("ZeshoMeppoPvEReady: ") + ZeshoMeppoPvEReady.ToString());
+		ImGui.Text(Loc.T("TenriJindoPvEReady: ") + TenriJindoPvEReady.ToString());
 	}
 	#endregion
 

@@ -1,4 +1,5 @@
-﻿namespace RotationSolver.RebornRotations.Tank;
+﻿using RotationSolver.Basic.Localization;
+namespace RotationSolver.RebornRotations.Tank;
 
 [Rotation("Reborn", CombatType.PvE, GameVersion = "7.55")]
 [SourceCode(Path = "main/RebornRotations/Tank/PLD_Reborn.cs")]
@@ -62,7 +63,7 @@ public sealed class PLD_Reborn : PaladinRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Use Oath: {UseOath(out _)}");
+		ImGui.Text(string.Format(Loc.T("Use Oath: {0}"), UseOath(out _)));
 	}
 	#endregion
 

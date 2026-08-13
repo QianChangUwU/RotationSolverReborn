@@ -1,3 +1,4 @@
+﻿using RotationSolver.Basic.Localization;
 namespace RotationSolver.RebornRotations.Melee;
 
 [Rotation("Reborn", CombatType.PvE, GameVersion = "7.55")]
@@ -47,9 +48,9 @@ public sealed class NIN_Reborn : NinjaRotation
 
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Last Ninjutsu Action Cleared From Queue: {_lastNinActionAim}");
-		ImGui.Text($"Current Ninjutsu Action: {_ninActionAim}");
-		ImGui.Text($"Ninjutsu ID: {AdjustId(NinjutsuPvEid)}");
+		ImGui.Text(string.Format(Loc.T("Last Ninjutsu Action Cleared From Queue: {0}"), _lastNinActionAim));
+		ImGui.Text(string.Format(Loc.T("Current Ninjutsu Action: {0}"), _ninActionAim));
+		ImGui.Text(string.Format(Loc.T("Ninjutsu ID: {0}"), AdjustId(NinjutsuPvEid)));
 	}
 	#endregion
 

@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Healer;
 
@@ -102,7 +103,7 @@ public sealed class SCH_Reborn : ScholarRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Max Targets to apply Bio to rather than spamming AoW: {GetAoWBreakevenTargets() - 1}");
+		ImGui.Text(string.Format(Loc.T("Max Targets to apply Bio to rather than spamming AoW: {0}"), GetAoWBreakevenTargets() - 1));
 	}
 	#endregion
 

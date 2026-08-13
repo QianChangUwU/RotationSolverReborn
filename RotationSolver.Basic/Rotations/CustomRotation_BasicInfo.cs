@@ -198,7 +198,7 @@ public partial class CustomRotation : ICustomRotation
 	/// </summary>
 	public virtual void DisplayRotationStatus()
 	{
-		ImGui.TextWrapped($"If you want to display some extra information on this panel, please override the {nameof(DisplayRotationStatus)} method!");
+		ImGui.TextWrapped(string.Format(Loc.T("If you want to display some extra information on this panel, please override the {0} method!"), nameof(DisplayRotationStatus)));
 	}
 
 	/// <summary>
@@ -206,7 +206,7 @@ public partial class CustomRotation : ICustomRotation
 	/// </summary>
 	public virtual void DisplayBaseStatus()
 	{
-		ImGui.TextWrapped($"If you want to display some extra information on this panel, please override the {nameof(DisplayBaseStatus)} method!");
+		ImGui.TextWrapped(string.Format(Loc.T("If you want to display some extra information on this panel, please override the {0} method!"), nameof(DisplayBaseStatus)));
 	}
 
 	/// <summary>

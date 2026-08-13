@@ -3,6 +3,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using RotationSolver.Basic.Configuration;
+using RotationSolver.Basic.Localization;
 using RotationSolver.Commands;
 using RotationSolver.Data;
 
@@ -82,10 +83,10 @@ internal class ControlWindow : CtrlWindow
 		columnWidth = Math.Max(columnWidth, ImGui.GetCursorPosX());
 
 		var autoMode = DataCenter.TargetingType;
-		ImGui.Text(" Targeting: " + autoMode.ToString());
+		ImGui.Text(Loc.T("Targeting: ") + autoMode.ToString());
 
 		var aoeType = Service.Config.AoEType;
-		if (ImGuiHelper.SelectableButton("AoE: " + aoeType.ToString()))
+		if (ImGuiHelper.SelectableButton(Loc.T("AoE: ") + aoeType.ToString()))
 		{
 			aoeType = (ConfigTypes.AoEType)(((int)aoeType + 1) % 3);
 			Service.Config.AoEType = aoeType;
@@ -104,7 +105,7 @@ internal class ControlWindow : CtrlWindow
 			pushedStyleColor = true; // Indicate that a style color has been pushed
 		}
 
-		if (ImGuiHelper.SelectableButton("Burst"))
+		if (ImGuiHelper.SelectableButton(Loc.T("Burst")))
 		{
 			Service.Config.AutoBurst.Value = !isBurst;
 		}
@@ -117,7 +118,7 @@ internal class ControlWindow : CtrlWindow
 		ImGui.SameLine();
 
 		var value = Service.Config.IsControlWindowLock ? 0 : 1;
-		if (ImGuiHelper.SelectableCombo("Rotation Solver Reborn Lock the Control Window",
+		if (ImGuiHelper.SelectableCombo(Loc.T("Rotation Solver Reborn Lock the Control Window"),
 		[
 			UiString.InfoWindowNoMove.GetDescription(),
 			UiString.InfoWindowMove.GetDescription(),
@@ -203,7 +204,7 @@ internal class ControlWindow : CtrlWindow
 
 		ImGui.Spacing();
 
-		ImGui.Text("CMD:");
+		ImGui.Text(Loc.T("CMD:"));
 		ImGui.SameLine();
 
 		_ = DrawIAction(DataCenter.CommandNextAction, Service.Config.ControlWindow0GCDSize, 1);
@@ -212,7 +213,7 @@ internal class ControlWindow : CtrlWindow
 
 		using var group = ImRaii.Group();
 		ImGui.Text(DataCenter.CurrentTargetToHostileType.GetDescription());
-		ImGui.Text("Auto: " + DataCenter.AutoStatus.ToString());
+		ImGui.Text(Loc.T("Auto: ") + DataCenter.AutoStatus.ToString());
 	}
 
 	private static void DrawCommandAction(IAction? gcd, IAction? ability, SpecialCommandType command, Vector4 color)
@@ -220,7 +221,7 @@ internal class ControlWindow : CtrlWindow
 		var gcdW = Service.Config.ControlWindowGCDSize;
 		var abilityW = Service.Config.ControlWindow0GCDSize;
 		var width = gcdW + abilityW + ImGui.GetStyle().ItemSpacing.X;
-		var str = command.ToString();
+		var str = Loc.T(command.ToString());
 		var strWidth = ImGui.CalcTextSize(str).X;
 
 		var pos = ImGui.GetCursorPos();
@@ -316,7 +317,7 @@ internal class ControlWindow : CtrlWindow
 	{
 		var abilityW = Service.Config.ControlWindow0GCDSize;
 		var width = abilityW + (ImGui.GetStyle().ItemInnerSpacing.X * 2);
-		var str = command.ToString();
+		var str = Loc.T(command.ToString());
 		var strWidth = ImGui.CalcTextSize(str).X;
 
 		var pos = ImGui.GetCursorPos();
@@ -362,7 +363,7 @@ internal class ControlWindow : CtrlWindow
 	{
 		var abilityW = Service.Config.ControlWindow0GCDSize;
 		var width = abilityW + (ImGui.GetStyle().ItemInnerSpacing.X * 2);
-		var str = command.ToString();
+		var str = Loc.T(command.ToString());
 		var strWidth = ImGui.CalcTextSize(str).X;
 
 		var pos = ImGui.GetCursorPos();
@@ -525,7 +526,7 @@ internal class ControlWindow : CtrlWindow
 	{
 		using var group = ImRaii.Group();
 
-		var str = "Next Action";
+		var str = Loc.T("Next Action");
 		ImGui.SetCursorPosX(ImGui.GetCursorPosX() + (width / 2) - (ImGui.CalcTextSize(str).X / 2));
 		ImGui.TextColored(ImGuiColors.DalamudYellow, str);
 

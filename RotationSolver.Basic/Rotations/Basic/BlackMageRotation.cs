@@ -199,36 +199,36 @@ public partial class BlackMageRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("Is next GCD be instant: " + NextGCDisInstant.ToString());
-		ImGui.Text("Can next GCD be instant: " + CanMakeInstant.ToString());
-		ImGui.Text("Number of Instant Casts Available: " + ThisManyInstantCasts.ToString());
-		ImGui.Text("AstralDefecit: " + AstralDefecit.ToString());
-		ImGui.Text("HasFire: " + HasFire.ToString());
-		ImGui.Text("HasThunder: " + HasThunder.ToString());
+		ImGui.Text(Loc.T("Is next GCD be instant: ") + NextGCDisInstant.ToString());
+		ImGui.Text(Loc.T("Can next GCD be instant: ") + CanMakeInstant.ToString());
+		ImGui.Text(Loc.T("Number of Instant Casts Available: ") + ThisManyInstantCasts.ToString());
+		ImGui.Text(Loc.T("AstralDefecit: ") + AstralDefecit.ToString());
+		ImGui.Text(Loc.T("HasFire: ") + HasFire.ToString());
+		ImGui.Text(Loc.T("HasThunder: ") + HasThunder.ToString());
 		ImGui.Separator();
-		ImGui.Text("PolyglotStacks: " + PolyglotStacks.ToString());
-		ImGui.Text("IsPolyglotStacksMaxed: " + IsPolyglotStacksMaxed.ToString());
+		ImGui.Text(Loc.T("PolyglotStacks: ") + PolyglotStacks.ToString());
+		ImGui.Text(Loc.T("IsPolyglotStacksMaxed: ") + IsPolyglotStacksMaxed.ToString());
 		ImGui.Separator();
-		ImGui.Text("InUmbralIce: " + InUmbralIce.ToString());
-		ImGui.Text("InAstralFire: " + InAstralFire.ToString());
+		ImGui.Text(Loc.T("InUmbralIce: ") + InUmbralIce.ToString());
+		ImGui.Text(Loc.T("InAstralFire: ") + InAstralFire.ToString());
 		ImGui.Separator();
-		ImGui.Text("UmbralIceStacks: " + UmbralIceStacks.ToString());
-		ImGui.Text("AstralFireStacks: " + AstralFireStacks.ToString());
-		ImGui.Text("AstralSoulStacks: " + AstralSoulStacks.ToString());
-		ImGui.Text("Soul Stack Count: " + SoulStackCount.ToString());
-		ImGui.Text("Is Soul Stacks Maxed: " + IsSoulStacksMaxed.ToString());
-		ImGui.Text("Max Soul Stacks: " + MaxSoulCount.ToString());
+		ImGui.Text(Loc.T("UmbralIceStacks: ") + UmbralIceStacks.ToString());
+		ImGui.Text(Loc.T("AstralFireStacks: ") + AstralFireStacks.ToString());
+		ImGui.Text(Loc.T("AstralSoulStacks: ") + AstralSoulStacks.ToString());
+		ImGui.Text(Loc.T("Soul Stack Count: ") + SoulStackCount.ToString());
+		ImGui.Text(Loc.T("Is Soul Stacks Maxed: ") + IsSoulStacksMaxed.ToString());
+		ImGui.Text(Loc.T("Max Soul Stacks: ") + MaxSoulCount.ToString());
 		ImGui.Separator();
-		ImGui.Text("UmbralHearts: " + UmbralHearts.ToString());
-		ImGui.Text("IsParadoxActive: " + IsParadoxActive.ToString());
-		ImGui.Text("IsEnochianActive: " + IsEnochianActive.ToString());
-		ImGui.Text("EnochianTimeRaw: " + EnochianTimeRaw.ToString());
-		ImGui.Text("EnochianTime: " + EnochianTime.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("ParadoxPvEReady: " + ParadoxPvEReady.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudOrange, "PvP Actions");
-		ImGui.Text("HasPvPAstralFire: " + HasPvPAstralFire.ToString());
-		ImGui.Text("HasPvPUmbralIce: " + HasPvPUmbralIce.ToString());
+		ImGui.Text(Loc.T("UmbralHearts: ") + UmbralHearts.ToString());
+		ImGui.Text(Loc.T("IsParadoxActive: ") + IsParadoxActive.ToString());
+		ImGui.Text(Loc.T("IsEnochianActive: ") + IsEnochianActive.ToString());
+		ImGui.Text(Loc.T("EnochianTimeRaw: ") + EnochianTimeRaw.ToString());
+		ImGui.Text(Loc.T("EnochianTime: ") + EnochianTime.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("ParadoxPvEReady: ") + ParadoxPvEReady.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudOrange, Loc.T("PvP Actions"));
+		ImGui.Text(Loc.T("HasPvPAstralFire: ") + HasPvPAstralFire.ToString());
+		ImGui.Text(Loc.T("HasPvPUmbralIce: ") + HasPvPUmbralIce.ToString());
 	}
 	#endregion
 

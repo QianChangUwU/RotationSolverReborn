@@ -1,6 +1,7 @@
 ﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.UI;
 
@@ -143,27 +144,28 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	public override void Draw()
 	{
+		WindowName = Loc.T("RSR First Start Tutorial");
 		var step = Steps[_stepIndex];
 
 		ImGui.PushFont(FontManager.GetFont(ImGui.GetFontSize() + 6));
-		ImGui.TextColored(ImGuiColors.ParsedGold, step.Title);
+		ImGui.TextColored(ImGuiColors.ParsedGold, Loc.T(step.Title));
 		ImGui.PopFont();
 
-		DrawWrappedText(step.Description);
+		DrawWrappedText(Loc.T(step.Description));
 		ImGui.Spacing();
 
 		if (step.Bullets is { Length: > 0 })
 		{
 			foreach (var bullet in step.Bullets)
 			{
-				DrawWrappedBullet(bullet);
+				DrawWrappedBullet(Loc.T(bullet));
 			}
 			ImGui.Spacing();
 		}
 
 		if (step.RecommendedMacros is { Length: > 0 })
 		{
-			ImGui.TextColored(ImGuiColors.HealerGreen, "Recommended macros:");
+			ImGui.TextColored(ImGuiColors.HealerGreen, Loc.T("Recommended macros:"));
 			for (var i = 0; i < step.RecommendedMacros.Length; i++)
 			{
 				var macro = step.RecommendedMacros[i];
@@ -174,7 +176,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				if (ImGui.SmallButton(buttonId))
 				{
 					ImGui.SetClipboardText(macro);
-					Svc.Toasts.ShowNormal("Macro copied to clipboard.");
+					Svc.Toasts.ShowNormal(Loc.T("Macro copied to clipboard."));
 				}
 			}
 
@@ -183,7 +185,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (step.Tab != null)
 		{
-			if (ImGui.Button($"Open {step.Tab} tab"))
+			if (ImGui.Button(string.Format(Loc.T("Open {0} tab"), step.Tab.Value.CNString())))
 			{
 				RotationSolverPlugin.ShowConfigWindow(step.Tab.Value);
 			}
@@ -218,7 +220,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	private void DrawNavigation()
 	{
 		ImGui.BeginDisabled(_stepIndex == 0);
-		if (ImGui.Button("Back"))
+		if (ImGui.Button(Loc.T("Back")))
 		{
 			_stepIndex = Math.Max(0, _stepIndex - 1);
 		}
@@ -228,14 +230,14 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (_stepIndex < Steps.Length - 1)
 		{
-			if (ImGui.Button("Next"))
+			if (ImGui.Button(Loc.T("Next")))
 			{
 				_stepIndex = Math.Min(Steps.Length - 1, _stepIndex + 1);
 			}
 		}
 		else
 		{
-			if (ImGui.Button("Finish"))
+			if (ImGui.Button(Loc.T("Finish")))
 			{
 				FinishTutorial();
 			}

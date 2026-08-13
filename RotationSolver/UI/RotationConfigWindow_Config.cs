@@ -1,5 +1,6 @@
 ﻿using Dalamud.Game.ClientState.Keys;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using ECommons.ImGuiMethods;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Data;
@@ -214,14 +215,14 @@ public partial class RotationConfigWindow
 
 	private static void DrawInternalTab()
 	{
-		ImGui.Text($"Configs/Backups location: {Svc.PluginInterface.ConfigFile.Directory}");
+		ImGui.Text(string.Format(Loc.T("Configs/Backups location: {0}"), Svc.PluginInterface.ConfigFile.Directory));
 
-		if (ImGui.Button("Backup Configs"))
+		if (ImGui.Button(Loc.T("Backup Configs")))
 		{
 			Service.Config.Backup();
 		}
 
-		if (ImGui.Button("Restore Configs"))
+		if (ImGui.Button(Loc.T("Restore Configs")))
 		{
 			Service.Config.Restore();
 		}

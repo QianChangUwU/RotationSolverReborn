@@ -1,4 +1,5 @@
 ﻿using RotationSolver.Basic.Rotations.Duties;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Duty;
 
@@ -9,29 +10,29 @@ internal class HardboiledDefault : HardboiledRotation
 	public override void DisplayDutyStatus()
 	{
 		ImGui.Spacing();
-		ImGui.Text($"ShootHardPvE Slotted: {ShootHardPvE.Info.IsOnSlot}");
-		ImGui.Text($"ShootHardPvE Charges: {ShootHardPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("ShootHardPvE Slotted: {0}"), ShootHardPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("ShootHardPvE Charges: {0}"), ShootHardPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"ShootHarderPvE Slotted: {ShootHarderPvE.Info.IsOnSlot}");
-		ImGui.Text($"ShootHarderPvE Charges: {ShootHarderPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("ShootHarderPvE Slotted: {0}"), ShootHarderPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("ShootHarderPvE Charges: {0}"), ShootHarderPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"SmokingGunPvE Slotted: {SmokingGunPvE.Info.IsOnSlot}");
-		ImGui.Text($"SmokingGunPvE Charges: {SmokingGunPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("SmokingGunPvE Slotted: {0}"), SmokingGunPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("SmokingGunPvE Charges: {0}"), SmokingGunPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"PulpFissionPvE Slotted: {PulpFissionPvE.Info.IsOnSlot}");
-		ImGui.Text($"PulpFissionPvE Charges: {PulpFissionPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("PulpFissionPvE Slotted: {0}"), PulpFissionPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("PulpFissionPvE Charges: {0}"), PulpFissionPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"MoltingPythonPvE Slotted: {MoltingPythonPvE.Info.IsOnSlot}");
-		ImGui.Text($"MoltingPythonPvE Charges: {MoltingPythonPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("MoltingPythonPvE Slotted: {0}"), MoltingPythonPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("MoltingPythonPvE Charges: {0}"), MoltingPythonPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"NightStallionPvE Slotted: {NightStallionPvE.Info.IsOnSlot}");
-		ImGui.Text($"NightStallionPvE Charges: {NightStallionPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("NightStallionPvE Slotted: {0}"), NightStallionPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("NightStallionPvE Charges: {0}"), NightStallionPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"ThickSkinPvE Slotted: {ThickSkinPvE.Info.IsOnSlot}");
-		ImGui.Text($"ThickSkinPvE Charges: {ThickSkinPvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("ThickSkinPvE Slotted: {0}"), ThickSkinPvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("ThickSkinPvE Charges: {0}"), ThickSkinPvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
-		ImGui.Text($"TheShortGoodbyePvE Slotted: {TheShortGoodbyePvE.Info.IsOnSlot}");
-		ImGui.Text($"TheShortGoodbyePvE Charges: {TheShortGoodbyePvE.Cooldown.CurrentCharges}");
+		ImGui.Text(string.Format(Loc.T("TheShortGoodbyePvE Slotted: {0}"), TheShortGoodbyePvE.Info.IsOnSlot));
+		ImGui.Text(string.Format(Loc.T("TheShortGoodbyePvE Charges: {0}"), TheShortGoodbyePvE.Cooldown.CurrentCharges));
 		ImGui.Spacing();
 	}
 

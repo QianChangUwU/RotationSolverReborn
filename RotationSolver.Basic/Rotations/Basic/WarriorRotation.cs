@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -70,15 +70,15 @@ public partial class WarriorRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("InnerReleaseStacks: " + InnerReleaseStacks.ToString());
-		ImGui.Text("BerserkStacks: " + BerserkStacks.ToString());
-		ImGui.Text("BeastGaugeValue: " + BeastGauge.ToString());
-		ImGui.Text("OnslaughtMax: " + OnslaughtMax.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.Text("ChaoticCyclonePvEReady: " + ChaoticCyclonePvEReady.ToString());
-		ImGui.Text("InnerChaosPvEeady: " + InnerChaosPvEeady.ToString());
-		ImGui.Text("PrimalWrathPvEReady: " + PrimalWrathPvEReady.ToString());
-		ImGui.Text("PrimalRuinationPvEReady: " + PrimalRuinationPvEReady.ToString());
+		ImGui.Text(Loc.T("InnerReleaseStacks: ") + InnerReleaseStacks.ToString());
+		ImGui.Text(Loc.T("BerserkStacks: ") + BerserkStacks.ToString());
+		ImGui.Text(Loc.T("BeastGaugeValue: ") + BeastGauge.ToString());
+		ImGui.Text(Loc.T("OnslaughtMax: ") + OnslaughtMax.ToString());
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.Text(Loc.T("ChaoticCyclonePvEReady: ") + ChaoticCyclonePvEReady.ToString());
+		ImGui.Text(Loc.T("InnerChaosPvEeady: ") + InnerChaosPvEeady.ToString());
+		ImGui.Text(Loc.T("PrimalWrathPvEReady: ") + PrimalWrathPvEReady.ToString());
+		ImGui.Text(Loc.T("PrimalRuinationPvEReady: ") + PrimalRuinationPvEReady.ToString());
 	}
 	#endregion
 

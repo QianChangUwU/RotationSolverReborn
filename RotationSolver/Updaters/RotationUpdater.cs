@@ -1,6 +1,7 @@
 ﻿using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
+using RotationSolver.Basic.Localization;
 using ECommons.Logging;
 using Lumina.Excel.Sheets;
 using RotationSolver.Basic.Rotations.Duties;
@@ -367,7 +368,7 @@ internal static class RotationUpdater
 			}
 			catch (Exception ex)
 			{
-				BasicWarningHelper.AddSystemWarning($"Failed to create the rotation: {t.Name}");
+				BasicWarningHelper.AddSystemWarning(string.Format(Loc.T("Failed to create the rotation: {0}"), t.Name));
 				PluginLog.Error($"Failed to create the rotation: {t.Name}: {ex.Message}");
 				return null;
 			}

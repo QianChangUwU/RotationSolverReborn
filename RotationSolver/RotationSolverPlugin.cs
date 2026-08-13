@@ -1,6 +1,6 @@
-using Dalamud.Game.ClientState.Conditions;
+﻿using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.DutyState;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Dalamud.Game;using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using ECommons;
@@ -10,6 +10,7 @@ using ECommons.Logging;
 using Lumina.Excel.Sheets;
 using RotationSolver.ActionTimeline;
 using RotationSolver.Basic.Configuration;
+using RotationSolver.Basic.Localization;
 using RotationSolver.Commands;
 using RotationSolver.Data;
 using RotationSolver.IPC;
@@ -137,6 +138,10 @@ public sealed class RotationSolverPlugin : IAsyncDalamudPlugin
 			Service.Config = new Configs();
 		}
 
+		// Set up localization based on the game client language and user choice.
+		Loc.ClientIsChinese = Svc.ClientState.ClientLanguage is ClientLanguage.ChineseSimplified or ClientLanguage.ChineseTraditional;
+		Loc.Language = Service.Config.UILanguage;
+
 		// Load OtherConfiguration files
 		await OtherConfiguration.InitAsync(cancellationToken);
 
@@ -185,7 +190,7 @@ public sealed class RotationSolverPlugin : IAsyncDalamudPlugin
 				if (guid == 0)
 				{
 					Service.Config.HideWarning.Value = true;
-								Svc.Chat.Print("Warning has been hidden.");
+								Svc.Chat.Print(Loc.T("Warning has been hidden."));
 								}
 							});
 						}, CancellationToken.None);

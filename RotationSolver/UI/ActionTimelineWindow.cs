@@ -1,7 +1,8 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using ECommons.GameHelpers;
 using RotationSolver.ActionTimeline;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.UI;
 
@@ -67,7 +68,7 @@ internal class ActionTimelineWindow : Window
 	{
 		if (!Player.Available)
 		{
-			ImGui.Text("Player not available");
+			ImGui.Text(Loc.T("Player not available"));
 			return;
 		}
 

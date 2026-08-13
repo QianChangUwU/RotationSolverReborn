@@ -1,5 +1,6 @@
 ﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Windowing;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.UI;
 
@@ -61,12 +62,12 @@ internal class InterceptedActionWindow : Window
 		// If there's no current intercepted action, show placeholder text
 		if (cur == null)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudGrey, "No intercepted actions queued.");
+			ImGui.TextColored(ImGuiColors.DalamudGrey, Loc.T("No intercepted actions queued."));
 			return;
 		}
 
 		// Draw current intercepted action (large / left)
-		ImGui.TextColored(ImGuiColors.DalamudWhite, "Current Intercepted Action");
+		ImGui.TextColored(ImGuiColors.DalamudWhite, Loc.T("Current Intercepted Action"));
 		ControlWindow.DrawIAction(cur, gcdWidth, 1);
 	}
 }

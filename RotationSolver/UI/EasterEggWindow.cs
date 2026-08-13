@@ -1,7 +1,8 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using ECommons.Logging;
 using RotationSolver.Basic.Configuration;
 
@@ -42,6 +43,7 @@ internal class EasterEggWindow : Window
 
 	public override void Draw()
 	{
+		WindowName = Loc.T("RSR Lab — Tic-tac-toe");
 		var scale = ImGui.GetIO().FontGlobalScale;
 		var size = _cellSize * scale;
 
@@ -97,7 +99,7 @@ internal class EasterEggWindow : Window
 
 		ImGui.Spacing();
 		ImGui.Separator();
-		ImGui.Text("I made this because i was bored");
+		ImGui.Text(Loc.T("I made this because i was bored"));
 		ImGui.Spacing();
 
 		using (var __ = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudYellow))
@@ -106,12 +108,12 @@ internal class EasterEggWindow : Window
 		}
 		ImGui.Spacing();
 
-		if (ImGui.Button("Reset"))
+		if (ImGui.Button(Loc.T("Reset")))
 		{
 			Reset();
 		}
 		ImGui.SameLine();
-		if (ImGui.Button("Close"))
+		if (ImGui.Button(Loc.T("Close")))
 		{
 			IsOpen = false;
 		}

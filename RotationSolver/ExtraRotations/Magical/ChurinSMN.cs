@@ -1,6 +1,7 @@
-using Dalamud.Game.ClientState.JobGauge.Types;
+﻿using Dalamud.Game.ClientState.JobGauge.Types;
 using ECommons.DalamudServices;
 using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Magical;
 
@@ -132,18 +133,18 @@ public sealed class ChurinSMN : SummonerRotation
 	public override void DisplayRotationStatus()
 	{
 		// Big Summon Status
-		ImGui.Text("=== Big Summon Status ===");
-		ImGui.Text($"Max GCDs in Big Summon: {BigSummonGCDLeft}");
-		ImGui.Text($"In Big Summon Count: {InBigSummonCount}");
+		ImGui.Text(Loc.T("=== Big Summon Status ==="));
+		ImGui.Text(string.Format(Loc.T("Max GCDs in Big Summon: {0}"), BigSummonGCDLeft));
+		ImGui.Text(string.Format(Loc.T("In Big Summon Count: {0}"), InBigSummonCount));
 
 		ImGui.Separator();
 
 		// Attunement Status
-		ImGui.Text("=== Attunement Status ===");
-		ImGui.Text($"Current Attunement: {(RubyAttunement ? "Ruby" : TopazAttunement ? "Topaz" : EmeraldAttunement ? "Emerald" : "None")}");
-		ImGui.Text($"Attunement Count: {AttunementCount}");
+		ImGui.Text(Loc.T("=== Attunement Status ==="));
+		ImGui.Text(string.Format(Loc.T("Current Attunement: {0}"), RubyAttunement ? Loc.T("Ruby") : TopazAttunement ? Loc.T("Topaz") : EmeraldAttunement ? Loc.T("Emerald") : Loc.T("None")));
+		ImGui.Text(string.Format(Loc.T("Attunement Count: {0}"), AttunementCount));
 		ImGui.NewLine();
-		ImGui.Text("Attunement Order:");
+		ImGui.Text(Loc.T("Attunement Order:"));
 		ImGui.NewLine();
 		if (_m4SOrderMap.Count > 0)
 		{
@@ -156,7 +157,7 @@ public sealed class ChurinSMN : SummonerRotation
 				var kv = new KeyValuePair<int, SummonOrderType>(key, _m4SOrderMap[key]);
 				if (kv.Key < InBigSummonCount) continue;
 				ImGui.SameLine();
-				ImGui.Text($"#{kv.Key}:");
+				ImGui.Text(string.Format(Loc.T("#{0}:"), kv.Key));
 				ImGui.SameLine();
 				var primals = GetPrimalsFromOrder(kv.Value);
 				const float iconSize = 22f;
@@ -181,28 +182,28 @@ public sealed class ChurinSMN : SummonerRotation
 		ImGui.Separator();
 
 		//Ruin III Tracking
-		ImGui.Text("=== Ruin III Tracking ===");
-		ImGui.Text($"Ruin III Cast Count: {Ruin3Count}");
-		ImGui.Text($"Just Used Ruin III: {JustUsedRuin3}");
+		ImGui.Text(Loc.T("=== Ruin III Tracking ==="));
+		ImGui.Text(string.Format(Loc.T("Ruin III Cast Count: {0}"), Ruin3Count));
+		ImGui.Text(string.Format(Loc.T("Just Used Ruin III: {0}"), JustUsedRuin3));
 
 		ImGui.Separator();
 
 		// Timing & Potions
-		ImGui.Text("=== Timing & Potions ===");
-		ImGui.Text($"Can Late Weave: {CanLateWeave}");
-		ImGui.Text($"Is Condition Met for Potion: {ChurinPotions.IsConditionMet()}");
+		ImGui.Text(Loc.T("=== Timing & Potions ==="));
+		ImGui.Text(string.Format(Loc.T("Can Late Weave: {0}"), CanLateWeave));
+		ImGui.Text(string.Format(Loc.T("Is Condition Met for Potion: {0}"), ChurinPotions.IsConditionMet()));
 
 		ImGui.Separator();
 
 		// Configuration
-		ImGui.Text("=== Configuration ===");
-		ImGui.Text($"Order: {SummonOrder}");
-		ImGui.Text($"Is Crimson Cyclone Target in Range: {CrimsonCyclonePvE.Target.Target.DistanceToPlayer() <= CrimsonCycloneDistance && HasIfritFavor}");
-		ImGui.Text($"Add Crimson Cyclone: {AddCrimsonCyclone}");
-		ImGui.Text($"Add Swiftcast on Garuda: {AddSwiftcastOnGaruda}");
-		ImGui.Text($"Skip Attunement: {SkipAttunement}");
+		ImGui.Text(Loc.T("=== Configuration ==="));
+		ImGui.Text(string.Format(Loc.T("Order: {0}"), SummonOrder));
+		ImGui.Text(string.Format(Loc.T("Is Crimson Cyclone Target in Range: {0}"), CrimsonCyclonePvE.Target.Target.DistanceToPlayer() <= CrimsonCycloneDistance && HasIfritFavor));
+		ImGui.Text(string.Format(Loc.T("Add Crimson Cyclone: {0}"), AddCrimsonCyclone));
+		ImGui.Text(string.Format(Loc.T("Add Swiftcast on Garuda: {0}"), AddSwiftcastOnGaruda));
+		ImGui.Text(string.Format(Loc.T("Skip Attunement: {0}"), SkipAttunement));
 
-		ImGui.Text($"Fight Preset Check: {FightPresetCheck(FightPresets)}");
+		ImGui.Text(string.Format(Loc.T("Fight Preset Check: {0}"), FightPresetCheck(FightPresets)));
 	}
 
 	private const int M4SMaxOrderCount = 12;

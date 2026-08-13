@@ -1,5 +1,6 @@
 ﻿using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.Basic.Rotations.Duties;
 
@@ -1537,22 +1538,22 @@ public static class PhantomJobExtensions
 	{
 		return phantomJob switch
 		{
-			DutyRotation.PhantomJob.Freelancer => "自由人",
-			DutyRotation.PhantomJob.Knight => "骑士",
-			DutyRotation.PhantomJob.Berserker => "狂战士",
-			DutyRotation.PhantomJob.Monk => "武僧",
-			DutyRotation.PhantomJob.Ranger => "猎人",
-			DutyRotation.PhantomJob.Samurai => "武士",
-			DutyRotation.PhantomJob.Bard => "吟游诗人",
-			DutyRotation.PhantomJob.Geomancer => "风水师",
-			DutyRotation.PhantomJob.TimeMage => "时魔法师",
-			DutyRotation.PhantomJob.Cannoneer => "炮击士",
-			DutyRotation.PhantomJob.Chemist => "药剂师",
-			DutyRotation.PhantomJob.Oracle => "预言师",
-			DutyRotation.PhantomJob.Thief => "盗贼",
-			DutyRotation.PhantomJob.MysticKnight => "魔法剑士",
-			DutyRotation.PhantomJob.Dancer => "舞者",
-			DutyRotation.PhantomJob.Gladiator => "剑斗士",
+			DutyRotation.PhantomJob.Freelancer => Loc.T("Freelancer"),
+			DutyRotation.PhantomJob.Knight => Loc.T("Knight"),
+			DutyRotation.PhantomJob.Berserker => Loc.T("Berserker"),
+			DutyRotation.PhantomJob.Monk => Loc.T("Monk"),
+			DutyRotation.PhantomJob.Ranger => Loc.T("Ranger"),
+			DutyRotation.PhantomJob.Samurai => Loc.T("Samurai"),
+			DutyRotation.PhantomJob.Bard => Loc.T("Bard"),
+			DutyRotation.PhantomJob.Geomancer => Loc.T("Geomancer"),
+			DutyRotation.PhantomJob.TimeMage => Loc.T("Time Mage"),
+			DutyRotation.PhantomJob.Cannoneer => Loc.T("Cannoneer"),
+			DutyRotation.PhantomJob.Chemist => Loc.T("Chemist"),
+			DutyRotation.PhantomJob.Oracle => Loc.T("Oracle"),
+			DutyRotation.PhantomJob.Thief => Loc.T("Thief"),
+			DutyRotation.PhantomJob.MysticKnight => Loc.T("Mystic Knight"),
+			DutyRotation.PhantomJob.Dancer => Loc.T("Dancer"),
+			DutyRotation.PhantomJob.Gladiator => Loc.T("Gladiator"),
 			_ => phantomJob.ToString(),
 		};
 	}

@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Healer;
 
@@ -101,8 +102,8 @@ public sealed class SGE_Reborn : SageRotation
 	private IBaseAction? _lastEukrasiaActionAim = null;
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Last E.Action Aim Cleared From Queue: {_lastEukrasiaActionAim}");
-		ImGui.Text($"Current E.Action Aim: {_EukrasiaActionAim}");
+		ImGui.Text(string.Format(Loc.T("Last E.Action Aim Cleared From Queue: {0}"), _lastEukrasiaActionAim));
+		ImGui.Text(string.Format(Loc.T("Current E.Action Aim: {0}"), _EukrasiaActionAim));
 	}
 	#endregion
 

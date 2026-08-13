@@ -2,6 +2,7 @@
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.Logging;
+using RotationSolver.Basic.Localization;
 using System.Collections.Concurrent;
 using static RotationSolver.Basic.Configuration.ConfigTypes;
 
@@ -46,6 +47,10 @@ internal partial class Configs : IPluginConfiguration
 
 	public string LastSeenChangelog { get; set; } = "0.0.0.0";
 	public bool TutorialDone { get; set; } = false;
+
+	[UI("UI Language", Filter = UiInformation,
+		Description = "Choose the language used in the plugin UI. \"Follow the client\" uses Chinese on Chinese clients and English otherwise.")]
+	public UILanguage UILanguage { get; set; } = UILanguage.Auto;
 
 	public List<ActionEventInfo> Events { get; private set; } = [];
 	public SortedSet<Job> DisabledJobs { get; private set; } = [];
@@ -1417,7 +1422,7 @@ internal partial class Configs : IPluginConfiguration
 	{
 		Save();
 		File.Copy(Svc.PluginInterface.ConfigFile.FullName, Svc.PluginInterface.ConfigFile.Directory + "\\RotationSolver_Backup.json", true);
-		Svc.Toasts.ShowNormal("Configs backed up.");
+		Svc.Toasts.ShowNormal(Loc.T("Configs backed up."));
 	}
 
 	public void Restore()
@@ -1431,13 +1436,13 @@ internal partial class Configs : IPluginConfiguration
 
 		if (restoredConfigs.Version != CurrentVersion)
 		{
-			Svc.Toasts.ShowNormal("Backed up configs are not compatible with the current version.");
+			Svc.Toasts.ShowNormal(Loc.T("Backed up configs are not compatible with the current version."));
 			return;
 		}
 
 		Service.Config = restoredConfigs;
 		Save();
-		Svc.Toasts.ShowNormal("Configs restored. Closing to set.");
+		Svc.Toasts.ShowNormal(Loc.T("Configs restored. Closing to set."));
 		DataCenter.HoldingRestore = true;
 	}
 }

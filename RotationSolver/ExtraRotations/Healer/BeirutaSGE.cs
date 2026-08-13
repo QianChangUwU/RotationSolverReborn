@@ -1,4 +1,5 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.ExtraRotations.Healer;
 
@@ -296,9 +297,9 @@ public sealed class BeirutaSGE : SageRotation
 
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"Last E.Action Aim Cleared From Queue: {_lastEukrasiaActionAim}");
-		ImGui.Text($"Current E.Action Aim: {_EukrasiaActionAim}");
-		ImGui.Text($"Swiftcast Movement Lock: {IsSwiftcastPostActionLockActive}");
+		ImGui.Text(string.Format(Loc.T("Last E.Action Aim Cleared From Queue: {0}"), _lastEukrasiaActionAim));
+		ImGui.Text(string.Format(Loc.T("Current E.Action Aim: {0}"), _EukrasiaActionAim));
+		ImGui.Text(string.Format(Loc.T("Swiftcast Movement Lock: {0}"), IsSwiftcastPostActionLockActive));
 	}
 
 	#endregion

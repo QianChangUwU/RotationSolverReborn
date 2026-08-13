@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.RebornRotations.Magical;
 
@@ -68,7 +69,7 @@ public sealed class SMN_Reborn : SummonerRotation
 	#region Tracking Properties
 	public override void DisplayRotationStatus()
 	{
-		ImGui.Text($"EnergyDrainPvE: Is Cooling Down: {EnergyDrainPvE.Cooldown.IsCoolingDown}");
+		ImGui.Text(string.Format(Loc.T("EnergyDrainPvE: Is Cooling Down: {0}"), EnergyDrainPvE.Cooldown.IsCoolingDown));
 	}
 	#endregion
 

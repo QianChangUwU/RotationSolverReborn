@@ -1,4 +1,4 @@
-using CombatRole = RotationSolver.Basic.Data.CombatRole;
+﻿using CombatRole = RotationSolver.Basic.Data.CombatRole;
 namespace RotationSolver.Basic.Rotations.Basic;
 
 public partial class BlueMageRotation
@@ -1415,6 +1415,6 @@ public partial class BlueMageRotation
 	/// </summary>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.TextWrapped($"Aetheric Mimicry Role: {BlueId}");
+		ImGui.TextWrapped(string.Format(Loc.T("Aetheric Mimicry Role: {0}"), BlueId));
 	}
 }

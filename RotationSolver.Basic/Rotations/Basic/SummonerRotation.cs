@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -305,42 +305,42 @@ public partial class SummonerRotation
 	/// <inheritdoc/>
 	public override void DisplayBaseStatus()
 	{
-		ImGui.Text("ReturnSummon: " + ReturnSummon.ToString());
-		ImGui.Text("SummonTime: " + SummonTime.ToString());
-		ImGui.Text("HasSummon: " + HasSummon.ToString());
-		ImGui.Text("HasPet: " + DataCenter.HasPet().ToString());
+		ImGui.Text(string.Format(Loc.T("ReturnSummon: {0}"), ReturnSummon.ToString()));
+		ImGui.Text(string.Format(Loc.T("SummonTime: {0}"), SummonTime.ToString()));
+		ImGui.Text(string.Format(Loc.T("HasSummon: {0}"), HasSummon.ToString()));
+		ImGui.Text(string.Format(Loc.T("HasPet: {0}"), DataCenter.HasPet()).ToString());
 		ImGui.Spacing();
-		ImGui.Text("HasAetherflowStacks: " + HasAetherflowStacks.ToString());
-		ImGui.Text("AetherflowStacks: " + AetherflowStacks.ToString());
+		ImGui.Text(string.Format(Loc.T("HasAetherflowStacks: {0}"), HasAetherflowStacks.ToString()));
+		ImGui.Text(string.Format(Loc.T("AetherflowStacks: {0}"), AetherflowStacks.ToString()));
 		ImGui.Spacing();
-		ImGui.Text("Attunement: " + Attunement.ToString());
-		ImGui.TextColored(RubyAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "RubyAttunement: " + RubyAttunement.ToString());
-		ImGui.TextColored(EmeraldAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "EmeraldAttunement: " + EmeraldAttunement.ToString());
-		ImGui.TextColored(TopazAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "TopazAttunement: " + TopazAttunement.ToString());
-		ImGui.Text("AttunementCount: " + AttunementCount.ToString());
-		ImGui.Text("AttunmentTime: " + AttunmentTime.ToString());
+		ImGui.Text(string.Format(Loc.T("Attunement: {0}"), Attunement.ToString()));
+		ImGui.TextColored(RubyAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("RubyAttunement: {0}"), RubyAttunement.ToString()));
+		ImGui.TextColored(EmeraldAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("EmeraldAttunement: {0}"), EmeraldAttunement.ToString()));
+		ImGui.TextColored(TopazAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("TopazAttunement: {0}"), TopazAttunement.ToString()));
+		ImGui.Text(string.Format(Loc.T("AttunementCount: {0}"), AttunementCount.ToString()));
+		ImGui.Text(string.Format(Loc.T("AttunmentTime: {0}"), AttunmentTime.ToString()));
 		ImGui.Spacing();
-		ImGui.TextColored(IfritActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IfritActive: " + IfritActive.ToString());
-		ImGui.TextColored(GarudaActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "GarudaActive: " + GarudaActive.ToString());
-		ImGui.TextColored(TitanActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "TitanActive: " + TitanActive.ToString());
-		ImGui.Text("AttunementType: " + AttunementType.ToString());
+		ImGui.TextColored(IfritActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IfritActive: {0}"), IfritActive.ToString()));
+		ImGui.TextColored(GarudaActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("GarudaActive: {0}"), GarudaActive.ToString()));
+		ImGui.TextColored(TitanActive ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("TitanActive: {0}"), TitanActive.ToString()));
+		ImGui.Text(string.Format(Loc.T("AttunementType: {0}"), AttunementType.ToString()));
 		ImGui.Spacing();
-		ImGui.TextColored(IsIfritReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsIfritReady: " + IsIfritReady.ToString());
-		ImGui.TextColored(IsGarudaReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsGarudaReady: " + IsGarudaReady.ToString());
-		ImGui.TextColored(IsTitanReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsTitanReady: " + IsTitanReady.ToString());
+		ImGui.TextColored(IsIfritReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsIfritReady: {0}"), IsIfritReady.ToString()));
+		ImGui.TextColored(IsGarudaReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsGarudaReady: {0}"), IsGarudaReady.ToString()));
+		ImGui.TextColored(IsTitanReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsTitanReady: {0}"), IsTitanReady.ToString()));
 		ImGui.Spacing();
-		ImGui.TextColored(IsSolarBahamutReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsSolarBahamutReady: " + IsSolarBahamutReady.ToString());
-		ImGui.TextColored(IsBahamutReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsBahamutReady: " + IsBahamutReady.ToString());
-		ImGui.TextColored(IsPhoenixReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "IsPhoenixReady: " + IsPhoenixReady.ToString());
+		ImGui.TextColored(IsSolarBahamutReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsSolarBahamutReady: {0}"), IsSolarBahamutReady.ToString()));
+		ImGui.TextColored(IsBahamutReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsBahamutReady: {0}"), IsBahamutReady.ToString()));
+		ImGui.TextColored(IsPhoenixReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("IsPhoenixReady: {0}"), IsPhoenixReady.ToString()));
 		ImGui.Spacing();
-		ImGui.TextColored(InSolarBahamut ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "InSolarBahamut: " + InSolarBahamut.ToString());
-		ImGui.TextColored(InBahamut ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "InBahamut: " + InBahamut.ToString());
-		ImGui.TextColored(InPhoenix ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "InPhoenix: " + InPhoenix.ToString());
+		ImGui.TextColored(InSolarBahamut ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("InSolarBahamut: {0}"), InSolarBahamut.ToString()));
+		ImGui.TextColored(InBahamut ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("InBahamut: {0}"), InBahamut.ToString()));
+		ImGui.TextColored(InPhoenix ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("InPhoenix: {0}"), InPhoenix.ToString()));
 		ImGui.Spacing();
-		ImGui.Text("Can Heal Single Spell: " + CanHealSingleSpell.ToString());
-		ImGui.TextColored(ImGuiColors.DalamudViolet, "PvE Actions");
-		ImGui.TextColored(SummonPhoenixPvEReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "SummonPhoenixPvEReady: " + SummonPhoenixPvEReady.ToString());
-		ImGui.TextColored(EnkindlePhoenixPvEReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, "EnkindlePhoenixPvEReady: " + EnkindlePhoenixPvEReady.ToString());
+		ImGui.Text(string.Format(Loc.T("Can Heal Single Spell: {0}"), CanHealSingleSpell.ToString()));
+		ImGui.TextColored(ImGuiColors.DalamudViolet, Loc.T("PvE Actions"));
+		ImGui.TextColored(SummonPhoenixPvEReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("SummonPhoenixPvEReady: {0}"), SummonPhoenixPvEReady.ToString()));
+		ImGui.TextColored(EnkindlePhoenixPvEReady ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("EnkindlePhoenixPvEReady: {0}"), EnkindlePhoenixPvEReady.ToString()));
 	}
 	#endregion
 

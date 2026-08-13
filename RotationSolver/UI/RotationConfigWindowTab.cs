@@ -1,4 +1,5 @@
 ﻿using ECommons.DalamudServices;
+using RotationSolver.Basic.Localization;
 using System.ComponentModel;
 
 namespace RotationSolver.UI;
@@ -74,19 +75,21 @@ internal static class RotationConfigWindowTabExtensions
 	{
 		return rotationConfigWindowTab switch
 		{
-			RotationConfigWindowTab.About => "关于",
-			RotationConfigWindowTab.Rotation => "循环",
-			RotationConfigWindowTab.Main => "主窗口",
-			RotationConfigWindowTab.Job => "职业",
-			RotationConfigWindowTab.Duty => "任务",
-			RotationConfigWindowTab.Actions => "技能",
-			RotationConfigWindowTab.List => "列表",
-			RotationConfigWindowTab.Basic => "基础",
-			RotationConfigWindowTab.UI => "界面",
-			RotationConfigWindowTab.Auto => "自动",
-			RotationConfigWindowTab.Target => "目标",
-			RotationConfigWindowTab.Extra => "额外",
-			RotationConfigWindowTab.Debug => "调试",
+			RotationConfigWindowTab.About => Loc.T("About"),
+			RotationConfigWindowTab.Rotation => Loc.T("Rotation"),
+			RotationConfigWindowTab.Main => Loc.T("Main"),
+			RotationConfigWindowTab.Job => Loc.T("Job"),
+			RotationConfigWindowTab.Duty => Loc.T("Duty"),
+			RotationConfigWindowTab.Actions => Loc.T("Actions"),
+			RotationConfigWindowTab.List => Loc.T("List"),
+			RotationConfigWindowTab.Basic => Loc.T("Basic"),
+			RotationConfigWindowTab.UI => Loc.T("UI"),
+			RotationConfigWindowTab.Auto => Loc.T("Auto"),
+			RotationConfigWindowTab.Target => Loc.T("Target"),
+			RotationConfigWindowTab.Extra => Loc.T("Extra"),
+			RotationConfigWindowTab.Debug => Loc.T("Debug"),
+			RotationConfigWindowTab.DutyRotation => Loc.T("Duty Rotation"),
+			RotationConfigWindowTab.AutoDuty => Loc.T("AutoDuty"),
 			_ => rotationConfigWindowTab.ToString()
 		};
 	}
