@@ -709,6 +709,7 @@ public partial class DutyRotation
 	{
 		setting.ActionCheck = () => SamuraiLevel >= 1;
 		setting.TargetType = TargetType.Interrupt;
+		setting.IsFriendly = false;
 	}
 
 	/// <summary>
@@ -719,6 +720,7 @@ public partial class DutyRotation
 	{
 		setting.ActionCheck = () => SamuraiLevel >= 2;
 		setting.TargetType = TargetType.Self;
+		setting.IsFriendly = true;
 		setting.StatusNeed = [StatusID.Shirahadori];
 	}
 
@@ -729,6 +731,7 @@ public partial class DutyRotation
 	static partial void ModifyIainukiPvE(ref ActionSetting setting)
 	{
 		setting.ActionCheck = () => SamuraiLevel >= 3;
+		setting.IsFriendly = false;
 		setting.CreateConfig = () => new ActionConfig()
 		{
 			AoeCount = 1,
@@ -742,6 +745,7 @@ public partial class DutyRotation
 	static partial void ModifyZeninagePvE(ref ActionSetting setting)
 	{
 		setting.ActionCheck = () => SamuraiLevel >= 4 && ZeninageItem.HasIt;
+		setting.IsFriendly = false;
 		setting.MPOverride = () => 0;
 	}
 	#endregion
