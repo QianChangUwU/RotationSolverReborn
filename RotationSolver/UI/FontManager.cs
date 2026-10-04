@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.ManagedFontAtlas;
 using ECommons.DalamudServices;
 
@@ -6,7 +7,7 @@ namespace RotationSolver.UI
 	public static class FontManager
 	{
 		private const int GameFontCapacity = 12;
-		private const int DefaultFontCapacity = 4;
+		private const int DefaultFontCapacity = 12;
 
 		private readonly record struct CachedFont(IFontHandle Handle, int LastUsedFrame);
 
@@ -16,6 +17,12 @@ namespace RotationSolver.UI
 
 		public static ImFontPtr GetFont(float size)
 		{
+			// The game Axis font does not cover all Chinese UI glyphs.
+			if (Loc.IsChinese)
+			{
+				return GetDefaultFont(size / Svc.PluginInterface.UiBuilder.FontDefaultSizePx);
+			}
+
 			// Round to a stable integer key to avoid excessive variants.
 			var key = Math.Max(1, (int)MathF.Round(size));
 

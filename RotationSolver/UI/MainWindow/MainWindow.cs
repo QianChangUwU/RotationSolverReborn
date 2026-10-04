@@ -232,16 +232,16 @@ public partial class MainWindow : Window
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			ImGui.TextUnformatted(CNLanguageClient ? "重置所有插件设置？" : "Reset all plugin settings?");
+			ImGui.TextUnformatted(Loc.T(CNLanguageClient ? "重置所有插件设置？" : "Reset all plugin settings?"));
 		}
 
 		ImGui.Dummy(new Vector2(0f, M3.Space2));
 
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant))
 		{
-			ImGui.TextWrapped(CNLanguageClient
+			ImGui.TextWrapped(Loc.T(CNLanguageClient
 				? "如果你在使用旧版默认配置的 RSR 时遇到问题，通常推荐执行此操作。此操作无法撤销。"
-				: "This is often recommended for users having issues while using an installation of RSR with an outdated default configuration. This cannot be undone.");
+				: "This is often recommended for users having issues while using an installation of RSR with an outdated default configuration. This cannot be undone."));
 		}
 
 		ImGui.Dummy(new Vector2(0f, M3.Space3));
@@ -302,8 +302,8 @@ public partial class MainWindow : Window
 		Vector2 titleSize;
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			clippedTitle = M3Navigation.Truncate(title, textWidth);
-			titleSize = ImGui.CalcTextSize(clippedTitle);
+			clippedTitle = M3Navigation.Truncate(Loc.T(title), textWidth);
+			titleSize = ImGui.CalcTextSize(Loc.T(clippedTitle));
 		}
 
 		var clippedSubtitle = string.Empty;
@@ -311,8 +311,8 @@ public partial class MainWindow : Window
 		if (!string.IsNullOrEmpty(subtitle))
 		{
 			using var font = ImRaii.PushFont(M3.LabelSmall);
-			clippedSubtitle = M3Navigation.Truncate(subtitle, textWidth);
-			subtitleSize = ImGui.CalcTextSize(clippedSubtitle);
+			clippedSubtitle = M3Navigation.Truncate(Loc.T(subtitle), textWidth);
+			subtitleSize = ImGui.CalcTextSize(Loc.T(clippedSubtitle));
 		}
 
 		var contentHeight = titleSize.Y + (subtitleSize.Y > 0f ? lineGap + subtitleSize.Y : 0f);
@@ -327,14 +327,14 @@ public partial class MainWindow : Window
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			drawList.AddText(new Vector2(min.X, textTop), M3.U32(scheme.OnSurface, 0.98f), clippedTitle);
+			drawList.AddText(new Vector2(min.X, textTop), M3.U32(scheme.OnSurface, 0.98f), Loc.T(clippedTitle));
 		}
 
 		if (subtitleSize.Y > 0f)
 		{
 			using var font = ImRaii.PushFont(M3.LabelSmall);
 			drawList.AddText(new Vector2(min.X, textTop + titleSize.Y + lineGap),
-				M3.U32(scheme.OnSurfaceVariant, 0.88f), clippedSubtitle);
+				M3.U32(scheme.OnSurfaceVariant, 0.88f), Loc.T(clippedSubtitle));
 		}
 
 		_shownActions = shown;
@@ -454,7 +454,7 @@ public partial class MainWindow : Window
 				break;
 
 			default:
-				ImGui.TextUnformatted("Unknown tab selected.");
+				ImGui.TextUnformatted(Loc.T("Unknown tab selected."));
 				break;
 		}
 	}
@@ -480,7 +480,7 @@ public partial class MainWindow : Window
 
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(M3.Scheme.OnSurfaceVariant, 0.92f)))
 		{
-			ImGui.TextWrapped(text);
+			ImGui.TextWrapped(Loc.T(text));
 		}
 
 		ImGui.Dummy(new Vector2(0f, M3.Space2));

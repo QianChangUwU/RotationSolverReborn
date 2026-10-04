@@ -45,7 +45,7 @@ internal static class ImGuiHelper
 	{
 		var cmdStr = command.GetCommandStr(extraCommand);
 
-		if (ImGui.Button(cmdStr))
+		if (ImGui.Button(Loc.Label(cmdStr)))
 		{
 			_ = Svc.Commands.ProcessCommand(cmdStr);
 		}
@@ -70,7 +70,7 @@ internal static class ImGuiHelper
 			}
 			ImGui.Text(Loc.T(" → "));
 			ImGui.SameLine();
-			ImGui.TextWrapped(help);
+			ImGui.TextWrapped(Loc.T(help));
 			if (sameLine)
 			{
 				ImGui.Unindent(INDENT_WIDTH);
@@ -82,13 +82,13 @@ internal static class ImGuiHelper
 	{
 		ImGui.SetNextItemWidth(50);
 
-		if (ImGui.DragInt($"{UiString.ConfigWindow_Events_MacroIndex.GetDescription()}##MacroIndex{info.GetHashCode()}", ref info.MacroIndex, 1, -1, 99))
+		if (ImGui.DragInt(Loc.Label($"{UiString.ConfigWindow_Events_MacroIndex.GetDescription()}##MacroIndex{info.GetHashCode()}"), ref info.MacroIndex, 1, -1, 99))
 		{
 			Service.Config.Save();
 		}
 
 		ImGui.SameLine();
-		if (ImGui.Checkbox($"{UiString.ConfigWindow_Events_ShareMacro.GetDescription()}##ShareMacro{info.GetHashCode()}", ref info.IsShared))
+		if (ImGui.Checkbox(Loc.Label($"{UiString.ConfigWindow_Events_ShareMacro.GetDescription()}##ShareMacro{info.GetHashCode()}"), ref info.IsShared))
 		{
 			Service.Config.Save();
 		}
@@ -97,7 +97,7 @@ internal static class ImGuiHelper
 	public static void DisplayEvent(this ActionEventInfo info)
 	{
 		var name = info.Name;
-		if (ImGui.InputText($"{UiString.ConfigWindow_Events_ActionName.GetDescription()}##ActionName{info.GetHashCode()}", ref name, 100))
+		if (ImGui.InputText(Loc.Label($"{UiString.ConfigWindow_Events_ActionName.GetDescription()}##ActionName{info.GetHashCode()}"), ref name, 100))
 		{
 			info.Name = name;
 			Service.Config.Save();
@@ -146,7 +146,7 @@ internal static class ImGuiHelper
 		{
 			for (var i = 0; i < count; i++)
 			{
-				if (ImGui.Selectable(items[i]))
+				if (ImGui.Selectable(Loc.Label(items[i])))
 				{
 					index = i;
 					result = true;
@@ -176,7 +176,7 @@ internal static class ImGuiHelper
 		ImGui.PushStyleColor(ImGuiCol.ButtonActive, ImGui.ColorConvertFloat4ToU32(*ImGui.GetStyleColorVec4(ImGuiCol.HeaderActive)));
 		ImGui.PushStyleColor(ImGuiCol.ButtonHovered, ImGui.ColorConvertFloat4ToU32(*ImGui.GetStyleColorVec4(ImGuiCol.HeaderHovered)));
 		ImGui.PushStyleColor(ImGuiCol.Button, 0);
-		var result = ImGui.Button(name);
+		var result = ImGui.Button(Loc.Label(name));
 		ImGui.PopStyleColor(colorCount);
 
 		if (font != null)
@@ -228,7 +228,7 @@ internal static class ImGuiHelper
 		style.FramePadding = Vector2.Zero;
 
 		//https://xkcd.com/2347/
-		ImGui.PushID(id + "literally anything");
+		ImGui.PushID(id + Loc.T("literally anything"));
 		//https://xkcd.com/2347/
 
 		var buttonClicked = false;
@@ -268,11 +268,11 @@ internal static class ImGuiHelper
 	internal static void TextShade(Vector2 pos, string text, float width = 1.5f)
 	{
 		var drawList = ImGui.GetWindowDrawList();
-		drawList.AddText(pos + new Vector2(0, -width), Black, text);
-		drawList.AddText(pos + new Vector2(0, width), Black, text);
-		drawList.AddText(pos + new Vector2(-width, 0), Black, text);
-		drawList.AddText(pos + new Vector2(width, 0), Black, text);
-		drawList.AddText(pos, White, text);
+		drawList.AddText(pos + new Vector2(0, -width), Black, Loc.T(text));
+		drawList.AddText(pos + new Vector2(0, width), Black, Loc.T(text));
+		drawList.AddText(pos + new Vector2(-width, 0), Black, Loc.T(text));
+		drawList.AddText(pos + new Vector2(width, 0), Black, Loc.T(text));
+		drawList.AddText(pos, White, Loc.T(text));
 	}
 
 	// Resolve overlay cover textures per draw to avoid using disposed wraps.
@@ -362,8 +362,8 @@ internal static class ImGuiHelper
 				}
 				if (!string.IsNullOrEmpty(command))
 				{
-					DrawHotKeys($"Execute \"{command}\"", () => ExecuteCommand(command), "Alt");
-					DrawHotKeys($"Copy \"{command}\"", () => CopyCommand(command), "Ctrl");
+					DrawHotKeys(Loc.F($"Execute \"{command}\""), () => ExecuteCommand(command), "Alt");
+					DrawHotKeys(Loc.F($"Copy \"{command}\""), () => CopyCommand(command), "Ctrl");
 				}
 				ImGui.EndTable();
 			}
@@ -449,7 +449,7 @@ internal static class ImGuiHelper
 	private static void CopyCommand(string command)
 	{
 		ImGui.SetClipboardText(command);
-		Notify.Success($"\"{command}\" copied to clipboard.");
+		Notify.Success(Loc.F($"\"{command}\" copied to clipboard."));
 	}
 
 	private static readonly SortedList<string, bool> _lastChecked = [];
@@ -498,14 +498,14 @@ internal static class ImGuiHelper
 
 		ImGui.TableNextRow();
 		_ = ImGui.TableNextColumn();
-		if (ImGui.Selectable(name))
+		if (ImGui.Selectable(Loc.Label(name)))
 		{
 			action();
 			ImGui.CloseCurrentPopup();
 		}
 
 		_ = ImGui.TableNextColumn();
-		ImGui.TextDisabled(string.Join(' ', keys));
+		ImGui.TextDisabled(Loc.T(string.Join(' ', keys)));
 	}
 
 	#endregion
@@ -527,14 +527,14 @@ internal static class ImGuiHelper
 	{
 		if (type == CombatType.None)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudRed, " None of PvE or PvP!");
+			ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T(" None of PvE or PvP!"));
 			return;
 		}
 
 		var first = true;
 		if (type.HasFlag(CombatType.PvE))
 		{
-			ImGui.TextColored(ImGuiColors.DalamudYellow, " PvE");
+			ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T(" PvE"));
 			first = false;
 		}
 
@@ -545,7 +545,7 @@ internal static class ImGuiHelper
 				ImGui.SameLine();
 			}
 
-			ImGui.TextColored(ImGuiColors.TankBlue, " PvP");
+			ImGui.TextColored(ImGuiColors.TankBlue, Loc.T(" PvP"));
 		}
 	}
 }

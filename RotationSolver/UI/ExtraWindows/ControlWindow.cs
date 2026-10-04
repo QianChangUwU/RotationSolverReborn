@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
@@ -353,7 +354,7 @@ internal class FullControlWindow : FullCtrlWindow
 	{
 		using var font = ImRaii.PushFont(M3.LabelSmall);
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(M3.Scheme.OnSurfaceVariant, 0.9f));
-		ImGui.TextUnformatted(text.ToUpperInvariant());
+		ImGui.TextUnformatted(Loc.T(text).ToUpperInvariant());
 	}
 
 	#region Header
@@ -494,12 +495,12 @@ internal class FullControlWindow : FullCtrlWindow
 
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurfaceVariant, 0.9f), "QUEUED");
+			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T("QUEUED"));
 		}
 
-		var name = action == null ? "Nothing queued" : M3Navigation.Truncate(action.Name, width - (textX - origin.X));
+		var name = action == null ? "Nothing queued" : M3Navigation.Truncate(Loc.T(action.Name), width - (textX - origin.X));
 		drawList.AddText(new Vector2(textX, textY + captionHeight),
-			action == null ? M3.U32(s.OnSurfaceVariant, 0.6f) : M3.U32(s.OnSurface), name);
+			action == null ? M3.U32(s.OnSurfaceVariant, 0.6f) : M3.U32(s.OnSurface), Loc.T(name));
 
 		ImGui.SetCursorScreenPos(origin);
 		ImGui.Dummy(new Vector2(width, rowHeight));
@@ -560,7 +561,7 @@ internal class FullControlWindow : FullCtrlWindow
 		float labelWidth;
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			labelWidth = MathF.Max(ImGui.CalcTextSize("HOSTILE").X, ImGui.CalcTextSize("AUTO").X);
+			labelWidth = MathF.Max(ImGui.CalcTextSize(Loc.T("HOSTILE")).X, ImGui.CalcTextSize(Loc.T("AUTO")).X);
 		}
 
 		StatusLine(FontAwesomeIcon.Users, "Hostile", DataCenter.CurrentTargetToHostileType.GetDescription(), labelWidth, width);
@@ -584,14 +585,14 @@ internal class FullControlWindow : FullCtrlWindow
 		var labelX = min.X + (22f * scale);
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			var caption = label.ToUpperInvariant();
+			var caption = Loc.T(label).ToUpperInvariant();
 			drawList.AddText(new Vector2(labelX, min.Y + ((height - ImGui.GetTextLineHeight()) * 0.5f)),
-				M3.U32(s.OnSurfaceVariant, 0.9f), caption);
+				M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T(caption));
 		}
 
 		var valueX = labelX + labelWidth + M3.Space2;
-		var text = M3Navigation.Truncate(value, min.X + width - valueX);
-		drawList.AddText(new Vector2(valueX, min.Y + ((height - ImGui.GetTextLineHeight()) * 0.5f)), M3.U32(s.OnSurface, 0.92f), text);
+		var text = M3Navigation.Truncate(Loc.T(value), min.X + width - valueX);
+		drawList.AddText(new Vector2(valueX, min.Y + ((height - ImGui.GetTextLineHeight()) * 0.5f)), M3.U32(s.OnSurface, 0.92f), Loc.T(text));
 
 		if (hovered && text != value)
 		{
@@ -631,7 +632,7 @@ internal class FullControlWindow : FullCtrlWindow
 			{
 				foreach (var tile in group.Tiles)
 				{
-					labelWidth = MathF.Max(labelWidth, ImGui.CalcTextSize(tile.Label).X);
+					labelWidth = MathF.Max(labelWidth, ImGui.CalcTextSize(Loc.T(tile.Label)).X);
 				}
 			}
 
@@ -708,10 +709,10 @@ internal class FullControlWindow : FullCtrlWindow
 		float labelHeight;
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			var labelSize = ImGui.CalcTextSize(tile.Label);
+			var labelSize = ImGui.CalcTextSize(Loc.T(tile.Label));
 			labelHeight = labelSize.Y;
 			drawList.AddText(new Vector2(min.X + ((size.X - labelSize.X) * 0.5f), max.Y - padding.Y - labelSize.Y),
-				M3.U32(active ? accent : s.OnSurfaceVariant, 0.95f * dim), tile.Label);
+				M3.U32(active ? accent : s.OnSurfaceVariant, 0.95f * dim), Loc.T(tile.Label));
 		}
 
 		DrawTileIcons(drawList, tile.Glyph, gcd, ability,
@@ -723,11 +724,11 @@ internal class FullControlWindow : FullCtrlWindow
 		{
 			using var font = ImRaii.PushFont(M3.LabelSmall);
 			var time = $"{DataCenter.SpecialTimeLeft:F1}s";
-			var timeSize = ImGui.CalcTextSize(time);
+			var timeSize = ImGui.CalcTextSize(Loc.T(time));
 			var badgePadding = new Vector2(5f, 1f) * scale;
 			var badgeMin = new Vector2(max.X - timeSize.X - (badgePadding.X * 2f) - (3f * scale), min.Y + (3f * scale));
 			drawList.AddRectFilled(badgeMin, badgeMin + timeSize + (badgePadding * 2f), M3.U32(s.InverseSurface, 0.92f), M3.ShapeFull);
-			drawList.AddText(badgeMin + badgePadding, M3.U32(s.InverseOnSurface), time);
+			drawList.AddText(badgeMin + badgePadding, M3.U32(s.InverseOnSurface), Loc.T(time));
 		}
 
 		if (hovered)
@@ -735,11 +736,11 @@ internal class FullControlWindow : FullCtrlWindow
 			var help = tile.Command.GetDescription();
 			if (gcd != null)
 			{
-				help += $"\nGCD: {gcd.Name}";
+				help += Loc.F($"\nGCD: {gcd.Name}");
 			}
 			if (ability != null)
 			{
-				help += $"\nAbility: {ability.Name}";
+				help += Loc.F($"\nAbility: {ability.Name}");
 			}
 
 			ImguiTooltips.ShowTooltip(help);
@@ -891,7 +892,7 @@ internal class FullControlWindow : FullCtrlWindow
 
 				using var font = ImRaii.PushFont(ImGui.GetFont());
 				var time = recast == 0 ? "0" : ((int)(recast - (elapsed % recast)) + 1).ToString();
-				var strSize = ImGui.CalcTextSize(time);
+				var strSize = ImGui.CalcTextSize(Loc.T(time));
 				var fontPos = new Vector2(pos.X + (size.X / 2) - (strSize.X / 2), pos.Y + (size.Y / 2) - (strSize.Y / 2)) + winPos;
 
 				ImGuiHelper.TextShade(fontPos, time);

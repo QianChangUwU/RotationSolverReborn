@@ -70,8 +70,8 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 			isFirst = false;
 
 			var command = $"{Service.COMMAND} {OtherCommandType.Settings} {_property.Name} {enumValue}";
-			DrawHotKeys($"Execute \"{command}\"", () => Svc.Commands.ProcessCommand(command), ["Alt"]);
-			DrawHotKeys($"Copy \"{command}\"", () => CopyCommand(command), ["Ctrl"]);
+			DrawHotKeys(Loc.F($"Execute \"{command}\""), () => Svc.Commands.ProcessCommand(command), ["Alt"]);
+			DrawHotKeys(Loc.F($"Copy \"{command}\""), () => CopyCommand(command), ["Ctrl"]);
 		}
 	}
 
@@ -79,14 +79,14 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 	{
 		ImGui.TableNextRow();
 		_ = ImGui.TableNextColumn();
-		if (ImGui.Selectable(name))
+		if (ImGui.Selectable(Loc.Label(name)))
 		{
 			action();
 			ImGui.CloseCurrentPopup();
 		}
 
 		_ = ImGui.TableNextColumn();
-		ImGui.TextDisabled(string.Join(' ', keys));
+		ImGui.TextDisabled(Loc.T(string.Join(' ', keys)));
 	}
 
 	private void ReactEnumPopup(bool hovered)
@@ -110,7 +110,7 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 	private static void CopyCommand(string command)
 	{
 		ImGui.SetClipboardText(command);
-		Notify.Success($"\"{command}\" copied to clipboard.");
+		Notify.Success(Loc.F($"\"{command}\" copied to clipboard."));
 	}
 
 	protected override void DrawMain()
@@ -131,7 +131,7 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 			_maxDisplayNameWidth = 0f;
 			foreach (var name in displayNames)
 			{
-				_maxDisplayNameWidth = MathF.Max(_maxDisplayNameWidth, ImGui.CalcTextSize(name).X);
+				_maxDisplayNameWidth = MathF.Max(_maxDisplayNameWidth, ImGui.CalcTextSize(Loc.T(name)).X);
 			}
 		}
 

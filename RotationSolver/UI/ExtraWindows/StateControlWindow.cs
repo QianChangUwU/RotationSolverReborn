@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using RotationSolver.Commands;
@@ -306,7 +307,7 @@ internal class StateControlWindow : Window
 		Vector2 titleSize;
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			titleSize = ImGui.CalcTextSize(Title);
+			titleSize = ImGui.CalcTextSize(Loc.T(Title));
 		}
 
 		var statusHeight = ImGui.GetTextLineHeight();
@@ -331,11 +332,11 @@ internal class StateControlWindow : Window
 		var textY = origin.Y + ((height - textHeight) * 0.5f);
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), M3Navigation.Truncate(Title, textWidth));
+			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), Loc.T(M3Navigation.Truncate(Loc.T(Title), textWidth)));
 		}
 
 		drawList.AddText(new Vector2(textX, textY + titleSize.Y + lineGap), M3.U32(Segments[current].Accent(s)),
-			M3Navigation.Truncate(status, textWidth));
+			Loc.T(M3Navigation.Truncate(Loc.T(status), textWidth)));
 
 		// Draw draws the pill here, after the content, so it can stay on screen while the window minimizes.
 		_fold.BarTop = (height - pillSize.Y) * 0.5f;
@@ -366,7 +367,7 @@ internal class StateControlWindow : Window
 		var tabLabelWidth = 0f;
 		foreach (var option in AoeOptions)
 		{
-			tabLabelWidth = MathF.Max(tabLabelWidth, ImGui.CalcTextSize(option.Label).X);
+			tabLabelWidth = MathF.Max(tabLabelWidth, ImGui.CalcTextSize(Loc.T(option.Label)).X);
 		}
 
 		var tabSegWidth = tabLabelWidth + (28f * scale);
@@ -415,7 +416,7 @@ internal class StateControlWindow : Window
 				if (ImGui.IsItemHovered())
 				{
 					aoeHovered = i;
-					ImGui.SetTooltip(AoeOptions[i].Tooltip);
+					ImGui.SetTooltip(Loc.T(AoeOptions[i].Tooltip));
 				}
 
 				if (ImGui.IsItemActive())
@@ -476,7 +477,7 @@ internal class StateControlWindow : Window
 				}
 
 				var label = Segments[i].Label;
-				var labelSize = ImGui.CalcTextSize(label);
+				var labelSize = ImGui.CalcTextSize(Loc.T(label));
 				var showIcon = i == current;
 				var contentWidth = labelSize.X + (showIcon ? iconSize + gap : 0f);
 				var contentLeft = centre.X - (contentWidth * 0.5f);
@@ -585,7 +586,7 @@ internal class StateControlWindow : Window
 			}
 
 			var label = AoeOptions[i].Label;
-			var labelSize = ImGui.CalcTextSize(label);
+			var labelSize = ImGui.CalcTextSize(Loc.T(label));
 			draw.AddText((segMin + segMax - labelSize) * 0.5f, M3.U32(content), label);
 		}
 

@@ -88,7 +88,7 @@ internal class AutoHealCheckBox(PropertyInfo property, params ISearchable[] othe
 		ImGui.TableNextRow();
 		_ = ImGui.TableNextColumn();
 		ImGui.AlignTextToFramePadding();
-		ImGui.TextWrapped(description);
+		ImGui.TextWrapped(Loc.T(description));
 
 		_ = ImGui.TableNextColumn();
 		normalTarget.DrawCompact(ImGui.GetContentRegionAvail().X);

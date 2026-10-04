@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 
 namespace RotationSolver.UI.Material;
@@ -77,8 +78,8 @@ internal static class M3Card
 			float titleHeight;
 			using (ImRaii.PushFont(M3.TitleMedium))
 			{
-				var titleSize = ImGui.CalcTextSize(title);
-				drawList.AddText(new Vector2(textX, cursorY), M3.U32(M3.Scheme.OnSurface, 0.98f), title);
+				var titleSize = ImGui.CalcTextSize(Loc.T(title));
+				drawList.AddText(new Vector2(textX, cursorY), M3.U32(M3.Scheme.OnSurface, 0.98f), Loc.T(title));
 				titleHeight = titleSize.Y;
 			}
 
@@ -212,25 +213,25 @@ internal static class M3ExpandableCard
 		if (!string.IsNullOrEmpty(badge))
 		{
 			using var badgeFont = ImRaii.PushFont(M3.LabelSmall);
-			badgeSize = ImGui.CalcTextSize(badge) + (badgePadding * 2f);
+			badgeSize = ImGui.CalcTextSize(Loc.T(badge)) + (badgePadding * 2f);
 		}
 
 		var badgeRoom = badgeSize.X > 0f ? badgeSize.X + (10f * scale) : 0f;
-		var trailingSize = string.IsNullOrEmpty(trailing) ? Vector2.Zero : ImGui.CalcTextSize(trailing);
+		var trailingSize = string.IsNullOrEmpty(trailing) ? Vector2.Zero : ImGui.CalcTextSize(Loc.T(trailing));
 		var trailingRoom = trailingSize.X > 0f ? trailingSize.X + (16f * scale) : 0f;
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
 			var titleRoom = contentRight - textX - badgeRoom;
-			if (ImGui.CalcTextSize(title).X > titleRoom - trailingRoom)
+			if (ImGui.CalcTextSize(Loc.T(title)).X > titleRoom - trailingRoom)
 			{
 				trailingRoom = 0f;
 			}
 
-			var label = M3Navigation.Truncate(title, MathF.Max(24f * scale, titleRoom - trailingRoom));
-			var titleSize = ImGui.CalcTextSize(label);
+			var label = M3Navigation.Truncate(Loc.T(title), MathF.Max(24f * scale, titleRoom - trailingRoom));
+			var titleSize = ImGui.CalcTextSize(Loc.T(label));
 			drawList.AddText(new Vector2(textX, min.Y + ((headerHeight - titleSize.Y) * 0.5f)),
-				M3.U32(expanded ? s.OnSurface : M3.Alpha(s.OnSurface, 0.88f)), label);
+				M3.U32(expanded ? s.OnSurface : M3.Alpha(s.OnSurface, 0.88f)), Loc.T(label));
 			textX += titleSize.X + (10f * scale);
 		}
 
@@ -240,13 +241,13 @@ internal static class M3ExpandableCard
 			using var badgeFont = ImRaii.PushFont(M3.LabelSmall);
 			var badgeMin = new Vector2(textX, min.Y + ((headerHeight - badgeSize.Y) * 0.5f));
 			drawList.AddRectFilled(badgeMin, badgeMin + badgeSize, M3.U32(badgeTone, 0.18f), M3.ShapeFull);
-			drawList.AddText(badgeMin + badgePadding, M3.U32(badgeTone, 0.95f), badge);
+			drawList.AddText(badgeMin + badgePadding, M3.U32(badgeTone, 0.95f), Loc.T(badge));
 		}
 
 		if (trailingRoom > 0f && trailing is not null)
 		{
 			drawList.AddText(new Vector2(contentRight - trailingSize.X, min.Y + ((headerHeight - trailingSize.Y) * 0.5f)),
-				M3.U32(s.OnSurfaceVariant, 0.85f), trailing);
+				M3.U32(s.OnSurfaceVariant, 0.85f), Loc.T(trailing));
 		}
 
 		DrawChevron(drawList, chevronCenter, progress, M3.Alpha(s.OnSurfaceVariant, hovered ? 1f : 0.8f));

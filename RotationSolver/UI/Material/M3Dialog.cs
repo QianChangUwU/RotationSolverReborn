@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 
 namespace RotationSolver.UI.Material;
@@ -58,15 +59,15 @@ internal static class M3Dialog
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			var headlineWidth = ImGui.CalcTextSize(headline).X;
+			var headlineWidth = ImGui.CalcTextSize(Loc.T(headline)).X;
 			if (centred && headlineWidth <= contentWidth)
 			{
 				ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ((contentWidth - headlineWidth) * 0.5f));
-				ImGui.TextUnformatted(headline);
+				ImGui.TextUnformatted(Loc.T(headline));
 			}
 			else
 			{
-				ImGui.TextWrapped(headline);
+				ImGui.TextWrapped(Loc.T(headline));
 			}
 		}
 
@@ -74,7 +75,7 @@ internal static class M3Dialog
 		{
 			ImGui.Dummy(new Vector2(0f, 8f * scale));
 			using var color = ImRaii.PushColor(ImGuiCol.Text, s.OnSurfaceVariant);
-			ImGui.TextWrapped(supporting);
+			ImGui.TextWrapped(Loc.T(supporting));
 		}
 
 		ImGui.Dummy(new Vector2(0f, 8f * scale));

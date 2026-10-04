@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
@@ -19,7 +20,7 @@ public partial class MainWindow
 
 		if (table)
 		{
-			ImGui.TableSetupColumn("Action Column", ImGuiTableColumnFlags.WidthFixed, ImGui.GetWindowWidth() / 2);
+			ImGui.TableSetupColumn(Loc.T("Action Column"), ImGuiTableColumnFlags.WidthFixed, ImGui.GetWindowWidth() / 2);
 			ImGui.TableNextColumn();
 
 			if (_actionsList != null)
@@ -260,56 +261,56 @@ public partial class MainWindow
 				try
 				{
 					var target = action.Target.Target;
-					ImGui.Text("Can Use: " + action.CanUse(out _));
+					ImGui.Text(Loc.T("Can Use: ") + action.CanUse(out _));
 					ImGui.Spacing();
 					ImGui.Spacing();
-					ImGui.Text("ID: " + action.Info.ID);
-					ImGui.Text("Cast Type: " + action.Info.CastType);
-					ImGui.Text("GCDSingleHeal: " + action.Config.GCDSingleHeal);
-					ImGui.Text("MinHPPercent: " + action.MinHPPercent);
-					ImGui.Text("AdjustedID: " + Service.GetAdjustedActionId(action.Info.ID));
-					ImGui.Text($"IsQuestUnlocked: {action.Info.IsQuestUnlocked()} ({action.Action.UnlockLink.RowId})");
-					ImGui.Text("EnoughLevel: " + action.EnoughLevel);
+					ImGui.Text(Loc.T("ID: ") + action.Info.ID);
+					ImGui.Text(Loc.T("Cast Type: ") + action.Info.CastType);
+					ImGui.Text(Loc.T("GCDSingleHeal: ") + action.Config.GCDSingleHeal);
+					ImGui.Text(Loc.T("MinHPPercent: ") + action.MinHPPercent);
+					ImGui.Text(Loc.T("AdjustedID: ") + Service.GetAdjustedActionId(action.Info.ID));
+					ImGui.Text(Loc.F($"IsQuestUnlocked: {action.Info.IsQuestUnlocked()} ({action.Action.UnlockLink.RowId})"));
+					ImGui.Text(Loc.T("EnoughLevel: ") + action.EnoughLevel);
 					if (!action.TargetInfo.IsSingleTarget)
 					{
-						ImGui.Text("AoeCount: " + action.Config.AoeCount);
+						ImGui.Text(Loc.T("AoeCount: ") + action.Config.AoeCount);
 					}
-					ImGui.Text("ShouldCheckStatus: " + action.Config.ShouldCheckStatus);
-					ImGui.Text("ShouldCheckTargetStatus: " + action.Config.ShouldCheckTargetStatus);
-					ImGui.Text("StatusFromSelf: " + action.Setting.StatusFromSelf);
-					ImGui.Text("Is Real GCD: " + action.Info.IsRealGCD);
-					ImGui.Text("Is PvP Action: " + action.Info.IsPvP);
+					ImGui.Text(Loc.T("ShouldCheckStatus: ") + action.Config.ShouldCheckStatus);
+					ImGui.Text(Loc.T("ShouldCheckTargetStatus: ") + action.Config.ShouldCheckTargetStatus);
+					ImGui.Text(Loc.T("StatusFromSelf: ") + action.Setting.StatusFromSelf);
+					ImGui.Text(Loc.T("Is Real GCD: ") + action.Info.IsRealGCD);
+					ImGui.Text(Loc.T("Is PvP Action: ") + action.Info.IsPvP);
 
 					if (ActionManager.Instance() != null && action.AdjustedID != 0)
 					{
-						ImGui.Text("Resources: " + ActionManager.Instance()->CheckActionResources(ActionType.Action, action.AdjustedID));
-						ImGui.Text("Status: " + ActionManager.Instance()->GetActionStatus(ActionType.Action, action.AdjustedID));
+						ImGui.Text(Loc.T("Resources: ") + ActionManager.Instance()->CheckActionResources(ActionType.Action, action.AdjustedID));
+						ImGui.Text(Loc.T("Status: ") + ActionManager.Instance()->GetActionStatus(ActionType.Action, action.AdjustedID));
 					}
-					ImGui.Text("Cast Time: " + action.Info.CastTime);
-					ImGui.Text("MP: " + action.Info.MPNeed);
-					ImGui.Text("HasEnoughMP: " + action.Info.HasEnoughMP());
-					ImGui.Text("AttackType: " + action.Info.AttackType);
-					ImGui.Text("Level: " + action.Info.Level);
-					ImGui.Text("Range: " + action.Info.Range);
-					ImGui.Text("EffectRange: " + action.Info.EffectRange);
-					ImGui.Text("Aspects: " + string.Join(", ", action.Info.Aspects));
-					ImGui.Text("Has One:" + action.Cooldown.HasOneCharge);
-					ImGui.Text("Recast One: " + action.Cooldown.RecastTimeOneChargeRaw);
-					ImGui.Text("Recast Elapsed: " + action.Cooldown.RecastTimeElapsed);
-					ImGui.Text("Recast Time Elapsed One Charge: " + action.Cooldown.RecastTimeElapsedOneCharge);
-					ImGui.Text("Recast Time Remain One Charge: " + action.Cooldown.RecastTimeRemainOneCharge);
-					ImGui.Text($"Charges: {action.Cooldown.CurrentCharges} / {action.Cooldown.MaxCharges}");
+					ImGui.Text(Loc.T("Cast Time: ") + action.Info.CastTime);
+					ImGui.Text(Loc.T("MP: ") + action.Info.MPNeed);
+					ImGui.Text(Loc.T("HasEnoughMP: ") + action.Info.HasEnoughMP());
+					ImGui.Text(Loc.T("AttackType: ") + action.Info.AttackType);
+					ImGui.Text(Loc.T("Level: ") + action.Info.Level);
+					ImGui.Text(Loc.T("Range: ") + action.Info.Range);
+					ImGui.Text(Loc.T("EffectRange: ") + action.Info.EffectRange);
+					ImGui.Text(Loc.T("Aspects: ") + string.Join(", ", action.Info.Aspects));
+					ImGui.Text(Loc.T("Has One:") + action.Cooldown.HasOneCharge);
+					ImGui.Text(Loc.T("Recast One: ") + action.Cooldown.RecastTimeOneChargeRaw);
+					ImGui.Text(Loc.T("Recast Elapsed: ") + action.Cooldown.RecastTimeElapsed);
+					ImGui.Text(Loc.T("Recast Time Elapsed One Charge: ") + action.Cooldown.RecastTimeElapsedOneCharge);
+					ImGui.Text(Loc.T("Recast Time Remain One Charge: ") + action.Cooldown.RecastTimeRemainOneCharge);
+					ImGui.Text(Loc.F($"Charges: {action.Cooldown.CurrentCharges} / {action.Cooldown.MaxCharges}"));
 
-					ImGui.Text("IgnoreCastCheck:" + action.CanUse(out _, skipCastingCheck: true));
+					ImGui.Text(Loc.T("IgnoreCastCheck:") + action.CanUse(out _, skipCastingCheck: true));
 					action.CanUse(out _, skipCastingCheck: true, skipStatusProvideCheck: true, skipTargetStatusNeedCheck: true, skipAoeCheck: true);
 					if (target == null)
 					{
-						ImGui.TextColored(ImGuiColors.DalamudRed, "Target is not set.");
+						ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("Target is not set."));
 					}
 					else if (target != null)
 					{
-						ImGui.Text("Target Name: " + action.Target.Target?.Name ?? string.Empty);
-						ImGui.Text("AffectedTarget Count: " + (action.Target.AffectedTargets?.Length ?? 0));
+						ImGui.Text(Loc.T("Target Name: ") + action.Target.Target?.Name ?? string.Empty);
+						ImGui.Text(Loc.T("AffectedTarget Count: ") + (action.Target.AffectedTargets?.Length ?? 0));
 
 						if (IsMovingSpecialType(action.Setting.SpecialType))
 						{
@@ -323,22 +324,22 @@ public partial class MainWindow
 							};
 							var statusText = safetyResult.Status switch
 							{
-								MovementSafetyStatus.Safe => "Pass",
-								MovementSafetyStatus.NotSafe => "Fail",
-								MovementSafetyStatus.NotApplicable => "N/A",
-								_ => "Unknown"
+								MovementSafetyStatus.Safe => Loc.T("Pass"),
+								MovementSafetyStatus.NotSafe => Loc.T("Fail"),
+								MovementSafetyStatus.NotApplicable => Loc.T("N/A"),
+								_ => Loc.T("Unknown")
 							};
-							ImGui.TextColored(color, $"BMR Safetycheck: {statusText}");
+							ImGui.TextColored(color, Loc.F($"BMR Safetycheck: {statusText}"));
 							if (!string.IsNullOrEmpty(safetyResult.Reason))
 							{
-								ImGui.Text($"Reason: {safetyResult.Reason}");
+								ImGui.Text(Loc.F($"Reason: {safetyResult.Reason}"));
 							}
 						}
 					}
 				}
 				catch (Exception ex)
 				{
-					ImGui.TextColored(ImGuiColors.DalamudRed, "Error: " + ex.Message);
+					ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("Error: ") + ex.Message);
 				}
 			}
 			else if (_activeAction is IBaseItem item)
@@ -347,25 +348,25 @@ public partial class MainWindow
 				{
 					if (ActionManager.Instance() != null)
 					{
-						ImGui.Text("Status: " + ActionManager.Instance()->GetActionStatus(ActionType.Item, item.ID).ToString());
-						ImGui.Text("Status HQ: " + ActionManager.Instance()->GetActionStatus(ActionType.Item, item.ID + 1000000).ToString());
+						ImGui.Text(Loc.T("Status: ") + ActionManager.Instance()->GetActionStatus(ActionType.Item, item.ID).ToString());
+						ImGui.Text(Loc.T("Status HQ: ") + ActionManager.Instance()->GetActionStatus(ActionType.Item, item.ID + 1000000).ToString());
 						var remain = ActionManager.Instance()->GetRecastTime(ActionType.Item, item.ID) - ActionManager.Instance()->GetRecastTimeElapsed(ActionType.Item, item.ID);
-						ImGui.Text("remain: " + remain.ToString());
-						ImGui.Text("ID: " + item.ID.ToString());
-						ImGui.Text("A4: " + item.A4.ToString());
-						ImGui.Text("AdjustedID: " + item.AdjustedID.ToString());
+						ImGui.Text(Loc.T("remain: ") + remain.ToString());
+						ImGui.Text(Loc.T("ID: ") + item.ID.ToString());
+						ImGui.Text(Loc.T("A4: ") + item.A4.ToString());
+						ImGui.Text(Loc.T("AdjustedID: ") + item.AdjustedID.ToString());
 					}
 
-					ImGui.Text("CanUse: " + item.CanUse(out _, true).ToString());
+					ImGui.Text(Loc.T("CanUse: ") + item.CanUse(out _, true).ToString());
 
 					if (item is HpPotionItem healPotionItem)
 					{
-						ImGui.Text("MaxHP:" + healPotionItem.MaxHp.ToString());
+						ImGui.Text(Loc.T("MaxHP:") + healPotionItem.MaxHp.ToString());
 					}
 				}
 				catch (Exception ex)
 				{
-					ImGui.TextColored(ImGuiColors.DalamudRed, "Error: " + ex.Message);
+					ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("Error: ") + ex.Message);
 				}
 			}
 		}
@@ -507,7 +508,7 @@ public partial class MainWindow
 		}
 		catch (Exception ex)
 		{
-			return new MovementSafetyResult { Status = MovementSafetyStatus.NotSafe, Reason = $"Error: {ex.Message}" };
+			return new MovementSafetyResult { Status = MovementSafetyStatus.NotSafe, Reason = Loc.F($"Error: {ex.Message}") };
 		}
 	}
 }

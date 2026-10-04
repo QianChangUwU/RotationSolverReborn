@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Config;
+using Dalamud.Game.Config;
 using ECommons.DalamudServices;
 using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
@@ -356,7 +356,7 @@ namespace RotationSolver.Commands
 		{
 			if (DataCenter.PvPAutomationBlocked && stateType != StateCommandType.Off)
 			{
-				Svc.Chat.PrintError("Rotation Solver Reborn: Autorotation is blocked in PvP while 'Auto PVP Series Grind' is enabled. It is an AI generated plugin and has been breaking RSR installations.");
+				Svc.Chat.PrintError(Loc.T("Rotation Solver Reborn: Autorotation is blocked in PvP while 'Auto PVP Series Grind' is enabled. It is an AI generated plugin and has been breaking RSR installations."));
 				stateType = StateCommandType.Off;
 			}
 
@@ -465,7 +465,7 @@ namespace RotationSolver.Commands
 		{
 			if (DataCenter.PvPAutomationBlocked && stateType != StateCommandType.Off)
 			{
-				Svc.Chat.PrintError("Rotation Solver Reborn: Autorotation is blocked in PvP while 'Auto PVP Series Grind' is enabled. It is an AI generated plugin and has been breaking RSR installations.");
+				Svc.Chat.PrintError(Loc.T("Rotation Solver Reborn: Autorotation is blocked in PvP while 'Auto PVP Series Grind' is enabled. It is an AI generated plugin and has been breaking RSR installations."));
 				stateType = StateCommandType.Off;
 			}
 

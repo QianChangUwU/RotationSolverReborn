@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
@@ -295,9 +296,9 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		return chapter switch
 		{
-			Chapter.GettingStarted => "Getting started",
-			Chapter.Configure => "Configure",
-			_ => "Wrap up",
+			Chapter.GettingStarted => Loc.T("Getting started"),
+			Chapter.Configure => Loc.T("Configure"),
+			_ => Loc.T("Wrap up"),
 		};
 	}
 
@@ -353,12 +354,12 @@ internal sealed class FirstStartTutorialWindow : Window
 		var textY = origin.Y + ((height - textHeight) * 0.5f);
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), M3Navigation.Truncate(title, textWidth));
+			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), Loc.T(M3Navigation.Truncate(Loc.T(title), textWidth)));
 		}
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			drawList.AddText(new Vector2(textX, textY + titleHeight + (2f * scale)), M3.U32(s.Primary), M3Navigation.Truncate(subtitle, textWidth));
+			drawList.AddText(new Vector2(textX, textY + titleHeight + (2f * scale)), M3.U32(s.Primary), Loc.T(M3Navigation.Truncate(Loc.T(subtitle), textWidth)));
 		}
 	}
 
@@ -469,12 +470,12 @@ internal sealed class FirstStartTutorialWindow : Window
 			if (!compact)
 			{
 				var textX = center.X + radius + (12f * scale);
-				var label = M3Navigation.Truncate(step.Title, MathF.Max(8f * scale, max.X - textX - (10f * scale)));
-				var labelSize = ImGui.CalcTextSize(label);
+				var label = M3Navigation.Truncate(Loc.T(step.Title), MathF.Max(8f * scale, max.X - textX - (10f * scale)));
+				var labelSize = ImGui.CalcTextSize(Loc.T(label));
 				var color = current ? s.OnSecondaryContainer
 					: done ? M3.Alpha(s.OnSurface, 0.9f)
 					: M3.Alpha(s.OnSurfaceVariant, 0.85f);
-				drawList.AddText(new Vector2(textX, center.Y - (labelSize.Y * 0.5f)), M3.U32(color), label);
+				drawList.AddText(new Vector2(textX, center.Y - (labelSize.Y * 0.5f)), M3.U32(color), Loc.T(label));
 			}
 			else if (hovered)
 			{
@@ -499,7 +500,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		using var font = ImRaii.PushFont(M3.LabelSmall);
 		var text = number.ToString();
-		drawList.AddText(center - (ImGui.CalcTextSize(text) * 0.5f), M3.U32(color), text);
+		drawList.AddText(center - (ImGui.CalcTextSize(Loc.T(text)) * 0.5f), M3.U32(color), Loc.T(text));
 	}
 
 	private void DrawPage(float height)
@@ -546,7 +547,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var diameter = 48f * scale;
 		var textX = origin.X + diameter + (16f * scale);
 		var textWidth = MathF.Max(32f * scale, origin.X + width - textX);
-		var overline = $"{ChapterName(step.Chapter)}".ToUpperInvariant();
+		var overline = Loc.F($"{ChapterName(step.Chapter)}").ToUpperInvariant();
 
 		float overlineHeight;
 		float titleHeight;
@@ -557,7 +558,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			titleHeight = ImGui.CalcTextSize(step.Title, false, textWidth).Y;
+			titleHeight = ImGui.CalcTextSize(Loc.T(step.Title), false, textWidth).Y;
 		}
 
 		var textHeight = overlineHeight + (4f * scale) + titleHeight;
@@ -572,7 +573,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var textTop = origin.Y + ((height - textHeight) * 0.5f);
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			drawList.AddText(new Vector2(textX, textTop), M3.U32(s.Primary), M3Navigation.Truncate(overline, textWidth));
+			drawList.AddText(new Vector2(textX, textTop), M3.U32(s.Primary), Loc.T(M3Navigation.Truncate(Loc.T(overline), textWidth)));
 		}
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
@@ -585,7 +586,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f)))
 		{
-			ImGui.TextWrapped(step.Summary);
+			ImGui.TextWrapped(Loc.T(step.Summary));
 		}
 
 		if (step.Pages is { Length: > 0 } pages)
@@ -679,17 +680,17 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var s = M3.Scheme;
 		var scale = M3.Scale;
-		var label = $"Step {_stepIndex + 1} of {_steps.Length}";
+		var label = Loc.F($"Step {_stepIndex + 1} of {_steps.Length}");
 		var width = MathF.Min(right - left, 320f * scale);
 		left += ((right - left) - width) * 0.5f;
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
-		var labelSize = ImGui.CalcTextSize(label);
+		var labelSize = ImGui.CalcTextSize(Loc.T(label));
 		var barHeight = 4f * scale;
 		var labelGap = 6f * scale;
 		var blockTop = top + ((height - (labelSize.Y + labelGap + barHeight)) * 0.5f);
 
-		ImGui.GetWindowDrawList().AddText(new Vector2(left + ((width - labelSize.X) * 0.5f), blockTop), M3.U32(s.OnSurfaceVariant, 0.9f), label);
+		ImGui.GetWindowDrawList().AddText(new Vector2(left + ((width - labelSize.X) * 0.5f), blockTop), M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T(label));
 
 		var fraction = M3Motion.Approach("##tutorial_progress", (_stepIndex + 1) / (float)_steps.Length, M3Motion.EmphasisedDuration);
 		ImGui.SetCursorScreenPos(new Vector2(left, blockTop + labelSize.Y + labelGap));
@@ -766,7 +767,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var s = M3.Scheme;
 
 		var (state, accent) = CurrentState();
-		_ = M3Widgets.Pill("##tutorial_state", $"Right now: {state}", accent, tooltip: "Updates as the state changes.");
+		_ = M3Widgets.Pill("##tutorial_state", Loc.F($"Right now: {state}"), accent, tooltip: "Updates as the state changes.");
 		Gap(12f);
 
 		DrawTiles(
@@ -872,7 +873,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var subtitle = $"{Player.Job} - {(DataCenter.IsPvP ? "PvP" : "PvE")}";
 		if (!string.IsNullOrEmpty(attributes?.GameVersion))
 		{
-			subtitle += $" - Patch {attributes.GameVersion}";
+			subtitle += Loc.F($" - Patch {attributes.GameVersion}");
 		}
 
 		using var card = M3Card.Begin("tutorial_rotation_current", null, accent: accent, style: M3CardStyle.Elevated);
@@ -906,11 +907,11 @@ internal sealed class FirstStartTutorialWindow : Window
 		var textTop = origin.Y + ((height - textHeight) * 0.5f);
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			drawList.AddText(new Vector2(textX, textTop), M3.U32(accent), M3Navigation.Truncate(name, textWidth));
+			drawList.AddText(new Vector2(textX, textTop), M3.U32(accent), Loc.T(M3Navigation.Truncate(Loc.T(name), textWidth)));
 		}
 
 		drawList.AddText(new Vector2(textX, textTop + titleHeight + (2f * scale)), M3.U32(s.OnSurfaceVariant, 0.9f),
-			M3Navigation.Truncate(subtitle, textWidth));
+			Loc.T(M3Navigation.Truncate(Loc.T(subtitle), textWidth)));
 
 		ImGui.SetCursorScreenPos(new Vector2(origin.X + width - buttonWidth, origin.Y + ((height - M3Widgets.ButtonHeight) * 0.5f)));
 		if (M3Widgets.Button("##tutorial_switch_rotation", switchLabel, M3ButtonStyle.Tonal, FontAwesomeIcon.Sync,
@@ -928,7 +929,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		if (description.Length > 0)
 		{
 			using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f));
-			ImGui.TextWrapped(description);
+			ImGui.TextWrapped(Loc.T(description));
 		}
 	}
 
@@ -964,7 +965,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				"Switches on as soon as a pull timer begins, so the rotation can time its pre-pull actions.",
 				Service.Config.StartOnCountdown);
 			DrawSwitch("tutorial_off_after_combat", "Turn off after combat",
-				$"Switches off once you have been out of combat for {Service.Config.AutoOffAfterCombatTime:0} seconds. The delay is on the Auto page.",
+				Loc.F($"Switches off once you have been out of combat for {Service.Config.AutoOffAfterCombatTime:0} seconds. The delay is on the Auto page."),
 				Service.Config.AutoOffAfterCombat);
 			DrawSwitch("tutorial_off_when_dead", "Turn off when you die",
 				"Stops RSR the moment you are knocked out.",
@@ -1015,12 +1016,12 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		Gap(4f);
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(M3.Scheme.OnSurfaceVariant, 0.95f));
-		ImGui.TextWrapped(current switch
+		ImGui.TextWrapped(Loc.T(current switch
 		{
-			0 => "Off: single-target actions only. The safest choice near enemies you must not pull.",
-			1 => "Cleave: AoE actions are used only when they need no more than your one target, such as cleaves. Nothing that relies on hitting a pack.",
-			_ => "Full: every AoE action, whenever enough enemies are in range. The usual choice for dungeons and trash packs.",
-		});
+			0 => Loc.T("Off: single-target actions only. The safest choice near enemies you must not pull."),
+			1 => Loc.T("Cleave: AoE actions are used only when they need no more than your one target, such as cleaves. Nothing that relies on hitting a pack."),
+			_ => Loc.T("Full: every AoE action, whenever enough enemies are in range. The usual choice for dungeons and trash packs."),
+		}));
 	}
 
 	private static void DrawTargetStep()
@@ -1045,7 +1046,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		if (types.Count == 0)
 		{
 			using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f));
-			ImGui.TextWrapped("The list is empty. RSR fills in its defaults the first time it needs a rule.");
+			ImGui.TextWrapped(Loc.T("The list is empty. RSR fills in its defaults the first time it needs a rule."));
 			return;
 		}
 
@@ -1141,7 +1142,7 @@ internal sealed class FirstStartTutorialWindow : Window
 			if (M3SettingRow.NavigationRow($"##tutorial_command_{i}", command.Command, command.Description,
 				FontAwesomeIcon.Terminal, FontAwesomeIcon.Copy))
 			{
-				CopyToClipboard(command.Command, $"Copied {command.Command}");
+				CopyToClipboard(command.Command, Loc.F($"Copied {command.Command}"));
 			}
 		}
 
@@ -1255,10 +1256,10 @@ internal sealed class FirstStartTutorialWindow : Window
 		float titleHeight;
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			titleHeight = ImGui.CalcTextSize(tile.Title, false, textWidth).Y;
+			titleHeight = ImGui.CalcTextSize(Loc.T(tile.Title), false, textWidth).Y;
 		}
 
-		var bodyHeight = ImGui.CalcTextSize(tile.Text, false, textWidth).Y;
+		var bodyHeight = ImGui.CalcTextSize(Loc.T(tile.Text), false, textWidth).Y;
 		return padding + TileIconDiameter + (10f * scale) + titleHeight + (4f * scale) + bodyHeight + padding;
 	}
 
@@ -1316,7 +1317,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		ImGui.Indent(indent);
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurface, 0.9f)))
 		{
-			ImGui.TextWrapped(text);
+			ImGui.TextWrapped(Loc.T(text));
 		}
 
 		ImGui.Unindent(indent);
@@ -1374,7 +1375,7 @@ internal sealed class FirstStartTutorialWindow : Window
 			{
 				drawList.AddCircleFilled(center, (diameter * 0.5f) + (6f * scale), M3.U32(s.OnSurface, M3.StateHover), 32);
 				ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
-				ImGui.SetTooltip(preset.Name);
+				ImGui.SetTooltip(Loc.T(preset.Name));
 			}
 
 			drawList.AddCircleFilled(center, diameter * 0.5f, M3.U32(color), 32);
@@ -1394,7 +1395,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (ImGui.IsItemHovered())
 		{
-			ImGui.SetTooltip(matched ? "Pick any colour" : "Your own colour. Click to change it.");
+			ImGui.SetTooltip(Loc.T(matched ? "Pick any colour" : "Your own colour. Click to change it."));
 		}
 
 		if (!matched)
@@ -1472,12 +1473,12 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var key = $"tutorial_practice_popup_{name}";
 		var command = $"{Service.COMMAND} {OtherCommandType.Settings} {name} {defaultValue}";
-		void Copy() => CopyToClipboard(command, $"Copied {command} (a practice command, it does nothing in chat).");
+		void Copy() => CopyToClipboard(command, Loc.F($"Copied {command} (a practice command, it does nothing in chat)."));
 
 		ImGuiHelper.DrawHotKeysPopup(key, string.Empty,
 			("Reset to Default Value.", reset, ImGuiHelper.BackspaceHint),
-			($"Execute \"{command}\"", reset, ["Alt"]),
-			($"Copy \"{command}\"", Copy, ["Ctrl"]));
+			(Loc.F($"Execute \"{command}\""), reset, ["Alt"]),
+			(Loc.F($"Copy \"{command}\""), Copy, ["Ctrl"]));
 
 		ImGuiHelper.ExecuteHotKeysPopupAt(row.Hovered, key, string.Empty, string.Empty, false,
 			(reset, [VirtualKey.BACK]),
@@ -1513,7 +1514,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var y = origin.Y + ((height - textHeight) * 0.5f);
 		foreach (var line in lines)
 		{
-			drawList.AddText(new Vector2(origin.X + padding.X, y), M3.U32(s.OnSurface, 0.95f), M3Navigation.Truncate(line, textWidth));
+			drawList.AddText(new Vector2(origin.X + padding.X, y), M3.U32(s.OnSurface, 0.95f), Loc.T(M3Navigation.Truncate(Loc.T(line), textWidth)));
 			y += lineHeight + lineGap;
 		}
 
@@ -1542,7 +1543,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (DataCenter.IsTargetOnly)
 		{
-			return ($"Target Only, {DataCenter.TargetingType}", s.Secondary);
+			return (Loc.F($"Target Only, {DataCenter.TargetingType}"), s.Secondary);
 		}
 
 		if (DataCenter.IsAutoDuty)
@@ -1557,7 +1558,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		return DataCenter.IsPvPStateEnabled
 			? ("PvP", s.Primary)
-			: ($"Auto, {DataCenter.TargetingType}", s.Primary);
+			: (Loc.F($"Auto, {DataCenter.TargetingType}"), s.Primary);
 	}
 
 	private static string FirstParagraph(string? text, int maxLength = 280)
@@ -1584,7 +1585,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		try
 		{
 			ImGui.SetClipboardText(text);
-			M3Snackbar.Show(confirmation);
+			M3Snackbar.Show(Loc.T(confirmation));
 		}
 		catch (Exception ex)
 		{

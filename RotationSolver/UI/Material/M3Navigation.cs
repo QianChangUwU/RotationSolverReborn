@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 
 namespace RotationSolver.UI.Material;
@@ -94,18 +95,18 @@ internal static class M3Navigation
 		var textX = iconX + MathF.Max(iconSize.X, 18f * scale) + (14f * scale);
 		var available = MathF.Max(16f * scale, max.X - textX - (12f * scale));
 		var label = Truncate(item.Label, available);
-		var labelSize = ImGui.CalcTextSize(label);
-		drawList.AddText(new Vector2(textX, min.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(textColor), label);
+		var labelSize = ImGui.CalcTextSize(Loc.T(label));
+		drawList.AddText(new Vector2(textX, min.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(textColor), Loc.T(label));
 
 		if (!string.IsNullOrEmpty(item.Badge))
 		{
 			using var badgeFont = ImRaii.PushFont(M3.LabelSmall);
-			var badgeSize = ImGui.CalcTextSize(item.Badge);
+			var badgeSize = ImGui.CalcTextSize(Loc.T(item.Badge));
 			var padding = new Vector2(6f, 2f) * scale;
 			var badgeMax = new Vector2(max.X - (12f * scale), min.Y + ((height + badgeSize.Y + (padding.Y * 2f)) * 0.5f));
 			var badgeMin = badgeMax - badgeSize - (padding * 2f);
 			drawList.AddRectFilled(badgeMin, badgeMax, M3.U32(s.Error, 0.9f), M3.ShapeFull);
-			drawList.AddText(badgeMin + padding, M3.U32(s.OnError), item.Badge);
+			drawList.AddText(badgeMin + padding, M3.U32(s.OnError), Loc.T(item.Badge));
 		}
 
 		if (hovered && !string.IsNullOrEmpty(item.Tooltip))
@@ -157,11 +158,11 @@ internal static class M3Navigation
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
 			var label = Truncate(item.Label, width - (4f * scale));
-			var labelSize = ImGui.CalcTextSize(label);
+			var labelSize = ImGui.CalcTextSize(Loc.T(label));
 			var textColor = M3ColorMath.Mix(M3.Alpha(s.OnSurfaceVariant, 0.9f), s.OnSurface, selection);
 			drawList.AddText(
 				new Vector2(min.X + ((width - labelSize.X) * 0.5f), indicatorMax.Y + (4f * scale)),
-				M3.U32(textColor), label);
+				M3.U32(textColor), Loc.T(label));
 		}
 
 		if (hovered)
@@ -235,7 +236,7 @@ internal static class M3Navigation
 			var badgeSize = string.IsNullOrEmpty(tab.Badge) ? Vector2.Zero : M3Widgets.BadgeSize(tab.Badge);
 			var badgeRoom = badgeSize.X > 0f ? (badgeSize.X + (4f * scale)) * 2f : 0f;
 			var label = Truncate(tab.Label, MathF.Max(8f * scale, tabWidth - (16f * scale) - inlineIcon - badgeRoom));
-			var labelSize = ImGui.CalcTextSize(label);
+			var labelSize = ImGui.CalcTextSize(Loc.T(label));
 
 			float contentLeft;
 			float contentWidth;
@@ -266,7 +267,7 @@ internal static class M3Navigation
 				labelPosition = new Vector2(contentLeft + inlineIcon, tabMin.Y + ((height - labelSize.Y) * 0.5f));
 			}
 
-			drawList.AddText(labelPosition, M3.U32(content), label);
+			drawList.AddText(labelPosition, M3.U32(content), Loc.T(label));
 
 			if (badgeSize.X > 0f)
 			{
@@ -306,16 +307,16 @@ internal static class M3Navigation
 
 	public static string Truncate(string text, float maxWidth)
 	{
-		if (string.IsNullOrEmpty(text) || ImGui.CalcTextSize(text).X <= maxWidth)
+		if (string.IsNullOrEmpty(text) || ImGui.CalcTextSize(Loc.T(text)).X <= maxWidth)
 		{
 			return text;
 		}
 
-		var ellipsisWidth = ImGui.CalcTextSize("…").X;
+		var ellipsisWidth = ImGui.CalcTextSize(Loc.T("…")).X;
 		for (var length = text.Length - 1; length > 0; length--)
 		{
 			var candidate = text[..length];
-			if (ImGui.CalcTextSize(candidate).X + ellipsisWidth <= maxWidth)
+			if (ImGui.CalcTextSize(Loc.T(candidate)).X + ellipsisWidth <= maxWidth)
 			{
 				return candidate + "…";
 			}

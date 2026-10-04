@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Newtonsoft.Json;
 using System.Reflection;
 
@@ -68,7 +70,8 @@ public static class Loc
 	/// <summary>
 	/// Translates the given English text into Chinese if available, otherwise returns the original text.
 	/// </summary>
-	public static string T(string en)
+	[return: NotNullIfNotNull(nameof(en))]
+	public static string? T(string? en)
 	{
 		if (string.IsNullOrEmpty(en) || !IsChinese)
 		{
@@ -76,7 +79,50 @@ public static class Loc
 		}
 
 		EnsureLoaded();
-		return _dict!.TryGetValue(en, out var zh) ? zh : en;
+		if (_dict!.TryGetValue(en, out var zh))
+		{
+			return zh;
+		}
+
+		// ImGui labels may carry an invisible ID after their visible text.
+		var idIndex = en.IndexOf("##", StringComparison.Ordinal);
+		return idIndex > 0 && _dict.TryGetValue(en[..idIndex], out zh)
+			? zh + en[idIndex..]
+			: en;
+	}
+
+	/// <summary>
+	/// Localizes a formatted UI message while preserving numeric formats and argument order.
+	/// </summary>
+	public static string F(FormattableString text)
+	{
+		var arguments = (object?[])text.GetArguments().Clone();
+		if (IsChinese)
+		{
+			for (var i = 0; i < arguments.Length; i++)
+			{
+				if (arguments[i] is string value)
+				{
+					arguments[i] = T(value);
+				}
+			}
+		}
+		return string.Format(CultureInfo.CurrentCulture, T(text.Format), arguments);
+	}
+
+	/// <summary>
+	/// Translates an interactive label without changing its ImGui identity when the language changes.
+	/// </summary>
+	public static string Label(string label)
+	{
+		if (label.StartsWith("##", StringComparison.Ordinal) || label.Contains("###", StringComparison.Ordinal))
+		{
+			return T(label);
+		}
+
+		var separator = label.IndexOf("##", StringComparison.Ordinal);
+		var visible = separator < 0 ? label : label[..separator];
+		return T(visible) + "###" + label;
 	}
 
 	private static void EnsureLoaded()

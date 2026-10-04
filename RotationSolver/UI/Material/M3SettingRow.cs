@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 
@@ -91,13 +92,13 @@ internal static class M3SettingRow
 			? MathF.Max(32f * scale, innerWidth - controlSize.X - ControlGap)
 			: innerWidth;
 
-		var labelSize = string.IsNullOrEmpty(label) ? Vector2.Zero : ImGui.CalcTextSize(label, false, labelWidth);
+		var labelSize = string.IsNullOrEmpty(label) ? Vector2.Zero : ImGui.CalcTextSize(Loc.T(label), false, labelWidth);
 
 		var supportingHeight = 0f;
 		if (!string.IsNullOrEmpty(supporting))
 		{
 			using var font = ImRaii.PushFont(M3.LabelSmall);
-			supportingHeight = ImGui.CalcTextSize(supporting, false, innerWidth).Y + (4f * scale);
+			supportingHeight = ImGui.CalcTextSize(Loc.T(supporting), false, innerWidth).Y + (4f * scale);
 		}
 
 		var headlineHeight = hasControl && !controlBelow
@@ -199,12 +200,12 @@ internal static class M3SettingRow
 		var trailingWidth = trailingIcon == FontAwesomeIcon.None ? 0f : M3Draw.MeasureIcon(trailingIcon).X + (12f * scale);
 		var textWidth = MathF.Max(32f * scale, width - (PaddingX * 2f) - iconWidth - trailingWidth);
 
-		var labelSize = ImGui.CalcTextSize(label, false, textWidth);
+		var labelSize = ImGui.CalcTextSize(Loc.T(label), false, textWidth);
 		var supportingHeight = 0f;
 		if (!string.IsNullOrEmpty(supporting))
 		{
 			using var font = ImRaii.PushFont(M3.LabelSmall);
-			supportingHeight = ImGui.CalcTextSize(supporting, false, textWidth).Y + (4f * scale);
+			supportingHeight = ImGui.CalcTextSize(Loc.T(supporting), false, textWidth).Y + (4f * scale);
 		}
 
 		var height = (PaddingY * 2f) + labelSize.Y + supportingHeight;

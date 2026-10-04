@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.Logging;
@@ -85,7 +86,7 @@ public partial class MainWindow
 
 			using (ImRaii.PushFont(M3.TitleMedium))
 			{
-				ImGui.TextUnformatted(plugin.Name);
+				ImGui.TextUnformatted(Loc.T(plugin.Name));
 			}
 
 			ImGui.SameLine(0f, M3.Space2);
@@ -98,7 +99,7 @@ public partial class MainWindow
 				ImGui.Dummy(new Vector2(0f, M3.Space1));
 				using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(scheme.OnSurfaceVariant, 0.92f)))
 				{
-					ImGui.TextWrapped(advice);
+					ImGui.TextWrapped(Loc.T(advice));
 				}
 			}
 

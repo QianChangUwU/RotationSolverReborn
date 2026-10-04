@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
@@ -232,12 +233,12 @@ internal sealed class UpdateNotesWindow : Window
 		float subtitleHeight;
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			titleSize = ImGui.CalcTextSize(title);
+			titleSize = ImGui.CalcTextSize(Loc.T(title));
 		}
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			subtitleHeight = ImGui.CalcTextSize(subtitle).Y;
+			subtitleHeight = ImGui.CalcTextSize(Loc.T(subtitle)).Y;
 		}
 
 		var textHeight = titleSize.Y + (2f * scale) + subtitleHeight;
@@ -263,16 +264,16 @@ internal sealed class UpdateNotesWindow : Window
 		var textY = origin.Y + ((height - textHeight) * 0.5f);
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), title);
+			drawList.AddText(new Vector2(textX, textY), M3.U32(s.OnSurface), Loc.T(title));
 		}
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			drawList.AddText(new Vector2(textX, textY + titleSize.Y + (2f * scale)), M3.U32(s.Primary), subtitle);
+			drawList.AddText(new Vector2(textX, textY + titleSize.Y + (2f * scale)), M3.U32(s.Primary), Loc.T(subtitle));
 		}
 
 		var versionLabel = $"v{_currentVersion}";
-		var newLabel = _newCount == 1 ? "1 new update" : $"{_newCount} new updates";
+		var newLabel = _newCount == 1 ? "1 new update" : Loc.F($"{_newCount} new updates");
 		var versionSize = M3Widgets.PillSize(versionLabel);
 		var newSize = _newCount > 0 ? M3Widgets.PillSize(newLabel, FontAwesomeIcon.Star) : Vector2.Zero;
 		var room = origin.X + width - (textX + titleSize.X + (16f * scale));
@@ -320,15 +321,15 @@ internal sealed class UpdateNotesWindow : Window
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			drawList.AddText(new Vector2(x, origin.Y), M3.U32(s.Primary), label);
-			x += ImGui.CalcTextSize(label).X + (14f * scale);
+			drawList.AddText(new Vector2(x, origin.Y), M3.U32(s.Primary), Loc.T(label));
+			x += ImGui.CalcTextSize(Loc.T(label)).X + (14f * scale);
 		}
 
 		if (!string.IsNullOrEmpty(tagline))
 		{
-			var text = M3Navigation.Truncate(tagline, origin.X + width - x);
-			var textSize = ImGui.CalcTextSize(text);
-			drawList.AddText(new Vector2(x, origin.Y + ((height - textSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), text);
+			var text = M3Navigation.Truncate(Loc.T(tagline), origin.X + width - x);
+			var textSize = ImGui.CalcTextSize(Loc.T(text));
+			drawList.AddText(new Vector2(x, origin.Y + ((height - textSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T(text));
 		}
 	}
 
@@ -433,7 +434,7 @@ internal sealed class UpdateNotesWindow : Window
 		var s = M3.Scheme;
 		var isNew = IsNew(entry);
 		var highlighted = isNew || index == 0;
-		var title = string.IsNullOrEmpty(entry.Title) ? entry.DisplayVersion : $"{entry.DisplayVersion} - {entry.Title}";
+		var title = string.IsNullOrEmpty(entry.Title) ? entry.DisplayVersion : $"{entry.DisplayVersion} - {Loc.T(entry.Title)}";
 		var badge = isNew ? "New" : index == 0 ? "Latest" : null;
 
 		using var card = M3ExpandableCard.Begin($"changelog_entry_{index}", title, ref _expanded[index],
@@ -455,7 +456,7 @@ internal sealed class UpdateNotesWindow : Window
 		if (message.Length > 0)
 		{
 			using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f));
-			ImGui.TextUnformatted(message);
+			ImGui.TextUnformatted(Loc.T(message));
 		}
 
 		for (var i = 0; i < entry.Sections.Count; i++)
@@ -513,9 +514,9 @@ internal sealed class UpdateNotesWindow : Window
 
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			var label = M3Navigation.Truncate(title, max.X - x - (12f * scale));
-			var labelSize = ImGui.CalcTextSize(label);
-			drawList.AddText(new Vector2(x, min.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(s.OnSecondaryContainer), label);
+			var label = M3Navigation.Truncate(Loc.T(title), max.X - x - (12f * scale));
+			var labelSize = ImGui.CalcTextSize(Loc.T(label));
+			drawList.AddText(new Vector2(x, min.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(s.OnSecondaryContainer), Loc.T(label));
 		}
 	}
 
@@ -533,7 +534,7 @@ internal sealed class UpdateNotesWindow : Window
 		ImGui.Indent(indent);
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurface, 0.9f)))
 		{
-			ImGui.TextUnformatted(text);
+			ImGui.TextUnformatted(Loc.T(text));
 		}
 
 		ImGui.Unindent(indent);
@@ -598,14 +599,14 @@ internal sealed class UpdateNotesWindow : Window
 		{
 			drawList.AddRectFilled(min, max, M3.U32(s.OnSurface, held ? M3.StatePressed : M3.StateHover), M3.ShapeSmall);
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
-			ImGui.SetTooltip(url);
+			ImGui.SetTooltip(Loc.T(url));
 		}
 
 		var avatar = 26f * scale;
 		var avatarCenter = new Vector2(min.X + (6f * scale) + (avatar * 0.5f), min.Y + (height * 0.5f));
 		drawList.AddCircleFilled(avatarCenter, avatar * 0.5f, M3.U32(s.SecondaryContainer), 24);
 		var initial = Initial(credit.Name);
-		drawList.AddText(avatarCenter - (ImGui.CalcTextSize(initial) * 0.5f), M3.U32(s.OnSecondaryContainer), initial);
+		drawList.AddText(avatarCenter - (ImGui.CalcTextSize(Loc.T(initial)) * 0.5f), M3.U32(s.OnSecondaryContainer), Loc.T(initial));
 
 		var nameX = avatarCenter.X + (avatar * 0.5f) + (12f * scale);
 		var right = max.X - (8f * scale);
@@ -624,9 +625,9 @@ internal sealed class UpdateNotesWindow : Window
 		var roleRoom = right - (nameX + nameSize.X + (16f * scale));
 		if (!string.IsNullOrEmpty(credit.Role) && roleRoom > 24f * scale)
 		{
-			var role = M3Navigation.Truncate(credit.Role, roleRoom);
-			var roleSize = ImGui.CalcTextSize(role);
-			drawList.AddText(new Vector2(right - roleSize.X, min.Y + ((height - roleSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), role);
+			var role = M3Navigation.Truncate(Loc.T(credit.Role), roleRoom);
+			var roleSize = ImGui.CalcTextSize(Loc.T(role));
+			drawList.AddText(new Vector2(right - roleSize.X, min.Y + ((height - roleSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T(role));
 		}
 
 		if (clicked)

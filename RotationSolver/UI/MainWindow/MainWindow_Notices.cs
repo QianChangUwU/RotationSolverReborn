@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using RotationSolver.Data;
@@ -172,7 +173,7 @@ public partial class MainWindow
 		{
 			var supporterIndex = _hintRng.Next(_supporters.Length);
 			var supporter = _supporters[supporterIndex];
-			return $"Special thanks to supporter: {supporter}!";
+			return Loc.F($"Special thanks to supporter: {supporter}!");
 		}
 		if (CNLanguageClient)
 		{
@@ -212,7 +213,7 @@ public partial class MainWindow
 				or Job.MIN or Job.FSH or Job.BTN)
 			{
 				_ = M3Widgets.Banner("##unsupported_job_banner",
-					$"You are on an unsupported class: {Player.Job}. Rotation Solver only drives combat jobs.",
+					Loc.F($"You are on an unsupported class: {Player.Job}. Rotation Solver only drives combat jobs."),
 					M3Severity.Error, FontAwesomeIcon.Hammer);
 				ImGui.Dummy(new Vector2(0f, M3.Space2));
 				drewAnything = true;

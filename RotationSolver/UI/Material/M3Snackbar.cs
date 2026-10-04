@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 
 namespace RotationSolver.UI.Material;
@@ -96,7 +97,7 @@ internal static class M3Snackbar
 		var closeWidth = M3Widgets.IconButtonSize;
 		var trailing = actionWidth + closeWidth + (8f * scale);
 		var textWrap = MathF.Max(32f * scale, maxWidth - padding - trailing);
-		var textSize = ImGui.CalcTextSize(entry.Message, false, textWrap);
+		var textSize = ImGui.CalcTextSize(Loc.T(entry.Message), false, textWrap);
 
 		var width = MathF.Min(maxWidth, MathF.Max(280f * scale, padding + textSize.X + (16f * scale) + trailing));
 		var height = MathF.Max(48f * scale, textSize.Y + (28f * scale));
@@ -166,8 +167,8 @@ internal static class M3Snackbar
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 		}
 
-		var textSize = ImGui.CalcTextSize(label);
-		drawList.AddText(min + ((max - min - textSize) * 0.5f), M3.U32(s.InversePrimary), label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
+		drawList.AddText(min + ((max - min - textSize) * 0.5f), M3.U32(s.InversePrimary), Loc.T(label));
 		return pressed;
 	}
 }

@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
@@ -29,7 +30,7 @@ internal static class ImguiTooltips
 	{
 		if (!string.IsNullOrEmpty(text))
 		{
-			ShowTooltip(() => ImGui.Text(text));
+			ShowTooltip(() => ImGui.Text(Loc.T(text)));
 		}
 	}
 

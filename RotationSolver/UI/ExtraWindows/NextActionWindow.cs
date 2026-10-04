@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
@@ -130,18 +131,18 @@ internal class NextActionWindow : Window
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
 		var time = $"{remain:F2}s / {total:F2}s";
-		var timeSize = ImGui.CalcTextSize(time);
+		var timeSize = ImGui.CalcTextSize(Loc.T(time));
 		ImGui.Dummy(new Vector2(width, timeSize.Y));
 
 		var min = ImGui.GetItemRectMin();
 		var drawList = ImGui.GetWindowDrawList();
-		drawList.AddText(min, M3.U32(s.OnSurfaceVariant, 0.85f), "GCD");
-		drawList.AddText(new Vector2(min.X + width - timeSize.X, min.Y), M3.U32(s.OnSurfaceVariant, 0.85f), time);
+		drawList.AddText(min, M3.U32(s.OnSurfaceVariant, 0.85f), Loc.T("GCD"));
+		drawList.AddText(new Vector2(min.X + width - timeSize.X, min.Y), M3.U32(s.OnSurfaceVariant, 0.85f), Loc.T(time));
 	}
 
 	private static Vector2 KeyCapSize(string keybind)
 	{
-		return ImGui.CalcTextSize(keybind) + (new Vector2(8f, 3f) * M3.Scale * 2f);
+		return ImGui.CalcTextSize(Loc.T(keybind)) + (new Vector2(8f, 3f) * M3.Scale * 2f);
 	}
 
 	private static void DrawKeyCap(string keybind)
@@ -156,8 +157,8 @@ internal class NextActionWindow : Window
 
 		M3Draw.Container(drawList, min, max, s.SurfaceContainerHighest, M3.ShapeExtraSmall, M3.Alpha(s.Outline, 0.7f));
 
-		var textSize = ImGui.CalcTextSize(keybind);
-		drawList.AddText(min + ((size - textSize) * 0.5f), M3.U32(s.OnSurface), keybind);
+		var textSize = ImGui.CalcTextSize(Loc.T(keybind));
+		drawList.AddText(min + ((size - textSize) * 0.5f), M3.U32(s.OnSurface), Loc.T(keybind));
 	}
 
 	private static TargetHint? GetTargetHint(IAction? action)

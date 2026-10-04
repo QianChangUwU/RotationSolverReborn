@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 
 namespace RotationSolver.UI.Material;
@@ -128,9 +129,9 @@ internal static class M3Draw
 	{
 		using var font = ImRaii.PushFont(UiBuilder.IconFont);
 		var text = icon.ToIconString();
-		var size = ImGui.CalcTextSize(text) * scale;
+		var size = ImGui.CalcTextSize(Loc.T(text)) * scale;
 		var position = min + (((max - min) - size) * 0.5f);
-		drawList.AddText(UiBuilder.IconFont, ImGui.GetFontSize() * scale, position, M3.U32(color), text);
+		drawList.AddText(UiBuilder.IconFont, ImGui.GetFontSize() * scale, position, M3.U32(color), Loc.T(text));
 	}
 
 	public static float WrappedText(string text, Vector2 position, float wrapWidth, Vector4 color)
@@ -139,7 +140,7 @@ internal static class M3Draw
 		using (ImRaii.PushColor(ImGuiCol.Text, color))
 		{
 			ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + wrapWidth);
-			ImGui.TextUnformatted(text);
+			ImGui.TextUnformatted(Loc.T(text));
 			ImGui.PopTextWrapPos();
 		}
 

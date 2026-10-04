@@ -1,4 +1,4 @@
-﻿using Dalamud.Interface.Colors;
+using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
@@ -56,7 +56,7 @@ internal class EasterEggWindow : Window
 				ImGui.PushID(i);
 
 				Vector2 buttonSize = new(size, size);
-				var clicked = ImGui.Button(RenderCell(_board[i]), buttonSize);
+				var clicked = ImGui.Button(Loc.Label(RenderCell(_board[i])), buttonSize);
 				if (ImGui.IsItemHovered())
 				{
 					ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
@@ -103,7 +103,7 @@ internal class EasterEggWindow : Window
 
 		using (var __ = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudYellow))
 		{
-			ImGui.TextWrapped(_status);
+			ImGui.TextWrapped(Loc.T(_status));
 		}
 		ImGui.Spacing();
 
@@ -124,7 +124,7 @@ internal class EasterEggWindow : Window
 		{
 			Cell.X => "X",
 			Cell.O => "O",
-			_ => " ",
+			_ => Loc.T(" "),
 		};
 	}
 

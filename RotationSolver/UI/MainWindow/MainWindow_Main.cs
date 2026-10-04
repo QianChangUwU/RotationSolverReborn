@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.Logging;
@@ -19,14 +20,14 @@ public partial class MainWindow
 			using (ImRaii.PushFont(M3.TitleLarge))
 			using (ImRaii.PushColor(ImGuiCol.Text, scheme.Primary))
 			{
-				ImGui.TextWrapped(UiString.ConfigWindow_About_Punchline.GetDescription());
+				ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_About_Punchline.GetDescription()));
 			}
 
 			ImGui.Dummy(new Vector2(0f, M3.Space2));
 
 			using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(scheme.OnSurfaceVariant, 0.95f)))
 			{
-				ImGui.TextWrapped(UiString.ConfigWindow_About_Description.GetDescription());
+				ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_About_Description.GetDescription()));
 			}
 
 			ImGui.Dummy(new Vector2(0f, M3.Space3));
@@ -111,12 +112,12 @@ public partial class MainWindow
 		if (_supporters == null || _supporters.Length == 0)
 		{
 			ImGui.Dummy(new Vector2(0f, M3.Space2));
-			ImGui.TextWrapped("No supporters to display yet. Thank you for checking!");
+			ImGui.TextWrapped(Loc.T("No supporters to display yet. Thank you for checking!"));
 			return;
 		}
 
 		M3Widgets.SectionLabel(
-			$"Special thanks to the {_supporters.Length} supporters, including those not listed here",
+			Loc.F($"Special thanks to the {_supporters.Length} supporters, including those not listed here"),
 			M3.Scheme.Tertiary);
 
 		var names = new List<string>(_supporters);
@@ -224,14 +225,14 @@ public partial class MainWindow
 				OpenLinkSafely(item.Url);
 			}
 
-			ImguiTooltips.HoveredTooltip($"Open {item.Name}");
+			ImguiTooltips.HoveredTooltip(Loc.F($"Open {item.Name}"));
 
 			ImGui.SameLine(0f, M3.Space3);
 			ImGui.BeginGroup();
 
 			using (ImRaii.PushFont(M3.TitleMedium))
 			{
-				ImGui.TextUnformatted(item.Name ?? "Unnamed plugin");
+				ImGui.TextUnformatted(Loc.T(item.Name ?? "Unnamed plugin"));
 			}
 
 			ImGui.SameLine(0f, M3.Space2);
@@ -245,7 +246,7 @@ public partial class MainWindow
 			{
 				using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(scheme.OnSurfaceVariant, 0.9f)))
 				{
-					ImGui.TextWrapped(item.Features);
+					ImGui.TextWrapped(Loc.T(item.Features));
 				}
 			}
 

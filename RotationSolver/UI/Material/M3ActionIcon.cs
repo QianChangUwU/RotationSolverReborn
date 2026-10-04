@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 
 namespace RotationSolver.UI.Material;
@@ -113,10 +114,10 @@ internal static class M3ActionIcon
 			}
 
 			var text = recast <= 0f ? "0" : ((int)(recast - elapsed) + 1).ToString();
-			var textSize = ImGui.CalcTextSize(text);
+			var textSize = ImGui.CalcTextSize(Loc.T(text));
 			var textPosition = center - (textSize * 0.5f);
-			drawList.AddText(textPosition + (new Vector2(1f, 1f) * scale), M3.U32(s.Scrim, 0.8f), text);
-			drawList.AddText(textPosition, M3.U32(s.OnSurface), text);
+			drawList.AddText(textPosition + (new Vector2(1f, 1f) * scale), M3.U32(s.Scrim, 0.8f), Loc.T(text));
+			drawList.AddText(textPosition, M3.U32(s.OnSurface), Loc.T(text));
 		}
 
 		if (cooldown.MaxCharges > 1)

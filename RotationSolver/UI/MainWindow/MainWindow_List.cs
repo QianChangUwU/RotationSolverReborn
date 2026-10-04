@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
@@ -112,7 +113,7 @@ public partial class MainWindow
 	private static void DrawListStatuses()
 	{
 		ImGui.SetNextItemWidth(ImGui.GetWindowWidth());
-		_ = ImGui.InputTextWithHint("##Searching the action", UiString.ConfigWindow_List_StatusNameOrId.GetDescription(), ref _statusSearching, 50);
+		_ = ImGui.InputTextWithHint("##Searching the action", Loc.T(UiString.ConfigWindow_List_StatusNameOrId.GetDescription()), ref _statusSearching, 50);
 
 		using var table = ImRaii.Table("Rotation Solver List Statuses", 4, ImGuiTableFlags.BordersInner | ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingStretchSame);
 		if (table)
@@ -121,28 +122,28 @@ public partial class MainWindow
 			ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update Invuln Status List"))
+			if (ImGui.Button(Loc.Label("Reset and Update Invuln Status List")))
 			{
 				OtherConfiguration.ResetInvincibleStatus();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_Invincibility.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update Priority Status List"))
+			if (ImGui.Button(Loc.Label("Reset and Update Priority Status List")))
 			{
 				OtherConfiguration.ResetPriorityStatus();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_Priority.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update Dispell Debuff List"))
+			if (ImGui.Button(Loc.Label("Reset and Update Dispell Debuff List")))
 			{
 				OtherConfiguration.ResetDangerousStatus();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_DangerousStatus.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update No Casting Status List"))
+			if (ImGui.Button(Loc.Label("Reset and Update No Casting Status List")))
 			{
 				OtherConfiguration.ResetNoCastingStatus();
 			}
@@ -151,19 +152,19 @@ public partial class MainWindow
 			ImGui.TableNextRow();
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_InvincibilityDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_InvincibilityDesc.GetDescription()));
 			DrawStatusList(nameof(OtherConfiguration.InvincibleStatus), OtherConfiguration.InvincibleStatus, AllStatus);
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_PriorityDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_PriorityDesc.GetDescription()));
 			DrawStatusList(nameof(OtherConfiguration.PriorityStatus), OtherConfiguration.PriorityStatus, AllStatus);
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_DangerousStatusDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_DangerousStatusDesc.GetDescription()));
 			DrawStatusList(nameof(OtherConfiguration.DangerousStatus), OtherConfiguration.DangerousStatus, AllDispelStatus);
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_NoCastingStatusDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_NoCastingStatusDesc.GetDescription()));
 			DrawStatusList(nameof(OtherConfiguration.NoCastingStatus), OtherConfiguration.NoCastingStatus, BadStatus);
 		}
 	}
@@ -173,7 +174,7 @@ public partial class MainWindow
 		const string CopyErrorMessage = "Failed to copy the values to the clipboard.";
 		const string PasteErrorMessage = "Failed to copy the values from the clipboard.";
 
-		if (ImGui.Button(UiString.ConfigWindow_Actions_Copy.GetDescription()))
+		if (ImGui.Button(Loc.Label(UiString.ConfigWindow_Actions_Copy.GetDescription())))
 		{
 			try
 			{
@@ -187,7 +188,7 @@ public partial class MainWindow
 
 		ImGui.SameLine();
 
-		if (ImGui.Button(UiString.ActionSequencer_FromClipboard.GetDescription()))
+		if (ImGui.Button(Loc.Label(UiString.ActionSequencer_FromClipboard.GetDescription())))
 		{
 			try
 			{
@@ -240,7 +241,7 @@ public partial class MainWindow
 		{
 			ImGui.SameLine();
 		}
-		if (ImGui.Button("+", new Vector2(IconWidth, IconHeight) * Scale))
+		if (ImGui.Button(Loc.Label("+"), new Vector2(IconWidth, IconHeight) * Scale))
 		{
 			if (!ImGui.IsPopupOpen(popupId))
 			{
@@ -301,7 +302,7 @@ public partial class MainWindow
 		if (popup)
 		{
 			ImGui.SetNextItemWidth(InputWidth * Scale);
-			_ = ImGui.InputTextWithHint("##Searching the status", "Enter status name/number", ref searching, InputTextLength);
+			_ = ImGui.InputTextWithHint("##Searching the status", Loc.T("Enter status name/number"), ref searching, InputTextLength);
 
 			ImGui.Spacing();
 
@@ -339,7 +340,7 @@ public partial class MainWindow
 				var filtered = _statusPopupResults;
 				if (filtered.Count == 0)
 				{
-					ImGui.TextColored(ImGuiColors.DalamudRed, "No matching statuses found.");
+					ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("No matching statuses found."));
 					return;
 				}
 
@@ -367,7 +368,7 @@ public partial class MainWindow
 	private static void DrawListActions()
 	{
 		ImGui.SetNextItemWidth(ImGui.GetWindowWidth());
-		_ = ImGui.InputTextWithHint("##Searching the action", UiString.ConfigWindow_List_ActionNameOrId.GetDescription(), ref _actionSearching, 50);
+		_ = ImGui.InputTextWithHint("##Searching the action", Loc.T(UiString.ConfigWindow_List_ActionNameOrId.GetDescription()), ref _actionSearching, 50);
 
 		using var table = ImRaii.Table("Rotation Solver List Actions", 4, ImGuiTableFlags.BordersInner | ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingStretchSame);
 		if (table)
@@ -376,28 +377,28 @@ public partial class MainWindow
 			ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update Tankbuster List"))
+			if (ImGui.Button(Loc.Label("Reset and Update Tankbuster List")))
 			{
 				OtherConfiguration.ResetHostileCastingTank();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingTank.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update AOE List"))
+			if (ImGui.Button(Loc.Label("Reset and Update AOE List")))
 			{
 				OtherConfiguration.ResetHostileCastingArea();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingArea.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Update Knockback List"))
+			if (ImGui.Button(Loc.Label("Reset and Update Knockback List")))
 			{
 				OtherConfiguration.ResetHostileCastingKnockback();
 			}
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingKnockback.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset and Stop Casting List"))
+			if (ImGui.Button(Loc.Label("Reset and Stop Casting List")))
 			{
 				OtherConfiguration.ResetHostileCastingStop();
 			}
@@ -406,22 +407,22 @@ public partial class MainWindow
 			ImGui.TableNextRow();
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_HostileCastingTankDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_HostileCastingTankDesc.GetDescription()));
 			DrawActionsList(nameof(OtherConfiguration.HostileCastingTank), OtherConfiguration.HostileCastingTank);
 
 			_ = ImGui.TableNextColumn();
 			_allSearchable.DrawItems(Configs.List);
-			ImGui.TextWrapped(UiString.ConfigWindow_List_HostileCastingAreaDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_HostileCastingAreaDesc.GetDescription()));
 			DrawActionsList(nameof(OtherConfiguration.HostileCastingArea), OtherConfiguration.HostileCastingArea);
 
 			_ = ImGui.TableNextColumn();
 			_allSearchable.DrawItems(Configs.List2);
-			ImGui.TextWrapped(UiString.ConfigWindow_List_HostileCastingKnockbackDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_HostileCastingKnockbackDesc.GetDescription()));
 			DrawActionsList(nameof(OtherConfiguration.HostileCastingKnockback), OtherConfiguration.HostileCastingKnockback);
 
 			_ = ImGui.TableNextColumn();
 			_allSearchable.DrawItems(Configs.List3);
-			ImGui.TextWrapped(UiString.ConfigWindow_List_HostileCastingStopDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_HostileCastingStopDesc.GetDescription()));
 			DrawActionsList(nameof(OtherConfiguration.HostileCastingStop), OtherConfiguration.HostileCastingStop);
 		}
 	}
@@ -442,7 +443,7 @@ public partial class MainWindow
 		uint removeId = 0;
 		var popupId = $"Rotation Solver Reborn Action Popup{name}";
 
-		if (ImGui.Button($"{UiString.ConfigWindow_List_AddAction.GetDescription()}##{name}"))
+		if (ImGui.Button(Loc.Label($"{UiString.ConfigWindow_List_AddAction.GetDescription()}##{name}")))
 		{
 			if (!ImGui.IsPopupOpen(popupId))
 			{
@@ -490,7 +491,7 @@ public partial class MainWindow
 
 			ImGuiHelper.DrawHotKeysPopup(key, string.Empty, (UiString.ConfigWindow_List_Remove.GetDescription(), Reset, ImGuiHelper.DeleteHint));
 
-			_ = ImGui.Selectable($"{action.Name} ({action.RowId})");
+			_ = ImGui.Selectable(Loc.Label($"{action.Name} ({action.RowId})"));
 
 			ImGuiHelper.ExecuteHotKeysPopup(key, string.Empty, string.Empty, false, (Reset, new[] { VirtualKey.DELETE }));
 		}
@@ -516,7 +517,7 @@ public partial class MainWindow
 		if (popup)
 		{
 			ImGui.SetNextItemWidth(InputWidth * Scale);
-			_ = ImGui.InputTextWithHint("##Searching the action pop up", UiString.ConfigWindow_List_ActionNameOrId.GetDescription(), ref _actionPopupSearching, 50);
+			_ = ImGui.InputTextWithHint("##Searching the action pop up", Loc.T(UiString.ConfigWindow_List_ActionNameOrId.GetDescription()), ref _actionPopupSearching, 50);
 
 			ImGui.Spacing();
 
@@ -525,7 +526,7 @@ public partial class MainWindow
 			{
 				if (string.IsNullOrWhiteSpace(_actionPopupSearching))
 				{
-					ImGui.TextColored(ImGuiColors.DalamudYellow, "Enter a search term to filter actions.");
+					ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T("Enter a search term to filter actions."));
 					if (!string.IsNullOrEmpty(_lastActionPopupSearching))
 					{
 						_lastActionPopupSearching = string.Empty;
@@ -579,7 +580,7 @@ public partial class MainWindow
 					for (var i = 0; i < _cachedPopupFiltered.Count && shown < MaxDisplayCount; i++)
 					{
 						var action = _cachedPopupFiltered[i].action;
-						var selected = ImGui.Selectable($"{action.Name} ({action.RowId})");
+						var selected = ImGui.Selectable(Loc.Label($"{action.Name} ({action.RowId})"));
 						if (ImGui.IsItemHovered())
 						{
 							ImguiTooltips.ShowTooltip($"{action.Name} ({action.RowId})");
@@ -595,7 +596,7 @@ public partial class MainWindow
 
 					if (shown == 0)
 					{
-						ImGui.TextColored(ImGuiColors.DalamudRed, "No matching actions found.");
+						ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("No matching actions found."));
 					}
 				}
 			}
@@ -628,7 +629,7 @@ public partial class MainWindow
 			ImGui.TableNextRow();
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_NoHostileDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_NoHostileDesc.GetDescription()));
 			var width = ImGui.GetColumnWidth() - ImGuiEx.CalcIconSize(FontAwesomeIcon.Ban).X - ImGui.GetStyle().ItemSpacing.X - (10 * Scale);
 
 			if (!OtherConfiguration.NoHostileNames.TryGetValue(territoryId, out var libs))
@@ -662,7 +663,7 @@ public partial class MainWindow
 			{
 				ImGui.SetNextItemWidth(width);
 				if (ImGui.InputTextWithHint($"##Rotation Solver Territory Target Name {i}",
-					UiString.ConfigWindow_List_NoHostilesName.GetDescription(), ref libs[i], 1024))
+					Loc.T(UiString.ConfigWindow_List_NoHostilesName.GetDescription()), ref libs[i], 1024))
 				{
 					OtherConfiguration.NoHostileNames[territoryId] = libs;
 					_ = OtherConfiguration.SaveNoHostileNames();
@@ -690,7 +691,7 @@ public partial class MainWindow
 			}
 
 			_ = ImGui.TableNextColumn();
-			ImGui.TextWrapped(UiString.ConfigWindow_List_NoProvokeDesc.GetDescription());
+			ImGui.TextWrapped(Loc.T(UiString.ConfigWindow_List_NoProvokeDesc.GetDescription()));
 
 			width = ImGui.GetColumnWidth() - ImGuiEx.CalcIconSize(FontAwesomeIcon.Ban).X
 				- ImGui.GetStyle().ItemSpacing.X - (10 * Scale);
@@ -723,7 +724,7 @@ public partial class MainWindow
 			{
 				ImGui.SetNextItemWidth(width);
 				if (ImGui.InputTextWithHint($"##Rotation Solver Reborn Territory Provoke Name {i}",
-					UiString.ConfigWindow_List_NoProvokeName.GetDescription(), ref libs[i], 1024))
+					Loc.T(UiString.ConfigWindow_List_NoProvokeName.GetDescription()), ref libs[i], 1024))
 				{
 					OtherConfiguration.NoProvokeNames[territoryId] = libs;
 					_ = OtherConfiguration.SaveNoProvokeNames();
@@ -756,7 +757,7 @@ public partial class MainWindow
 				OtherConfiguration.BeneficialPositions[territoryId] = pts = [];
 			}
 
-			if (ImGui.Button(UiString.ConfigWindow_List_AddPosition.GetDescription()) && Player.Object != null && Player.Available)
+			if (ImGui.Button(Loc.Label(UiString.ConfigWindow_List_AddPosition.GetDescription())) && Player.Object != null && Player.Available)
 			{
 				unsafe
 				{
@@ -792,10 +793,10 @@ public partial class MainWindow
 			for (var i = 0; i < pts.Length; i++)
 			{
 				void Reset() => removePosIndex = i;
-				var key = "Beneficial Positions" + i.ToString();
+				var key = Loc.T("Beneficial Positions") + i.ToString();
 				ImGuiHelper.DrawHotKeysPopup(key, string.Empty,
 					(UiString.ConfigWindow_List_Remove.GetDescription(), Reset, ["Delete"]));
-				_ = ImGui.Selectable(pts[i].ToString());
+				_ = ImGui.Selectable(Loc.Label(pts[i].ToString()));
 
 				ImGuiHelper.ExecuteHotKeysPopup(key, string.Empty, string.Empty, false,
 					(Reset, [VirtualKey.DELETE]));

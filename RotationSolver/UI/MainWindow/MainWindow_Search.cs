@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Data;
 using RotationSolver.UI.Material;
@@ -38,7 +39,7 @@ public partial class MainWindow
 			if (searchable is Searchable target && !string.IsNullOrEmpty(path))
 			{
 				if (M3SettingRow.NavigationRow($"##jump_{target.ID}_{target.GetHashCode()}",
-					$"Open {path}", null, FontAwesomeIcon.ExternalLinkAlt, FontAwesomeIcon.ChevronRight,
+					Loc.F($"Open {path}"), null, FontAwesomeIcon.ExternalLinkAlt, FontAwesomeIcon.ChevronRight,
 					M3.Scheme.Tertiary))
 				{
 					NavigateToFilter(target.Filter);
@@ -100,8 +101,8 @@ public partial class MainWindow
 		}
 
 		return location.Section is { } section
-			? $"{location.Tab} > {section.GetDescription()}"
-			: location.Tab.ToString();
+			? $"{(Loc.IsChinese ? location.Tab.CNString() : location.Tab.ToString())} > {section.GetDescription()}"
+			: Loc.IsChinese ? location.Tab.CNString() : location.Tab.ToString();
 	}
 
 	private void NavigateToFilter(string filter)

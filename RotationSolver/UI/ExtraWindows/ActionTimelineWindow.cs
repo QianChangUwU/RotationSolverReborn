@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
@@ -132,7 +133,7 @@ internal class ActionTimelineWindow : Window
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
 			labelHeight = ImGui.GetTextLineHeight();
-			labelWidth = ImGui.CalcTextSize("-00s").X;
+			labelWidth = ImGui.CalcTextSize(Loc.T("-00s")).X;
 		}
 
 		var gcdTop = origin.Y;
@@ -465,10 +466,10 @@ internal class ActionTimelineWindow : Window
 			drawList.AddLine(new Vector2(x, top), new Vector2(x, linesBottom), lineColor, thickness);
 
 			var label = AxisLabel(seconds);
-			var labelX = x - (ImGui.CalcTextSize(label).X * 0.5f);
+			var labelX = x - (ImGui.CalcTextSize(Loc.T(label)).X * 0.5f);
 			if (labelX >= axis.Left)
 			{
-				drawList.AddText(new Vector2(labelX, labelTop), labelColor, label);
+				drawList.AddText(new Vector2(labelX, labelTop), labelColor, Loc.T(label));
 			}
 		}
 	}
@@ -491,14 +492,14 @@ internal class ActionTimelineWindow : Window
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
 		const string label = "now";
-		var labelWidth = ImGui.CalcTextSize(label).X;
+		var labelWidth = ImGui.CalcTextSize(Loc.T(label)).X;
 		var labelX = MathF.Min(axis.NowX - (labelWidth * 0.5f), axis.Right - labelWidth);
-		drawList.AddText(new Vector2(labelX, labelTop), color, label);
+		drawList.AddText(new Vector2(labelX, labelTop), color, Loc.T(label));
 	}
 
 	private static void DrawEmpty(ImDrawListPtr drawList, in Axis axis, float top, float bottom)
 	{
-		var size = ImGui.CalcTextSize(EmptyText);
+		var size = ImGui.CalcTextSize(Loc.T(EmptyText));
 		var room = axis.NowX - axis.Left - (M3.Space3 * 2f);
 		if (size.X > room)
 		{
@@ -506,7 +507,7 @@ internal class ActionTimelineWindow : Window
 		}
 
 		var position = new Vector2(((axis.Left + axis.NowX) - size.X) * 0.5f, ((top + bottom) - size.Y) * 0.5f);
-		drawList.AddText(position, M3.U32(M3.Scheme.OnSurfaceVariant, 0.7f), EmptyText);
+		drawList.AddText(position, M3.U32(M3.Scheme.OnSurfaceVariant, 0.7f), Loc.T(EmptyText));
 	}
 
 	#endregion
@@ -515,13 +516,13 @@ internal class ActionTimelineWindow : Window
 
 	private static void DrawTooltip(TimelineItem item, DateTime now)
 	{
-		ImGui.TextUnformatted(string.IsNullOrEmpty(item.Name) ? "Unknown action" : item.Name);
+		ImGui.TextUnformatted(Loc.T(string.IsNullOrEmpty(item.Name) ? "Unknown action" : item.Name));
 
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant);
-		ImGui.TextUnformatted(Describe(item));
-		ImGui.TextUnformatted(item.State == TimelineItemState.Casting
+		ImGui.TextUnformatted(Loc.T(Describe(item)));
+		ImGui.TextUnformatted(Loc.T(item.State == TimelineItemState.Casting
 			? "Casting now"
-			: $"{(now - item.StartTime).TotalSeconds:F1}s ago");
+			: Loc.F($"{(now - item.StartTime).TotalSeconds:F1}s ago")));
 	}
 
 	private static string Describe(TimelineItem item)
@@ -530,28 +531,28 @@ internal class ActionTimelineWindow : Window
 		{
 			TimelineItemType.GCD => "GCD",
 			TimelineItemType.OGCD => "oGCD",
-			_ => "Auto-attack",
+			_ => Loc.T("Auto-attack"),
 		};
 
 		if (item.State == TimelineItemState.Canceled)
 		{
-			text += $" - Cancelled after {item.CastingTime:F2}s";
+			text += Loc.F($" - Cancelled after {item.CastingTime:F2}s");
 			return text;
 		}
 
 		if (item.CastingTime > 0f)
 		{
-			text += $" - Cast {item.CastingTime:F2}s";
+			text += Loc.F($" - Cast {item.CastingTime:F2}s");
 		}
 
 		if (item.GCDTime > 0f)
 		{
-			text += $" - Recast {item.GCDTime:F2}s";
+			text += Loc.F($" - Recast {item.GCDTime:F2}s");
 		}
 
 		if (item.AnimationLockTime > 0f)
 		{
-			text += $" - Lock {item.AnimationLockTime:F2}s";
+			text += Loc.F($" - Lock {item.AnimationLockTime:F2}s");
 		}
 
 		return text;

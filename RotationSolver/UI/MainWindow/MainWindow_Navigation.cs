@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
@@ -140,18 +141,18 @@ public partial class MainWindow
 				var _ when DataCenter.IsInBozja => "副本 - 博兹雅",
 				var _ when DataCenter.IsInMonsterHunterDuty => "副本 - 怪猎联动",
 				var _ when DataCenter.Orbonne => "Duty - 瓯博讷修道院",
-				_ => "Duty",
+				_ => Loc.T("Duty"),
 			};
 		}
 
 		return true switch
 		{
-			var _ when DataCenter.IsInOccultCrescentOp => $"Duty - {DutyRotation.ActivePhantomJob}",
-			var _ when DataCenter.InVariantDungeon => "Duty - Variant",
-			var _ when DataCenter.IsInBozja => "Duty - Bozja",
-			var _ when DataCenter.IsInMonsterHunterDuty => "Duty - Monster Hunter",
-			var _ when DataCenter.Orbonne => "Duty - Orbonne Monastery",
-			_ => "Duty",
+			var _ when DataCenter.IsInOccultCrescentOp => Loc.F($"Duty - {DutyRotation.ActivePhantomJob}"),
+			var _ when DataCenter.InVariantDungeon => Loc.T("Duty - Variant"),
+			var _ when DataCenter.IsInBozja => Loc.T("Duty - Bozja"),
+			var _ when DataCenter.IsInMonsterHunterDuty => Loc.T("Duty - Monster Hunter"),
+			var _ when DataCenter.Orbonne => Loc.T("Duty - Orbonne Monastery"),
+			_ => Loc.T("Duty"),
 		};
 	}
 
@@ -249,7 +250,7 @@ public partial class MainWindow
 		var padding = 10f * Scale;
 		var nameGap = 6f * Scale;
 		var nameWidth = MathF.Max(16f * Scale, wholeWidth - (padding * 2f));
-		var nameSize = ImGui.CalcTextSize(rotationName);
+		var nameSize = ImGui.CalcTextSize(Loc.T(rotationName));
 		var height = (padding * 2f) + iconExtent + nameGap + nameSize.Y;
 
 		var pressed = ImGui.InvisibleButton("##rsr_rotation_card", new Vector2(wholeWidth, height));
@@ -287,28 +288,28 @@ public partial class MainWindow
 			}
 		}
 
-		var displayName = M3Navigation.Truncate(rotationName, nameWidth);
-		var displaySize = ImGui.CalcTextSize(displayName);
+		var displayName = M3Navigation.Truncate(Loc.T(rotationName), nameWidth);
+		var displaySize = ImGui.CalcTextSize(Loc.T(displayName));
 		drawList.AddText(
 			new Vector2(min.X + ((wholeWidth - displaySize.X) * 0.5f), iconMin.Y + iconExtent + nameGap),
 			M3.U32(rotation.IsExtra() ? scheme.Tertiary : scheme.Primary, 0.98f),
-			displayName);
+			Loc.T(displayName));
 
 		if (hovered)
 		{
 			ImguiTooltips.ShowTooltip(() =>
 			{
-				ImGui.TextColored(rotation.GetColor(), $"{rotation.Name ?? string.Empty} ({attribute.Name ?? string.Empty})");
+				ImGui.TextColored(rotation.GetColor(), Loc.T($"{rotation.Name ?? string.Empty} ({attribute.Name ?? string.Empty})"));
 				attribute.Type.Draw();
 
 				if (!string.IsNullOrEmpty(rotation.Description))
 				{
-					ImGui.TextWrapped(rotation.Description);
+					ImGui.TextWrapped(Loc.T(rotation.Description));
 				}
 
 				ImGui.Separator();
-				ImGui.TextDisabled($"Game version: {attribute.GameVersion}");
-				ImGui.TextDisabled("Right-click to pick a different rotation.");
+				ImGui.TextDisabled(Loc.F($"Game version: {attribute.GameVersion}"));
+				ImGui.TextDisabled(Loc.T("Right-click to pick a different rotation."));
 			});
 		}
 
@@ -365,7 +366,7 @@ public partial class MainWindow
 
 		using var wrap = ImRaii.TextWrapPos(ImGui.GetCursorPosX() + wholeWidth);
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.Error);
-		ImGui.TextWrapped(text);
+		ImGui.TextWrapped(Loc.T(text));
 		ImguiTooltips.HoveredTooltip("Please update your rotations!");
 	}
 
@@ -382,7 +383,7 @@ public partial class MainWindow
 		using (ImRaii.PushFont(M3.LabelSmall))
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant))
 		{
-			ImGui.TextUnformatted(UiString.ConfigWindow_Helper_SwitchRotation.GetDescription().ToUpperInvariant());
+			ImGui.TextUnformatted(Loc.T(UiString.ConfigWindow_Helper_SwitchRotation.GetDescription().ToUpperInvariant()));
 		}
 
 		ImGui.Dummy(new Vector2(0f, M3.Space1));
@@ -470,7 +471,7 @@ public partial class MainWindow
 		if (M3Widgets.Pill("##diag_pill", label, accent, FontAwesomeIcon.Cube, _diagInfoText, interactive: true))
 		{
 			ImGui.SetClipboardText(BuildDiagnosticInfo(out _));
-			M3Snackbar.Show(CNLanguageClient ? "诊断信息已复制到剪贴板" : "Diagnostic info copied to clipboard");
+			M3Snackbar.Show(Loc.T(CNLanguageClient ? "诊断信息已复制到剪贴板" : "Diagnostic info copied to clipboard"));
 		}
 
 		if (OtherConfiguration.RotationSolverRecord.TicTacToeWinStar == true)
@@ -513,15 +514,15 @@ public partial class MainWindow
 			_ = diagInfo.AppendLine($"Player Level: {DataCenter.PlayerSyncedLevel()}");
 			_ = diagInfo.AppendLine($"Rotation Name: {_curRotationAttribute?.Name ?? string.Empty}");
 			_ = diagInfo.AppendLine($"Player Job: {Player.Job}");
-			_ = diagInfo.AppendLine($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}");
+			_ = diagInfo.AppendLine(Loc.F($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}"));
 			var moveModeValue = DataCenter.MoveModeSetting();
 			var moveModeText = moveModeValue switch
 			{
-				0 => "Standard",
-				1 => "Legacy",
+				0 => Loc.T("Standard"),
+				1 => Loc.T("Legacy"),
 				_ => moveModeValue.ToString()
 			};
-			_ = diagInfo.AppendLine($"MoveModeSetting: {moveModeText}");
+			_ = diagInfo.AppendLine(Loc.F($"MoveModeSetting: {moveModeText}"));
 		}
 
 		var lastFrame = ActionTracer.LastFrameSummary;
@@ -547,10 +548,10 @@ public partial class MainWindow
 
 				if (!string.IsNullOrEmpty(item.Name) && item.Name.Contains("Combo"))
 				{
-					BasicWarningHelper.AddSystemWarning($"Disable {item.Name}");
+					BasicWarningHelper.AddSystemWarning(Loc.F($"Disable {item.Name}"));
 				}
 
-				_ = diagInfo.AppendLine($"{name}");
+				_ = diagInfo.AppendLine(Loc.F($"{name}"));
 			}
 		}
 

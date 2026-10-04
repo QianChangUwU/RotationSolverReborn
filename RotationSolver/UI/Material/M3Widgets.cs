@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 
@@ -209,7 +210,7 @@ internal static class M3Widgets
 		for (var i = 0; i < options.Count; i++)
 		{
 			var selected = i == selectedIndex;
-			var textSize = ImGui.CalcTextSize(options[i]);
+			var textSize = ImGui.CalcTextSize(Loc.T(options[i]));
 			var width = radio.X + labelGap + textSize.X + (12f * scale);
 
 			if (horizontal && i > 0)
@@ -232,7 +233,7 @@ internal static class M3Widgets
 			DrawRadio(drawList, center, radio.X, progress, selected, hovered, held, enabled);
 
 			drawList.AddText(new Vector2(min.X + radio.X + labelGap, min.Y + ((height - textSize.Y) * 0.5f)),
-				M3.U32(s.OnSurface, enabled ? 0.95f : M3.DisabledContent), options[i]);
+				M3.U32(s.OnSurface, enabled ? 0.95f : M3.DisabledContent), Loc.T(options[i]));
 
 			if (hovered)
 			{
@@ -280,7 +281,7 @@ internal static class M3Widgets
 
 		if (!string.IsNullOrEmpty(label))
 		{
-			width += ImGui.CalcTextSize(label).X;
+			width += ImGui.CalcTextSize(Loc.T(label)).X;
 		}
 
 		return MathF.Max(width, 64f * scale);
@@ -327,7 +328,7 @@ internal static class M3Widgets
 
 		var iconWidth = icon == FontAwesomeIcon.None ? 0f : M3Draw.MeasureIcon(icon).X;
 		var gap = icon == FontAwesomeIcon.None || string.IsNullOrEmpty(label) ? 0f : 8f * scale;
-		var textSize = string.IsNullOrEmpty(label) ? Vector2.Zero : ImGui.CalcTextSize(label);
+		var textSize = string.IsNullOrEmpty(label) ? Vector2.Zero : ImGui.CalcTextSize(Loc.T(label));
 		var contentWidth = iconWidth + gap + textSize.X;
 		var cursorX = min.X + ((size.X - contentWidth) * 0.5f);
 
@@ -336,9 +337,9 @@ internal static class M3Widgets
 			using (ImRaii.PushFont(UiBuilder.IconFont))
 			{
 				var glyph = icon.ToIconString();
-				var glyphSize = ImGui.CalcTextSize(glyph);
+				var glyphSize = ImGui.CalcTextSize(Loc.T(glyph));
 				drawList.AddText(UiBuilder.IconFont, ImGui.GetFontSize(),
-					new Vector2(cursorX, min.Y + ((height - glyphSize.Y) * 0.5f)), M3.U32(content), glyph);
+					new Vector2(cursorX, min.Y + ((height - glyphSize.Y) * 0.5f)), M3.U32(content), Loc.T(glyph));
 			}
 
 			cursorX += iconWidth + gap;
@@ -346,13 +347,13 @@ internal static class M3Widgets
 
 		if (!string.IsNullOrEmpty(label))
 		{
-			drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), label);
+			drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), Loc.T(label));
 		}
 
 		if (hovered && !string.IsNullOrEmpty(tooltip))
 		{
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
-			ImGui.SetTooltip(tooltip);
+			ImGui.SetTooltip(Loc.T(tooltip));
 		}
 		else if (hovered)
 		{
@@ -413,7 +414,7 @@ internal static class M3Widgets
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 			if (!string.IsNullOrEmpty(tooltip))
 			{
-				ImGui.SetTooltip(tooltip);
+				ImGui.SetTooltip(Loc.T(tooltip));
 			}
 		}
 
@@ -474,7 +475,7 @@ internal static class M3Widgets
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 			if (!string.IsNullOrEmpty(tooltip))
 			{
-				ImGui.SetTooltip(tooltip);
+				ImGui.SetTooltip(Loc.T(tooltip));
 			}
 		}
 
@@ -608,7 +609,7 @@ internal static class M3Widgets
 	{
 		var scale = M3.Scale;
 		using var font = ImRaii.PushFont(M3.TitleMedium);
-		return (6f * scale) + WindowBrandLogoSize + (8f * scale) + ImGui.CalcTextSize(brand.Label).X + (4f * scale);
+		return (6f * scale) + WindowBrandLogoSize + (8f * scale) + ImGui.CalcTextSize(Loc.T(brand.Label)).X + (4f * scale);
 	}
 
 	private static void DrawWindowBrand(ImDrawListPtr drawList, in M3WindowBrand brand, Vector2 origin, float height)
@@ -631,8 +632,8 @@ internal static class M3Widgets
 		}
 
 		using var font = ImRaii.PushFont(M3.TitleMedium);
-		var labelSize = ImGui.CalcTextSize(brand.Label);
-		drawList.AddText(new Vector2(logoMax.X + (8f * scale), origin.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(s.OnSurface), brand.Label);
+		var labelSize = ImGui.CalcTextSize(Loc.T(brand.Label));
+		drawList.AddText(new Vector2(logoMax.X + (8f * scale), origin.Y + ((height - labelSize.Y) * 0.5f)), M3.U32(s.OnSurface), Loc.T(brand.Label));
 	}
 
 	private static bool CaretButton(string id, float angle, string? tooltip)
@@ -665,7 +666,7 @@ internal static class M3Widgets
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 			if (!string.IsNullOrEmpty(tooltip))
 			{
-				ImGui.SetTooltip(tooltip);
+				ImGui.SetTooltip(Loc.T(tooltip));
 			}
 		}
 
@@ -685,7 +686,7 @@ internal static class M3Widgets
 
 		foreach (var segment in segments)
 		{
-			var width = ImGui.CalcTextSize(segment.Label).X + (14f * scale * 2f);
+			var width = ImGui.CalcTextSize(Loc.T(segment.Label)).X + (14f * scale * 2f);
 			if (segment.Icon != FontAwesomeIcon.None)
 			{
 				width += M3Draw.MeasureIcon(segment.Icon).X + (6f * scale);
@@ -753,7 +754,7 @@ internal static class M3Widgets
 			var content = selected ? tone : M3.Alpha(s.OnSurfaceVariant, hovered ? 1f : 0.85f);
 			var iconWidth = segment.Icon == FontAwesomeIcon.None ? 0f : M3Draw.MeasureIcon(segment.Icon).X;
 			var gap = segment.Icon == FontAwesomeIcon.None ? 0f : 6f * scale;
-			var textSize = ImGui.CalcTextSize(segment.Label);
+			var textSize = ImGui.CalcTextSize(Loc.T(segment.Label));
 			var cursorX = segmentMin.X + ((segmentWidth - iconWidth - gap - textSize.X) * 0.5f);
 
 			if (segment.Icon != FontAwesomeIcon.None)
@@ -763,7 +764,7 @@ internal static class M3Widgets
 				cursorX += iconWidth + gap;
 			}
 
-			drawList.AddText(new Vector2(cursorX, segmentMin.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), segment.Label);
+			drawList.AddText(new Vector2(cursorX, segmentMin.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), Loc.T(segment.Label));
 
 			if (i > 0)
 			{
@@ -794,7 +795,7 @@ internal static class M3Widgets
 	public static float ChipWidth(string label, FontAwesomeIcon icon = FontAwesomeIcon.None, FontAwesomeIcon trailingIcon = FontAwesomeIcon.None)
 	{
 		var scale = M3.Scale;
-		var width = ImGui.CalcTextSize(label).X + (16f * scale * 2f);
+		var width = ImGui.CalcTextSize(Loc.T(label)).X + (16f * scale * 2f);
 		if (icon != FontAwesomeIcon.None)
 		{
 			width += M3Draw.MeasureIcon(icon).X + (8f * scale);
@@ -838,7 +839,7 @@ internal static class M3Widgets
 		var iconWidth = icon == FontAwesomeIcon.None ? 0f : M3Draw.MeasureIcon(icon).X;
 		var gap = icon == FontAwesomeIcon.None ? 0f : 8f * scale;
 		var trailingWidth = trailingIcon == FontAwesomeIcon.None ? 0f : M3Draw.MeasureIcon(trailingIcon).X + (8f * scale);
-		var textSize = ImGui.CalcTextSize(label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
 		var cursorX = min.X + ((size.X - (iconWidth + gap + textSize.X + trailingWidth)) * 0.5f);
 
 		if (icon != FontAwesomeIcon.None)
@@ -847,14 +848,14 @@ internal static class M3Widgets
 			{
 				var glyph = icon.ToIconString();
 				drawList.AddText(UiBuilder.IconFont, ImGui.GetFontSize(),
-					new Vector2(cursorX, min.Y + ((height - ImGui.CalcTextSize(glyph).Y) * 0.5f)),
-					M3.U32(selected ? tone : content), glyph);
+					new Vector2(cursorX, min.Y + ((height - ImGui.CalcTextSize(Loc.T(glyph)).Y) * 0.5f)),
+					M3.U32(selected ? tone : content), Loc.T(glyph));
 			}
 
 			cursorX += iconWidth + gap;
 		}
 
-		drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), label);
+		drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), Loc.T(label));
 
 		if (trailingIcon != FontAwesomeIcon.None)
 		{
@@ -868,7 +869,7 @@ internal static class M3Widgets
 			ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 			if (!string.IsNullOrEmpty(tooltip))
 			{
-				ImGui.SetTooltip(tooltip);
+				ImGui.SetTooltip(Loc.T(tooltip));
 			}
 		}
 
@@ -878,7 +879,7 @@ internal static class M3Widgets
 	public static Vector2 PillSize(string label, FontAwesomeIcon icon = FontAwesomeIcon.None)
 	{
 		var scale = M3.Scale;
-		var width = ImGui.CalcTextSize(label).X + (12f * scale * 2f);
+		var width = ImGui.CalcTextSize(Loc.T(label)).X + (12f * scale * 2f);
 		width += icon == FontAwesomeIcon.None
 			? (6f * scale) + (6f * scale)
 			: M3Draw.MeasureIcon(icon).X + (6f * scale);
@@ -921,19 +922,19 @@ internal static class M3Widgets
 			using (ImRaii.PushFont(UiBuilder.IconFont))
 			{
 				var glyph = icon.ToIconString();
-				var glyphSize = ImGui.CalcTextSize(glyph);
+				var glyphSize = ImGui.CalcTextSize(Loc.T(glyph));
 				drawList.AddText(UiBuilder.IconFont, ImGui.GetFontSize(),
-					new Vector2(cursorX, min.Y + ((size.Y - glyphSize.Y) * 0.5f)), M3.U32(accent), glyph);
+					new Vector2(cursorX, min.Y + ((size.Y - glyphSize.Y) * 0.5f)), M3.U32(accent), Loc.T(glyph));
 				cursorX += glyphSize.X + (6f * scale);
 			}
 		}
 
-		var textSize = ImGui.CalcTextSize(label);
-		drawList.AddText(new Vector2(cursorX, min.Y + ((size.Y - textSize.Y) * 0.5f)), M3.U32(M3.Scheme.OnSurface, 0.95f), label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
+		drawList.AddText(new Vector2(cursorX, min.Y + ((size.Y - textSize.Y) * 0.5f)), M3.U32(M3.Scheme.OnSurface, 0.95f), Loc.T(label));
 
 		if (hovered && !string.IsNullOrEmpty(tooltip))
 		{
-			ImGui.SetTooltip(tooltip);
+			ImGui.SetTooltip(Loc.T(tooltip));
 		}
 
 		return clicked;
@@ -944,7 +945,7 @@ internal static class M3Widgets
 	public static float InputChipWidth(string label, FontAwesomeIcon icon = FontAwesomeIcon.None)
 	{
 		var scale = M3.Scale;
-		var width = (12f * scale) + ImGui.CalcTextSize(label).X + InputChipRemoveWidth;
+		var width = (12f * scale) + ImGui.CalcTextSize(Loc.T(label)).X + InputChipRemoveWidth;
 		if (icon != FontAwesomeIcon.None)
 		{
 			width += M3Draw.MeasureIcon(icon).X + (8f * scale);
@@ -993,8 +994,8 @@ internal static class M3Widgets
 			cursorX += iconSize.X + (8f * scale);
 		}
 
-		var textSize = ImGui.CalcTextSize(label);
-		drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
+		drawList.AddText(new Vector2(cursorX, min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(content), Loc.T(label));
 
 		var removeMin = new Vector2(max.X - removeWidth, min.Y);
 		var removeCenter = removeMin + (new Vector2(removeWidth, height) * 0.5f);
@@ -1015,11 +1016,11 @@ internal static class M3Widgets
 
 		if (removeHovered)
 		{
-			ImGui.SetTooltip($"Remove {label}");
+			ImGui.SetTooltip(Loc.F($"Remove {label}"));
 		}
 		else if (bodyHovered && !string.IsNullOrEmpty(tooltip))
 		{
-			ImGui.SetTooltip(tooltip);
+			ImGui.SetTooltip(Loc.T(tooltip));
 		}
 
 		return pressed;
@@ -1034,7 +1035,7 @@ internal static class M3Widgets
 		}
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
-		var textSize = ImGui.CalcTextSize(text);
+		var textSize = ImGui.CalcTextSize(Loc.T(text));
 		var height = MathF.Max(16f * scale, textSize.Y + (2f * scale));
 		return new Vector2(MathF.Max(height, textSize.X + (8f * scale)), height);
 	}
@@ -1069,10 +1070,10 @@ internal static class M3Widgets
 		drawList.AddRectFilled(min, min + size, M3.U32(fill), size.Y * 0.5f);
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
-		var textSize = ImGui.CalcTextSize(text);
+		var textSize = ImGui.CalcTextSize(Loc.T(text));
 
 		var onFill = color is null ? s.OnError : M3.ContentOn(fill);
-		drawList.AddText(center - (textSize * 0.5f), M3.U32(onFill), text);
+		drawList.AddText(center - (textSize * 0.5f), M3.U32(onFill), Loc.T(text));
 	}
 
 	#endregion
@@ -1266,7 +1267,7 @@ internal static class M3Widgets
 		using (ImRaii.PushStyle(ImGuiStyleVar.FramePadding, new Vector2(editing ? 8f : 0f, 10f) * scale))
 		{
 			ImGui.SetNextItemWidth(width);
-			changed = ImGui.SliderFloat(id, ref value, min, max, "%.2f", ImGuiSliderFlags.NoRoundToFormat);
+			changed = ImGui.SliderFloat(Loc.Label(id), ref value, min, max, "%.2f", ImGuiSliderFlags.NoRoundToFormat);
 		}
 
 		DrawSliderVisual(value, min, max, displayValue, M3.Scheme, scale, editing);
@@ -1283,7 +1284,7 @@ internal static class M3Widgets
 		using (ImRaii.PushStyle(ImGuiStyleVar.FramePadding, new Vector2(editing ? 8f : 0f, 10f) * scale))
 		{
 			ImGui.SetNextItemWidth(width);
-			changed = ImGui.SliderInt(id, ref value, min, max, "%d");
+			changed = ImGui.SliderInt(Loc.Label(id), ref value, min, max, "%d");
 		}
 
 		DrawSliderVisual(value, min, max, displayValue, M3.Scheme, scale, editing);
@@ -1298,11 +1299,11 @@ internal static class M3Widgets
 		var drawList = ImGui.GetWindowDrawList();
 
 		var hasReadout = !string.IsNullOrEmpty(displayValue);
-		var textSize = hasReadout ? ImGui.CalcTextSize(displayValue) : Vector2.Zero;
+		var textSize = hasReadout ? ImGui.CalcTextSize(Loc.T(displayValue)) : Vector2.Zero;
 		if (hasReadout)
 		{
 			drawList.AddText(new Vector2(itemMax.X + (10f * scale), centerY - (textSize.Y * 0.5f)),
-				M3.U32(s.OnSurfaceVariant), displayValue);
+				M3.U32(s.OnSurfaceVariant), Loc.T(displayValue));
 		}
 
 		if (editing)
@@ -1348,13 +1349,13 @@ internal static class M3Widgets
 			var bubbleMin = new Vector2(handleX - (textSize.X * 0.5f) - padding.X, itemMin.Y - textSize.Y - (padding.Y * 2f) - (6f * scale));
 			var bubbleMax = bubbleMin + textSize + (padding * 2f);
 			drawList.AddRectFilled(bubbleMin, bubbleMax, M3.U32(s.InverseSurface), M3.ShapeSmall);
-			drawList.AddText(bubbleMin + padding, M3.U32(s.InverseOnSurface), displayValue);
+			drawList.AddText(bubbleMin + padding, M3.U32(s.InverseOnSurface), Loc.T(displayValue));
 		}
 	}
 
 	public static float SliderValueGutter(string longestValue)
 	{
-		return ImGui.CalcTextSize(longestValue).X + (14f * M3.Scale);
+		return ImGui.CalcTextSize(Loc.T(longestValue)).X + (14f * M3.Scale);
 	}
 
 	#endregion
@@ -1523,7 +1524,7 @@ internal static class M3Widgets
 			.Push(ImGuiCol.FrameBgHovered, new Vector4(0f, 0f, 0f, 0f))
 			.Push(ImGuiCol.FrameBgActive, new Vector4(0f, 0f, 0f, 0f)))
 		{
-			changed = ImGui.InputTextWithHint(id, hint, ref text, maxLength, ImGuiInputTextFlags.AutoSelectAll);
+			changed = ImGui.InputTextWithHint(id, Loc.T(hint), ref text, maxLength, ImGuiInputTextFlags.AutoSelectAll);
 		}
 
 		if (hasText)
@@ -1586,7 +1587,7 @@ internal static class M3Widgets
 			.Push(ImGuiCol.FrameBgHovered, new Vector4(0f, 0f, 0f, 0f))
 			.Push(ImGuiCol.FrameBgActive, new Vector4(0f, 0f, 0f, 0f)))
 		{
-			changed = ImGui.InputText(id, ref text, maxLength, flags);
+			changed = ImGui.InputText(Loc.Label(id), ref text, maxLength, flags);
 		}
 
 		var focused = ImGui.IsItemActive();
@@ -1599,7 +1600,7 @@ internal static class M3Widgets
 		var floatingX = min.X + paddingX;
 		var notchStart = floatingX - (4f * scale);
 		var notchEnd = hasLabel
-			? notchStart + (((ImGui.CalcTextSize(label).X * (smallFontSize / bodyFontSize)) + (8f * scale)) * floating)
+			? notchStart + (((ImGui.CalcTextSize(Loc.T(label)).X * (smallFontSize / bodyFontSize)) + (8f * scale)) * floating)
 			: notchStart;
 		OutlineWithNotch(drawList, min, max, M3.ShapeExtraSmall, notchStart, notchEnd, M3.U32(accent), (focused || error ? 2f : 1f) * scale);
 
@@ -1608,7 +1609,7 @@ internal static class M3Widgets
 			var restingPosition = new Vector2(textLeft, min.Y + ((height - bodyFontSize) * 0.5f));
 			var floatingPosition = new Vector2(floatingX, min.Y - (smallFontSize * 0.5f));
 			drawList.AddText(ImGui.GetFont(), float.Lerp(bodyFontSize, smallFontSize, floating),
-				Vector2.Lerp(restingPosition, floatingPosition, floating), M3.U32(labelColor), label);
+				Vector2.Lerp(restingPosition, floatingPosition, floating), M3.U32(labelColor), Loc.T(label));
 		}
 
 		if (error)
@@ -1669,10 +1670,10 @@ internal static class M3Widgets
 		var s = M3.Scheme;
 		var scale = M3.Scale;
 		var tone = accent ?? s.Primary;
-		var label = text.ToUpperInvariant();
+		var label = Loc.T(text).ToUpperInvariant();
 
 		using var font = ImRaii.PushFont(M3.LabelSmall);
-		var textSize = ImGui.CalcTextSize(label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
 		var width = MathF.Max(1f, ImGui.GetContentRegionAvail().X);
 		var height = textSize.Y + (14f * scale);
 
@@ -1683,7 +1684,7 @@ internal static class M3Widgets
 		var textY = min.Y + (10f * scale);
 		var lineY = textY + (textSize.Y * 0.5f);
 
-		drawList.AddText(new Vector2(min.X, textY), M3.U32(tone, 0.95f), label);
+		drawList.AddText(new Vector2(min.X, textY), M3.U32(tone, 0.95f), Loc.T(label));
 
 		var lineStart = min.X + textSize.X + (10f * scale);
 		if (max.X > lineStart)
@@ -1709,7 +1710,7 @@ internal static class M3Widgets
 		var iconWidth = M3Draw.MeasureIcon(icon).X + (12f * scale);
 		var actionWidth = string.IsNullOrEmpty(actionLabel) ? 0f : ButtonWidth(FontAwesomeIcon.None, actionLabel) + (12f * scale);
 		var textWidth = MathF.Max(32f * scale, width - (padding.X * 2f) - iconWidth - actionWidth);
-		var textSize = ImGui.CalcTextSize(message, false, textWidth);
+		var textSize = ImGui.CalcTextSize(Loc.T(message), false, textWidth);
 		var height = MathF.Max(textSize.Y, string.IsNullOrEmpty(actionLabel) ? 0f : ButtonHeight) + (padding.Y * 2f);
 
 		var origin = ImGui.GetCursorScreenPos();
@@ -1737,7 +1738,7 @@ internal static class M3Widgets
 
 		if (hovered && !string.IsNullOrEmpty(tooltip))
 		{
-			ImGui.SetTooltip(tooltip);
+			ImGui.SetTooltip(Loc.T(tooltip));
 		}
 
 		return clicked;
@@ -1787,7 +1788,7 @@ internal static class M3Widgets
 
 	private static float CenteredBlock(string text, float centerX, float top, float maxWidth, Vector4 color)
 	{
-		var blockWidth = ImGui.CalcTextSize(text, false, maxWidth).X;
+		var blockWidth = ImGui.CalcTextSize(Loc.T(text), false, maxWidth).X;
 		return M3Draw.WrappedText(text, new Vector2(centerX - (blockWidth * 0.5f), top), maxWidth, color);
 	}
 
@@ -1825,9 +1826,9 @@ internal static class M3Widgets
 		var chevronWidth = 24f * scale;
 		var label = index >= 0 && index < items.Count ? items[index] : emptyText ?? string.Empty;
 		var textWidth = MathF.Max(8f * scale, width - (12f * scale * 2f) - chevronWidth);
-		var display = M3Navigation.Truncate(label, textWidth);
-		var textSize = ImGui.CalcTextSize(display);
-		drawList.AddText(new Vector2(min.X + (12f * scale), min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(s.OnSurface, 0.95f), display);
+		var display = M3Navigation.Truncate(Loc.T(label), textWidth);
+		var textSize = ImGui.CalcTextSize(Loc.T(display));
+		drawList.AddText(new Vector2(min.X + (12f * scale), min.Y + ((height - textSize.Y) * 0.5f)), M3.U32(s.OnSurface, 0.95f), Loc.T(display));
 
 		var chevronCenter = new Vector2(max.X - (16f * scale), min.Y + (height * 0.5f));
 		var arm = 4.5f * scale;
@@ -1870,7 +1871,7 @@ internal static class M3Widgets
 		var scale = M3.Scale;
 		var height = M3.FitText(34f, 7f);
 		var checkWidth = 24f * scale;
-		var textSize = ImGui.CalcTextSize(label);
+		var textSize = ImGui.CalcTextSize(Loc.T(label));
 		var width = MathF.Max(ImGui.GetContentRegionAvail().X, checkWidth + textSize.X + (24f * scale));
 
 		var pressed = ImGui.InvisibleButton(id, new Vector2(width, height));
@@ -1904,7 +1905,7 @@ internal static class M3Widgets
 
 		drawList.AddText(
 			new Vector2(min.X + checkWidth + (8f * scale), min.Y + ((height - textSize.Y) * 0.5f)),
-			M3.U32(selected ? s.OnSecondaryContainer : s.OnSurface, 0.95f), label);
+			M3.U32(selected ? s.OnSecondaryContainer : s.OnSurface, 0.95f), Loc.T(label));
 
 		return pressed;
 	}

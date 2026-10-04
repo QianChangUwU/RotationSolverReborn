@@ -189,7 +189,7 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 	public JobFilter PvPFilter { get; set; }
 	public JobFilter PvEFilter { get; set; }
 
-	public virtual string SearchingKeys => Name + " " + Description;
+	public virtual string SearchingKeys => Name + Loc.T(" ") + Description;
 	public virtual string Name => Loc.T(_ui?.Name ?? string.Empty);
 	public virtual string Description => string.IsNullOrEmpty(_ui?.Description) ? string.Empty : Loc.T(_ui.Description);
 
@@ -199,11 +199,11 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 	{
 		get
 		{
-			var result = Service.COMMAND + " " + OtherCommandType.Settings.ToString() + " " + _property.Name;
+			var result = Service.COMMAND + Loc.T(" ") + OtherCommandType.Settings.ToString() + Loc.T(" ") + _property.Name;
 			var extra = _property.GetValue(Service.ConfigDefault)?.ToString();
 			if (!string.IsNullOrEmpty(extra))
 			{
-				result += " " + extra;
+				result += Loc.T(" ") + extra;
 			}
 
 			return result;
@@ -273,7 +273,7 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 		{
 			ImGui.BulletText(description);
 			ImGui.Separator();
-			ImGui.TextDisabled(hint);
+			ImGui.TextDisabled(Loc.T(hint));
 		});
 	}
 

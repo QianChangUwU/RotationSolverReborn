@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using ECommons.DalamudServices;
@@ -33,7 +34,7 @@ public partial class MainWindow
 			{
 				ImGui.BeginDisabled();
 			}
-			if (ImGui.Button("Open Action Trace File"))
+			if (ImGui.Button(Loc.Label("Open Action Trace File")))
 			{
 				try
 				{
@@ -50,9 +51,9 @@ public partial class MainWindow
 			}
 			if (ImGui.IsItemHovered())
 			{
-				ImGui.SetTooltip(hasFile
+				ImGui.SetTooltip(Loc.T(hasFile
 					? tracePath
-					: "No trace file yet — enable the tracer and enter combat to create one.");
+					: "No trace file yet — enable the tracer and enter combat to create one."));
 			}
 
 			ImGui.SameLine();
@@ -61,7 +62,7 @@ public partial class MainWindow
 			{
 				ImGui.BeginDisabled();
 			}
-			if (ImGui.Button("Clear Trace"))
+			if (ImGui.Button(Loc.Label("Clear Trace")))
 			{
 				ActionTracer.ClearTrace();
 			}
@@ -71,7 +72,7 @@ public partial class MainWindow
 			}
 			if (ImGui.IsItemHovered())
 			{
-				ImGui.SetTooltip("Delete every actiontrace_*.log file in the Traces folder and clear the buffered last-frame data.");
+				ImGui.SetTooltip(Loc.T("Delete every actiontrace_*.log file in the Traces folder and clear the buffered last-frame data."));
 			}
 		}
 
@@ -82,12 +83,12 @@ public partial class MainWindow
 
 		_debugHeader?.Draw();
 
-		if (ImGui.Button("Reset Action Configs"))
+		if (ImGui.Button(Loc.Label("Reset Action Configs")))
 		{
 			DataCenter.ResetActionConfigs = DataCenter.ResetActionConfigs != true;
 		}
-		ImGui.Text($"Reset Action Configs: {DataCenter.ResetActionConfigs}");
-		if (ImGui.Button("Add Test Warning"))
+		ImGui.Text(Loc.F($"Reset Action Configs: {DataCenter.ResetActionConfigs}"));
+		if (ImGui.Button(Loc.Label("Add Test Warning")))
 		{
 			BasicWarningHelper.AddSystemWarning("This is a test warning.");
 		}
@@ -114,9 +115,9 @@ public partial class MainWindow
 
 		{() => "Effect", () =>
 			{
-				ImGui.Text(Watcher.ShowStrSelf);
+				ImGui.Text(Loc.T(Watcher.ShowStrSelf));
 				ImGui.Separator();
-				ImGui.Text(DataCenter.Role.ToString());
+				ImGui.Text(Loc.T(DataCenter.Role.ToString()));
 			} },
 		{() => "Material 3 Gallery", MaterialGallery.Draw },
 	});
@@ -146,11 +147,11 @@ public partial class MainWindow
 
 	private static void DrawOccultWeaknesses()
 	{
-		ImGui.TextWrapped("Records the elemental weaknesses (Lightning, Fire, Ice, Wind) observed on hostiles " +
-			"encountered in Occult Crescent, keyed by their NameId. This is populated automatically while in " +
-			"Occult Crescent.");
+		ImGui.TextWrapped(Loc.T("Records the elemental weaknesses (Lightning, Fire, Ice, Wind) observed on hostiles ") +
+			Loc.T("encountered in Occult Crescent, keyed by their NameId. This is populated automatically while in ") +
+			Loc.T("Occult Crescent."));
 
-		if (ImGui.Button("Open Weakness Data Folder"))
+		if (ImGui.Button(Loc.Label("Open Weakness Data Folder")))
 		{
 			try
 			{
@@ -163,12 +164,12 @@ public partial class MainWindow
 			}
 		}
 		ImGui.SameLine();
-		if (ImGui.Button("Clear Weakness Data"))
+		if (ImGui.Button(Loc.Label("Clear Weakness Data")))
 		{
 			OtherConfiguration.ResetOccultWeaknessRecords();
 		}
 		ImGui.SameLine();
-		if (ImGui.Button("Copy as Curated List Entries"))
+		if (ImGui.Button(Loc.Label("Copy as Curated List Entries")))
 		{
 			var sb = new StringBuilder();
 			void AppendEntries(Dictionary<uint, List<string>> records)
@@ -195,7 +196,7 @@ public partial class MainWindow
 		}
 		if (ImGui.IsItemHovered())
 		{
-			ImGui.SetTooltip("Copies each recorded NameId/weakness.");
+			ImGui.SetTooltip(Loc.T("Copies each recorded NameId/weakness."));
 		}
 
 		using var table = ImRaii.Table("OccultWeaknessTable", 4,
@@ -204,10 +205,10 @@ public partial class MainWindow
 		if (table)
 		{
 			ImGui.TableSetupScrollFreeze(0, 1);
-			ImGui.TableSetupColumn("Zone");
-			ImGui.TableSetupColumn("NameId");
-			ImGui.TableSetupColumn("Name");
-			ImGui.TableSetupColumn("Weaknesses");
+			ImGui.TableSetupColumn(Loc.T("Zone"));
+			ImGui.TableSetupColumn(Loc.T("NameId"));
+			ImGui.TableSetupColumn(Loc.T("Name"));
+			ImGui.TableSetupColumn(Loc.T("Weaknesses"));
 			ImGui.TableHeadersRow();
 
 			void DrawRows(string zoneName, Dictionary<uint, List<string>> records)
@@ -216,9 +217,9 @@ public partial class MainWindow
 				{
 					ImGui.TableNextRow();
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(zoneName);
+					ImGui.TextUnformatted(Loc.T(zoneName));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(kvp.Key.ToString());
+					ImGui.TextUnformatted(Loc.T(kvp.Key.ToString()));
 					_ = ImGui.TableNextColumn();
 					var npcName = string.Empty;
 					try
@@ -226,9 +227,9 @@ public partial class MainWindow
 						npcName = Service.GetSheet<Lumina.Excel.Sheets.BNpcName>().GetRow(kvp.Key).Singular.ToString();
 					}
 					catch { }
-					ImGui.TextUnformatted(npcName);
+					ImGui.TextUnformatted(Loc.T(npcName));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(string.Join(", ", kvp.Value));
+					ImGui.TextUnformatted(Loc.T(string.Join(", ", kvp.Value)));
 				}
 			}
 
@@ -238,7 +239,7 @@ public partial class MainWindow
 
 		ImGui.Spacing();
 		ImGui.Separator();
-		ImGui.TextWrapped("Hostiles in Range Without Weakness Data");
+		ImGui.TextWrapped(Loc.T("Hostiles in Range Without Weakness Data"));
 
 		var unknownNames = new List<string>();
 		var seenNameIds = new HashSet<uint>();
@@ -280,11 +281,11 @@ public partial class MainWindow
 
 		if (unknownNames.Count == 0)
 		{
-			ImGui.TextUnformatted("None.");
+			ImGui.TextUnformatted(Loc.T("None."));
 		}
 		else
 		{
-			ImGui.TextUnformatted(string.Join(", ", unknownNames));
+			ImGui.TextUnformatted(Loc.T(string.Join(", ", unknownNames)));
 		}
 	}
 
@@ -299,47 +300,47 @@ public partial class MainWindow
 		{
 			return;
 		}
-		ImGui.Text($"PlayerSyncedLevel: {DataCenter.PlayerSyncedLevel()}");
-		ImGui.Text($"PlayerUnsyncedLevel: {DataCenter.PlayerMaxLevel}");
-		ImGui.Text($"Merged Status: {DataCenter.MergedStatus}");
-		ImGui.Text($"PlayerHasLockActions: {ActionUpdater.PlayerHasLockActions()}");
-		ImGui.Text($"Height: {Player.Character->ModelContainer.CalculateHeight()}");
-		ImGui.Text($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}");
-		ImGui.Text($"MoveModeSetting: {DataCenter.MoveModeSetting()}");
+		ImGui.Text(Loc.F($"PlayerSyncedLevel: {DataCenter.PlayerSyncedLevel()}"));
+		ImGui.Text(Loc.F($"PlayerUnsyncedLevel: {DataCenter.PlayerMaxLevel}"));
+		ImGui.Text(Loc.F($"Merged Status: {DataCenter.MergedStatus}"));
+		ImGui.Text(Loc.F($"PlayerHasLockActions: {ActionUpdater.PlayerHasLockActions()}"));
+		ImGui.Text(Loc.F($"Height: {Player.Character->ModelContainer.CalculateHeight()}"));
+		ImGui.Text(Loc.F($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}"));
+		ImGui.Text(Loc.F($"MoveModeSetting: {DataCenter.MoveModeSetting()}"));
 		Dalamud.Game.ClientState.Conditions.ConditionFlag[] conditions = [.. Svc.Condition.AsReadOnlySet()];
-		ImGui.Text("InternalCondition:");
+		ImGui.Text(Loc.T("InternalCondition:"));
 		foreach (var condition in conditions)
 		{
-			ImGui.Text($"    {condition}");
+			ImGui.Text(Loc.F($"    {condition}"));
 		}
-		ImGui.Text($"OnlineStatus: {Player.OnlineStatus.RowId}");
-		ImGui.Text($"CanBeRaised: {Player.Object.CanBeRaised()}");
-		ImGui.Text($"Current Hp: {Player.Object.CurrentHp}");
-		ImGui.Text($"Effective Hp: {ObjectHelper.GetEffectiveHp(Player.Object)}");
-		ImGui.Text($"Effective Hp Percent: {ObjectHelper.GetEffectiveHpPercent(Player.Object)}");
-		ImGui.Text($"IsDead: {Player.Object.IsDead}");
-		ImGui.Text($"DoomNeedHealing: {Player.Object.DoomNeedHealing()}");
-		ImGui.Text($"Dead Time: {DataCenter.DeadTimeRaw}");
-		ImGui.Text($"Alive Time: {DataCenter.AliveTimeRaw}");
-		ImGui.Text($"Moving: {DataCenter.IsMoving}");
-		ImGui.Text($"Moving Time: {DataCenter.MovingRaw}");
-		ImGui.Text($"Stop Moving: {DataCenter.StopMovingRaw}");
-		ImGui.Text($"CountDownTime: {Service.CountDownTime}");
-		ImGui.Text($"Combo Time: {DataCenter.ComboTime}");
-		ImGui.Text($"TargetingType: {DataCenter.TargetingType}");
+		ImGui.Text(Loc.F($"OnlineStatus: {Player.OnlineStatus.RowId}"));
+		ImGui.Text(Loc.F($"CanBeRaised: {Player.Object.CanBeRaised()}"));
+		ImGui.Text(Loc.F($"Current Hp: {Player.Object.CurrentHp}"));
+		ImGui.Text(Loc.F($"Effective Hp: {ObjectHelper.GetEffectiveHp(Player.Object)}"));
+		ImGui.Text(Loc.F($"Effective Hp Percent: {ObjectHelper.GetEffectiveHpPercent(Player.Object)}"));
+		ImGui.Text(Loc.F($"IsDead: {Player.Object.IsDead}"));
+		ImGui.Text(Loc.F($"DoomNeedHealing: {Player.Object.DoomNeedHealing()}"));
+		ImGui.Text(Loc.F($"Dead Time: {DataCenter.DeadTimeRaw}"));
+		ImGui.Text(Loc.F($"Alive Time: {DataCenter.AliveTimeRaw}"));
+		ImGui.Text(Loc.F($"Moving: {DataCenter.IsMoving}"));
+		ImGui.Text(Loc.F($"Moving Time: {DataCenter.MovingRaw}"));
+		ImGui.Text(Loc.F($"Stop Moving: {DataCenter.StopMovingRaw}"));
+		ImGui.Text(Loc.F($"CountDownTime: {Service.CountDownTime}"));
+		ImGui.Text(Loc.F($"Combo Time: {DataCenter.ComboTime}"));
+		ImGui.Text(Loc.F($"TargetingType: {DataCenter.TargetingType}"));
 		ImGui.Spacing();
-		ImGui.Text($"IsHostileCastingToTank: {DataCenter.IsHostileCastingToTank}");
-		ImGui.Text($"AttackedTargets: {DataCenter.AttackedTargets?.Count ?? 0}");
+		ImGui.Text(Loc.F($"IsHostileCastingToTank: {DataCenter.IsHostileCastingToTank}"));
+		ImGui.Text(Loc.F($"AttackedTargets: {DataCenter.AttackedTargets?.Count ?? 0}"));
 		if (DataCenter.AttackedTargets != null)
 		{
 			foreach ((var id, var time) in DataCenter.AttackedTargets)
 			{
-				ImGui.Text(id.ToString() ?? "Unknown ID");
+				ImGui.Text(Loc.T(id.ToString() ?? "Unknown ID"));
 			}
 		}
 
 
-		ImGui.Text("Casting Vfx:");
+		ImGui.Text(Loc.T("Casting Vfx:"));
 		List<VfxNewData> filteredVfx = [];
 		foreach (var s in DataCenter.VfxDataQueue)
 		{
@@ -350,21 +351,21 @@ public partial class MainWindow
 		}
 		foreach (var vfx in filteredVfx)
 		{
-			ImGui.Text($"Path: {vfx.Path}");
+			ImGui.Text(Loc.F($"Path: {vfx.Path}"));
 		}
 
 		var partyMembers = DataCenter.PartyMembers;
 		if (partyMembers.Count != 0)
 		{
-			ImGui.Text("Party Members:");
+			ImGui.Text(Loc.T("Party Members:"));
 			foreach (var member in partyMembers)
 			{
-				ImGui.Text($"- {member.Name}");
+				ImGui.Text(Loc.F($"- {member.Name}"));
 			}
 		}
 		else
 		{
-			ImGui.Text("Party Members: None");
+			ImGui.Text(Loc.T("Party Members: None"));
 		}
 
 		List<IBattleChara> tankPartyMembers = [];
@@ -377,53 +378,53 @@ public partial class MainWindow
 		}
 		if (tankPartyMembers.Count != 0)
 		{
-			ImGui.Text("Tank Party Members:");
+			ImGui.Text(Loc.T("Tank Party Members:"));
 			foreach (var member in tankPartyMembers)
 			{
-				ImGui.Text($"- {member.Name}");
+				ImGui.Text(Loc.F($"- {member.Name}"));
 			}
 		}
 		else
 		{
-			ImGui.Text("Tank Party Members: None");
+			ImGui.Text(Loc.T("Tank Party Members: None"));
 		}
 
 		var dispelTarget = DataCenter.DispelTarget;
 		if (dispelTarget != null)
 		{
-			ImGui.Text("Dispel Target:");
-			ImGui.Text($"- {dispelTarget.Name}");
+			ImGui.Text(Loc.T("Dispel Target:"));
+			ImGui.Text(Loc.F($"- {dispelTarget.Name}"));
 		}
 		else
 		{
-			ImGui.Text("Dispel Target: None");
+			ImGui.Text(Loc.T("Dispel Target: None"));
 		}
 
-		ImGui.Text($"DPSTaken: {DataCenter.DPSTaken}");
-		ImGui.Text($"CurrentRotation: {DataCenter.CurrentRotation}");
-		ImGui.Text($"Job: {DataCenter.Job}");
-		ImGui.Text($"JobRange: {DataCenter.JobRange}");
-		ImGui.Text($"Job Role: {DataCenter.Role}");
-		ImGui.Text($"Have pet: {DataCenter.HasPet()}");
-		ImGui.Text($"Hostile Near Count: {DataCenter.NumberOfHostilesInRange}");
-		ImGui.Text($"Hostile Near Count Max Range: {DataCenter.NumberOfHostilesInMaxRange}");
-		ImGui.Text($"Have Companion: {DataCenter.HasCompanion}");
-		ImGui.Text($"MP: {DataCenter.CurrentMp}");
-		ImGui.Text($"Count Down: {Service.CountDownTime}");
+		ImGui.Text(Loc.F($"DPSTaken: {DataCenter.DPSTaken}"));
+		ImGui.Text(Loc.F($"CurrentRotation: {DataCenter.CurrentRotation}"));
+		ImGui.Text(Loc.F($"Job: {DataCenter.Job}"));
+		ImGui.Text(Loc.F($"JobRange: {DataCenter.JobRange}"));
+		ImGui.Text(Loc.F($"Job Role: {DataCenter.Role}"));
+		ImGui.Text(Loc.F($"Have pet: {DataCenter.HasPet()}"));
+		ImGui.Text(Loc.F($"Hostile Near Count: {DataCenter.NumberOfHostilesInRange}"));
+		ImGui.Text(Loc.F($"Hostile Near Count Max Range: {DataCenter.NumberOfHostilesInMaxRange}"));
+		ImGui.Text(Loc.F($"Have Companion: {DataCenter.HasCompanion}"));
+		ImGui.Text(Loc.F($"MP: {DataCenter.CurrentMp}"));
+		ImGui.Text(Loc.F($"Count Down: {Service.CountDownTime}"));
 
 		ImGui.Spacing();
-		ImGui.Text($"Statuses:");
+		ImGui.Text(Loc.F($"Statuses:"));
 		using var statusTable = ImRaii.Table("TargetStatusTable", 5,
 			ImGuiTableFlags.BordersInner | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingStretchProp | ImGuiTableFlags.ScrollY,
 			new Vector2(0, 200 * Scale));
 		if (statusTable)
 		{
 			ImGui.TableSetupScrollFreeze(0, 1);
-			ImGui.TableSetupColumn("Name");
-			ImGui.TableSetupColumn("ID");
-			ImGui.TableSetupColumn("Source");
-			ImGui.TableSetupColumn("Stacks");
-			ImGui.TableSetupColumn("Time");
+			ImGui.TableSetupColumn(Loc.T("Name"));
+			ImGui.TableSetupColumn(Loc.T("ID"));
+			ImGui.TableSetupColumn(Loc.T("Source"));
+			ImGui.TableSetupColumn(Loc.T("Stacks"));
+			ImGui.TableSetupColumn(Loc.T("Time"));
 			ImGui.TableHeadersRow();
 
 			foreach (var status in Player.Object.StatusList)
@@ -440,23 +441,23 @@ public partial class MainWindow
 
 				ImGui.TableNextRow();
 				_ = ImGui.TableNextColumn();
-				ImGui.TextUnformatted(status.GameData.Value.Name.ToString());
+				ImGui.TextUnformatted(Loc.T(status.GameData.Value.Name.ToString()));
 				_ = ImGui.TableNextColumn();
-				ImGui.TextUnformatted(status.StatusId.ToString());
+				ImGui.TextUnformatted(Loc.T(status.StatusId.ToString()));
 				_ = ImGui.TableNextColumn();
-				ImGui.TextUnformatted(source);
+				ImGui.TextUnformatted(Loc.T(source));
 				_ = ImGui.TableNextColumn();
-				ImGui.TextUnformatted(stackDisplay);
+				ImGui.TextUnformatted(Loc.T(stackDisplay));
 				_ = ImGui.TableNextColumn();
-				ImGui.TextUnformatted(timeDisplay);
+				ImGui.TextUnformatted(Loc.T(timeDisplay));
 			}
 		}
 	}
 
 	private static void DrawRaiseInfo()
 	{
-		ImGui.Text($"Can Raise: {DataCenter.CanRaise()}");
-		ImGui.Text($"Death Target: {DataCenter.DeathTarget}");
+		ImGui.Text(Loc.F($"Can Raise: {DataCenter.CanRaise()}"));
+		ImGui.Text(Loc.F($"Death Target: {DataCenter.DeathTarget}"));
 
 		var deadPartyMembersList = new List<IBattleChara>();
 		foreach (var member in DataCenter.PartyMembers.GetDeath())
@@ -466,15 +467,15 @@ public partial class MainWindow
 
 		if (deadPartyMembersList.Count > 0)
 		{
-			ImGui.Text("Dead Party Members:");
+			ImGui.Text(Loc.T("Dead Party Members:"));
 			foreach (var member in deadPartyMembersList)
 			{
-				ImGui.Text($"- {member.Name}");
+				ImGui.Text(Loc.F($"- {member.Name}"));
 			}
 		}
 		else
 		{
-			ImGui.Text("Dead Party Members: None");
+			ImGui.Text(Loc.T("Dead Party Members: None"));
 		}
 
 		var deadAllianceMembersList = new List<IBattleChara>();
@@ -485,105 +486,105 @@ public partial class MainWindow
 
 		if (deadAllianceMembersList.Count > 0)
 		{
-			ImGui.Text("Dead Alliance Members:");
+			ImGui.Text(Loc.T("Dead Alliance Members:"));
 			foreach (var member in deadAllianceMembersList)
 			{
-				ImGui.Text($"- {member.Name}");
+				ImGui.Text(Loc.F($"- {member.Name}"));
 			}
 		}
 		else
 		{
-			ImGui.Text("Dead Alliance Members: None");
+			ImGui.Text(Loc.T("Dead Alliance Members: None"));
 		}
 	}
 
 	private static unsafe void DrawDutyInfo()
 	{
 		ImGui.Spacing();
-		ImGui.Text($"DC State: {DataCenter.State}");
-		ImGui.Text($"Your combat state: {DataCenter.InCombat}");
-		ImGui.Text($"Combat Time: {DataCenter.CombatTimeRaw}");
-		ImGui.Text($"TerritoryID: {DataCenter.TerritoryID}");
-		ImGui.Text($"TerritoryType: {DataCenter.Territory?.ContentType}");
-		ImGui.Text($"Is in Alliance Raid: {DataCenter.IsInAllianceRaid}");
+		ImGui.Text(Loc.F($"DC State: {DataCenter.State}"));
+		ImGui.Text(Loc.F($"Your combat state: {DataCenter.InCombat}"));
+		ImGui.Text(Loc.F($"Combat Time: {DataCenter.CombatTimeRaw}"));
+		ImGui.Text(Loc.F($"TerritoryID: {DataCenter.TerritoryID}"));
+		ImGui.Text(Loc.F($"TerritoryType: {DataCenter.Territory?.ContentType}"));
+		ImGui.Text(Loc.F($"Is in Alliance Raid: {DataCenter.IsInAllianceRaid}"));
 		ImGui.Spacing();
-		ImGui.Text($"IsPvP: {DataCenter.IsPvP}");
-		ImGui.Text($"IsInFate: {DataCenter.IsInFate}");
+		ImGui.Text(Loc.F($"IsPvP: {DataCenter.IsPvP}"));
+		ImGui.Text(Loc.F($"IsInFate: {DataCenter.IsInFate}"));
 		if ((IntPtr)FateManager.Instance() != IntPtr.Zero)
 		{
-			ImGui.Text($"Fate ID: {DataCenter.PlayerFateId}");
+			ImGui.Text(Loc.F($"Fate ID: {DataCenter.PlayerFateId}"));
 		}
 		ImGui.Spacing();
-		ImGui.Text($"IsInWindurst: {DataCenter.IsInWindurst}");
+		ImGui.Text(Loc.F($"IsInWindurst: {DataCenter.IsInWindurst}"));
 		ImGui.Spacing();
-		ImGui.Text($"In Field Operations: {DataCenter.IsInFieldOperations}");
-		ImGui.Text($"In Field Raid: {DataCenter.IsInFieldRaid}");
+		ImGui.Text(Loc.F($"In Field Operations: {DataCenter.IsInFieldOperations}"));
+		ImGui.Text(Loc.F($"In Field Raid: {DataCenter.IsInFieldRaid}"));
 		ImGui.Spacing();
 		if (DataCenter.IsInBozjanFieldOp)
 		{
-			ImGui.Text($"IsInBozjanFieldOp: {DataCenter.IsInBozjanFieldOp}");
-			ImGui.Text($"IsInBozjanFieldOpCE: {DataCenter.IsInBozjanFieldOpCE}");
-			ImGui.Text($"IsInDelubrumNormal: {DataCenter.IsInDelubrumNormal}");
-			ImGui.Text($"IsInDelubrumSavage: {DataCenter.IsInDelubrumSavage}");
-			ImGui.Text($"IsInBozja: {DataCenter.IsInBozja}");
+			ImGui.Text(Loc.F($"IsInBozjanFieldOp: {DataCenter.IsInBozjanFieldOp}"));
+			ImGui.Text(Loc.F($"IsInBozjanFieldOpCE: {DataCenter.IsInBozjanFieldOpCE}"));
+			ImGui.Text(Loc.F($"IsInDelubrumNormal: {DataCenter.IsInDelubrumNormal}"));
+			ImGui.Text(Loc.F($"IsInDelubrumSavage: {DataCenter.IsInDelubrumSavage}"));
+			ImGui.Text(Loc.F($"IsInBozja: {DataCenter.IsInBozja}"));
 		}
 		if (DataCenter.IsInOccultCrescentOp)
 		{
-			ImGui.Text($"In North Horn: {DataCenter.IsInNorthHorn}");
-			ImGui.Text($"In South Horn: {DataCenter.IsInSouthHorn}");
-			ImGui.Text($"Is In Forked Tower Blood: {DataCenter.IsInForkedTowerBlood}");
-			ImGui.Text($"FreelancerLevel: {DutyRotation.FreelancerLevel}");
-			ImGui.Text($"KnightLevel: {DutyRotation.KnightLevel}");
-			ImGui.Text($"MonkLevel: {DutyRotation.MonkLevel}");
-			ImGui.Text($"BardLevel: {DutyRotation.BardLevel}");
-			ImGui.Text($"ChemistLevel: {DutyRotation.ChemistLevel}");
-			ImGui.Text($"TimeMageLevel: {DutyRotation.TimeMageLevel}");
-			ImGui.Text($"CannoneerLevel: {DutyRotation.CannoneerLevel}");
-			ImGui.Text($"OracleLevel: {DutyRotation.OracleLevel}");
-			ImGui.Text($"BerserkerLevel: {DutyRotation.BerserkerLevel}");
-			ImGui.Text($"RangerLevel: {DutyRotation.RangerLevel}");
-			ImGui.Text($"ThiefLevel: {DutyRotation.ThiefLevel}");
-			ImGui.Text($"SamuraiLevel: {DutyRotation.SamuraiLevel}");
-			ImGui.Text($"GeomancerLevel: {DutyRotation.GeomancerLevel}");
-			ImGui.Text($"MysticKnightLevel: {DutyRotation.MysticKnightLevel}");
-			ImGui.Text($"DancerLevel: {DutyRotation.DancerLevel}");
-			ImGui.Text($"NinjaLevel: {DutyRotation.NinjaLevel}");
-			ImGui.Text($"WhiteMageLevel: {DutyRotation.WhiteMageLevel}");
-			ImGui.Text($"BlackMageLevel: {DutyRotation.BlackMageLevel}");
-			ImGui.Text($"DragoonLevel: {DutyRotation.DragoonLevel}");
-			ImGui.Text($"SummonerLevel: {DutyRotation.SummonerLevel}");
-			ImGui.Text($"BlueMageLevel: {DutyRotation.BlueMageLevel}");
-			ImGui.Text($"RedMageLevel: {DutyRotation.RedMageLevel}");
-			ImGui.Text($"NecromancerLevel: {DutyRotation.NecromancerLevel}");
+			ImGui.Text(Loc.F($"In North Horn: {DataCenter.IsInNorthHorn}"));
+			ImGui.Text(Loc.F($"In South Horn: {DataCenter.IsInSouthHorn}"));
+			ImGui.Text(Loc.F($"Is In Forked Tower Blood: {DataCenter.IsInForkedTowerBlood}"));
+			ImGui.Text(Loc.F($"FreelancerLevel: {DutyRotation.FreelancerLevel}"));
+			ImGui.Text(Loc.F($"KnightLevel: {DutyRotation.KnightLevel}"));
+			ImGui.Text(Loc.F($"MonkLevel: {DutyRotation.MonkLevel}"));
+			ImGui.Text(Loc.F($"BardLevel: {DutyRotation.BardLevel}"));
+			ImGui.Text(Loc.F($"ChemistLevel: {DutyRotation.ChemistLevel}"));
+			ImGui.Text(Loc.F($"TimeMageLevel: {DutyRotation.TimeMageLevel}"));
+			ImGui.Text(Loc.F($"CannoneerLevel: {DutyRotation.CannoneerLevel}"));
+			ImGui.Text(Loc.F($"OracleLevel: {DutyRotation.OracleLevel}"));
+			ImGui.Text(Loc.F($"BerserkerLevel: {DutyRotation.BerserkerLevel}"));
+			ImGui.Text(Loc.F($"RangerLevel: {DutyRotation.RangerLevel}"));
+			ImGui.Text(Loc.F($"ThiefLevel: {DutyRotation.ThiefLevel}"));
+			ImGui.Text(Loc.F($"SamuraiLevel: {DutyRotation.SamuraiLevel}"));
+			ImGui.Text(Loc.F($"GeomancerLevel: {DutyRotation.GeomancerLevel}"));
+			ImGui.Text(Loc.F($"MysticKnightLevel: {DutyRotation.MysticKnightLevel}"));
+			ImGui.Text(Loc.F($"DancerLevel: {DutyRotation.DancerLevel}"));
+			ImGui.Text(Loc.F($"NinjaLevel: {DutyRotation.NinjaLevel}"));
+			ImGui.Text(Loc.F($"WhiteMageLevel: {DutyRotation.WhiteMageLevel}"));
+			ImGui.Text(Loc.F($"BlackMageLevel: {DutyRotation.BlackMageLevel}"));
+			ImGui.Text(Loc.F($"DragoonLevel: {DutyRotation.DragoonLevel}"));
+			ImGui.Text(Loc.F($"SummonerLevel: {DutyRotation.SummonerLevel}"));
+			ImGui.Text(Loc.F($"BlueMageLevel: {DutyRotation.BlueMageLevel}"));
+			ImGui.Text(Loc.F($"RedMageLevel: {DutyRotation.RedMageLevel}"));
+			ImGui.Text(Loc.F($"NecromancerLevel: {DutyRotation.NecromancerLevel}"));
 		}
-		ImGui.Text($"InVariantDungeon: {DataCenter.InVariantDungeon}");
-		ImGui.Text($"The Merchant's Tale Advanced: {DataCenter.TheMerchantsTaleAdvanced}");
-		ImGui.Text($"The Merchant's Tale: {DataCenter.TheMerchantsTale}");
-		ImGui.Text($"AloaloIsland: {DataCenter.AloaloIsland}");
-		ImGui.Text($"MountRokkon: {DataCenter.MountRokkon}");
-		ImGui.Text($"SildihnSubterrane: {DataCenter.SildihnSubterrane}");
+		ImGui.Text(Loc.F($"InVariantDungeon: {DataCenter.InVariantDungeon}"));
+		ImGui.Text(Loc.F($"The Merchant's Tale Advanced: {DataCenter.TheMerchantsTaleAdvanced}"));
+		ImGui.Text(Loc.F($"The Merchant's Tale: {DataCenter.TheMerchantsTale}"));
+		ImGui.Text(Loc.F($"AloaloIsland: {DataCenter.AloaloIsland}"));
+		ImGui.Text(Loc.F($"MountRokkon: {DataCenter.MountRokkon}"));
+		ImGui.Text(Loc.F($"SildihnSubterrane: {DataCenter.SildihnSubterrane}"));
 		ImGui.Spacing();
-		ImGui.Text($"AreHostilesCastingKnockback: {DataCenter.AreHostilesCastingKnockback}");
-		ImGui.Text($"IsHostileCastingAOE: {DataCenter.IsHostileCastingAOE}");
-		ImGui.Text($"IsHostileCastingToTank: {DataCenter.IsHostileCastingToTank}");
-		ImGui.Text($"IsHostileCastingStop: {DataCenter.IsHostileCastingStop}");
+		ImGui.Text(Loc.F($"AreHostilesCastingKnockback: {DataCenter.AreHostilesCastingKnockback}"));
+		ImGui.Text(Loc.F($"IsHostileCastingAOE: {DataCenter.IsHostileCastingAOE}"));
+		ImGui.Text(Loc.F($"IsHostileCastingToTank: {DataCenter.IsHostileCastingToTank}"));
+		ImGui.Text(Loc.F($"IsHostileCastingStop: {DataCenter.IsHostileCastingStop}"));
 		ImGui.Spacing();
-		ImGui.Text($"IsCastingMultiHit: {DataCenter.IsCastingMultiHit()}");
-		ImGui.Text($"IsCastingAreaVfx: {DataCenter.IsCastingAreaVfx()}");
-		ImGui.Text($"IsCastingTankVfx: {DataCenter.IsCastingTankVfx()}");
-		ImGui.Text($"TankbusterTargets: {DataCenter.TankbusterTargets.Count}");
+		ImGui.Text(Loc.F($"IsCastingMultiHit: {DataCenter.IsCastingMultiHit()}"));
+		ImGui.Text(Loc.F($"IsCastingAreaVfx: {DataCenter.IsCastingAreaVfx()}"));
+		ImGui.Text(Loc.F($"IsCastingTankVfx: {DataCenter.IsCastingTankVfx()}"));
+		ImGui.Text(Loc.F($"TankbusterTargets: {DataCenter.TankbusterTargets.Count}"));
 		ImGui.Spacing();
-		ImGui.Text($"IsInM11S: {DataCenter.IsInM11S}");
-		ImGui.Text($"IsTyrantCastingSpecialIndicator2: {DataCenter.IsTyrantCastingSpecialIndicator2()}");
-		ImGui.Text($"IsLichCastingSpecialIndicator: {DataCenter.IsLichCastingSpecialIndicator()}");
+		ImGui.Text(Loc.F($"IsInM11S: {DataCenter.IsInM11S}"));
+		ImGui.Text(Loc.F($"IsTyrantCastingSpecialIndicator2: {DataCenter.IsTyrantCastingSpecialIndicator2()}"));
+		ImGui.Text(Loc.F($"IsLichCastingSpecialIndicator: {DataCenter.IsLichCastingSpecialIndicator()}"));
 	}
 
 	private static void DrawParty()
 	{
-		ImGui.Text($"Number of Party Members: {DataCenter.PartyMembers.Count}");
-		ImGui.Text($"Number of Alliance Members: {DataCenter.AllianceMembers.Count}");
-		ImGui.Text($"Average Party HP Percent: {DataCenter.PartyMembersAverHP * 100}");
-		ImGui.Text($"Average Lowest Party HP Percent: {DataCenter.LowestPartyMembersAverHP * 100}");
+		ImGui.Text(Loc.F($"Number of Party Members: {DataCenter.PartyMembers.Count}"));
+		ImGui.Text(Loc.F($"Number of Alliance Members: {DataCenter.AllianceMembers.Count}"));
+		ImGui.Text(Loc.F($"Average Party HP Percent: {DataCenter.PartyMembersAverHP * 100}"));
+		ImGui.Text(Loc.F($"Average Lowest Party HP Percent: {DataCenter.LowestPartyMembersAverHP * 100}"));
 		var doomedCount = 0;
 		foreach (var member in DataCenter.PartyMembers)
 		{
@@ -592,7 +593,7 @@ public partial class MainWindow
 				doomedCount++;
 			}
 		}
-		ImGui.Text($"Number of Party Members with Doomed To Heal status: {doomedCount}");
+		ImGui.Text(Loc.F($"Number of Party Members with Doomed To Heal status: {doomedCount}"));
 
 
 		if (Player.Object != null && Player.Object.IsJobs(Job.AST))
@@ -600,17 +601,17 @@ public partial class MainWindow
 			var spear = ActionTargetInfo.FindTargetByType(DataCenter.PartyMembers, TargetType.TheSpear, 0, SpecialActionType.None, TargetType.TheSpear, true);
 			var balance = ActionTargetInfo.FindTargetByType(DataCenter.PartyMembers, TargetType.TheBalance, 0, SpecialActionType.None, TargetType.TheBalance, true);
 			ImGui.Spacing();
-			ImGui.Text("AST Card Targets (Preview):");
-			ImGui.Text($"- The Spear: {spear?.Name ?? "None"}");
-			ImGui.Text($"- The Balance: {balance?.Name ?? "None"}");
+			ImGui.Text(Loc.T("AST Card Targets (Preview):"));
+			ImGui.Text(Loc.F($"- The Spear: {spear?.Name ?? "None"}"));
+			ImGui.Text(Loc.F($"- The Balance: {balance?.Name ?? "None"}"));
 			ImGui.Spacing();
 		}
 
 		foreach (var p in DataCenter.PartyMembers)
 		{
-			var text = $"Name: {p.Name}, HP: {p.GetEffectiveHpPercent()}%";
+			var text = Loc.F($"Name: {p.Name}, HP: {p.GetEffectiveHpPercent()}%");
 
-			ImGui.Text(text);
+			ImGui.Text(Loc.T(text));
 		}
 
 		foreach (var p in Svc.Party)
@@ -620,52 +621,52 @@ public partial class MainWindow
 				continue;
 			}
 
-			var text = $"Name: {b.Name}, In Combat: {b.InCombat()}";
+			var text = Loc.F($"Name: {b.Name}, In Combat: {b.InCombat()}");
 			if (b.TimeAlive() > 0)
 			{
-				text += $", Time Alive: {b.TimeAlive()}";
+				text += Loc.F($", Time Alive: {b.TimeAlive()}");
 			}
 
 			if (b.TimeDead() > 0)
 			{
-				text += $", Time Dead: {b.TimeDead()}";
+				text += Loc.F($", Time Dead: {b.TimeDead()}");
 			}
 
-			ImGui.Text(text);
+			ImGui.Text(Loc.T(text));
 		}
 		ImGui.Spacing();
-		ImGui.Text($"Limit Break: {CustomRotation.LimitBreakLevel}");
+		ImGui.Text(Loc.F($"Limit Break: {CustomRotation.LimitBreakLevel}"));
 		ImGui.Spacing();
-		ImGui.Text($"Object Data");
-		ImGui.Text($"NumberOfPartyMembersInRangeOf 5m: {DataCenter.NumberOfPartyMembersInRangeOf(5)}");
-		ImGui.Text($"AllTargets Count: {DataCenter.AllTargets.Count}");
-		ImGui.Text($"AllHostileTargets Count: {DataCenter.AllHostileTargets.Count}");
+		ImGui.Text(Loc.F($"Object Data"));
+		ImGui.Text(Loc.F($"NumberOfPartyMembersInRangeOf 5m: {DataCenter.NumberOfPartyMembersInRangeOf(5)}"));
+		ImGui.Text(Loc.F($"AllTargets Count: {DataCenter.AllTargets.Count}"));
+		ImGui.Text(Loc.F($"AllHostileTargets Count: {DataCenter.AllHostileTargets.Count}"));
 		foreach (var item in DataCenter.AllHostileTargets)
 		{
-			ImGui.Text(item.Name.ToString());
+			ImGui.Text(Loc.T(item.Name.ToString()));
 		}
 		ImGui.Spacing();
-		ImGui.Text($"Party Composition:");
+		ImGui.Text(Loc.F($"Party Composition:"));
 		var party = CustomRotation.PartyComposition;
 		if (party.Count == 0)
 		{
-			ImGui.Text("No party members.");
+			ImGui.Text(Loc.T("No party members."));
 		}
 		else
 		{
 			for (var i = 0; i < party.Count; i++)
 			{
 				var classJob = party[i].Value;
-				var jobName = classJob.Abbreviation.ToString() ?? classJob.Name.ToString() ?? $"Job #{i}";
-				ImGui.Text($"{i + 1}: {jobName}");
+				var jobName = classJob.Abbreviation.ToString() ?? classJob.Name.ToString() ?? Loc.F($"Job #{i}");
+				ImGui.Text(Loc.F($"{i + 1}: {jobName}"));
 			}
 		}
 		ImGui.Spacing();
 		var mitigationFraction = CustomRotation.GetCurrentMitigationPercent();
-		ImGui.Text($"Current Mitigation Percent: {mitigationFraction * 100f:F1}%");
-		ImGui.Text($"Current Mitigation Percent RAW: {mitigationFraction}");
+		ImGui.Text(Loc.F($"Current Mitigation Percent: {mitigationFraction * 100f:F1}%"));
+		ImGui.Text(Loc.F($"Current Mitigation Percent RAW: {mitigationFraction}"));
 
-		ImGui.Text($"Is Magical Damage Incoming: {CustomRotation.IsMagicalDamageIncoming}");
+		ImGui.Text(Loc.F($"Is Magical Damage Incoming: {CustomRotation.IsMagicalDamageIncoming}"));
 	}
 
 	private static unsafe void DrawTargetData()
@@ -675,31 +676,31 @@ public partial class MainWindow
 			return;
 		}
 
-		ImGui.Text($"Height: {target.Struct()->Height}");
-		ImGui.Text($"Kind: {target.GetObjectKind()}");
-		ImGui.Text($"SubKind: {target.GetBattleNPCSubKind()}");
+		ImGui.Text(Loc.F($"Height: {target.Struct()->Height}"));
+		ImGui.Text(Loc.F($"Kind: {target.GetObjectKind()}"));
+		ImGui.Text(Loc.F($"SubKind: {target.GetBattleNPCSubKind()}"));
 
 		var owner = Svc.Objects.SearchById(target.OwnerId);
 		if (owner != null)
 		{
-			ImGui.Text($"Owner: {owner.Name}");
+			ImGui.Text(Loc.F($"Owner: {owner.Name}"));
 		}
 
 		if (target is IBattleChara battleChara)
 		{
-			ImGui.Text($"IsCasting: {battleChara.IsCasting}");
-			ImGui.Text($"CastID: {battleChara.CastInfo.ActionId}");
-			ImGui.Text($"Is Status Capped: {StatusHelper.IsStatusCapped(battleChara)}");
-			ImGui.Text($"CanSee: {battleChara.CanSee()}");
-			ImGui.Text($"CanBeRaised: {battleChara.CanBeRaised()}");
-			ImGui.Text($"HP: {battleChara.CurrentHp} / {battleChara.MaxHp}");
-			ImGui.Text($"HealthRatio: {battleChara.GetHealthRatio()}");
-			ImGui.Text($"HitboxRadius: {battleChara.HitboxRadius}");
-			ImGui.Text($"Distance To Player: {battleChara.DistanceToPlayer()}");
+			ImGui.Text(Loc.F($"IsCasting: {battleChara.IsCasting}"));
+			ImGui.Text(Loc.F($"CastID: {battleChara.CastInfo.ActionId}"));
+			ImGui.Text(Loc.F($"Is Status Capped: {StatusHelper.IsStatusCapped(battleChara)}"));
+			ImGui.Text(Loc.F($"CanSee: {battleChara.CanSee()}"));
+			ImGui.Text(Loc.F($"CanBeRaised: {battleChara.CanBeRaised()}"));
+			ImGui.Text(Loc.F($"HP: {battleChara.CurrentHp} / {battleChara.MaxHp}"));
+			ImGui.Text(Loc.F($"HealthRatio: {battleChara.GetHealthRatio()}"));
+			ImGui.Text(Loc.F($"HitboxRadius: {battleChara.HitboxRadius}"));
+			ImGui.Text(Loc.F($"Distance To Player: {battleChara.DistanceToPlayer()}"));
 			ImGui.Spacing();
-			ImGui.Text($"NamePlate Icon ID: {battleChara.GetNamePlateIcon()}");
-			ImGui.Text($"Event Type: {battleChara.GetEventType()}");
-			ImGui.Text($"TargetCharaCondition: {battleChara.TargetCharaCondition()}");
+			ImGui.Text(Loc.F($"NamePlate Icon ID: {battleChara.GetNamePlateIcon()}"));
+			ImGui.Text(Loc.F($"Event Type: {battleChara.GetEventType()}"));
+			ImGui.Text(Loc.F($"TargetCharaCondition: {battleChara.TargetCharaCondition()}"));
 			var npcName = string.Empty;
 			var npcEnumName = string.Empty;
 			if (battleChara.NameId != 0)
@@ -709,103 +710,103 @@ public partial class MainWindow
 
 				if (Enum.IsDefined(typeof(NPCName), battleChara.NameId))
 				{
-					npcEnumName = $"{Enum.GetName(typeof(NPCName), battleChara.NameId)}";
+					npcEnumName = Loc.F($"{Enum.GetName(typeof(NPCName), battleChara.NameId)}");
 				}
 			}
-			ImGui.Text($"NPC Name: {npcEnumName}");
-			ImGui.Text($"Name Id: {battleChara.NameId}");
-			ImGui.Text($"Data Id: {battleChara.BaseId}");
+			ImGui.Text(Loc.F($"NPC Name: {npcEnumName}"));
+			ImGui.Text(Loc.F($"Name Id: {battleChara.NameId}"));
+			ImGui.Text(Loc.F($"Data Id: {battleChara.BaseId}"));
 			ImGui.Spacing();
-			ImGui.Text($"Is Attackable: {battleChara.IsAttackable()}");
-			ImGui.Text($"Is Others Players Mob: {battleChara.IsOthersPlayersMob()}");
-			ImGui.Text($"Is Alliance: {battleChara.IsAllianceMember()}");
-			ImGui.Text($"Is Enemy Action Check: {battleChara.IsEnemy()}");
-			ImGui.Text($"IsSpecialExecptionImmune: {battleChara.IsSpecialExceptionImmune()}");
-			ImGui.Text($"IsSpecialImmune: {battleChara.IsSpecialImmune()}");
-			ImGui.Text($"IsTopPriorityNamedHostile: {battleChara.IsTopPriorityNamedHostile()}");
-			ImGui.Text($"IsTopPriorityHostile: {battleChara.IsTopPriorityHostile()}");
+			ImGui.Text(Loc.F($"Is Attackable: {battleChara.IsAttackable()}"));
+			ImGui.Text(Loc.F($"Is Others Players Mob: {battleChara.IsOthersPlayersMob()}"));
+			ImGui.Text(Loc.F($"Is Alliance: {battleChara.IsAllianceMember()}"));
+			ImGui.Text(Loc.F($"Is Enemy Action Check: {battleChara.IsEnemy()}"));
+			ImGui.Text(Loc.F($"IsSpecialExecptionImmune: {battleChara.IsSpecialExceptionImmune()}"));
+			ImGui.Text(Loc.F($"IsSpecialImmune: {battleChara.IsSpecialImmune()}"));
+			ImGui.Text(Loc.F($"IsTopPriorityNamedHostile: {battleChara.IsTopPriorityNamedHostile()}"));
+			ImGui.Text(Loc.F($"IsTopPriorityHostile: {battleChara.IsTopPriorityHostile()}"));
 			ImGui.Spacing();
-			ImGui.Text($"FateID: {battleChara.FateId().ToString() ?? string.Empty}");
-			ImGui.Text($"EventType: {battleChara.GetEventType().ToString() ?? string.Empty}");
+			ImGui.Text(Loc.F($"FateID: {battleChara.FateId().ToString() ?? string.Empty}"));
+			ImGui.Text(Loc.F($"EventType: {battleChara.GetEventType().ToString() ?? string.Empty}"));
 			if (DataCenter.IsInBozja)
 			{
-				ImGui.Text($"IsBozjanCEFateMob: {battleChara.IsBozjanCEMob()}");
+				ImGui.Text(Loc.F($"IsBozjanCEFateMob: {battleChara.IsBozjanCEMob()}"));
 			}
 			ImGui.Spacing();
 			if (DataCenter.IsInOccultCrescentOp)
 			{
-				ImGui.Text($"IsOccultCEMob: {battleChara.IsOccultCEMob()}");
-				ImGui.Text($"IsOccultFateMob: {battleChara.IsOccultFateMob()}");
-				ImGui.Text($"IsOCUndeadTarget: {battleChara.IsOCUndeadTarget()}");
-				ImGui.Text($"IsOCSlowgaImmuneTarget: {battleChara.IsOCSlowgaImmuneTarget()}");
-				ImGui.Text($"IsOCDoomImmuneTarget: {battleChara.IsOCDoomImmuneTarget()}");
-				ImGui.Text($"IsOCStunImmuneTarget: {battleChara.IsOCStunImmuneTarget()}");
-				ImGui.Text($"IsOCFreezeImmuneTarget: {battleChara.IsOCFreezeImmuneTarget()}");
-				ImGui.Text($"IsOCBlindImmuneTarget: {battleChara.IsOCBlindImmuneTarget()}");
-				ImGui.Text($"IsOCParalysisImmuneTarget: {battleChara.IsOCParalysisImmuneTarget()}");
+				ImGui.Text(Loc.F($"IsOccultCEMob: {battleChara.IsOccultCEMob()}"));
+				ImGui.Text(Loc.F($"IsOccultFateMob: {battleChara.IsOccultFateMob()}"));
+				ImGui.Text(Loc.F($"IsOCUndeadTarget: {battleChara.IsOCUndeadTarget()}"));
+				ImGui.Text(Loc.F($"IsOCSlowgaImmuneTarget: {battleChara.IsOCSlowgaImmuneTarget()}"));
+				ImGui.Text(Loc.F($"IsOCDoomImmuneTarget: {battleChara.IsOCDoomImmuneTarget()}"));
+				ImGui.Text(Loc.F($"IsOCStunImmuneTarget: {battleChara.IsOCStunImmuneTarget()}"));
+				ImGui.Text(Loc.F($"IsOCFreezeImmuneTarget: {battleChara.IsOCFreezeImmuneTarget()}"));
+				ImGui.Text(Loc.F($"IsOCBlindImmuneTarget: {battleChara.IsOCBlindImmuneTarget()}"));
+				ImGui.Text(Loc.F($"IsOCParalysisImmuneTarget: {battleChara.IsOCParalysisImmuneTarget()}"));
 				ImGui.Spacing();
 			}
-			ImGui.Text($"Is Current Focus Target: {battleChara.IsFocusTarget()}");
-			ImGui.Text($"TTK: {battleChara.GetTTK()}");
-			ImGui.Text($"Is Boss TTK: {battleChara.IsBossFromTTK()}");
-			ImGui.Text($"Is Boss Icon: {battleChara.IsBossFromIcon()}");
-			ImGui.Text($"Rank: {battleChara.GetObjectNPC()?.Rank.ToString() ?? string.Empty}");
-			ImGui.Text($"Has Positional: {battleChara.HasPositional()}");
-			ImGui.Text($"IsNpcPartyMember: {battleChara.IsNpcPartyMember()}");
-			ImGui.Text($"IsPlayerCharacterChocobo: {battleChara.IsPlayerCharacterChocobo()}");
-			ImGui.Text($"IsFriendlyBattleNPC: {battleChara.IsFriendlyBattleNPC()}");
-			ImGui.Text($"Is Dying: {battleChara.IsDying()}");
-			ImGui.Text($"Is Alive: {battleChara.IsAlive()}");
-			ImGui.Text($"Is Party: {battleChara.IsParty()}");
-			ImGui.Text($"Is Healer: {battleChara.IsJobCategory(JobRole.Healer)}");
-			ImGui.Text($"Is DPS: {battleChara.IsJobCategory(JobRole.AllDPS)}");
-			ImGui.Text($"Is Tank: {battleChara.IsJobCategory(JobRole.Tank)}");
-			ImGui.Text($"Is Alliance: {battleChara.IsAllianceMember()}");
-			ImGui.Text($"CanProvoke: {battleChara.CanProvoke()}");
-			ImGui.Text($"StatusFlags: {battleChara.StatusFlags}");
-			ImGui.Text($"InView: {Svc.GameGui.WorldToScreen(battleChara.Position, out _)}");
-			ImGui.Text($"Enemy Positional: {battleChara.FindEnemyPositional()}");
-			ImGui.Text($"NameplateKind: {battleChara.GetNameplateKind()}");
-			ImGui.Text($"BattleNPCSubKind: {battleChara.GetBattleNPCSubKind()}");
-			ImGui.Text($"Is Top Priority Hostile: {battleChara.IsTopPriorityHostile()}");
-			ImGui.Text($"Targetable: {battleChara.Struct()->Character.GameObject.TargetableStatus}");
+			ImGui.Text(Loc.F($"Is Current Focus Target: {battleChara.IsFocusTarget()}"));
+			ImGui.Text(Loc.F($"TTK: {battleChara.GetTTK()}"));
+			ImGui.Text(Loc.F($"Is Boss TTK: {battleChara.IsBossFromTTK()}"));
+			ImGui.Text(Loc.F($"Is Boss Icon: {battleChara.IsBossFromIcon()}"));
+			ImGui.Text(Loc.F($"Rank: {battleChara.GetObjectNPC()?.Rank.ToString() ?? string.Empty}"));
+			ImGui.Text(Loc.F($"Has Positional: {battleChara.HasPositional()}"));
+			ImGui.Text(Loc.F($"IsNpcPartyMember: {battleChara.IsNpcPartyMember()}"));
+			ImGui.Text(Loc.F($"IsPlayerCharacterChocobo: {battleChara.IsPlayerCharacterChocobo()}"));
+			ImGui.Text(Loc.F($"IsFriendlyBattleNPC: {battleChara.IsFriendlyBattleNPC()}"));
+			ImGui.Text(Loc.F($"Is Dying: {battleChara.IsDying()}"));
+			ImGui.Text(Loc.F($"Is Alive: {battleChara.IsAlive()}"));
+			ImGui.Text(Loc.F($"Is Party: {battleChara.IsParty()}"));
+			ImGui.Text(Loc.F($"Is Healer: {battleChara.IsJobCategory(JobRole.Healer)}"));
+			ImGui.Text(Loc.F($"Is DPS: {battleChara.IsJobCategory(JobRole.AllDPS)}"));
+			ImGui.Text(Loc.F($"Is Tank: {battleChara.IsJobCategory(JobRole.Tank)}"));
+			ImGui.Text(Loc.F($"Is Alliance: {battleChara.IsAllianceMember()}"));
+			ImGui.Text(Loc.F($"CanProvoke: {battleChara.CanProvoke()}"));
+			ImGui.Text(Loc.F($"StatusFlags: {battleChara.StatusFlags}"));
+			ImGui.Text(Loc.F($"InView: {Svc.GameGui.WorldToScreen(battleChara.Position, out _)}"));
+			ImGui.Text(Loc.F($"Enemy Positional: {battleChara.FindEnemyPositional()}"));
+			ImGui.Text(Loc.F($"NameplateKind: {battleChara.GetNameplateKind()}"));
+			ImGui.Text(Loc.F($"BattleNPCSubKind: {battleChara.GetBattleNPCSubKind()}"));
+			ImGui.Text(Loc.F($"Is Top Priority Hostile: {battleChara.IsTopPriorityHostile()}"));
+			ImGui.Text(Loc.F($"Targetable: {battleChara.Struct()->Character.GameObject.TargetableStatus}"));
 			if (DataCenter.IsInMaskedCarnivale)
 			{
 				ImGui.Spacing();
-				ImGui.Text($"Aspect Resistance (Fire): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Fire)}");
-				ImGui.Text($"Aspect Resistance (Ice): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Ice)}");
-				ImGui.Text($"Aspect Resistance (Wind): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Wind)}");
-				ImGui.Text($"Aspect Resistance (Earth): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Earth)}");
-				ImGui.Text($"Aspect Resistance (Lightning): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Lightning)}");
-				ImGui.Text($"Aspect Resistance (Water): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Water)}");
-				ImGui.Text($"Aspect Resistance (Slashing): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Slashing)}");
-				ImGui.Text($"Aspect Resistance (Piercing): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Piercing)}");
-				ImGui.Text($"Aspect Resistance (Blunt): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Blunt)}");
+				ImGui.Text(Loc.F($"Aspect Resistance (Fire): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Fire)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Ice): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Ice)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Wind): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Wind)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Earth): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Earth)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Lightning): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Lightning)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Water): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Water)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Slashing): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Slashing)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Piercing): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Piercing)}"));
+				ImGui.Text(Loc.F($"Aspect Resistance (Blunt): {MaskedCarnivaleHelper.GetAspectResistance(battleChara, Aspect.Blunt)}"));
 				ImGui.Spacing();
-				ImGui.Text($"IsVulnerableToSlow: {MaskedCarnivaleHelper.IsVulnerableToSlow(battleChara)}");
-				ImGui.Text($"IsVulnerableToPetrification: {MaskedCarnivaleHelper.IsVulnerableToPetrification(battleChara)}");
-				ImGui.Text($"IsVulnerableToParalysis: {MaskedCarnivaleHelper.IsVulnerableToParalysis(battleChara)}");
-				ImGui.Text($"IsVulnerableToInterruption: {MaskedCarnivaleHelper.IsVulnerableToInterruption(battleChara)}");
-				ImGui.Text($"IsVulnerableToBlind: {MaskedCarnivaleHelper.IsVulnerableToBlind(battleChara)}");
-				ImGui.Text($"IsVulnerableToStun: {MaskedCarnivaleHelper.IsVulnerableToStun(battleChara)}");
-				ImGui.Text($"IsVulnerableToSleep: {MaskedCarnivaleHelper.IsVulnerableToSleep(battleChara)}");
-				ImGui.Text($"IsVulnerableToBind: {MaskedCarnivaleHelper.IsVulnerableToBind(battleChara)}");
-				ImGui.Text($"IsVulnerableToHeavy: {MaskedCarnivaleHelper.IsVulnerableToHeavy(battleChara)}");
-				ImGui.Text($"IsVulnerableToFlatOrDeath: {MaskedCarnivaleHelper.IsVulnerableToFlatOrDeath(battleChara)}");
+				ImGui.Text(Loc.F($"IsVulnerableToSlow: {MaskedCarnivaleHelper.IsVulnerableToSlow(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToPetrification: {MaskedCarnivaleHelper.IsVulnerableToPetrification(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToParalysis: {MaskedCarnivaleHelper.IsVulnerableToParalysis(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToInterruption: {MaskedCarnivaleHelper.IsVulnerableToInterruption(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToBlind: {MaskedCarnivaleHelper.IsVulnerableToBlind(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToStun: {MaskedCarnivaleHelper.IsVulnerableToStun(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToSleep: {MaskedCarnivaleHelper.IsVulnerableToSleep(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToBind: {MaskedCarnivaleHelper.IsVulnerableToBind(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToHeavy: {MaskedCarnivaleHelper.IsVulnerableToHeavy(battleChara)}"));
+				ImGui.Text(Loc.F($"IsVulnerableToFlatOrDeath: {MaskedCarnivaleHelper.IsVulnerableToFlatOrDeath(battleChara)}"));
 			}
 			ImGui.Spacing();
-			ImGui.Text($"Statuses:");
+			ImGui.Text(Loc.F($"Statuses:"));
 			using var statusTable = ImRaii.Table("TargetStatusTable", 5,
 				ImGuiTableFlags.BordersInner | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingStretchProp | ImGuiTableFlags.ScrollY,
 				new Vector2(0, 200 * Scale));
 			if (statusTable)
 			{
 				ImGui.TableSetupScrollFreeze(0, 1);
-				ImGui.TableSetupColumn("Name");
-				ImGui.TableSetupColumn("ID");
-				ImGui.TableSetupColumn("Source");
-				ImGui.TableSetupColumn("Stacks");
-				ImGui.TableSetupColumn("Time");
+				ImGui.TableSetupColumn(Loc.T("Name"));
+				ImGui.TableSetupColumn(Loc.T("ID"));
+				ImGui.TableSetupColumn(Loc.T("Source"));
+				ImGui.TableSetupColumn(Loc.T("Stacks"));
+				ImGui.TableSetupColumn(Loc.T("Time"));
 				ImGui.TableHeadersRow();
 
 				foreach (var status in battleChara.StatusList)
@@ -822,15 +823,15 @@ public partial class MainWindow
 
 					ImGui.TableNextRow();
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(status.GameData.Value.Name.ToString());
+					ImGui.TextUnformatted(Loc.T(status.GameData.Value.Name.ToString()));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(status.StatusId.ToString());
+					ImGui.TextUnformatted(Loc.T(status.StatusId.ToString()));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(source);
+					ImGui.TextUnformatted(Loc.T(source));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(stackDisplay);
+					ImGui.TextUnformatted(Loc.T(stackDisplay));
 					_ = ImGui.TableNextColumn();
-					ImGui.TextUnformatted(timeDisplay);
+					ImGui.TextUnformatted(Loc.T(timeDisplay));
 				}
 			}
 		}
@@ -838,15 +839,15 @@ public partial class MainWindow
 
 	private static void DrawNextAction()
 	{
-		ImGui.Text(DataCenter.CurrentRotation?.GetAttributes()?.Name);
-		ImGui.Text(DataCenter.SpecialType.ToString());
+		ImGui.Text(Loc.T(DataCenter.CurrentRotation?.GetAttributes()?.Name));
+		ImGui.Text(Loc.T(DataCenter.SpecialType.ToString()));
 
-		ImGui.Text(ActionUpdater.NextAction?.Name ?? "null");
-		ImGui.Text($"GCD Total: {DataCenter.DefaultGCDTotal}");
-		ImGui.Text($"GCD Remain: {DataCenter.DefaultGCDRemain}");
-		ImGui.Text($"GCD Elapsed: {DataCenter.DefaultGCDElapsed}");
-		ImGui.Text($"Calculated Action Ahead: {DataCenter.CalculatedActionAhead}");
-		ImGui.Text($"Animation Lock Delay: {DataCenter.AnimationLock}");
+		ImGui.Text(Loc.T(ActionUpdater.NextAction?.Name ?? "null"));
+		ImGui.Text(Loc.F($"GCD Total: {DataCenter.DefaultGCDTotal}"));
+		ImGui.Text(Loc.F($"GCD Remain: {DataCenter.DefaultGCDRemain}"));
+		ImGui.Text(Loc.F($"GCD Elapsed: {DataCenter.DefaultGCDElapsed}"));
+		ImGui.Text(Loc.F($"Calculated Action Ahead: {DataCenter.CalculatedActionAhead}"));
+		ImGui.Text(Loc.F($"Animation Lock Delay: {DataCenter.AnimationLock}"));
 	}
 
 	private static void DrawLastAction()
@@ -855,8 +856,8 @@ public partial class MainWindow
 		DrawAction(DataCenter.LastAbility, nameof(DataCenter.LastAbility));
 		DrawAction(DataCenter.LastGCD, nameof(DataCenter.LastGCD));
 		DrawAction(DataCenter.LastComboAction, nameof(DataCenter.LastComboAction));
-		ImGui.Text($"IsLastActionAbility: {IActionHelper.IsLastActionAbility()}");
-		ImGui.Text($"IsLastActionGCD: {IActionHelper.IsLastActionGCD()}");
+		ImGui.Text(Loc.F($"IsLastActionAbility: {IActionHelper.IsLastActionAbility()}"));
+		ImGui.Text(Loc.F($"IsLastActionGCD: {IActionHelper.IsLastActionGCD()}"));
 	}
 
 	private static string _ipcTestText = "Sent data";
@@ -864,67 +865,67 @@ public partial class MainWindow
 	private static void DrawIPC()
 	{
 		ImGui.SetNextItemWidth(200 * Scale);
-		ImGui.InputText("##IPCTextBox", ref _ipcTestText, 128);
+		ImGui.InputText(Loc.Label("##IPCTextBox"), ref _ipcTestText, 128);
 		ImGui.SameLine();
-		if (ImGui.Button("Test Function"))
+		if (ImGui.Button(Loc.Label("Test Function")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.Test(_ipcTestText);
 		}
 
-		if (ImGui.Button("Test ChangeOperatingMode to Manual IPC"))
+		if (ImGui.Button(Loc.Label("Test ChangeOperatingMode to Manual IPC")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.ChangeOperatingMode(StateCommandType.Manual);
 		}
 
-		if (ImGui.Button("Test ChangeOperatingMode to Off IPC"))
+		if (ImGui.Button(Loc.Label("Test ChangeOperatingMode to Off IPC")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.ChangeOperatingMode(StateCommandType.Off);
 		}
 
-		if (ImGui.Button("Test TriggerSpecialState DefenseArea IPC"))
+		if (ImGui.Button(Loc.Label("Test TriggerSpecialState DefenseArea IPC")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.TriggerSpecialState(SpecialCommandType.DefenseArea);
 		}
 
-		if (ImGui.Button("Test TriggerSpecialState AntiKnockback IPC"))
+		if (ImGui.Button(Loc.Label("Test TriggerSpecialState AntiKnockback IPC")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.TriggerSpecialState(SpecialCommandType.AntiKnockback);
 		}
 
-		if (ImGui.Button("Test Setting IPC (Changing engage setting to All Target)"))
+		if (ImGui.Button(Loc.Label("Test Setting IPC (Changing engage setting to All Target)")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.OtherCommand(OtherCommandType.Settings, "HostileType AllTargetsCanAttack");
 		}
 
-		if (ImGui.Button("Test OtherCommand DoAction IPC (Magick Barrier on RDM)"))
+		if (ImGui.Button(Loc.Label("Test OtherCommand DoAction IPC (Magick Barrier on RDM)")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.OtherCommand(OtherCommandType.DoActions, "Magick Barrier-5");
 		}
 
-		if (ImGui.Button("Test ToggleAction IPC (Magick Barrier on RDM)"))
+		if (ImGui.Button(Loc.Label("Test ToggleAction IPC (Magick Barrier on RDM)")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.OtherCommand(OtherCommandType.ToggleActions, "Magick Barrier");
 		}
 
-		if (ImGui.Button("Test ActionCommand IPC (Magick Barrier on RDM)"))
+		if (ImGui.Button(Loc.Label("Test ActionCommand IPC (Magick Barrier on RDM)")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.ActionCommand("Magick Barrier", 7);
 		}
-		if (ImGui.Button("Test AutodutyChangeOperatingMode IPC (AutoDuty, HighHPPercent)"))
+		if (ImGui.Button(Loc.Label("Test AutodutyChangeOperatingMode IPC (AutoDuty, HighHPPercent)")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.AutodutyChangeOperatingMode(StateCommandType.AutoDuty, TargetingType.HighHPPercent);
 		}
-		if (ImGui.Button("Test Henchman IPC support"))
+		if (ImGui.Button(Loc.Label("Test Henchman IPC support")))
 		{
 			var ipcProvider = RotationSolverPlugin.IPCProvider;
 			ipcProvider.ChangeOperatingMode(StateCommandType.Henched);
@@ -933,15 +934,15 @@ public partial class MainWindow
 
 	private static void DrawBMRData()
 	{
-		ImGui.Text($"Cooldown Planner IPC Enabled: {BMRPlan_IPCSubscriber.IsEnabled}");
-		ImGui.Text($"BMRPlannedActionsCount: {DataCenter.BMRPlannedActions.Count}");
-		ImGui.Text($"BMRForceCancelCast: {DataCenter.BMRForceCancelCast}");
-		ImGui.Text($"BMRForceCancelCastAI: {DataCenter.BMRForceCancelCastAI}");
-		ImGui.Text($"BMRIsMoving: {DataCenter.BMRIsMoving}");
+		ImGui.Text(Loc.F($"Cooldown Planner IPC Enabled: {BMRPlan_IPCSubscriber.IsEnabled}"));
+		ImGui.Text(Loc.F($"BMRPlannedActionsCount: {DataCenter.BMRPlannedActions.Count}"));
+		ImGui.Text(Loc.F($"BMRForceCancelCast: {DataCenter.BMRForceCancelCast}"));
+		ImGui.Text(Loc.F($"BMRForceCancelCastAI: {DataCenter.BMRForceCancelCastAI}"));
+		ImGui.Text(Loc.F($"BMRIsMoving: {DataCenter.BMRIsMoving}"));
 	}
 
 	private static void DrawAction(ActionID id, string type)
 	{
-		ImGui.Text($"{type}: {id}");
+		ImGui.Text(Loc.F($"{type}: {id}"));
 	}
 }

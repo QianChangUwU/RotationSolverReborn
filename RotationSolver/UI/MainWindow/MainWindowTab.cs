@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace RotationSolver.UI;
 
@@ -85,6 +85,8 @@ internal static class MainWindowTabExtensions
 			MainWindowTab.Rotation => "循环",
 			MainWindowTab.Main => "主窗口",
 			MainWindowTab.Job => "职业",
+			MainWindowTab.DutyRotation => "副本循环",
+			MainWindowTab.AutoDuty => "AutoDuty",
 			MainWindowTab.Duty => "任务",
 			MainWindowTab.Actions => "技能",
 			MainWindowTab.List => "列表",

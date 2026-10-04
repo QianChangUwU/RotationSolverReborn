@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Utility.Raii;
 using RotationSolver.UI.Material;
 
@@ -299,7 +300,7 @@ internal static class MaterialGallery
 			if (ImGui.InvisibleButton($"##role_{name}", size))
 			{
 				ImGui.SetClipboardText(hex);
-				M3Snackbar.Show($"Copied {name} ({hex})");
+				M3Snackbar.Show(Loc.F($"Copied {name} ({hex})"));
 			}
 
 			var hovered = ImGui.IsItemHovered();
@@ -314,8 +315,8 @@ internal static class MaterialGallery
 			using (ImRaii.PushFont(M3.LabelSmall))
 			{
 				var line = ImGui.GetTextLineHeight();
-				drawList.AddText(min + (new Vector2(8f, 6f) * scale), M3.U32(content), name);
-				drawList.AddText(new Vector2(min.X + (8f * scale), max.Y - line - (6f * scale)), M3.U32(content, 0.75f), hex);
+				drawList.AddText(min + (new Vector2(8f, 6f) * scale), M3.U32(content), Loc.T(name));
+				drawList.AddText(new Vector2(min.X + (8f * scale), max.Y - line - (6f * scale)), M3.U32(content, 0.75f), Loc.T(hex));
 			}
 
 			if (hovered)
@@ -341,12 +342,12 @@ internal static class MaterialGallery
 			float size;
 			using (ImRaii.PushFont(font))
 			{
-				ImGui.TextUnformatted($"{name} — The quick brown fox");
+				ImGui.TextUnformatted(Loc.F($"{name} — The quick brown fox"));
 				size = ImGui.GetFontSize();
 			}
 
 			ImGui.SameLine(0f, M3.Space2);
-			Caption($"{size:0}px");
+			Caption(Loc.F($"{size:0}px"));
 		}
 	}
 
@@ -393,7 +394,7 @@ internal static class MaterialGallery
 				var drawList = ImGui.GetWindowDrawList();
 				M3Draw.Elevation(drawList, min, max, M3.ShapeMedium, level);
 				drawList.AddRectFilled(min, max, M3.U32(s.SurfaceContainerLow), M3.ShapeMedium);
-				Caption($"Level {level}");
+				Caption(Loc.F($"Level {level}"));
 			}
 		}
 	}
@@ -419,8 +420,8 @@ internal static class MaterialGallery
 			var max = ImGui.GetItemRectMax();
 			var drawList = ImGui.GetWindowDrawList();
 			drawList.AddRectFilled(min, max, M3.U32(container), box.Y * 0.5f);
-			var textSize = ImGui.CalcTextSize(name);
-			drawList.AddText(min + ((box - textSize) * 0.5f), M3.U32(content), name);
+			var textSize = ImGui.CalcTextSize(Loc.T(name));
+			drawList.AddText(min + ((box - textSize) * 0.5f), M3.U32(content), Loc.T(name));
 		}
 	}
 
@@ -439,11 +440,11 @@ internal static class MaterialGallery
 			drawList.AddRectFilled(min, max, M3.U32(M3.SeverityContainer(severity), 0.8f), M3.ShapeSmall);
 
 			var name = severity.ToString();
-			var textSize = ImGui.CalcTextSize(name);
+			var textSize = ImGui.CalcTextSize(Loc.T(name));
 			var radius = 4f * M3.Scale;
 			var left = min.X + ((box.X - textSize.X - (radius * 2f) - M3.Space2) * 0.5f);
 			drawList.AddCircleFilled(new Vector2(left + radius, min.Y + (box.Y * 0.5f)), radius, M3.U32(accent), 12);
-			drawList.AddText(new Vector2(left + (radius * 2f) + M3.Space2, min.Y + ((box.Y - textSize.Y) * 0.5f)), M3.U32(accent), name);
+			drawList.AddText(new Vector2(left + (radius * 2f) + M3.Space2, min.Y + ((box.Y - textSize.Y) * 0.5f)), M3.U32(accent), Loc.T(name));
 		}
 	}
 
@@ -457,8 +458,8 @@ internal static class MaterialGallery
 
 		(string Name, float Duration)[] tracks =
 		[
-			($"Fast - {M3Motion.FastDuration * 1000f:0}ms", M3Motion.FastDuration),
-			($"Emphasised - {M3Motion.EmphasisedDuration * 1000f:0}ms", M3Motion.EmphasisedDuration),
+			(Loc.F($"Fast - {M3Motion.FastDuration * 1000f:0}ms"), M3Motion.FastDuration),
+			(Loc.F($"Emphasised - {M3Motion.EmphasisedDuration * 1000f:0}ms"), M3Motion.EmphasisedDuration),
 		];
 
 		var width = MathF.Min(ImGui.GetContentRegionAvail().X, 320f * scale);
@@ -558,7 +559,7 @@ internal static class MaterialGallery
 		flow = new Flow(M3.Space2);
 		for (var i = 0; i < _buttonStyles.Length; i++)
 		{
-			var label = $"{_buttonStyles[i]} + icon";
+			var label = Loc.F($"{_buttonStyles[i]} + icon");
 			flow.Next(M3Widgets.ButtonWidth(_buttonIcons[i], label));
 			if (M3Widgets.Button($"##button_icon_{i}", label, _buttonStyles[i], _buttonIcons[i], tooltip: "Buttons take a tooltip"))
 			{
@@ -569,7 +570,7 @@ internal static class MaterialGallery
 		flow = new Flow(M3.Space2);
 		foreach (var style in _buttonStyles)
 		{
-			var label = $"{style} (disabled)";
+			var label = Loc.F($"{style} (disabled)");
 			flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.None, label));
 			_ = M3Widgets.Button($"##button_disabled_{style}", label, style, enabled: false);
 		}
@@ -585,9 +586,9 @@ internal static class MaterialGallery
 		for (var i = 0; i < _buttonStyles.Length; i++)
 		{
 			flow.Next(M3Widgets.IconButtonSize);
-			if (M3Widgets.IconButton($"##icon_{i}", _buttonIcons[i], $"{_buttonStyles[i]} icon button", _buttonStyles[i]))
+			if (M3Widgets.IconButton($"##icon_{i}", _buttonIcons[i], Loc.F($"{_buttonStyles[i]} icon button"), _buttonStyles[i]))
 			{
-				Pressed($"{_buttonStyles[i]} icon button");
+				Pressed(Loc.F($"{_buttonStyles[i]} icon button"));
 			}
 		}
 
@@ -614,7 +615,7 @@ internal static class MaterialGallery
 		{
 			var (icon, selected, style, tip) = toggles[i];
 			flow.Next(M3Widgets.IconButtonSize);
-			_ = M3Widgets.IconToggle($"##toggle_{i}", icon, ref _toggles[i], $"{tip}: {(_toggles[i] ? "on" : "off")}", style, selected);
+			_ = M3Widgets.IconToggle($"##toggle_{i}", icon, ref _toggles[i], Loc.F($"{tip}: {(_toggles[i] ? "on" : "off")}"), style, selected);
 		}
 
 		Heading("Window actions", isNew: true);
@@ -764,21 +765,21 @@ internal static class MaterialGallery
 			flow.Next(M3Widgets.InputChipWidth(_tags[i], FontAwesomeIcon.Tag));
 			if (M3Widgets.InputChip($"##tag_{i}", _tags[i], out var removed, FontAwesomeIcon.Tag, "Click the body, or the cross to remove"))
 			{
-				M3Snackbar.Show($"Opened {_tags[i]}");
+				M3Snackbar.Show(Loc.F($"Opened {_tags[i]}"));
 			}
 
 			if (removed)
 			{
 				var tag = _tags[i];
 				_tags.RemoveAt(i--);
-				M3Snackbar.Show($"Removed {tag}", "Undo", () => _tags.Add(tag));
+				M3Snackbar.Show(Loc.F($"Removed {tag}"), "Undo", () => _tags.Add(tag));
 			}
 		}
 
 		flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.Plus, "Add"));
 		if (M3Widgets.Button("##tag_add", "Add", M3ButtonStyle.Text, FontAwesomeIcon.Plus))
 		{
-			_tags.Add($"Status {_nextTag++}");
+			_tags.Add(Loc.F($"Status {_nextTag++}"));
 		}
 
 		Heading("Pills");
@@ -800,14 +801,14 @@ internal static class MaterialGallery
 
 		Heading("Sliders");
 		var track = 200f * scale;
-		_ = M3Widgets.Slider("##slider_float", ref _slider, 0f, 1f, $"{_slider:P0}", track);
+		_ = M3Widgets.Slider("##slider_float", ref _slider, 0f, 1f, Loc.F($"{_slider:P0}"), track);
 		_ = M3Widgets.SliderInt("##slider_int", ref _sliderInt, 0, 10, _sliderInt.ToString(), track);
 		_ = M3Widgets.RowDragFloat("Row slider (float)###gallery_row_float", ref _rowFloat, 0f, 5f, "%.1f s");
 		_ = M3Widgets.RowDragInt("Row slider (int)###gallery_row_int", ref _rowInt, 0, 30);
 
 		Heading("Colour swatch");
 		_ = M3Widgets.ColorSwatch("##gallery_swatch", ref _swatch);
-		Beside($"Opens a picker. Now {Hex(_swatch)}.");
+		Beside(Loc.F($"Opens a picker. Now {Hex(_swatch)}."));
 	}
 
 	#endregion
@@ -862,7 +863,7 @@ internal static class MaterialGallery
 		{
 			if (M3Widgets.Banner($"##banner_{severity}", message, severity, icon, action, "Banners take a tooltip"))
 			{
-				Pressed($"{severity} banner action");
+				Pressed(Loc.F($"{severity} banner action"));
 			}
 
 			ImGui.Dummy(new Vector2(0f, M3.Space1));
@@ -871,7 +872,7 @@ internal static class MaterialGallery
 		Heading("Linear progress");
 		M3Widgets.LinearProgress(new Vector2(width, 6f * scale), _progress, 0.75f);
 		ImGui.Dummy(new Vector2(0f, M3.Space1));
-		_ = M3Widgets.Slider("##gallery_progress", ref _progress, 0f, 1f, $"{_progress:P0}", 200f * scale);
+		_ = M3Widgets.Slider("##gallery_progress", ref _progress, 0f, 1f, Loc.F($"{_progress:P0}"), 200f * scale);
 		Caption("The tick marks a threshold, here 75%.");
 
 		Heading("Indeterminate linear progress", isNew: true);
@@ -916,28 +917,28 @@ internal static class MaterialGallery
 		flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.None, "Message"));
 		if (M3Widgets.Button("##snack_plain", "Message", M3ButtonStyle.Tonal))
 		{
-			M3Snackbar.Show("Copied to clipboard");
+			M3Snackbar.Show(Loc.T("Copied to clipboard"));
 		}
 
 		flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.None, "With action"));
 		if (M3Widgets.Button("##snack_action", "With action", M3ButtonStyle.Tonal))
 		{
-			M3Snackbar.Show("Rotation settings reset", "Undo", () => M3Snackbar.Show("Undone"));
+			M3Snackbar.Show(Loc.T("Rotation settings reset"), "Undo", () => M3Snackbar.Show(Loc.T("Undone")));
 		}
 
 		flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.None, "Long text"));
 		if (M3Widgets.Button("##snack_long", "Long text", M3ButtonStyle.Tonal))
 		{
-			M3Snackbar.Show("A longer snackbar wraps onto a second line when it will not fit on one, and stays up for the long duration.",
+			M3Snackbar.Show(Loc.T("A longer snackbar wraps onto a second line when it will not fit on one, and stays up for the long duration."),
 				"Got it", duration: M3Snackbar.LongDuration);
 		}
 
 		flow.Next(M3Widgets.ButtonWidth(FontAwesomeIcon.None, "Queue three"));
 		if (M3Widgets.Button("##snack_queue", "Queue three", M3ButtonStyle.Tonal))
 		{
-			M3Snackbar.Show("First of three", duration: 2f);
-			M3Snackbar.Show("Second of three", duration: 2f);
-			M3Snackbar.Show("Third of three", duration: 2f);
+			M3Snackbar.Show(Loc.T("First of three"), duration: 2f);
+			M3Snackbar.Show(Loc.T("Second of three"), duration: 2f);
+			M3Snackbar.Show(Loc.T("Third of three"), duration: 2f);
 		}
 
 		Heading("Dialogs", isNew: true);
@@ -981,7 +982,7 @@ internal static class MaterialGallery
 				_ = M3Widgets.RowSwitch("Also reset action settings###gallery_dialog_switch", ref _dialogSwitch);
 				if (M3Dialog.Actions([new("Cancel"), new("Reset", M3ButtonStyle.Danger, FontAwesomeIcon.Undo)]) == 1)
 				{
-					M3Snackbar.Show(_dialogSwitch ? "Pretended to reset everything" : "Pretended to reset the rotation");
+					M3Snackbar.Show(Loc.T(_dialogSwitch ? "Pretended to reset everything" : "Pretended to reset the rotation"));
 				}
 			}
 		}
@@ -1007,9 +1008,9 @@ internal static class MaterialGallery
 		Heading("Cards");
 		foreach (var style in Enum.GetValues<M3CardStyle>())
 		{
-			using var card = M3Card.Begin($"gallery_card_{style}", $"{style} card", FontAwesomeIcon.Square, style: style,
+			using var card = M3Card.Begin($"gallery_card_{style}", Loc.F($"{style} card"), FontAwesomeIcon.Square, style: style,
 				subtitle: "A subtitle wraps under the title.");
-			ImGui.TextWrapped("Card content is inset from the accent rail, and wrapped text stops at the card's padding.");
+			ImGui.TextWrapped(Loc.T("Card content is inset from the accent rail, and wrapped text stops at the card's padding."));
 		}
 
 		using (var card = M3Card.Begin("gallery_card_accent", "Accented card", FontAwesomeIcon.Leaf, s.Tertiary))
@@ -1142,7 +1143,7 @@ internal static class MaterialGallery
 			}
 		}
 
-		Caption($"The drawer collapses to the rail below {M3Navigation.DrawerBreakpoint:0}dp. Both share one selection.");
+		Caption(Loc.F($"The drawer collapses to the rail below {M3Navigation.DrawerBreakpoint:0}dp. Both share one selection."));
 
 		Heading("Tabs", isNew: true);
 		Caption("The page switcher at the top of this gallery is a primary tab row too.");
@@ -1175,7 +1176,7 @@ internal static class MaterialGallery
 
 	private static void Heading(string title, bool isNew = false)
 	{
-		M3Widgets.SectionLabel(isNew ? $"{title} - new" : title, isNew ? M3.Scheme.Tertiary : null);
+		M3Widgets.SectionLabel(isNew ? Loc.F($"{title} - new") : title, isNew ? M3.Scheme.Tertiary : null);
 	}
 
 	private static float RowWidth => ImGui.GetContentRegionAvail().X - M3Card.RightInset;
@@ -1183,7 +1184,7 @@ internal static class MaterialGallery
 	private static void Caption(string text)
 	{
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(M3.Scheme.OnSurfaceVariant, 0.9f));
-		ImGui.TextUnformatted(text);
+		ImGui.TextUnformatted(Loc.T(text));
 	}
 
 	private static void Beside(string text, bool muted = true)
@@ -1198,13 +1199,13 @@ internal static class MaterialGallery
 		}
 		else
 		{
-			ImGui.TextUnformatted(text);
+			ImGui.TextUnformatted(Loc.T(text));
 		}
 	}
 
 	private static void Pressed(string what)
 	{
-		M3Snackbar.Show($"{what} pressed", duration: 2f);
+		M3Snackbar.Show(Loc.F($"{what} pressed"), duration: 2f);
 	}
 
 	private static string Hex(Vector4 color)

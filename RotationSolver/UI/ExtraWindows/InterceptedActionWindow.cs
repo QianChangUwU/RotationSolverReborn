@@ -54,8 +54,8 @@ internal class InterceptedActionWindow : Window
 		var totalWidth = gcdWidth + abilityWidth + ImGui.GetStyle().ItemSpacing.X;
 
 		var title = "Intercept System";
-		ImGui.SetCursorPosX(ImGui.GetCursorPosX() + (totalWidth / 2) - (ImGui.CalcTextSize(title).X / 2));
-		ImGui.TextColored(ImGuiColors.DalamudYellow, title);
+		ImGui.SetCursorPosX(ImGui.GetCursorPosX() + (totalWidth / 2) - (ImGui.CalcTextSize(Loc.T(title)).X / 2));
+		ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T(title));
 
 		ImGui.Spacing();
 

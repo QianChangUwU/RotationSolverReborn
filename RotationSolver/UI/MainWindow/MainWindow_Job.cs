@@ -1,3 +1,4 @@
+using RotationSolver.Basic.Localization;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.ExcelServices;
@@ -102,7 +103,7 @@ public partial class MainWindow
 					ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudYellow);
 				}
 
-				ImGui.Text(" " + attr.Type.GetDescription());
+				ImGui.Text(Loc.T(" ") + attr.Type.GetDescription());
 				if (isOnCommand)
 				{
 					ImGui.PopStyleColor();
@@ -112,7 +113,7 @@ public partial class MainWindow
 
 				if (hasDesc)
 				{
-					ImGui.Text(attr.Description);
+					ImGui.Text(Loc.T(attr.Description));
 				}
 
 				var notStart = false;
@@ -187,10 +188,10 @@ public partial class MainWindow
 
 	private static string ToCommandStr(OtherCommandType type, string str, string extra = "")
 	{
-		var result = Service.COMMAND + " " + type.ToString() + " " + str;
+		var result = Service.COMMAND + Loc.T(" ") + type.ToString() + Loc.T(" ") + str;
 		if (!string.IsNullOrEmpty(extra))
 		{
-			result += " " + extra;
+			result += Loc.T(" ") + extra;
 		}
 
 		return result;
@@ -336,7 +337,7 @@ public partial class MainWindow
 			var widest = 0f;
 			foreach (var value in values)
 			{
-				var width = ImGui.CalcTextSize(value).X;
+				var width = ImGui.CalcTextSize(Loc.T(value)).X;
 				if (width > widest)
 				{
 					widest = width;
@@ -414,7 +415,7 @@ public partial class MainWindow
 				{
 					var value = config.Value;
 					ImGui.SetNextItemWidth(controlWidth);
-					if (ImGui.InputTextWithHint($"{id}_text", config.DisplayName, ref value, 128))
+					if (ImGui.InputTextWithHint($"{id}_text", Loc.T(config.DisplayName), ref value, 128))
 					{
 						config.Value = value;
 					}
@@ -540,10 +541,10 @@ public partial class MainWindow
 	private static void DrawJobPriorityList(string title, string id, IEnumerable<Job> priority, Action reset, Action<List<Job>> save)
 	{
 		ImGui.Spacing();
-		ImGui.Text(title);
+		ImGui.Text(Loc.T(title));
 		ImGui.Spacing();
 
-		if (ImGui.Button($"Reset to Default##{id}"))
+		if (ImGui.Button(Loc.Label($"Reset to Default##{id}")))
 		{
 			reset();
 		}
@@ -573,7 +574,7 @@ public partial class MainWindow
 				}
 
 				ImGui.SameLine();
-				ImGui.Text(working[i].ToString());
+				ImGui.Text(Loc.T(working[i].ToString()));
 			}
 		}
 
