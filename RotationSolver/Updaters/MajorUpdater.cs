@@ -3,11 +3,9 @@ using Dalamud.Plugin.Services;
 using ECommons.DalamudServices;
 using ECommons.GameHelpers;
 using ECommons.Logging;
-using Lumina.Excel.Sheets;
 using RotationSolver.Commands;
 using RotationSolver.IPC;
 using RotationSolver.UI.HighlightTeachingMode;
-using static FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureHotbarModule;
 
 namespace RotationSolver.Updaters;
 
@@ -21,11 +19,8 @@ internal static class MajorUpdater
 	private static bool _isActivatedThisCycle;
 	private static bool _rotationsLoaded;
 
-	// Cached GeneralAction sheet lookup (RowId -> GeneralAction RowId) for teaching mode highlighting
-	private static Dictionary<uint, uint>? _generalActionLookup;
-
-	// Reusable list for VFX cleanup to avoid per-frame allocations
 	private static readonly List<VfxNewData> _vfxRemaining = [];
+	private static readonly List<string> _expiredWarnings = [];
 
 	public static bool IsValid
 	{
@@ -33,22 +28,17 @@ internal static class MajorUpdater
 		{
 			if (!Player.Available)
 			{
-				_rotationsLoaded = false;
 				return false;
 			}
 
 			// Consider the game valid when not transitioning or logging out.
-			if (Svc.Condition[ConditionFlag.BetweenAreas] || Svc.Condition[ConditionFlag.BetweenAreas51] || Svc.Condition[ConditionFlag.LoggingOut])
-			{
-				_rotationsLoaded = false;
-				return false;
-			}
-
-			return true;
+			return !Svc.Condition[ConditionFlag.BetweenAreas] && !Svc.Condition[ConditionFlag.BetweenAreas51] && !Svc.Condition[ConditionFlag.LoggingOut];
 		}
 	}
 
-	private static Exception? _threadException;
+	// Keys of errors already logged, so a failure repeating every frame is only reported once.
+	private static readonly HashSet<string> _loggedErrors = [];
+	private const int MaxLoggedErrors = 256;
 
 	public static void Enable()
 	{
@@ -70,7 +60,8 @@ internal static class MajorUpdater
 		{
 			// Throttle by MinUpdatingTime
 			_timeSinceUpdate += framework.UpdateDelta;
-			if (Service.Config.MinUpdatingTime > 0 && _timeSinceUpdate < TimeSpan.FromSeconds(Service.Config.MinUpdatingTime))
+
+			if (Service.Config.MinUpdatingTime > 0f && _timeSinceUpdate < TimeSpan.FromSeconds(Service.Config.MinUpdatingTime))
 			{
 				_shouldRunThisCycle = false;
 				return;
@@ -80,12 +71,13 @@ internal static class MajorUpdater
 			_isValidThisCycle = IsValid;
 			_isActivatedThisCycle = DataCenter.IsActivated();
 			_shouldRunThisCycle = true;
-			if (!Service.Config.TutorialDone)
+			RotationSolverPlugin.ShowFirstStartTutorialIfNeeded();
+
+			if (_isValidThisCycle)
 			{
-				RotationSolverPlugin.OpenFirstStartTutorial();
+				RotationSolverPlugin.ShowChangelogIfUpdated();
 			}
 
-			// Opportunistically load rotations if not yet loaded
 			if (_isValidThisCycle && !_rotationsLoaded)
 			{
 				RotationUpdater.LoadBuiltInRotations();
@@ -132,7 +124,6 @@ internal static class MajorUpdater
 				RSCommands.UpdateRotationState();
 				ActionUpdater.ClearNextAction();
 				MiscUpdater.UpdateEntry();
-				ActionUpdater.NextAction = ActionUpdater.NextGCDAction = null;
 			}
 			catch (Exception ex)
 			{
@@ -302,8 +293,26 @@ internal static class MajorUpdater
 
 	private static void RSRActivatedHighlightUpdate(IFramework framework)
 	{
-		if (!_shouldRunThisCycle || !_isActivatedThisCycle)
+		if (!_shouldRunThisCycle)
 		{
+			return;
+		}
+
+		if (!_isActivatedThisCycle)
+		{
+			HotbarHighlightManager.ClearElements();
+
+			if (HotbarDisabledColor.HasTint)
+			{
+				try
+				{
+					HotbarDisabledColor.Reset();
+				}
+				catch (Exception ex)
+				{
+					LogOnce("Hotbar Disabled Redden Exception", ex);
+				}
+			}
 			return;
 		}
 
@@ -312,19 +321,7 @@ internal static class MajorUpdater
 		{
 			try
 			{
-				var nextAction = ActionUpdater.NextAction;
-				HotbarID? hotbar = null;
-				if (nextAction is IBaseItem item)
-				{
-					hotbar = new HotbarID(HotbarSlotType.Item, item.ID);
-				}
-				else if (nextAction is IBaseAction baseAction)
-				{
-					hotbar = baseAction.Action.ActionCategory.RowId is 10 or 11
-							? GetGeneralActionHotbarID(baseAction)
-							: new HotbarID(HotbarSlotType.Action, baseAction.AdjustedID);
-				}
-
+				var hotbar = HotbarAddonHelper.GetHotbarID(ActionUpdater.NextAction);
 				if (hotbar.HasValue)
 				{
 					_ = HotbarHighlightManager.HotbarIDs.Add(hotbar.Value);
@@ -334,10 +331,22 @@ internal static class MajorUpdater
 			{
 				LogOnce("Hotbar Highlighting Exception", ex);
 			}
+
+			try
+			{
+				HotbarHighlightManager.UpdateElements();
+			}
+			catch (Exception ex)
+			{
+				LogOnce("Hotbar Highlight Update Exception", ex);
+			}
+		}
+		else
+		{
+			HotbarHighlightManager.ClearElements();
 		}
 
-		// Apply reddening of disabled actions on hotbars alongside highlight
-		if (Service.Config.ReddenDisabledHotbarActions)
+		if (Service.Config.ReddenDisabledHotbarActions || HotbarDisabledColor.HasTint)
 		{
 			try
 			{
@@ -372,6 +381,15 @@ internal static class MajorUpdater
 		{
 			LogOnce("CommonUpdate Exception", ex);
 		}
+
+		try
+		{
+			HotbarKeybindHelper.Update();
+		}
+		catch (Exception ex)
+		{
+			LogOnce("HotbarKeybindHelper.Update Exception", ex);
+		}
 	}
 
 	private static void RSRCleanupUpdate(IFramework framework)
@@ -386,16 +404,16 @@ internal static class MajorUpdater
 			// Handle system warnings
 			if (DataCenter.SystemWarnings.Count > 0)
 			{
-				var now = DateTime.Now;
-				List<string> keysToRemove = [];
+				var expiry = DateTime.Now - TimeSpan.FromMinutes(10);
+				_expiredWarnings.Clear();
 				foreach (var kvp in DataCenter.SystemWarnings)
 				{
-					if (kvp.Value + TimeSpan.FromMinutes(10) < now)
+					if (kvp.Value < expiry)
 					{
-						keysToRemove.Add(kvp.Key);
+						_expiredWarnings.Add(kvp.Key);
 					}
 				}
-				foreach (var key in keysToRemove)
+				foreach (var key in _expiredWarnings)
 				{
 					_ = DataCenter.SystemWarnings.Remove(key);
 				}
@@ -556,42 +574,21 @@ internal static class MajorUpdater
 		_shouldRunThisCycle = false;
 	}
 
-	private static HotbarID? GetGeneralActionHotbarID(IBaseAction baseAction)
-	{
-		// Build the lookup once and cache it to avoid a full sheet scan every frame
-		if (_generalActionLookup == null)
-		{
-			var sheet = Svc.Data.GetExcelSheet<GeneralAction>();
-			if (sheet == null)
-			{
-				return null;
-			}
-
-			_generalActionLookup = [];
-			foreach (var gAct in sheet)
-			{
-				var actionRowId = gAct.Action.RowId;
-				if (actionRowId != 0)
-				{
-					_generalActionLookup.TryAdd(actionRowId, gAct.RowId);
-				}
-			}
-		}
-
-		return _generalActionLookup.TryGetValue(baseAction.ID, out var generalActionRowId)
-			? new HotbarID(HotbarSlotType.GeneralAction, generalActionRowId)
-			: null;
-	}
-
 	private static void LogOnce(string context, Exception ex)
 	{
-		if (_threadException == ex)
+		// Exceptions thrown every frame are new instances, so dedupe on what they say rather than reference.
+		var key = $"{context}|{ex.GetType().FullName}|{ex.Message}";
+		if (_loggedErrors.Count >= MaxLoggedErrors)
+		{
+			_loggedErrors.Clear();
+		}
+
+		if (!_loggedErrors.Add(key))
 		{
 			return;
 		}
 
-		_threadException = ex;
-		PluginLog.Error($"{context}: {ex.Message}");
+		PluginLog.Error($"{context}: {ex}");
 		if (Service.Config.InDebug)
 		{
 			_ = BasicWarningHelper.AddSystemWarning(context);

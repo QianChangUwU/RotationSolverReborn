@@ -40,7 +40,11 @@ public static class Loc
 	/// <summary>
 	/// The language choice. Defaults to <see cref="UILanguage.Auto"/>.
 	/// </summary>
-	public static UILanguage Language { get; set; } = UILanguage.Auto;
+	public static UILanguage Language
+	{
+		get => Service.Config.UILanguage;
+		set => Service.Config.UILanguage = value;
+	}
 
 	/// <summary>
 	/// Whether the game client is running in Chinese. Set by the plugin on initialization.

@@ -1,4 +1,4 @@
-﻿using Dalamud.Interface.Colors;
+using Dalamud.Interface.Colors;
 
 namespace RotationSolver.Basic.Rotations.Basic;
 
@@ -29,22 +29,17 @@ public partial class SummonerRotation
 	/// <summary>
 	/// 
 	/// </summary>
-	public static byte Attunement => JobGauge.Attunement;
+	public static bool RubyAttunement => JobGauge.AttunementType == SummonAttunement.Ifrit && JobGauge.AttunementCount > 0;
 
 	/// <summary>
-	/// 
+	///
 	/// </summary>
-	public static bool RubyAttunement => JobGauge.Attunement == 5 || JobGauge.Attunement == 9;
+	public static bool TopazAttunement => JobGauge.AttunementType == SummonAttunement.Titan && JobGauge.AttunementCount > 0;
 
 	/// <summary>
-	/// 
+	///
 	/// </summary>
-	public static bool TopazAttunement => JobGauge.Attunement == 6 || JobGauge.Attunement == 10 || JobGauge.Attunement == 14 || JobGauge.Attunement == 18;
-
-	/// <summary>
-	/// 
-	/// </summary>
-	public static bool EmeraldAttunement => JobGauge.Attunement == 7 || JobGauge.Attunement == 11 || JobGauge.Attunement == 15 || JobGauge.Attunement == 19;
+	public static bool EmeraldAttunement => JobGauge.AttunementType == SummonAttunement.Garuda && JobGauge.AttunementCount > 0;
 
 	/// <summary>
 	/// 
@@ -119,7 +114,7 @@ public partial class SummonerRotation
 	/// <summary>
 	/// 
 	/// </summary>
-	public static bool NoElementalSummon => JobGauge.Attunement == 0 && !InPhoenix && !InBahamut && !InSolarBahamut;
+	public static bool NoElementalSummon => JobGauge.AttunementType == SummonAttunement.None && !InPhoenix && !InBahamut && !InSolarBahamut;
 
 	/// <summary>
 	/// 
@@ -313,7 +308,6 @@ public partial class SummonerRotation
 		ImGui.Text(string.Format(Loc.T("HasAetherflowStacks: {0}"), HasAetherflowStacks.ToString()));
 		ImGui.Text(string.Format(Loc.T("AetherflowStacks: {0}"), AetherflowStacks.ToString()));
 		ImGui.Spacing();
-		ImGui.Text(string.Format(Loc.T("Attunement: {0}"), Attunement.ToString()));
 		ImGui.TextColored(RubyAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("RubyAttunement: {0}"), RubyAttunement.ToString()));
 		ImGui.TextColored(EmeraldAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("EmeraldAttunement: {0}"), EmeraldAttunement.ToString()));
 		ImGui.TextColored(TopazAttunement ? ImGuiColors.HealerGreen : ImGuiColors.DalamudWhite, string.Format(Loc.T("TopazAttunement: {0}"), TopazAttunement.ToString()));

@@ -1,9 +1,9 @@
-﻿using Dalamud.Interface.Utility;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using Lumina.Excel.Sheets;
 using RotationSolver.Basic.Localization;
 using RotationSolver.Data;
+using RotationSolver.UI.Material;
 
 namespace RotationSolver.UI.SearchableConfigs;
 
@@ -86,37 +86,25 @@ internal readonly struct JobFilter
 		}
 	}
 
-	/// <summary>
-	/// Only these job roles can get this setting.
-	/// </summary>
 	public JobRole[]? JobRoles { get; init; }
 
-	/// <summary>
-	/// Or these jobs.
-	/// </summary>
 	public Job[]? Jobs { get; init; }
 
 	public bool CanDraw
 	{
 		get
 		{
-			var canDraw = true;
-
-			if (JobRoles is { Length: > 0 })
+			var hasRoles = JobRoles is { Length: > 0 };
+			var hasJobs = Jobs is { Length: > 0 };
+			if (!hasRoles && !hasJobs)
 			{
-				var role = DataCenter.CurrentRotation?.Role;
-				if (role.HasValue)
-				{
-					canDraw = JobRoles.Contains(role.Value);
-				}
+				return true;
 			}
 
-			if (Jobs is { Length: > 0 })
-			{
-				canDraw |= Jobs.Contains(DataCenter.Job);
-			}
-
-			return canDraw;
+			// With no rotation loaded there's no role to check, so the role filter can't hide anything.
+			var role = DataCenter.CurrentRotation?.Role;
+			return (hasRoles && (!role.HasValue || JobRoles!.Contains(role.Value)))
+				|| (hasJobs && Jobs!.Contains(DataCenter.Job));
 		}
 	}
 
@@ -126,26 +114,26 @@ internal readonly struct JobFilter
 		{
 			List<Job> jobs = [];
 
-			// Add jobs from JobRoles via JobRoleExtension.ToJobs
 			if (JobRoles != null)
 			{
 				foreach (var role in JobRoles)
 				{
 					var roleJobs = JobRoleExtension.ToJobs(role);
-					if (roleJobs != null)
+					if (roleJobs == null)
 					{
-						foreach (var job in roleJobs)
+						continue;
+					}
+
+					foreach (var job in roleJobs)
+					{
+						if (!jobs.Contains(job))
 						{
-							if (!jobs.Contains(job))
-							{
-								jobs.Add(job);
-							}
+							jobs.Add(job);
 						}
 					}
 				}
 			}
 
-			// Add jobs from Jobs array
 			if (Jobs != null)
 			{
 				foreach (var job in Jobs)
@@ -165,22 +153,19 @@ internal readonly struct JobFilter
 	{
 		get
 		{
+			var sheet = Svc.Data.GetExcelSheet<ClassJob>();
 			var sb = new System.Text.StringBuilder();
-			var firstLine = true;
 			foreach (var job in AllJobs)
 			{
-				var sheet = Svc.Data.GetExcelSheet<ClassJob>();
-				var name = sheet?.GetRow((uint)job).Name ?? job.ToString();
-				if (!firstLine)
+				if (sb.Length > 0)
 				{
-					sb.Append('\n');
+					_ = sb.Append('\n');
 				}
 
-				sb.Append(name);
-				firstLine = false;
+				_ = sb.Append(sheet?.GetRow((uint)job).Name ?? job.ToString());
 			}
-			var roleOrJob = sb.ToString();
-			return string.Format(UiString.NotInJob.GetDescription(), roleOrJob);
+
+			return string.Format(UiString.NotInJob.GetDescription(), sb.ToString());
 		}
 	}
 }
@@ -189,38 +174,26 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 {
 	protected readonly PropertyInfo _property = property;
 
+	// GetCustomAttribute builds a new attribute instance on every call, and these are read several
+	// times per frame for every visible setting, so look them up once.
+	private readonly UIAttribute? _ui = property.GetCustomAttribute<UIAttribute>();
+	private readonly bool _isJob = property.GetCustomAttribute<JobConfigAttribute>() != null
+		|| property.GetCustomAttribute<JobChoiceConfigAttribute>() != null;
+	private string? _popupKey;
+
 	public const float DRAG_WIDTH = 150;
-	protected static float Scale => ImGuiHelpers.GlobalScale;
-	public CheckBoxSearch? Parent { get; set; } = null;
 
-	public virtual string SearchingKeys => Loc.T(Name) + " " + Loc.T(Description);
-	public virtual string Name
-	{
-		get
-		{
-			var ui = _property.GetCustomAttribute<UIAttribute>();
-			return ui == null ? string.Empty : Loc.T(ui.Name);
-		}
-	}
+	protected static float Scale => M3.Scale;
 
-	public virtual string Description
-	{
-		get
-		{
-			var ui = _property.GetCustomAttribute<UIAttribute>();
-			return ui == null || string.IsNullOrEmpty(ui.Description) ? string.Empty : Loc.T(ui.Description);
-		}
-	}
+	public CheckBoxSearch? Parent { get; set; }
+	public JobFilter PvPFilter { get; set; }
+	public JobFilter PvEFilter { get; set; }
 
-	// Expose the owning UI filter so callers can navigate to the correct menu
-	public virtual string Filter
-	{
-		get
-		{
-			var ui = _property.GetCustomAttribute<UIAttribute>();
-			return ui == null ? string.Empty : ui.Filter ?? string.Empty;
-		}
-	}
+	public virtual string SearchingKeys => Name + " " + Description;
+	public virtual string Name => Loc.T(_ui?.Name ?? string.Empty);
+	public virtual string Description => string.IsNullOrEmpty(_ui?.Description) ? string.Empty : Loc.T(_ui.Description);
+
+	public virtual string Filter => _ui?.Filter ?? string.Empty;
 
 	public virtual string Command
 	{
@@ -236,111 +209,93 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 			return result;
 		}
 	}
+
 	public virtual string ID => _property.Name;
-	private string Popup_Key => $"Rotation Solver RightClicking##{ID}_{GetHashCode()}";
-	protected bool IsJob => _property.GetCustomAttribute<JobConfigAttribute>() != null
-		|| _property.GetCustomAttribute<JobChoiceConfigAttribute>() != null;
+	protected bool IsJob => _isJob;
+	protected string PopupKey => _popupKey ??= $"Rotation Solver RightClicking##{ID}_{GetHashCode()}";
 
-	public uint Color { get; set; } = 0;
+	protected string? SupportingText
+		=> Service.Config.UiInlineDescriptions && !string.IsNullOrEmpty(Description) ? Description : null;
 
-	public JobFilter PvPFilter { get; set; }
-	public JobFilter PvEFilter { get; set; }
+	protected FontAwesomeIcon RowIcon => IsJob ? FontAwesomeIcon.UserCog : FontAwesomeIcon.None;
 
-	public virtual bool ShowInChild => true;
-
-	public virtual unsafe void Draw()
+	public virtual void Draw()
 	{
-		// Determine the appropriate filter based on the context (PvP or PvE)
 		var filter = DataCenter.IsPvP ? PvPFilter : PvEFilter;
 
-		// Check if the filter allows drawing
 		if (!filter.CanDraw)
 		{
-			// If no jobs are available in the filter, return early
 			if (filter.AllJobs.Length == 0)
 			{
 				return;
 			}
 
-			// Get the text color for disabled text
-			var textColor = *ImGui.GetStyleColorVec4(ImGuiCol.Text);
-
-			// Push the disabled text color style
-			ImGui.PushStyleColor(ImGuiCol.Text, *ImGui.GetStyleColorVec4(ImGuiCol.TextDisabled));
-
-			// Calculate the cursor position
-			var cursor = ImGui.GetCursorPos() + ImGui.GetWindowPos() - new Vector2(ImGui.GetScrollX(), ImGui.GetScrollY());
-
-			// Ensure Name is not null before using it
-			if (!string.IsNullOrEmpty(Name))
-			{
-				ImGui.TextWrapped(Name);
-			}
-
-			// Pop the disabled text color style
-			ImGui.PopStyleColor();
-
-			// Calculate the text size and item rectangle size
-			var step = ImGui.CalcTextSize(Name ?? string.Empty);
-			var size = ImGui.GetItemRectSize();
-			var height = step.Y / 2;
-			var wholeWidth = step.X;
-
-			// Draw lines to indicate disabled state
-			while (height < size.Y)
-			{
-				var pt = cursor + new Vector2(0, height);
-				ImGui.GetWindowDrawList().AddLine(pt, pt + new Vector2(Math.Min(wholeWidth, size.X), 0), ImGui.ColorConvertFloat4ToU32(textColor));
-				height += step.Y;
-				wholeWidth -= size.X;
-			}
-
-			// Show a tooltip with the filter description
-			ImguiTooltips.HoveredTooltip(filter.Description);
+			DrawUnavailable(filter);
 			return;
 		}
 
-		// Draw the main content
 		DrawMain();
-
-		// Prepare the group for the popup menu
-		ImGuiHelper.PrepareGroup(Popup_Key, Command, ResetToDefault);
+		PreparePopup();
 	}
 
 	protected abstract void DrawMain();
 
+	protected virtual void PreparePopup()
+	{
+		if (ImGui.IsPopupOpen(PopupKey))
+		{
+			ImGuiHelper.PrepareGroup(PopupKey, Command, ResetToDefault);
+		}
+	}
+
+	private void DrawUnavailable(JobFilter filter)
+	{
+		var row = M3SettingRow.Begin(Name, null, Vector2.Zero,
+			leadingIcon: FontAwesomeIcon.Ban, disabled: true, strikeThrough: true);
+
+		if (row.Hovered)
+		{
+			ImguiTooltips.ShowTooltip(filter.Description);
+		}
+
+		M3SettingRow.End(row);
+	}
+
+	protected void RowTooltip(in M3RowInfo row, string hint)
+	{
+		var description = Description;
+		if (!row.Hovered || string.IsNullOrEmpty(description) || SupportingText != null)
+		{
+			return;
+		}
+
+		ImguiTooltips.ShowTooltip(() =>
+		{
+			ImGui.BulletText(description);
+			ImGui.Separator();
+			ImGui.TextDisabled(hint);
+		});
+	}
+
+	protected void RowInteractions(in M3RowInfo row)
+	{
+		RowTooltip(row, "Right-click for the matching chat command.");
+		ImGuiHelper.ReactPopupAt(row.Hovered, PopupKey, Command, ResetToDefault, false);
+	}
+
 	protected void ShowTooltip(bool showHand = true)
 	{
-		var showDesc = !string.IsNullOrEmpty(Description);
-		if (showDesc)
+		var description = Description;
+		if (!string.IsNullOrEmpty(description))
 		{
 			ImguiTooltips.ShowTooltip(() =>
 			{
-				if (showDesc)
-				{
-					ImGui.BulletText(Description);
-				}
-				if (showDesc)
-				{
-					ImGui.Separator();
-				}
-				var wholeWidth = ImGui.GetWindowWidth();
-
+				ImGui.BulletText(description);
+				ImGui.Separator();
 			});
 		}
 
-		ImGuiHelper.ReactPopup(Popup_Key, Command, ResetToDefault, showHand);
-	}
-
-	protected static void DrawJobIcon()
-	{
-		ImGui.SameLine();
-
-		if (IconSet.GetTexture(IconSet.GetJobIcon(DataCenter.Job, IconType.Framed), out var texture))
-		{
-			ImGui.Image(texture.Handle, Vector2.One * 24 * ImGuiHelpers.GlobalScale);
-			ImguiTooltips.HoveredTooltip(UiString.JobConfigTip.GetDescription());
-		}
+		ImGuiHelper.ReactPopup(PopupKey, Command, ResetToDefault, showHand);
 	}
 
 	public virtual void ResetToDefault()
@@ -350,5 +305,29 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 		{
 			_property.SetValue(Service.Config, v);
 		}
+	}
+}
+
+internal abstract class UnitSearchable(PropertyInfo property) : Searchable(property)
+{
+	public ConfigUnitType Unit { get; } = property.GetCustomAttribute<RangeAttribute>()?.UnitType ?? ConfigUnitType.None;
+
+	public override string Description
+	{
+		get
+		{
+			var baseDesc = base.Description;
+			return string.IsNullOrEmpty(baseDesc) ? Unit.ToString() : $"{baseDesc}\n{Unit}";
+		}
+	}
+
+	// Percentages are stored as fractions but dragged and typed as whole percents.
+	protected float SliderScale => Unit == ConfigUnitType.Percent ? 100f : 1f;
+
+	protected string Format(float value)
+	{
+		return Unit == ConfigUnitType.Percent
+			? $"{value * 100f:F1}{Unit.ToSymbol()}"
+			: $"{value:F2}{Unit.ToSymbol()}";
 	}
 }

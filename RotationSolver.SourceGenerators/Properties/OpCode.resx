@@ -60,915 +60,915 @@
   </resheader>
   <data name="Value" xml:space="preserve">
     <value>/// &lt;summary&gt;
-///Aoe Effect 8
-/// &lt;/summary&gt;
-[Description("Aoe Effect 8")]
-AoeEffect8 = 356,
-/// &lt;summary&gt;
 ///Actor Control Self
 /// &lt;/summary&gt;
 [Description("Actor Control Self")]
-ActorControlSelf = 861,
-/// &lt;summary&gt;
-///Airship Exploration Result
-/// &lt;/summary&gt;
-[Description("Airship Exploration Result")]
-AirshipExplorationResult = 872,
-/// &lt;summary&gt;
-///Aoe Effect 32
-/// &lt;/summary&gt;
-[Description("Aoe Effect 32")]
-AoeEffect32 = 882,
-/// &lt;summary&gt;
-///Actor Move
-/// &lt;/summary&gt;
-[Description("Actor Move")]
-ActorMove = 909,
-/// &lt;summary&gt;
-///Aoe Effect 16
-/// &lt;/summary&gt;
-[Description("Aoe Effect 16")]
-AoeEffect16 = 433,
-/// &lt;summary&gt;
-///Airship Status List
-/// &lt;/summary&gt;
-[Description("Airship Status List")]
-AirshipStatusList = 752,
-/// &lt;summary&gt;
-///Aoe Effect 24
-/// &lt;/summary&gt;
-[Description("Aoe Effect 24")]
-AoeEffect24 = 923,
-/// &lt;summary&gt;
-///Airship Status
-/// &lt;/summary&gt;
-[Description("Airship Status")]
-AirshipStatus = 397,
-/// &lt;summary&gt;
-///Actor Control
-/// &lt;/summary&gt;
-[Description("Actor Control")]
-ActorControl = 474,
-/// &lt;summary&gt;
-///Actor Set Pos
-/// &lt;/summary&gt;
-[Description("Actor Set Pos")]
-ActorSetPos = 991,
+ActorControlSelf = 516,
 /// &lt;summary&gt;
 ///Actor Gauge
 /// &lt;/summary&gt;
 [Description("Actor Gauge")]
-ActorGauge = 545,
+ActorGauge = 614,
 /// &lt;summary&gt;
-///Airship Timers
+///Actor Control
 /// &lt;/summary&gt;
-[Description("Airship Timers")]
-AirshipTimers = 559,
+[Description("Actor Control")]
+ActorControl = 607,
+/// &lt;summary&gt;
+///Airship Status
+/// &lt;/summary&gt;
+[Description("Airship Status")]
+AirshipStatus = 294,
+/// &lt;summary&gt;
+///Aoe Effect 24
+/// &lt;/summary&gt;
+[Description("Aoe Effect 24")]
+AoeEffect24 = 778,
 /// &lt;summary&gt;
 ///Actor Control Target
 /// &lt;/summary&gt;
 [Description("Actor Control Target")]
-ActorControlTarget = 316,
+ActorControlTarget = 856,
+/// &lt;summary&gt;
+///Airship Exploration Result
+/// &lt;/summary&gt;
+[Description("Airship Exploration Result")]
+AirshipExplorationResult = 756,
+/// &lt;summary&gt;
+///Aoe Effect 32
+/// &lt;/summary&gt;
+[Description("Aoe Effect 32")]
+AoeEffect32 = 938,
+/// &lt;summary&gt;
+///Actor Move
+/// &lt;/summary&gt;
+[Description("Actor Move")]
+ActorMove = 473,
+/// &lt;summary&gt;
+///Aoe Effect 16
+/// &lt;/summary&gt;
+[Description("Aoe Effect 16")]
+AoeEffect16 = 140,
+/// &lt;summary&gt;
+///Airship Status List
+/// &lt;/summary&gt;
+[Description("Airship Status List")]
+AirshipStatusList = 996,
 /// &lt;summary&gt;
 ///Actor Cast
 /// &lt;/summary&gt;
 [Description("Actor Cast")]
-ActorCast = 396,
+ActorCast = 354,
+/// &lt;summary&gt;
+///Airship Timers
+/// &lt;/summary&gt;
+[Description("Airship Timers")]
+AirshipTimers = 108,
+/// &lt;summary&gt;
+///Aoe Effect 8
+/// &lt;/summary&gt;
+[Description("Aoe Effect 8")]
+AoeEffect8 = 540,
+/// &lt;summary&gt;
+///Actor Set Pos
+/// &lt;/summary&gt;
+[Description("Actor Set Pos")]
+ActorSetPos = 686,
 /// &lt;summary&gt;
 ///Balloon Talk 2
 /// &lt;/summary&gt;
 [Description("Balloon Talk 2")]
-BalloonTalk2 = 266,
-/// &lt;summary&gt;
-///Boss Spawn
-/// &lt;/summary&gt;
-[Description("Boss Spawn")]
-BossSpawn = 647,
-/// &lt;summary&gt;
-///Black List
-/// &lt;/summary&gt;
-[Description("Black List")]
-BlackList = 681,
+BalloonTalk2 = 741,
 /// &lt;summary&gt;
 ///Balloon Talk 4
 /// &lt;/summary&gt;
 [Description("Balloon Talk 4")]
-BalloonTalk4 = 158,
+BalloonTalk4 = 817,
 /// &lt;summary&gt;
 ///Battle Talk 4
 /// &lt;/summary&gt;
 [Description("Battle Talk 4")]
-BattleTalk4 = 782,
+BattleTalk4 = 276,
 /// &lt;summary&gt;
-///Battle Talk 2
+///Black List
 /// &lt;/summary&gt;
-[Description("Battle Talk 2")]
-BattleTalk2 = 685,
-/// &lt;summary&gt;
-///Balloon Talk 8
-/// &lt;/summary&gt;
-[Description("Balloon Talk 8")]
-BalloonTalk8 = 539,
+[Description("Black List")]
+BlackList = 257,
 /// &lt;summary&gt;
 ///Battle Talk 8
 /// &lt;/summary&gt;
 [Description("Battle Talk 8")]
-BattleTalk8 = 918,
+BattleTalk8 = 728,
 /// &lt;summary&gt;
-///Crafting Log
+///Boss Spawn
 /// &lt;/summary&gt;
-[Description("Crafting Log")]
-CraftingLog = 386,
+[Description("Boss Spawn")]
+BossSpawn = 445,
 /// &lt;summary&gt;
-///Countdown
+///Battle Talk 2
 /// &lt;/summary&gt;
-[Description("Countdown")]
-Countdown = 802,
+[Description("Battle Talk 2")]
+BattleTalk2 = 481,
 /// &lt;summary&gt;
-///Countdown Cancel
+///Balloon Talk 8
 /// &lt;/summary&gt;
-[Description("Countdown Cancel")]
-CountdownCancel = 425,
-/// &lt;summary&gt;
-///CFPreferred Role
-/// &lt;/summary&gt;
-[Description("CFPreferred Role")]
-CFPreferredRole = 223,
-/// &lt;summary&gt;
-///CFNotify
-/// &lt;/summary&gt;
-[Description("CFNotify")]
-CFNotify = 184,
-/// &lt;summary&gt;
-///Container Info
-/// &lt;/summary&gt;
-[Description("Container Info")]
-ContainerInfo = 536,
-/// &lt;summary&gt;
-///CEDirector
-/// &lt;/summary&gt;
-[Description("CEDirector")]
-CEDirector = 146,
-/// &lt;summary&gt;
-///CFDuty Info
-/// &lt;/summary&gt;
-[Description("CFDuty Info")]
-CFDutyInfo = 516,
+[Description("Balloon Talk 8")]
+BalloonTalk8 = 155,
 /// &lt;summary&gt;
 ///CFRegistered
 /// &lt;/summary&gt;
 [Description("CFRegistered")]
-CFRegistered = 196,
-/// &lt;summary&gt;
-///Currency Crystal Info
-/// &lt;/summary&gt;
-[Description("Currency Crystal Info")]
-CurrencyCrystalInfo = 736,
+CFRegistered = 934,
 /// &lt;summary&gt;
 ///CFCancel
 /// &lt;/summary&gt;
 [Description("CFCancel")]
-CFCancel = 362,
+CFCancel = 724,
 /// &lt;summary&gt;
-///Despawn Character
+///CEDirector
 /// &lt;/summary&gt;
-[Description("Despawn Character")]
-DespawnCharacter = 630,
+[Description("CEDirector")]
+CEDirector = 798,
+/// &lt;summary&gt;
+///CFNotify
+/// &lt;/summary&gt;
+[Description("CFNotify")]
+CFNotify = 819,
+/// &lt;summary&gt;
+///Container Info
+/// &lt;/summary&gt;
+[Description("Container Info")]
+ContainerInfo = 435,
+/// &lt;summary&gt;
+///Countdown
+/// &lt;/summary&gt;
+[Description("Countdown")]
+Countdown = 846,
+/// &lt;summary&gt;
+///CFPreferred Role
+/// &lt;/summary&gt;
+[Description("CFPreferred Role")]
+CFPreferredRole = 434,
+/// &lt;summary&gt;
+///Crafting Log
+/// &lt;/summary&gt;
+[Description("Crafting Log")]
+CraftingLog = 618,
+/// &lt;summary&gt;
+///Countdown Cancel
+/// &lt;/summary&gt;
+[Description("Countdown Cancel")]
+CountdownCancel = 441,
+/// &lt;summary&gt;
+///CFDuty Info
+/// &lt;/summary&gt;
+[Description("CFDuty Info")]
+CFDutyInfo = 197,
+/// &lt;summary&gt;
+///Currency Crystal Info
+/// &lt;/summary&gt;
+[Description("Currency Crystal Info")]
+CurrencyCrystalInfo = 422,
 /// &lt;summary&gt;
 ///Desynth Result
 /// &lt;/summary&gt;
 [Description("Desynth Result")]
-DesynthResult = 891,
+DesynthResult = 251,
 /// &lt;summary&gt;
-///Event Play 32
+///Despawn Character
 /// &lt;/summary&gt;
-[Description("Event Play 32")]
-EventPlay32 = 636,
-/// &lt;summary&gt;
-///Examine
-/// &lt;/summary&gt;
-[Description("Examine")]
-Examine = 699,
-/// &lt;summary&gt;
-///Effect Result 16
-/// &lt;/summary&gt;
-[Description("Effect Result 16")]
-EffectResult16 = 679,
-/// &lt;summary&gt;
-///Effect Result Basic 4
-/// &lt;/summary&gt;
-[Description("Effect Result Basic 4")]
-EffectResultBasic4 = 625,
-/// &lt;summary&gt;
-///Effect
-/// &lt;/summary&gt;
-[Description("Effect")]
-Effect = 662,
-/// &lt;summary&gt;
-///Event Play 8
-/// &lt;/summary&gt;
-[Description("Event Play 8")]
-EventPlay8 = 552,
-/// &lt;summary&gt;
-///Examine Free Company Info
-/// &lt;/summary&gt;
-[Description("Examine Free Company Info")]
-ExamineFreeCompanyInfo = 716,
-/// &lt;summary&gt;
-///Event Finish
-/// &lt;/summary&gt;
-[Description("Event Finish")]
-EventFinish = 366,
-/// &lt;summary&gt;
-///Event Start
-/// &lt;/summary&gt;
-[Description("Event Start")]
-EventStart = 365,
-/// &lt;summary&gt;
-///Effect Result Basic 64
-/// &lt;/summary&gt;
-[Description("Effect Result Basic 64")]
-EffectResultBasic64 = 467,
-/// &lt;summary&gt;
-///Effect Result Basic 8
-/// &lt;/summary&gt;
-[Description("Effect Result Basic 8")]
-EffectResultBasic8 = 997,
-/// &lt;summary&gt;
-///Environment Control
-/// &lt;/summary&gt;
-[Description("Environment Control")]
-EnvironmentControl = 188,
-/// &lt;summary&gt;
-///Event Play 255
-/// &lt;/summary&gt;
-[Description("Event Play 255")]
-EventPlay255 = 937,
-/// &lt;summary&gt;
-///Event Play 64
-/// &lt;/summary&gt;
-[Description("Event Play 64")]
-EventPlay64 = 241,
-/// &lt;summary&gt;
-///Effect Result Basic 16
-/// &lt;/summary&gt;
-[Description("Effect Result Basic 16")]
-EffectResultBasic16 = 876,
-/// &lt;summary&gt;
-///Effect Result Basic
-/// &lt;/summary&gt;
-[Description("Effect Result Basic")]
-EffectResultBasic = 931,
-/// &lt;summary&gt;
-///Environment Control 8
-/// &lt;/summary&gt;
-[Description("Environment Control 8")]
-EnvironmentControl8 = 780,
-/// &lt;summary&gt;
-///Examine Search Info
-/// &lt;/summary&gt;
-[Description("Examine Search Info")]
-ExamineSearchInfo = 770,
-/// &lt;summary&gt;
-///Effect Result
-/// &lt;/summary&gt;
-[Description("Effect Result")]
-EffectResult = 757,
-/// &lt;summary&gt;
-///Event Play 4
-/// &lt;/summary&gt;
-[Description("Event Play 4")]
-EventPlay4 = 303,
-/// &lt;summary&gt;
-///Environment Control 12
-/// &lt;/summary&gt;
-[Description("Environment Control 12")]
-EnvironmentControl12 = 870,
-/// &lt;summary&gt;
-///Effect Result Basic 32
-/// &lt;/summary&gt;
-[Description("Effect Result Basic 32")]
-EffectResultBasic32 = 944,
-/// &lt;summary&gt;
-///Effect Result 4
-/// &lt;/summary&gt;
-[Description("Effect Result 4")]
-EffectResult4 = 983,
-/// &lt;summary&gt;
-///Event Play 16
-/// &lt;/summary&gt;
-[Description("Event Play 16")]
-EventPlay16 = 318,
-/// &lt;summary&gt;
-///Event Play 128
-/// &lt;/summary&gt;
-[Description("Event Play 128")]
-EventPlay128 = 565,
-/// &lt;summary&gt;
-///Event Play
-/// &lt;/summary&gt;
-[Description("Event Play")]
-EventPlay = 733,
-/// &lt;summary&gt;
-///Environment Control 4
-/// &lt;/summary&gt;
-[Description("Environment Control 4")]
-EnvironmentControl4 = 985,
+[Description("Despawn Character")]
+DespawnCharacter = 974,
 /// &lt;summary&gt;
 ///Effect Result 8
 /// &lt;/summary&gt;
 [Description("Effect Result 8")]
-EffectResult8 = 721,
+EffectResult8 = 690,
 /// &lt;summary&gt;
-///Free Company Dialog
+///Effect Result Basic
 /// &lt;/summary&gt;
-[Description("Free Company Dialog")]
-FreeCompanyDialog = 855,
+[Description("Effect Result Basic")]
+EffectResultBasic = 697,
 /// &lt;summary&gt;
-///First Attack
+///Environment Control
 /// &lt;/summary&gt;
-[Description("First Attack")]
-FirstAttack = 833,
+[Description("Environment Control")]
+EnvironmentControl = 408,
 /// &lt;summary&gt;
-///Fish Caught
+///Event Play 4
 /// &lt;/summary&gt;
-[Description("Fish Caught")]
-FishCaught = 813,
+[Description("Event Play 4")]
+EventPlay4 = 454,
 /// &lt;summary&gt;
-///Free Company Info
+///Environment Control 8
 /// &lt;/summary&gt;
-[Description("Free Company Info")]
-FreeCompanyInfo = 463,
+[Description("Environment Control 8")]
+EnvironmentControl8 = 711,
+/// &lt;summary&gt;
+///Environment Control 12
+/// &lt;/summary&gt;
+[Description("Environment Control 12")]
+EnvironmentControl12 = 550,
+/// &lt;summary&gt;
+///Examine Search Info
+/// &lt;/summary&gt;
+[Description("Examine Search Info")]
+ExamineSearchInfo = 719,
+/// &lt;summary&gt;
+///Event Play 32
+/// &lt;/summary&gt;
+[Description("Event Play 32")]
+EventPlay32 = 413,
+/// &lt;summary&gt;
+///Event Play 255
+/// &lt;/summary&gt;
+[Description("Event Play 255")]
+EventPlay255 = 350,
+/// &lt;summary&gt;
+///Effect Result Basic 16
+/// &lt;/summary&gt;
+[Description("Effect Result Basic 16")]
+EffectResultBasic16 = 660,
+/// &lt;summary&gt;
+///Effect Result
+/// &lt;/summary&gt;
+[Description("Effect Result")]
+EffectResult = 305,
+/// &lt;summary&gt;
+///Event Start
+/// &lt;/summary&gt;
+[Description("Event Start")]
+EventStart = 737,
+/// &lt;summary&gt;
+///Effect Result Basic 64
+/// &lt;/summary&gt;
+[Description("Effect Result Basic 64")]
+EffectResultBasic64 = 982,
+/// &lt;summary&gt;
+///Environment Control 4
+/// &lt;/summary&gt;
+[Description("Environment Control 4")]
+EnvironmentControl4 = 942,
+/// &lt;summary&gt;
+///Event Play 128
+/// &lt;/summary&gt;
+[Description("Event Play 128")]
+EventPlay128 = 930,
+/// &lt;summary&gt;
+///Effect Result Basic 4
+/// &lt;/summary&gt;
+[Description("Effect Result Basic 4")]
+EffectResultBasic4 = 176,
+/// &lt;summary&gt;
+///Effect Result 4
+/// &lt;/summary&gt;
+[Description("Effect Result 4")]
+EffectResult4 = 181,
+/// &lt;summary&gt;
+///Event Play 16
+/// &lt;/summary&gt;
+[Description("Event Play 16")]
+EventPlay16 = 918,
+/// &lt;summary&gt;
+///Effect Result Basic 32
+/// &lt;/summary&gt;
+[Description("Effect Result Basic 32")]
+EffectResultBasic32 = 199,
+/// &lt;summary&gt;
+///Event Finish
+/// &lt;/summary&gt;
+[Description("Event Finish")]
+EventFinish = 217,
+/// &lt;summary&gt;
+///Effect Result Basic 8
+/// &lt;/summary&gt;
+[Description("Effect Result Basic 8")]
+EffectResultBasic8 = 231,
+/// &lt;summary&gt;
+///Examine
+/// &lt;/summary&gt;
+[Description("Examine")]
+Examine = 498,
+/// &lt;summary&gt;
+///Event Play 64
+/// &lt;/summary&gt;
+[Description("Event Play 64")]
+EventPlay64 = 849,
+/// &lt;summary&gt;
+///Event Play 8
+/// &lt;/summary&gt;
+[Description("Event Play 8")]
+EventPlay8 = 843,
+/// &lt;summary&gt;
+///Examine Free Company Info
+/// &lt;/summary&gt;
+[Description("Examine Free Company Info")]
+ExamineFreeCompanyInfo = 873,
+/// &lt;summary&gt;
+///Effect Result 16
+/// &lt;/summary&gt;
+[Description("Effect Result 16")]
+EffectResult16 = 328,
+/// &lt;summary&gt;
+///Event Play
+/// &lt;/summary&gt;
+[Description("Event Play")]
+EventPlay = 509,
+/// &lt;summary&gt;
+///Effect
+/// &lt;/summary&gt;
+[Description("Effect")]
+Effect = 787,
 /// &lt;summary&gt;
 ///Fashion Report
 /// &lt;/summary&gt;
 [Description("Fashion Report")]
-FashionReport = 993,
+FashionReport = 876,
+/// &lt;summary&gt;
+///First Attack
+/// &lt;/summary&gt;
+[Description("First Attack")]
+FirstAttack = 214,
+/// &lt;summary&gt;
+///Free Company Info
+/// &lt;/summary&gt;
+[Description("Free Company Info")]
+FreeCompanyInfo = 444,
+/// &lt;summary&gt;
+///Free Company Dialog
+/// &lt;/summary&gt;
+[Description("Free Company Dialog")]
+FreeCompanyDialog = 391,
+/// &lt;summary&gt;
+///Fish Caught
+/// &lt;/summary&gt;
+[Description("Fish Caught")]
+FishCaught = 272,
 /// &lt;summary&gt;
 ///GCAffiliation
 /// &lt;/summary&gt;
 [Description("GCAffiliation")]
-GCAffiliation = 260,
+GCAffiliation = 732,
 /// &lt;summary&gt;
 ///Gathering Log
 /// &lt;/summary&gt;
 [Description("Gathering Log")]
-GatheringLog = 917,
+GatheringLog = 185,
 /// &lt;summary&gt;
 ///Housing Ward Info
 /// &lt;/summary&gt;
 [Description("Housing Ward Info")]
-HousingWardInfo = 460,
-/// &lt;summary&gt;
-///Island Workshop Supply Demand
-/// &lt;/summary&gt;
-[Description("Island Workshop Supply Demand")]
-IslandWorkshopSupplyDemand = 606,
-/// &lt;summary&gt;
-///Init
-/// &lt;/summary&gt;
-[Description("Init")]
-Init = 589,
-/// &lt;summary&gt;
-///Init Search Info
-/// &lt;/summary&gt;
-[Description("Init Search Info")]
-InitSearchInfo = 851,
-/// &lt;summary&gt;
-///Init Zone
-/// &lt;/summary&gt;
-[Description("Init Zone")]
-InitZone = 653,
-/// &lt;summary&gt;
-///Island Workshop Demand Research
-/// &lt;/summary&gt;
-[Description("Island Workshop Demand Research")]
-IslandWorkshopDemandResearch = 661,
-/// &lt;summary&gt;
-///Item Market Board Summary
-/// &lt;/summary&gt;
-[Description("Item Market Board Summary")]
-ItemMarketBoardSummary = 242,
-/// &lt;summary&gt;
-///Inventory Transaction
-/// &lt;/summary&gt;
-[Description("Inventory Transaction")]
-InventoryTransaction = 456,
+HousingWardInfo = 867,
 /// &lt;summary&gt;
 ///Inventory Transaction Finish
 /// &lt;/summary&gt;
 [Description("Inventory Transaction Finish")]
-InventoryTransactionFinish = 392,
-/// &lt;summary&gt;
-///Item Info
-/// &lt;/summary&gt;
-[Description("Item Info")]
-ItemInfo = 314,
-/// &lt;summary&gt;
-///Item Market Board Info
-/// &lt;/summary&gt;
-[Description("Item Market Board Info")]
-ItemMarketBoardInfo = 378,
-/// &lt;summary&gt;
-///Island Workshop Favors
-/// &lt;/summary&gt;
-[Description("Island Workshop Favors")]
-IslandWorkshopFavors = 724,
+InventoryTransactionFinish = 962,
 /// &lt;summary&gt;
 ///Island Workshop Granary Result
 /// &lt;/summary&gt;
 [Description("Island Workshop Granary Result")]
-IslandWorkshopGranaryResult = 193,
+IslandWorkshopGranaryResult = 610,
+/// &lt;summary&gt;
+///Inventory Transaction
+/// &lt;/summary&gt;
+[Description("Inventory Transaction")]
+InventoryTransaction = 570,
+/// &lt;summary&gt;
+///Init Zone
+/// &lt;/summary&gt;
+[Description("Init Zone")]
+InitZone = 811,
+/// &lt;summary&gt;
+///Island Workshop Demand Research
+/// &lt;/summary&gt;
+[Description("Island Workshop Demand Research")]
+IslandWorkshopDemandResearch = 941,
+/// &lt;summary&gt;
+///Island Workshop Supply Demand
+/// &lt;/summary&gt;
+[Description("Island Workshop Supply Demand")]
+IslandWorkshopSupplyDemand = 890,
+/// &lt;summary&gt;
+///Init Search Info
+/// &lt;/summary&gt;
+[Description("Init Search Info")]
+InitSearchInfo = 998,
+/// &lt;summary&gt;
+///Item Market Board Summary
+/// &lt;/summary&gt;
+[Description("Item Market Board Summary")]
+ItemMarketBoardSummary = 442,
 /// &lt;summary&gt;
 ///Inventory Action Ack
 /// &lt;/summary&gt;
 [Description("Inventory Action Ack")]
-InventoryActionAck = 346,
+InventoryActionAck = 308,
+/// &lt;summary&gt;
+///Item Market Board Info
+/// &lt;/summary&gt;
+[Description("Item Market Board Info")]
+ItemMarketBoardInfo = 313,
+/// &lt;summary&gt;
+///Init
+/// &lt;/summary&gt;
+[Description("Init")]
+Init = 338,
+/// &lt;summary&gt;
+///Item Info
+/// &lt;/summary&gt;
+[Description("Item Info")]
+ItemInfo = 132,
+/// &lt;summary&gt;
+///Island Workshop Favors
+/// &lt;/summary&gt;
+[Description("Island Workshop Favors")]
+IslandWorkshopFavors = 154,
 /// &lt;summary&gt;
 ///Logout
 /// &lt;/summary&gt;
 [Description("Logout")]
-Logout = 569,
+Logout = 470,
 /// &lt;summary&gt;
 ///Log Message
 /// &lt;/summary&gt;
 [Description("Log Message")]
-LogMessage = 509,
-/// &lt;summary&gt;
-///Map Update 16
-/// &lt;/summary&gt;
-[Description("Map Update 16")]
-MapUpdate16 = 919,
-/// &lt;summary&gt;
-///Model Equip
-/// &lt;/summary&gt;
-[Description("Model Equip")]
-ModelEquip = 822,
-/// &lt;summary&gt;
-///Market Board Search Result
-/// &lt;/summary&gt;
-[Description("Market Board Search Result")]
-MarketBoardSearchResult = 877,
-/// &lt;summary&gt;
-///Map Update 64
-/// &lt;/summary&gt;
-[Description("Map Update 64")]
-MapUpdate64 = 784,
-/// &lt;summary&gt;
-///Map Update 4
-/// &lt;/summary&gt;
-[Description("Map Update 4")]
-MapUpdate4 = 197,
+LogMessage = 749,
 /// &lt;summary&gt;
 ///Map Update 8
 /// &lt;/summary&gt;
 [Description("Map Update 8")]
-MapUpdate8 = 767,
-/// &lt;summary&gt;
-///Market Board Item Listing History
-/// &lt;/summary&gt;
-[Description("Market Board Item Listing History")]
-MarketBoardItemListingHistory = 295,
-/// &lt;summary&gt;
-///Mini Cactpot Init
-/// &lt;/summary&gt;
-[Description("Mini Cactpot Init")]
-MiniCactpotInit = 301,
-/// &lt;summary&gt;
-///Map Update
-/// &lt;/summary&gt;
-[Description("Map Update")]
-MapUpdate = 169,
-/// &lt;summary&gt;
-///Map Update 128
-/// &lt;/summary&gt;
-[Description("Map Update 128")]
-MapUpdate128 = 958,
-/// &lt;summary&gt;
-///Market Board Item Listing
-/// &lt;/summary&gt;
-[Description("Market Board Item Listing")]
-MarketBoardItemListing = 854,
+MapUpdate8 = 357,
 /// &lt;summary&gt;
 ///Market Board Purchase
 /// &lt;/summary&gt;
 [Description("Market Board Purchase")]
-MarketBoardPurchase = 117,
-/// &lt;summary&gt;
-///Market Board Item Listing Count
-/// &lt;/summary&gt;
-[Description("Market Board Item Listing Count")]
-MarketBoardItemListingCount = 598,
+MarketBoardPurchase = 665,
 /// &lt;summary&gt;
 ///Market Board Sale
 /// &lt;/summary&gt;
 [Description("Market Board Sale")]
-MarketBoardSale = 980,
+MarketBoardSale = 286,
+/// &lt;summary&gt;
+///Map Update
+/// &lt;/summary&gt;
+[Description("Map Update")]
+MapUpdate = 277,
+/// &lt;summary&gt;
+///Map Update 4
+/// &lt;/summary&gt;
+[Description("Map Update 4")]
+MapUpdate4 = 680,
+/// &lt;summary&gt;
+///Market Board Item Listing Count
+/// &lt;/summary&gt;
+[Description("Market Board Item Listing Count")]
+MarketBoardItemListingCount = 192,
+/// &lt;summary&gt;
+///Model Equip
+/// &lt;/summary&gt;
+[Description("Model Equip")]
+ModelEquip = 271,
+/// &lt;summary&gt;
+///Map Update 16
+/// &lt;/summary&gt;
+[Description("Map Update 16")]
+MapUpdate16 = 612,
+/// &lt;summary&gt;
+///Map Update 128
+/// &lt;/summary&gt;
+[Description("Map Update 128")]
+MapUpdate128 = 417,
+/// &lt;summary&gt;
+///Market Board Item Listing
+/// &lt;/summary&gt;
+[Description("Market Board Item Listing")]
+MarketBoardItemListing = 845,
+/// &lt;summary&gt;
+///Mini Cactpot Init
+/// &lt;/summary&gt;
+[Description("Mini Cactpot Init")]
+MiniCactpotInit = 589,
+/// &lt;summary&gt;
+///Map Update 64
+/// &lt;/summary&gt;
+[Description("Map Update 64")]
+MapUpdate64 = 376,
+/// &lt;summary&gt;
+///Market Board Item Listing History
+/// &lt;/summary&gt;
+[Description("Market Board Item Listing History")]
+MarketBoardItemListingHistory = 577,
+/// &lt;summary&gt;
+///Market Board Search Result
+/// &lt;/summary&gt;
+[Description("Market Board Search Result")]
+MarketBoardSearchResult = 472,
 /// &lt;summary&gt;
 ///Map Update 32
 /// &lt;/summary&gt;
 [Description("Map Update 32")]
-MapUpdate32 = 532,
+MapUpdate32 = 735,
 /// &lt;summary&gt;
 ///Npc Yell
 /// &lt;/summary&gt;
 [Description("Npc Yell")]
-NpcYell = 808,
+NpcYell = 221,
 /// &lt;summary&gt;
 ///Npc Spawn
 /// &lt;/summary&gt;
 [Description("Npc Spawn")]
-NpcSpawn = 111,
-/// &lt;summary&gt;
-///Object Despawn
-/// &lt;/summary&gt;
-[Description("Object Despawn")]
-ObjectDespawn = 272,
+NpcSpawn = 524,
 /// &lt;summary&gt;
 ///Object Spawn
 /// &lt;/summary&gt;
 [Description("Object Spawn")]
-ObjectSpawn = 177,
+ObjectSpawn = 238,
 /// &lt;summary&gt;
-///Player Class Info
+///Object Despawn
 /// &lt;/summary&gt;
-[Description("Player Class Info")]
-PlayerClassInfo = 243,
-/// &lt;summary&gt;
-///Party Message
-/// &lt;/summary&gt;
-[Description("Party Message")]
-PartyMessage = 602,
-/// &lt;summary&gt;
-///Player Blue Mage Actions
-/// &lt;/summary&gt;
-[Description("Player Blue Mage Actions")]
-PlayerBlueMageActions = 280,
-/// &lt;summary&gt;
-///Playtime
-/// &lt;/summary&gt;
-[Description("Playtime")]
-Playtime = 895,
+[Description("Object Despawn")]
+ObjectDespawn = 301,
 /// &lt;summary&gt;
 ///Player Setup
 /// &lt;/summary&gt;
 [Description("Player Setup")]
-PlayerSetup = 989,
+PlayerSetup = 147,
 /// &lt;summary&gt;
-///Player Retainer Info
+///Party Message
 /// &lt;/summary&gt;
-[Description("Player Retainer Info")]
-PlayerRetainerInfo = 750,
+[Description("Party Message")]
+PartyMessage = 717,
 /// &lt;summary&gt;
-///Player Stats
+///Player Blue Mage Actions
 /// &lt;/summary&gt;
-[Description("Player Stats")]
-PlayerStats = 805,
+[Description("Player Blue Mage Actions")]
+PlayerBlueMageActions = 402,
 /// &lt;summary&gt;
 ///Place Field Marker Preset
 /// &lt;/summary&gt;
 [Description("Place Field Marker Preset")]
-PlaceFieldMarkerPreset = 329,
-/// &lt;summary&gt;
-///Player Title List
-/// &lt;/summary&gt;
-[Description("Player Title List")]
-PlayerTitleList = 850,
-/// &lt;summary&gt;
-///Player Spawn
-/// &lt;/summary&gt;
-[Description("Player Spawn")]
-PlayerSpawn = 920,
-/// &lt;summary&gt;
-///Place Field Marker
-/// &lt;/summary&gt;
-[Description("Place Field Marker")]
-PlaceFieldMarker = 369,
-/// &lt;summary&gt;
-///Player Removed From Blacklist
-/// &lt;/summary&gt;
-[Description("Player Removed From Blacklist")]
-PlayerRemovedFromBlacklist = 696,
-/// &lt;summary&gt;
-///Prepare Zoning
-/// &lt;/summary&gt;
-[Description("Prepare Zoning")]
-PrepareZoning = 713,
-/// &lt;summary&gt;
-///Player Added To Blacklist
-/// &lt;/summary&gt;
-[Description("Player Added To Blacklist")]
-PlayerAddedToBlacklist = 705,
-/// &lt;summary&gt;
-///Player State Flags
-/// &lt;/summary&gt;
-[Description("Player State Flags")]
-PlayerStateFlags = 508,
+PlaceFieldMarkerPreset = 359,
 /// &lt;summary&gt;
 ///Party Finder List
 /// &lt;/summary&gt;
 [Description("Party Finder List")]
-PartyFinderList = 124,
+PartyFinderList = 742,
+/// &lt;summary&gt;
+///Player Stats
+/// &lt;/summary&gt;
+[Description("Player Stats")]
+PlayerStats = 208,
+/// &lt;summary&gt;
+///Player Class Info
+/// &lt;/summary&gt;
+[Description("Player Class Info")]
+PlayerClassInfo = 490,
+/// &lt;summary&gt;
+///Player Title List
+/// &lt;/summary&gt;
+[Description("Player Title List")]
+PlayerTitleList = 510,
+/// &lt;summary&gt;
+///Player State Flags
+/// &lt;/summary&gt;
+[Description("Player State Flags")]
+PlayerStateFlags = 515,
+/// &lt;summary&gt;
+///Place Field Marker
+/// &lt;/summary&gt;
+[Description("Place Field Marker")]
+PlaceFieldMarker = 669,
+/// &lt;summary&gt;
+///Playtime
+/// &lt;/summary&gt;
+[Description("Playtime")]
+Playtime = 109,
+/// &lt;summary&gt;
+///Player Added To Blacklist
+/// &lt;/summary&gt;
+[Description("Player Added To Blacklist")]
+PlayerAddedToBlacklist = 479,
+/// &lt;summary&gt;
+///Prepare Zoning
+/// &lt;/summary&gt;
+[Description("Prepare Zoning")]
+PrepareZoning = 254,
+/// &lt;summary&gt;
+///Player Retainer Info
+/// &lt;/summary&gt;
+[Description("Player Retainer Info")]
+PlayerRetainerInfo = 599,
+/// &lt;summary&gt;
+///Player Spawn
+/// &lt;/summary&gt;
+[Description("Player Spawn")]
+PlayerSpawn = 452,
+/// &lt;summary&gt;
+///Player Removed From Blacklist
+/// &lt;/summary&gt;
+[Description("Player Removed From Blacklist")]
+PlayerRemovedFromBlacklist = 748,
 /// &lt;summary&gt;
 ///Retainer Summary
 /// &lt;/summary&gt;
 [Description("Retainer Summary")]
-RetainerSummary = 476,
-/// &lt;summary&gt;
-///Retainer Sale History
-/// &lt;/summary&gt;
-[Description("Retainer Sale History")]
-RetainerSaleHistory = 232,
-/// &lt;summary&gt;
-///Result Dialog
-/// &lt;/summary&gt;
-[Description("Result Dialog")]
-ResultDialog = 426,
-/// &lt;summary&gt;
-///RSFData
-/// &lt;/summary&gt;
-[Description("RSFData")]
-RSFData = 947,
-/// &lt;summary&gt;
-///Retainer State
-/// &lt;/summary&gt;
-[Description("Retainer State")]
-RetainerState = 540,
+RetainerSummary = 786,
 /// &lt;summary&gt;
 ///Retainer Information
 /// &lt;/summary&gt;
 [Description("Retainer Information")]
-RetainerInformation = 789,
+RetainerInformation = 757,
+/// &lt;summary&gt;
+///Retainer Sale History
+/// &lt;/summary&gt;
+[Description("Retainer Sale History")]
+RetainerSaleHistory = 161,
+/// &lt;summary&gt;
+///RSFData
+/// &lt;/summary&gt;
+[Description("RSFData")]
+RSFData = 258,
 /// &lt;summary&gt;
 ///RSVData
 /// &lt;/summary&gt;
 [Description("RSVData")]
-RSVData = 979,
+RSVData = 243,
 /// &lt;summary&gt;
-///System Log Message 16
+///Retainer State
 /// &lt;/summary&gt;
-[Description("System Log Message 16")]
-SystemLogMessage16 = 198,
+[Description("Retainer State")]
+RetainerState = 908,
 /// &lt;summary&gt;
-///Status Effect List Bozja
+///Result Dialog
 /// &lt;/summary&gt;
-[Description("Status Effect List Bozja")]
-StatusEffectListBozja = 155,
-/// &lt;summary&gt;
-///System Log Message 2
-/// &lt;/summary&gt;
-[Description("System Log Message 2")]
-SystemLogMessage2 = 113,
-/// &lt;summary&gt;
-///Status Effect List Occult
-/// &lt;/summary&gt;
-[Description("Status Effect List Occult")]
-StatusEffectListOccult = 220,
-/// &lt;summary&gt;
-///System Log Message 8
-/// &lt;/summary&gt;
-[Description("System Log Message 8")]
-SystemLogMessage8 = 186,
-/// &lt;summary&gt;
-///Submarine Progression Status
-/// &lt;/summary&gt;
-[Description("Submarine Progression Status")]
-SubmarineProgressionStatus = 205,
-/// &lt;summary&gt;
-///Status Effect List Eureka
-/// &lt;/summary&gt;
-[Description("Status Effect List Eureka")]
-StatusEffectListEureka = 966,
-/// &lt;summary&gt;
-///System Log Message 4
-/// &lt;/summary&gt;
-[Description("System Log Message 4")]
-SystemLogMessage4 = 590,
-/// &lt;summary&gt;
-///Social Message 2
-/// &lt;/summary&gt;
-[Description("Social Message 2")]
-SocialMessage2 = 108,
-/// &lt;summary&gt;
-///Status Effect List Player
-/// &lt;/summary&gt;
-[Description("Status Effect List Player")]
-StatusEffectListPlayer = 339,
-/// &lt;summary&gt;
-///Set Online Status
-/// &lt;/summary&gt;
-[Description("Set Online Status")]
-SetOnlineStatus = 325,
-/// &lt;summary&gt;
-///Submarine Timers
-/// &lt;/summary&gt;
-[Description("Submarine Timers")]
-SubmarineTimers = 689,
-/// &lt;summary&gt;
-///Submarine Exploration Result
-/// &lt;/summary&gt;
-[Description("Submarine Exploration Result")]
-SubmarineExplorationResult = 399,
-/// &lt;summary&gt;
-///System Log Message
-/// &lt;/summary&gt;
-[Description("System Log Message")]
-SystemLogMessage = 487,
-/// &lt;summary&gt;
-///Status Effect List
-/// &lt;/summary&gt;
-[Description("Status Effect List")]
-StatusEffectList = 497,
-/// &lt;summary&gt;
-///Submarine Status List
-/// &lt;/summary&gt;
-[Description("Submarine Status List")]
-SubmarineStatusList = 495,
-/// &lt;summary&gt;
-///Status Effect List Double
-/// &lt;/summary&gt;
-[Description("Status Effect List Double")]
-StatusEffectListDouble = 800,
-/// &lt;summary&gt;
-///Social Message
-/// &lt;/summary&gt;
-[Description("Social Message")]
-SocialMessage = 634,
-/// &lt;summary&gt;
-///Social Request Response
-/// &lt;/summary&gt;
-[Description("Social Request Response")]
-SocialRequestResponse = 512,
-/// &lt;summary&gt;
-///Status Effect List Player Double
-/// &lt;/summary&gt;
-[Description("Status Effect List Player Double")]
-StatusEffectListPlayerDouble = 268,
-/// &lt;summary&gt;
-///Server Notice
-/// &lt;/summary&gt;
-[Description("Server Notice")]
-ServerNotice = 537,
-/// &lt;summary&gt;
-///Server Notice Short
-/// &lt;/summary&gt;
-[Description("Server Notice Short")]
-ServerNoticeShort = 637,
+[Description("Result Dialog")]
+ResultDialog = 615,
 /// &lt;summary&gt;
 ///Social List
 /// &lt;/summary&gt;
 [Description("Social List")]
-SocialList = 719,
+SocialList = 755,
 /// &lt;summary&gt;
-///Update Search Info
+///Social Message 2
 /// &lt;/summary&gt;
-[Description("Update Search Info")]
-UpdateSearchInfo = 134,
+[Description("Social Message 2")]
+SocialMessage2 = 905,
 /// &lt;summary&gt;
-///Update Recast Times
+///Status Effect List Player
 /// &lt;/summary&gt;
-[Description("Update Recast Times")]
-UpdateRecastTimes = 119,
+[Description("Status Effect List Player")]
+StatusEffectListPlayer = 988,
 /// &lt;summary&gt;
-///Update Inventory Slot
+///Submarine Exploration Result
 /// &lt;/summary&gt;
-[Description("Update Inventory Slot")]
-UpdateInventorySlot = 398,
+[Description("Submarine Exploration Result")]
+SubmarineExplorationResult = 530,
 /// &lt;summary&gt;
-///Update Class Info Bozja
+///Set Online Status
 /// &lt;/summary&gt;
-[Description("Update Class Info Bozja")]
-UpdateClassInfoBozja = 353,
+[Description("Set Online Status")]
+SetOnlineStatus = 868,
 /// &lt;summary&gt;
-///Update Hate
+///System Log Message 4
 /// &lt;/summary&gt;
-[Description("Update Hate")]
-UpdateHate = 737,
+[Description("System Log Message 4")]
+SystemLogMessage4 = 466,
 /// &lt;summary&gt;
-///Update Alliance Small Member Positions
+///Status Effect List
 /// &lt;/summary&gt;
-[Description("Update Alliance Small Member Positions")]
-UpdateAllianceSmallMemberPositions = 915,
+[Description("Status Effect List")]
+StatusEffectList = 131,
 /// &lt;summary&gt;
-///Update Hp Mp Tp
+///Server Notice Short
 /// &lt;/summary&gt;
-[Description("Update Hp Mp Tp")]
-UpdateHpMpTp = 743,
+[Description("Server Notice Short")]
+ServerNoticeShort = 255,
 /// &lt;summary&gt;
-///Update Class Info Occult
+///Server Notice
 /// &lt;/summary&gt;
-[Description("Update Class Info Occult")]
-UpdateClassInfoOccult = 904,
+[Description("Server Notice")]
+ServerNotice = 592,
 /// &lt;summary&gt;
-///Update Alliance Small
+///Submarine Progression Status
 /// &lt;/summary&gt;
-[Description("Update Alliance Small")]
-UpdateAllianceSmall = 903,
+[Description("Submarine Progression Status")]
+SubmarineProgressionStatus = 460,
 /// &lt;summary&gt;
-///Update Party Member Positions
+///Submarine Timers
 /// &lt;/summary&gt;
-[Description("Update Party Member Positions")]
-UpdatePartyMemberPositions = 284,
+[Description("Submarine Timers")]
+SubmarineTimers = 492,
 /// &lt;summary&gt;
-///Update Class Info Eureka
+///Status Effect List Eureka
 /// &lt;/summary&gt;
-[Description("Update Class Info Eureka")]
-UpdateClassInfoEureka = 772,
+[Description("Status Effect List Eureka")]
+StatusEffectListEureka = 448,
 /// &lt;summary&gt;
-///Update Hater
+///System Log Message
 /// &lt;/summary&gt;
-[Description("Update Hater")]
-UpdateHater = 281,
+[Description("System Log Message")]
+SystemLogMessage = 168,
 /// &lt;summary&gt;
-///Update Alliance Normal
+///Social Request Response
 /// &lt;/summary&gt;
-[Description("Update Alliance Normal")]
-UpdateAllianceNormal = 204,
+[Description("Social Request Response")]
+SocialRequestResponse = 167,
+/// &lt;summary&gt;
+///System Log Message 8
+/// &lt;/summary&gt;
+[Description("System Log Message 8")]
+SystemLogMessage8 = 620,
+/// &lt;summary&gt;
+///Social Message
+/// &lt;/summary&gt;
+[Description("Social Message")]
+SocialMessage = 425,
+/// &lt;summary&gt;
+///Status Effect List Player Double
+/// &lt;/summary&gt;
+[Description("Status Effect List Player Double")]
+StatusEffectListPlayerDouble = 703,
+/// &lt;summary&gt;
+///System Log Message 2
+/// &lt;/summary&gt;
+[Description("System Log Message 2")]
+SystemLogMessage2 = 706,
+/// &lt;summary&gt;
+///Submarine Status List
+/// &lt;/summary&gt;
+[Description("Submarine Status List")]
+SubmarineStatusList = 906,
+/// &lt;summary&gt;
+///Status Effect List Occult
+/// &lt;/summary&gt;
+[Description("Status Effect List Occult")]
+StatusEffectListOccult = 355,
+/// &lt;summary&gt;
+///Status Effect List Bozja
+/// &lt;/summary&gt;
+[Description("Status Effect List Bozja")]
+StatusEffectListBozja = 337,
+/// &lt;summary&gt;
+///System Log Message 16
+/// &lt;/summary&gt;
+[Description("System Log Message 16")]
+SystemLogMessage16 = 619,
+/// &lt;summary&gt;
+///Status Effect List Double
+/// &lt;/summary&gt;
+[Description("Status Effect List Double")]
+StatusEffectListDouble = 102,
 /// &lt;summary&gt;
 ///Update Alliance Normal Member Positions
 /// &lt;/summary&gt;
 [Description("Update Alliance Normal Member Positions")]
-UpdateAllianceNormalMemberPositions = 275,
+UpdateAllianceNormalMemberPositions = 917,
 /// &lt;summary&gt;
 ///Update Duty Recast Times
 /// &lt;/summary&gt;
 [Description("Update Duty Recast Times")]
-UpdateDutyRecastTimes = 838,
+UpdateDutyRecastTimes = 936,
 /// &lt;summary&gt;
-///Update Duty Recast Times 5
+///Update Party Member Positions
 /// &lt;/summary&gt;
-[Description("Update Duty Recast Times 5")]
-UpdateDutyRecastTimes5 = 256,
+[Description("Update Party Member Positions")]
+UpdatePartyMemberPositions = 985,
+/// &lt;summary&gt;
+///Update Class Info Occult
+/// &lt;/summary&gt;
+[Description("Update Class Info Occult")]
+UpdateClassInfoOccult = 325,
+/// &lt;summary&gt;
+///Update Class Info Bozja
+/// &lt;/summary&gt;
+[Description("Update Class Info Bozja")]
+UpdateClassInfoBozja = 837,
+/// &lt;summary&gt;
+///Update Hp Mp Tp
+/// &lt;/summary&gt;
+[Description("Update Hp Mp Tp")]
+UpdateHpMpTp = 283,
 /// &lt;summary&gt;
 ///Update Class Info
 /// &lt;/summary&gt;
 [Description("Update Class Info")]
-UpdateClassInfo = 848,
+UpdateClassInfo = 788,
+/// &lt;summary&gt;
+///Update Class Info Eureka
+/// &lt;/summary&gt;
+[Description("Update Class Info Eureka")]
+UpdateClassInfoEureka = 317,
+/// &lt;summary&gt;
+///Update Duty Recast Times 5
+/// &lt;/summary&gt;
+[Description("Update Duty Recast Times 5")]
+UpdateDutyRecastTimes5 = 331,
+/// &lt;summary&gt;
+///Update Inventory Slot
+/// &lt;/summary&gt;
+[Description("Update Inventory Slot")]
+UpdateInventorySlot = 674,
+/// &lt;summary&gt;
+///Update Hate
+/// &lt;/summary&gt;
+[Description("Update Hate")]
+UpdateHate = 671,
+/// &lt;summary&gt;
+///Update Alliance Small Member Positions
+/// &lt;/summary&gt;
+[Description("Update Alliance Small Member Positions")]
+UpdateAllianceSmallMemberPositions = 590,
+/// &lt;summary&gt;
+///Update Hater
+/// &lt;/summary&gt;
+[Description("Update Hater")]
+UpdateHater = 558,
+/// &lt;summary&gt;
+///Update Search Info
+/// &lt;/summary&gt;
+[Description("Update Search Info")]
+UpdateSearchInfo = 544,
+/// &lt;summary&gt;
+///Update Recast Times
+/// &lt;/summary&gt;
+[Description("Update Recast Times")]
+UpdateRecastTimes = 503,
+/// &lt;summary&gt;
+///Update Alliance Small
+/// &lt;/summary&gt;
+[Description("Update Alliance Small")]
+UpdateAllianceSmall = 850,
+/// &lt;summary&gt;
+///Update Alliance Normal
+/// &lt;/summary&gt;
+[Description("Update Alliance Normal")]
+UpdateAllianceNormal = 500,
 /// &lt;summary&gt;
 ///Weather Change
 /// &lt;/summary&gt;
 [Description("Weather Change")]
-WeatherChange = 949,
-/// &lt;summary&gt;
-///Action Request
-/// &lt;/summary&gt;
-[Description("Action Request")]
-ActionRequest = 534,
+WeatherChange = 815,
 /// &lt;summary&gt;
 ///Action Request Ground Targeted
 /// &lt;/summary&gt;
 [Description("Action Request Ground Targeted")]
-ActionRequestGroundTargeted = 577,
+ActionRequestGroundTargeted = 891,
 /// &lt;summary&gt;
-///Client Countdown Initiate
+///Action Request
 /// &lt;/summary&gt;
-[Description("Client Countdown Initiate")]
-ClientCountdownInitiate = 775,
+[Description("Action Request")]
+ActionRequest = 913,
 /// &lt;summary&gt;
 ///Client Trigger
 /// &lt;/summary&gt;
 [Description("Client Trigger")]
-ClientTrigger = 855,
+ClientTrigger = 391,
 /// &lt;summary&gt;
 ///Chat Handler
 /// &lt;/summary&gt;
 [Description("Chat Handler")]
-ChatHandler = 973,
+ChatHandler = 560,
+/// &lt;summary&gt;
+///Client Countdown Initiate
+/// &lt;/summary&gt;
+[Description("Client Countdown Initiate")]
+ClientCountdownInitiate = 894,
 /// &lt;summary&gt;
 ///Inventory Modify Handler
 /// &lt;/summary&gt;
 [Description("Inventory Modify Handler")]
-InventoryModifyHandler = 576,
+InventoryModifyHandler = 507,
 /// &lt;summary&gt;
 ///Logout Handler
 /// &lt;/summary&gt;
 [Description("Logout Handler")]
-LogoutHandler = 656,
-/// &lt;summary&gt;
-///Market Board Request Item Listing Info
-/// &lt;/summary&gt;
-[Description("Market Board Request Item Listing Info")]
-MarketBoardRequestItemListingInfo = 112,
+LogoutHandler = 431,
 /// &lt;summary&gt;
 ///Market Board Purchase Handler
 /// &lt;/summary&gt;
 [Description("Market Board Purchase Handler")]
-MarketBoardPurchaseHandler = 179,
+MarketBoardPurchaseHandler = 765,
+/// &lt;summary&gt;
+///Market Board Request Item Listing Info
+/// &lt;/summary&gt;
+[Description("Market Board Request Item Listing Info")]
+MarketBoardRequestItemListingInfo = 800,
 /// &lt;summary&gt;
 ///Set Search Info Handler
 /// &lt;/summary&gt;
 [Description("Set Search Info Handler")]
-SetSearchInfoHandler = 238,
-/// &lt;summary&gt;
-///Update Position Handler
-/// &lt;/summary&gt;
-[Description("Update Position Handler")]
-UpdatePositionHandler = 418,
+SetSearchInfoHandler = 633,
 /// &lt;summary&gt;
 ///Update Position Instance
 /// &lt;/summary&gt;
 [Description("Update Position Instance")]
-UpdatePositionInstance = 479,
+UpdatePositionInstance = 411,
+/// &lt;summary&gt;
+///Update Position Handler
+/// &lt;/summary&gt;
+[Description("Update Position Handler")]
+UpdatePositionHandler = 920,
 /// &lt;summary&gt;
 ///Lobby Error
 /// &lt;/summary&gt;

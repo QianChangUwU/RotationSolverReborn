@@ -35,7 +35,33 @@ public readonly struct ActionBasicInfo
 	/// <summary>
 	/// Gets the range of the action.
 	/// </summary>
-	public readonly sbyte Range => _action.Action.Range;
+	public readonly sbyte Range
+	{
+		get
+		{
+			if ((ActionID)_action.Info.ID == ActionID.AvalancheAxePvE)
+			{
+				return 3;
+			}
+
+			if ((ActionID)_action.Info.ID == ActionID.SpinningAxePvE)
+			{
+				return 3;
+			}
+
+			if ((ActionID)_action.Info.ID == ActionID.MistralAxePvE)
+			{
+				return 3;
+			}
+
+			if ((ActionID)_action.Info.ID == ActionID.GaleAxePvE)
+			{
+				return 3;
+			}
+
+			return (sbyte)ActionManager.GetActionRange(_action.Info.ID);
+		}
+	}
 
 	/// <summary>
 	/// Gets the effect range of the action.
@@ -720,13 +746,18 @@ public readonly struct ActionBasicInfo
 			}
 		}
 
-		ActionID[] comboActions = _action.Action.ActionCombo.RowId != 0
-								? [(ActionID)_action.Action.ActionCombo.RowId]
-								: [];
-
-		if (_action.Setting.ComboIds != null)
+		var comboActions = _action.Setting.ComboActionsCache;
+		if (comboActions == null)
 		{
-			comboActions = [.. comboActions, .. _action.Setting.ComboIds];
+			ActionID[] baseCombo = _action.Action.ActionCombo.RowId != 0
+									? [(ActionID)_action.Action.ActionCombo.RowId]
+									: [];
+
+			comboActions = _action.Setting.ComboIds != null
+				? [.. baseCombo, .. _action.Setting.ComboIds]
+				: baseCombo;
+
+			_action.Setting.ComboActionsCache = comboActions;
 		}
 
 		if (comboActions.Length > 0)

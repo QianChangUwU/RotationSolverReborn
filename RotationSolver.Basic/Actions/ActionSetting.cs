@@ -100,6 +100,12 @@ public class ActionSetting
 	public Func<uint?>? MPOverride { get; set; } = null;
 
 	/// <summary>
+	/// Marks action as a fake action. 
+	/// This is used for actions that can be placed on hotbars but not actually usable, just a placeholder to turn into something else.
+	/// </summary>
+	public bool IsFakeAction { get; set; } = false;
+
+	/// <summary>
 	/// Is this action in the melee range.
 	/// </summary>
 	internal SpecialActionType SpecialType { get; set; }
@@ -147,6 +153,12 @@ public class ActionSetting
 	/// The additional combo ids.
 	/// </summary>
 	public ActionID[]? ComboIds { get; set; }
+
+	/// <summary>
+	/// Cached combined combo action list (the action's base <c>ActionCombo</c> plus <see cref="ComboIds"/>),
+	/// computed once on first combo check instead of being rebuilt on every CanUse().
+	/// </summary>
+	internal ActionID[]? ComboActionsCache { get; set; }
 
 	/// <summary>
 	/// Status that this action provides.
