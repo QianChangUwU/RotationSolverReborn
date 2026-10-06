@@ -1,0 +1,31 @@
+name: PR - Build and test
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test plugin repository updater
+        run: python -m unittest discover -s .github/tests -v
+      - uses: ./.github/actions/setup
+      - name: Build, check localization and package
+        shell: pwsh
+        run: ./.github/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RSR-PR-${{ github.run_number }}
+          path: release/*
+          if-no-files-found: error

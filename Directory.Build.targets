@@ -1,0 +1,9 @@
+<Project>
+  <!-- Bump this four-part version to publish a new release from main. -->
+  <PropertyGroup>
+    <Version>7.5.6.16</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <InformationalVersion>$(Version)</InformationalVersion>
+  </PropertyGroup>
+</Project>

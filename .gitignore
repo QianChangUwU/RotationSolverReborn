@@ -10,3 +10,6 @@ RotationSolver.sln.DotSettings.user
 /RotationSolver.GameData/RotationSolver.GameData.csproj.user
 /doc
 .vscode/
+# Workflow artifacts and Python test caches
+/release/
+__pycache__/
