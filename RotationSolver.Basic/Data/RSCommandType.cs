@@ -1,4 +1,4 @@
-﻿using RotationSolver.Basic.Localization;
+using RotationSolver.Basic.Localization;
 
 namespace RotationSolver.Basic.Data;
 
@@ -162,7 +162,7 @@ public static class StateCommandTypeExtensions
 			StateCommandType.Off => Loc.T("Off"),
 			StateCommandType.Auto => Loc.T("Auto"),
 			StateCommandType.Manual => Loc.T("Manual"),
-			_ => stateCommandType.ToString(),
+			_ => Loc.T(stateCommandType.ToString()),
 		};
 	}
 }

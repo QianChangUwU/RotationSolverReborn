@@ -3,15 +3,18 @@ using ECommons.DalamudServices;
 using RotationSolver.Basic.Localization;
 using ECommons.GameHelpers;
 using RotationSolver.IPC;
+using RotationSolver.Data;
 using RotationSolver.Updaters;
 
 namespace RotationSolver.Commands
 {
 	public static partial class RSCommands
 	{
-		public static string _stateString = "Off", _specialString = string.Empty;
+		private static Func<string> _stateText = () => Loc.T("Off");
+		public static string _stateString => _stateText();
+		public static string _specialString = string.Empty;
 
-		internal static string EntryString => $"{_stateString}{(DataCenter.SpecialTimeLeft < 0 ? string.Empty : $" - {_specialString}: {DataCenter.SpecialTimeLeft:F2}s")}";
+		internal static string EntryString => $"{_stateString}{(DataCenter.SpecialTimeLeft < 0 ? string.Empty : $" - {Loc.T(_specialString)}: {DataCenter.SpecialTimeLeft:F2}s")}";
 
 		private static string _lastToastMessage = string.Empty;
 
@@ -457,7 +460,7 @@ namespace RotationSolver.Commands
 					break;
 			}
 
-			_stateString = stateType.ToStateString(role);
+			_stateText = () => stateType.ToStateString(role);
 			UpdateToast();
 		}
 
@@ -566,8 +569,8 @@ namespace RotationSolver.Commands
 					break;
 			}
 
-			_stateString = stateType == StateCommandType.AutoDuty
-				? $"{stateType.ToStateString(role)} ({targetingType})"
+			_stateText = () => stateType == StateCommandType.AutoDuty
+				? $"{stateType.ToStateString(role)} ({Loc.T(targetingType.GetDescription())})"
 				: stateType.ToStateString(role);
 			UpdateToast();
 		}

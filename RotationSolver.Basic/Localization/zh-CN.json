@@ -3288,5 +3288,19 @@
   "Sec5": "5 秒",
   "SecondBattlehorn": "第二战斗号角",
   "Dynamic": "动态判断",
-  "Borrow": "Borrow（借用）"
+  "Borrow": "Borrow（借用）",
+  "TargetOnly": "仅选目标",
+  "EndSpecial": "结束特殊状态",
+  "HealArea": "群体治疗",
+  "HealSingle": "单体治疗",
+  "DefenseArea": "群体减伤",
+  "DefenseSingle": "单体减伤",
+  "DispelStancePositional": "驱散／坦克姿态／身位",
+  "RaiseShirk": "复活／退避",
+  "MoveForward": "向前位移",
+  "MoveBack": "向后位移",
+  "AntiKnockback": "防击退",
+  "LimitBreak": "极限技",
+  "NoCasting": "禁用咏唱",
+  "Intercepting": "技能拦截"
 }
