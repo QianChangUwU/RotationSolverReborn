@@ -11,3 +11,5 @@ RotationSolver.sln.DotSettings.user
 .vscode/
 *.csproj.user
 *.csproj.Backup.tmp
+__pycache__/
+*.pyc
