@@ -403,7 +403,7 @@ public partial class MainWindow
 	{
 		if (Player.Object == null)
 		{
-			return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = "Player not available" };
+			return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = Loc.T("Player not available") };
 		}
 
 		var playerPos = Player.Object.Position;
@@ -422,7 +422,7 @@ public partial class MainWindow
 						return new MovementSafetyResult
 						{
 							Status = isSafe ? MovementSafetyStatus.Safe : MovementSafetyStatus.NotSafe,
-							Reason = isSafe ? string.Empty : "Destination unsafe (IsFixedDashSafe)"
+							Reason = isSafe ? string.Empty : Loc.T("Destination unsafe (IsFixedDashSafe)")
 						};
 					}
 
@@ -435,7 +435,7 @@ public partial class MainWindow
 						return new MovementSafetyResult
 						{
 							Status = isSafe ? MovementSafetyStatus.Safe : MovementSafetyStatus.NotSafe,
-							Reason = isSafe ? string.Empty : "Destination unsafe (IsFixedDashSafe)"
+							Reason = isSafe ? string.Empty : Loc.T("Destination unsafe (IsFixedDashSafe)")
 						};
 					}
 
@@ -447,7 +447,7 @@ public partial class MainWindow
 						var target = action.Target.Target;
 						if (target == null)
 						{
-							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = "No target" };
+							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = Loc.T("No target") };
 						}
 
 						var directionToTarget = target.Position - playerPos;
@@ -455,7 +455,7 @@ public partial class MainWindow
 
 						if (distanceToTarget < 0.001f)
 						{
-							return new MovementSafetyResult { Status = MovementSafetyStatus.Safe, Reason = "Already at target" };
+							return new MovementSafetyResult { Status = MovementSafetyStatus.Safe, Reason = Loc.T("Already at target") };
 						}
 
 						var normalizedDirection = directionToTarget / distanceToTarget;
@@ -466,7 +466,7 @@ public partial class MainWindow
 						return new MovementSafetyResult
 						{
 							Status = isSafe ? MovementSafetyStatus.Safe : MovementSafetyStatus.NotSafe,
-							Reason = isSafe ? string.Empty : "Path to target unsafe (IsDashSafe)"
+							Reason = isSafe ? string.Empty : Loc.T("Path to target unsafe (IsDashSafe)")
 						};
 					}
 
@@ -474,7 +474,7 @@ public partial class MainWindow
 					{
 						if (action.Setting.ObjectBasedMovementObjectOID == 0)
 						{
-							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = "No object OID configured" };
+							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = Loc.T("No object OID configured") };
 						}
 
 						Vector3? objectPosition = null;
@@ -490,19 +490,19 @@ public partial class MainWindow
 
 						if (!objectPosition.HasValue)
 						{
-							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = "Object not found" };
+							return new MovementSafetyResult { Status = MovementSafetyStatus.NotApplicable, Reason = Loc.T("Object not found") };
 						}
 
 						var isSafe = DataCenter.IsDashSafe(playerPos, objectPosition.Value);
 						return new MovementSafetyResult
 						{
 							Status = isSafe ? MovementSafetyStatus.Safe : MovementSafetyStatus.NotSafe,
-							Reason = isSafe ? string.Empty : "Object position unsafe (IsDashSafe)"
+							Reason = isSafe ? string.Empty : Loc.T("Object position unsafe (IsDashSafe)")
 						};
 					}
 
 				default:
-					return new MovementSafetyResult { Status = MovementSafetyStatus.NotSafe, Reason = "Unknown movement type" };
+					return new MovementSafetyResult { Status = MovementSafetyStatus.NotSafe, Reason = Loc.T("Unknown movement type") };
 			}
 		}
 		catch (Exception ex)

@@ -327,7 +327,7 @@ public partial class MainWindow
 		{
 			ImGui.Dummy(new Vector2(0f, M3.Space1));
 			_ = M3Widgets.Pill("##bmr_pill", BmrIntegrationLabel, scheme.Success, FontAwesomeIcon.Link,
-				"Boss Mod Reborn integration is active.");
+				Loc.T("Boss Mod Reborn integration is active."));
 		}
 	}
 
@@ -342,7 +342,7 @@ public partial class MainWindow
 			if (expanded)
 			{
 				_ = M3Widgets.Pill("##no_combat_job", "Non-combat job", M3.Scheme.OnSurfaceVariant, FontAwesomeIcon.Hammer,
-					"Rotation Solver only drives combat jobs.");
+					Loc.T("Rotation Solver only drives combat jobs."));
 			}
 
 			return;
@@ -364,7 +364,7 @@ public partial class MainWindow
 		using var wrap = ImRaii.TextWrapPos(ImGui.GetCursorPosX() + wholeWidth);
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.Error);
 		ImGui.TextWrapped(text);
-		ImguiTooltips.HoveredTooltip("Please update your rotations!");
+		ImguiTooltips.HoveredTooltip(Loc.T("Please update your rotations!"));
 	}
 
 	internal static void DrawRotationPicker(string popupId, ICustomRotation current)
@@ -474,7 +474,7 @@ public partial class MainWindow
 		{
 			ImGui.SameLine(0f, M3.Space1);
 			_ = M3Widgets.Pill("##trophy_pill", string.Empty, ImGuiColors.ParsedGold, FontAwesomeIcon.Star,
-				"Tic-tac-toe winner!");
+				Loc.T("Tic-tac-toe winner!"));
 		}
 	}
 
@@ -495,21 +495,21 @@ public partial class MainWindow
 		if (_cachedDiagInfo == null)
 		{
 			_ = diagInfo.AppendLine($"Rotation Solver Reborn v{typeof(MainWindow).Assembly.GetName().Version?.ToString() ?? "?.?.?"}");
-			_ = diagInfo.AppendLine("Failed to get Dalamud start info.");
+			_ = diagInfo.AppendLine(Loc.T("Failed to get Dalamud start info."));
 		}
 		else
 		{
-			_ = diagInfo.AppendLine($"OS Type: {_cachedDiagInfo.Platform}");
-			_ = diagInfo.AppendLine($"FFXIV Version: {_cachedDiagInfo.GameVersion}");
-			_ = diagInfo.AppendLine($"Dalamud Version: {Svc.PluginInterface.GetDalamudVersion().Version.ToString()}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("OS Type: {0}"), _cachedDiagInfo.Platform));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("FFXIV Version: {0}"), _cachedDiagInfo.GameVersion));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Dalamud Version: {0}"), Svc.PluginInterface.GetDalamudVersion().Version.ToString()));
 			_ = diagInfo.AppendLine($"Rotation Solver Reborn v{_cachedDiagInfo.RSRVersion}");
-			_ = diagInfo.AppendLine($"Dalamud Staging: {DataCenter.DalamudStagingEnabled}");
-			_ = diagInfo.AppendLine($"Game Language: {_cachedDiagInfo.Language}");
-			_ = diagInfo.AppendLine($"Update Frequency: {Service.Config.MinUpdatingTime}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Dalamud Staging: {0}"), DataCenter.DalamudStagingEnabled));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Game Language: {0}"), _cachedDiagInfo.Language));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Update Frequency: {0}"), Service.Config.MinUpdatingTime));
 			_ = diagInfo.AppendLine($"Intercept: {Service.Config.InterceptAction3}");
-			_ = diagInfo.AppendLine($"Player Level: {DataCenter.PlayerSyncedLevel()}");
-			_ = diagInfo.AppendLine($"Rotation Name: {_curRotationAttribute?.Name ?? string.Empty}");
-			_ = diagInfo.AppendLine($"Player Job: {Player.Job}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Player Level: {0}"), DataCenter.PlayerSyncedLevel()));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Rotation Name: {0}"), _curRotationAttribute?.Name ?? string.Empty));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Player Job: {0}"), Player.Job));
 			_ = diagInfo.AppendLine($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}");
 			var moveModeValue = DataCenter.MoveModeSetting();
 			var moveModeText = moveModeValue switch
@@ -525,7 +525,7 @@ public partial class MainWindow
 		if (!string.IsNullOrEmpty(lastFrame))
 		{
 			_ = diagInfo.AppendLine();
-			_ = diagInfo.AppendLine("Last Action Tracer Frame:");
+			_ = diagInfo.AppendLine(Loc.T("Last Action Tracer Frame:"));
 			_ = diagInfo.Append(lastFrame);
 		}
 
@@ -535,7 +535,7 @@ public partial class MainWindow
 		{
 			if (item.IsEnabled)
 			{
-				var name = item.Name ?? "Unnamed Incompatible Plugin";
+				var name = item.Name ?? Loc.T("Unnamed Incompatible Plugin");
 
 				if (item.Type.HasFlag(CompatibleType.Crash))
 				{

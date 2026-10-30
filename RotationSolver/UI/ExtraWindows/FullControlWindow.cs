@@ -115,7 +115,7 @@ internal class FullControlWindow : FullCtrlWindow
 	private static float SpecialGcdSize => SpecialGcdBaseSize * Service.Config.ControlWindowSpecialsScale;
 	private static float SpecialAbilitySize => SpecialAbilityBaseSize * Service.Config.ControlWindowSpecialsScale;
 
-	private static M3WindowBrand Brand => new(MainWindow.GetLogoTexture(), "RSR Control");
+	private static M3WindowBrand Brand => new(MainWindow.GetLogoTexture(), Loc.T("RSR Control"));
 
 	private readonly M3WindowAction[] _actions = new M3WindowAction[3];
 	private readonly M3WindowFold _fold = new();
@@ -701,8 +701,8 @@ internal class FullControlWindow : FullCtrlWindow
 
 	private static void DrawStatusLines(float width)
 	{
-		const string HostileLabel = "HOSTILE";
-		const string TriggerLabel = "STATE TRIGGER";
+		var HostileLabel = Loc.T("HOSTILE");
+		var TriggerLabel = Loc.T("STATE TRIGGER");
 
 		float labelWidth;
 		using (ImRaii.PushFont(M3.LabelSmall))

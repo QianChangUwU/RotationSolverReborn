@@ -86,7 +86,7 @@ public partial class MainWindow
 
 	internal static Status[] BadStatus => _badStatus.Value;
 
-	private const string ResetListTooltip = "Clears your additions and removals. The built-in list updates with RSR on its own.";
+	private static string ResetListTooltip => Loc.T("Clears your additions and removals. The built-in list updates with RSR on its own.");
 
 	private static void DrawList()
 	{

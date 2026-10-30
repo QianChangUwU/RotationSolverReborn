@@ -255,7 +255,7 @@ internal class ActionTimelineWindow : Window
 		bool locked = config.IsActionTimelineLock;
 
 		var pressed = M3Widgets.WindowActions("##timeline_actions", topRight, locked ? LockedActions : UnlockedActions,
-			out var closed, M3.Scheme.SurfaceContainerHigh, "Hide the timeline. Turn it back on in the UI settings.");
+			out var closed, M3.Scheme.SurfaceContainerHigh, Loc.T("Hide the timeline. Turn it back on in the UI settings."));
 
 		if (pressed == 0)
 		{

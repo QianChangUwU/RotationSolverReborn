@@ -365,7 +365,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var inset = 14f * M3.Scale;
 		_ = M3Widgets.WindowActions("##tutorial_actions", new Vector2(right - inset, top + inset), [], out var closed,
-			closeTooltip: "Close the tutorial");
+			closeTooltip: Loc.T("Close the tutorial"));
 		if (closed)
 		{
 			IsOpen = false;
@@ -613,8 +613,8 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	private void DrawFooter()
 	{
-		const string skipLabel = "Skip tutorial";
-		const string backLabel = "Back";
+		var skipLabel = Loc.T("Skip tutorial");
+		var backLabel = Loc.T("Back");
 
 		var s = M3.Scheme;
 		var scale = M3.Scale;
@@ -627,11 +627,11 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		ImGui.GetWindowDrawList().AddLine(origin, new Vector2(right, origin.Y), M3.U32(s.OutlineVariant, 0.5f), 1f * scale);
 
-		var nextWidth = MathF.Max(M3Widgets.ButtonWidth(FontAwesomeIcon.ArrowRight, "Next"), M3Widgets.ButtonWidth(FontAwesomeIcon.Check, "Finish"));
+		var nextWidth = MathF.Max(M3Widgets.ButtonWidth(FontAwesomeIcon.ArrowRight, Loc.T("Next")), M3Widgets.ButtonWidth(FontAwesomeIcon.Check, Loc.T("Finish")));
 		var backWidth = M3Widgets.ButtonWidth(FontAwesomeIcon.ArrowLeft, backLabel);
 
 		ImGui.SetCursorScreenPos(new Vector2(right - nextWidth, y));
-		if (M3Widgets.Button("##tutorial_next", last ? "Finish" : "Next", M3ButtonStyle.Filled,
+		if (M3Widgets.Button("##tutorial_next", last ? Loc.T("Finish") : Loc.T("Next"), M3ButtonStyle.Filled,
 			last ? FontAwesomeIcon.Check : FontAwesomeIcon.ArrowRight, nextWidth))
 		{
 			if (last)
@@ -678,7 +678,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var s = M3.Scheme;
 		var scale = M3.Scale;
-		var label = $"Step {_stepIndex + 1} of {_steps.Length}";
+		var label = string.Format(Loc.T("Step {0} of {1}"), _stepIndex + 1, _steps.Length);
 		var width = MathF.Min(right - left, 320f * scale);
 		left += ((right - left) - width) * 0.5f;
 
@@ -765,7 +765,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var s = M3.Scheme;
 
 		var (state, accent) = CurrentState();
-		_ = M3Widgets.Pill("##tutorial_state", $"Right now: {state}", accent, tooltip: Loc.T("Updates as the state changes."));
+		_ = M3Widgets.Pill("##tutorial_state", string.Format(Loc.T("Right now: {0}"), state), accent, tooltip: Loc.T("Updates as the state changes."));
 		Gap(12f);
 
 		DrawTiles(
@@ -963,7 +963,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				"Switches on as soon as a pull timer begins, so the rotation can time its pre-pull actions.",
 				Service.Config.StartOnCountdown);
 			DrawSwitch("tutorial_off_after_combat", "Turn off after combat",
-				$"Switches off once you have been out of combat for {Service.Config.AutoOffAfterCombatTime:0} seconds. The delay is on the Auto page.",
+				string.Format(Loc.T("Switches off once you have been out of combat for {0:0} seconds. The delay is on the Auto page."), Service.Config.AutoOffAfterCombatTime),
 				Service.Config.AutoOffAfterCombat);
 			DrawSwitch("tutorial_off_when_dead", "Turn off when you die",
 				"Stops RSR the moment you are knocked out.",
@@ -1451,12 +1451,12 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var key = $"tutorial_practice_popup_{name}";
 		var command = $"{Service.COMMAND} {OtherCommandType.Settings} {name} {defaultValue}";
-		void Copy() => CopyToClipboard(command, $"Copied {command} (a practice command, it does nothing in chat).");
+		void Copy() => CopyToClipboard(command, string.Format(Loc.T("Copied {0} (a practice command, it does nothing in chat)."), command));
 
 		ImGuiHelper.DrawHotKeysPopup(key, string.Empty,
-			("Reset to Default Value.", reset, []),
-			($"Execute \"{command}\"", reset, []),
-			($"Copy \"{command}\"", Copy, []));
+			(Loc.T("Reset to Default Value."), reset, []),
+			(string.Format(Loc.T("Execute \"{0}\""), command), reset, []),
+			(string.Format(Loc.T("Copy \"{0}\""), command), Copy, []));
 
 		ImGuiHelper.ReactPopupAt(row.Hovered, key, false);
 	}
@@ -1518,7 +1518,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (DataCenter.IsTargetOnly)
 		{
-			return ($"Target Only, {DataCenter.TargetingType}", s.Secondary);
+			return (string.Format(Loc.T("Target Only, {0}"), DataCenter.TargetingType), s.Secondary);
 		}
 
 		if (DataCenter.IsAutoDuty)
@@ -1533,7 +1533,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		return DataCenter.IsPvPStateEnabled
 			? ("PvP", s.Primary)
-			: ($"Auto, {DataCenter.TargetingType}", s.Primary);
+			: (string.Format(Loc.T("Auto, {0}"), DataCenter.TargetingType), s.Primary);
 	}
 
 	private static string FirstParagraph(string? text, int maxLength = 280)

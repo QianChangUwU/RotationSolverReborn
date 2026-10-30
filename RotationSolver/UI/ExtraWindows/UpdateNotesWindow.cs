@@ -284,7 +284,7 @@ internal sealed class UpdateNotesWindow : Window
 		}
 
 		var versionLabel = $"v{_currentVersion}";
-		var newLabel = _newCount == 1 ? "1 new update" : $"{_newCount} new updates";
+		var newLabel = _newCount == 1 ? Loc.T("1 new update") : string.Format(Loc.T("{0} new updates"), _newCount);
 		var versionSize = M3Widgets.PillSize(versionLabel);
 		var newSize = _newCount > 0 ? M3Widgets.PillSize(newLabel, FontAwesomeIcon.Star) : Vector2.Zero;
 		var room = origin.X + width - (textX + titleSize.X + (16f * scale));

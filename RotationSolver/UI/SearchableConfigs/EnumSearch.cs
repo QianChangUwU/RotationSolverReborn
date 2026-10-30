@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.ImGuiMethods;
 using RebornMaterial;
@@ -48,7 +48,7 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 			return;
 		}
 
-		DrawPopupItem("Reset to Default Value.", ResetToDefault);
+		DrawPopupItem(Loc.T("Reset to Default Value."), ResetToDefault);
 
 		var isFirst = true;
 		foreach (Enum enumValue in Enum.GetValues(_property.PropertyType))
@@ -111,7 +111,7 @@ internal class EnumSearch(PropertyInfo property) : Searchable(property)
 			Value = enumKeys[currentIndex];
 		}
 
-		RowTooltip(row, "Right-click for the matching chat commands.");
+		RowTooltip(row, Loc.T("Right-click for the matching chat commands."));
 		ImGuiHelper.ReactPopupAt(row.Hovered, PopupKey, false);
 		M3SettingRow.End(row);
 	}

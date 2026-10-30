@@ -116,7 +116,7 @@ public partial class MainWindow
 		}
 
 		M3Widgets.SectionLabel(
-			$"Special thanks to the {_supporters.Length} supporters, including those not listed here",
+			string.Format(Loc.T("Special thanks to the {0} supporters, including those not listed here"), _supporters.Length),
 			M3.Scheme.Tertiary);
 
 		var names = new List<string>(_supporters);
@@ -219,7 +219,7 @@ public partial class MainWindow
 				: item.Icon;
 
 			if (IconSet.GetTexture(iconUrl, out var texture)
-				&& ImGuiHelper.NoPaddingNoColorImageButton(texture, Vector2.One * iconSize, item.Name ?? "plugin"))
+				&& ImGuiHelper.NoPaddingNoColorImageButton(texture, Vector2.One * iconSize, item.Name ?? Loc.T("plugin")))
 			{
 				OpenLinkSafely(item.Url);
 			}
@@ -236,7 +236,7 @@ public partial class MainWindow
 
 			ImGui.SameLine(0f, M3.Space2);
 			_ = M3Widgets.Pill($"##compat_state_{item.Name}",
-				item.IsEnabled ? "Enabled" : "Not loaded",
+				item.IsEnabled ? Loc.T("Enabled") : Loc.T("Not loaded"),
 				item.IsEnabled ? accent : scheme.OnSurfaceVariant);
 
 			DisplayPluginType(item.Type);
