@@ -1,4 +1,4 @@
-using Dalamud.Interface.Textures.TextureWraps;
+﻿using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
@@ -487,7 +487,7 @@ internal class FullControlWindow : FullCtrlWindow
 
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			var caption = ImGui.CalcTextSize("AOE");
+			var caption = ImGui.CalcTextSize(Loc.T("AOE"));
 			if (caption.X + M3.Space1 <= (columnWidth - size.X) * 0.5f)
 			{
 				drawList.AddText(new Vector2(origin.X, origin.Y + ((rowHeight - caption.Y) * 0.5f)),

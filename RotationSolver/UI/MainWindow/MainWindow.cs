@@ -1,4 +1,4 @@
-using Dalamud.Common;
+﻿using Dalamud.Common;
 using Dalamud.Common.Game;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
@@ -27,16 +27,7 @@ public partial class MainWindow : Window
 
 	internal static SearchableCollection _allSearchable = new();
 
-	private static bool? _cnLanguageClient;
-
-	public static bool CNLanguageClient => _cnLanguageClient ??= GetClientLanguage() is "Chinese" or "ChineseSimplified";
-
-	private static string GetClientLanguage()
-	{
-		return DalamudReflector.TryGetDalamudStartInfo(out var startInfo, Svc.PluginInterface)
-			? startInfo.Language.ToString()
-			: Svc.ClientState.ClientLanguage.ToString();
-	}
+	public static bool CNLanguageClient => Loc.IsChinese;
 
 	internal sealed class DiagInfo(DalamudStartInfo startInfo)
 	{
@@ -372,7 +363,7 @@ public partial class MainWindow : Window
 				break;
 
 			default:
-				ImGui.TextUnformatted("Unknown tab selected.");
+				ImGui.TextUnformatted(Loc.T("Unknown tab selected."));
 				break;
 		}
 	}

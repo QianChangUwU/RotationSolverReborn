@@ -32,6 +32,7 @@
 		<Using Include="RotationSolver.Basic.Helpers" />
 		<Using Include="RotationSolver.Basic.Rotations" />
 		<Using Include="RotationSolver.Basic.Rotations.Basic" />
+		<Using Include="RotationSolver.Basic.Localization" />
 		<Using Include="Dalamud.Game.ClientState.JobGauge.Enums" />
 		<Using Include="Dalamud.Interface" />
 		<Using Include="Dalamud.Bindings.ImGui" />
@@ -44,6 +45,7 @@
 		<EmbeddedResource Include="Changelog\credits.json" LogicalName="RotationSolver.Changelog.credits.json" />
 		<EmbeddedResource Include="Changelog\banner.jpg" LogicalName="RotationSolver.Changelog.banner.jpg" />
 		<EmbeddedResource Include="..\Images\Logo.png" Link="Images\Logo.png" LogicalName="RotationSolver.Images.Logo.png" />
+		<EmbeddedResource Include="Basic\Localization\zh-CN.json" LogicalName="RotationSolver.Basic.Localization.zh-CN.json" />
 	</ItemGroup>
 
 	<Target Name="PruneOutputDlls" AfterTargets="ResolveReferences">

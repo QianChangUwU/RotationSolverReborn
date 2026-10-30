@@ -1,6 +1,7 @@
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.DutyState;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
+using Dalamud.Game;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using ECommons;
@@ -121,6 +122,8 @@ public sealed class RotationSolverPlugin : IAsyncDalamudPlugin
 			PluginLog.Warning($"Failed to load config: {ex.Message}");
 			Service.Config = new Configs();
 		}
+
+		Loc.ClientIsChinese = Svc.ClientState.ClientLanguage is ClientLanguage.ChineseSimplified or ClientLanguage.ChineseTraditional;
 
 		await OtherConfiguration.InitAsync(cancellationToken);
 

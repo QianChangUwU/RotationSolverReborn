@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.Logging;
 using RebornMaterial;
@@ -111,7 +111,7 @@ public partial class MainWindow
 		if (_supporters == null || _supporters.Length == 0)
 		{
 			ImGui.Dummy(new Vector2(0f, M3.Space2));
-			ImGui.TextWrapped("No supporters to display yet. Thank you for checking!");
+			ImGui.TextWrapped(Loc.T("No supporters to display yet. Thank you for checking!"));
 			return;
 		}
 
@@ -231,7 +231,7 @@ public partial class MainWindow
 
 			using (ImRaii.PushFont(M3.TitleMedium))
 			{
-				ImGui.TextUnformatted(item.Name ?? "Unnamed plugin");
+				ImGui.TextUnformatted(item.Name ?? Loc.T("Unnamed plugin"));
 			}
 
 			ImGui.SameLine(0f, M3.Space2);

@@ -1,4 +1,4 @@
-using Dalamud.Game.ClientState.Keys;
+﻿using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
@@ -66,7 +66,7 @@ internal static class ImGuiHelper
 				ImGui.SameLine();
 				ImGui.Indent(INDENT_WIDTH);
 			}
-			ImGui.Text(" → ");
+			ImGui.Text(Loc.T(" → "));
 			ImGui.SameLine();
 			ImGui.TextWrapped(help);
 			if (sameLine)

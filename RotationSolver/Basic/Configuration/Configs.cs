@@ -48,6 +48,10 @@ internal partial class Configs : IPluginConfiguration, IM3Settings
 	public string LastSeenChangelog { get; set; } = "0.0.0.0";
 	public bool TutorialDone { get; set; } = false;
 
+	[UI("UI Language", Filter = UiInformation,
+		Description = "Choose the language used in the plugin UI. \"Follow the client\" uses Chinese on Chinese clients and English otherwise.")]
+	public UILanguage UILanguage { get; set; } = UILanguage.Auto;
+
 	public AoEType StateWindowManualAoEType { get; set; } = AoEType.Cleave;
 
 	public bool ControlWindowLinkAutoFull { get; set; } = false;

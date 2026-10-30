@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using RebornMaterial;
 using RotationSolver.Basic.Configuration;
@@ -32,7 +32,7 @@ public partial class MainWindow
 	{
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant))
 		{
-			ImGui.TextWrapped($"Configs and backups live in {Svc.PluginInterface.ConfigFile.Directory}");
+			ImGui.TextWrapped(string.Format(Loc.T("Configs and backups live in {0}"), Svc.PluginInterface.ConfigFile.Directory));
 		}
 
 		ImGui.Dummy(new Vector2(0f, M3.Space2));

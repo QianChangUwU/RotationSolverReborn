@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
@@ -305,8 +305,8 @@ public partial class MainWindow
 				}
 
 				ImGui.Separator();
-				ImGui.TextDisabled($"Game version: {attribute.GameVersion}");
-				ImGui.TextDisabled("Right-click to pick a different rotation.");
+				ImGui.TextDisabled(string.Format(Loc.T("Game version: {0}"), attribute.GameVersion));
+				ImGui.TextDisabled(Loc.T("Right-click to pick a different rotation."));
 			});
 		}
 

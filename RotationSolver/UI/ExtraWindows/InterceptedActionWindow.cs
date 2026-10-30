@@ -66,7 +66,7 @@ internal class InterceptedActionWindow : Window
 			return;
 		}
 
-		ImGui.TextColored(ImGuiColors.DalamudWhite, "Current Intercepted Action");
+		ImGui.TextColored(ImGuiColors.DalamudWhite, Loc.T("Current Intercepted Action"));
 		FullControlWindow.DrawIAction(cur, gcdWidth, 1);
 	}
 }

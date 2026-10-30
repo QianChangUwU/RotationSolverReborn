@@ -1,4 +1,4 @@
-using Dalamud.Game.ClientState.Keys;
+﻿using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
@@ -117,7 +117,7 @@ public partial class MainWindow
 			ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Invuln Status List"))
+			if (ImGui.Button(Loc.T("Reset Invuln Status List")))
 			{
 				OtherConfiguration.ResetInvincibleStatus();
 			}
@@ -125,7 +125,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_Invincibility.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Priority Status List"))
+			if (ImGui.Button(Loc.T("Reset Priority Status List")))
 			{
 				OtherConfiguration.ResetPriorityStatus();
 			}
@@ -133,7 +133,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_Priority.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Dispel Debuff List"))
+			if (ImGui.Button(Loc.T("Reset Dispel Debuff List")))
 			{
 				OtherConfiguration.ResetDangerousStatus();
 			}
@@ -141,7 +141,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_DangerousStatus.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset No Casting Status List"))
+			if (ImGui.Button(Loc.T("Reset No Casting Status List")))
 			{
 				OtherConfiguration.ResetNoCastingStatus();
 			}
@@ -240,7 +240,7 @@ public partial class MainWindow
 		{
 			ImGui.SameLine();
 		}
-		if (ImGui.Button("+", new Vector2(IconWidth, IconHeight) * Scale))
+		if (ImGui.Button(Loc.T("+"), new Vector2(IconWidth, IconHeight) * Scale))
 		{
 			if (!ImGui.IsPopupOpen(popupId))
 			{
@@ -376,7 +376,7 @@ public partial class MainWindow
 			ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Tankbuster List"))
+			if (ImGui.Button(Loc.T("Reset Tankbuster List")))
 			{
 				OtherConfiguration.ResetHostileCastingTank();
 			}
@@ -384,7 +384,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingTank.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset AOE List"))
+			if (ImGui.Button(Loc.T("Reset AOE List")))
 			{
 				OtherConfiguration.ResetHostileCastingArea();
 			}
@@ -392,7 +392,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingArea.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Knockback List"))
+			if (ImGui.Button(Loc.T("Reset Knockback List")))
 			{
 				OtherConfiguration.ResetHostileCastingKnockback();
 			}
@@ -400,7 +400,7 @@ public partial class MainWindow
 			ImGui.TableHeader(UiString.ConfigWindow_List_HostileCastingKnockback.GetDescription());
 
 			_ = ImGui.TableNextColumn();
-			if (ImGui.Button("Reset Stop Casting List"))
+			if (ImGui.Button(Loc.T("Reset Stop Casting List")))
 			{
 				OtherConfiguration.ResetHostileCastingStop();
 			}
@@ -528,7 +528,7 @@ public partial class MainWindow
 			{
 				if (string.IsNullOrWhiteSpace(_actionPopupSearching))
 				{
-					ImGui.TextColored(ImGuiColors.DalamudYellow, "Enter a search term to filter actions.");
+					ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T("Enter a search term to filter actions."));
 					if (!string.IsNullOrEmpty(_lastActionPopupSearching))
 					{
 						_lastActionPopupSearching = string.Empty;

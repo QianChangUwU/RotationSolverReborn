@@ -1,4 +1,4 @@
-using Dalamud.Interface.Textures.TextureWraps;
+﻿using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using RebornMaterial;
@@ -514,7 +514,7 @@ internal class ActionTimelineWindow : Window
 
 	private static void DrawTooltip(TimelineItem item, DateTime now)
 	{
-		ImGui.TextUnformatted(string.IsNullOrEmpty(item.Name) ? "Unknown action" : item.Name);
+		ImGui.TextUnformatted(string.IsNullOrEmpty(item.Name) ? Loc.T("Unknown action") : item.Name);
 
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant);
 		ImGui.TextUnformatted(Describe(item));

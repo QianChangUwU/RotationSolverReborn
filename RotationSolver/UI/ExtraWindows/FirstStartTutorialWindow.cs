@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ECommons.ExcelServices;
@@ -1044,7 +1044,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		if (types.Count == 0)
 		{
 			using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f));
-			ImGui.TextWrapped("The list is empty. RSR fills in its defaults the first time it needs a rule.");
+			ImGui.TextWrapped(Loc.T("The list is empty. RSR fills in its defaults the first time it needs a rule."));
 			return;
 		}
 
@@ -1373,7 +1373,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (ImGui.IsItemHovered())
 		{
-			ImGui.SetTooltip(matched ? "Pick any colour" : "Your own colour. Click to change it.");
+			ImGui.SetTooltip(matched ? Loc.T("Pick any colour") : Loc.T("Your own colour. Click to change it."));
 		}
 
 		if (!matched)

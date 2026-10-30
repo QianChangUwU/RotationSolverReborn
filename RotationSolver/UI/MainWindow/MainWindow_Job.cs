@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
@@ -102,7 +102,7 @@ public partial class MainWindow
 					ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudYellow);
 				}
 
-				ImGui.Text(" " + attr.Type.GetDescription());
+				ImGui.Text(Loc.T(" ") + attr.Type.GetDescription());
 				if (isOnCommand)
 				{
 					ImGui.PopStyleColor();
