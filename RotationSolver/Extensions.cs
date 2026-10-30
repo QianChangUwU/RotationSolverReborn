@@ -6,14 +6,15 @@ namespace RotationSolver
 	{
 		public static string ToStateString(this StateCommandType stateType)
 		{
+			var name = Loc.T(stateType.ToString());
 			return stateType == StateCommandType.Auto || stateType == StateCommandType.TargetOnly
-				? $"{stateType} ({DataCenter.TargetingType.GetDescription()})"
-				: stateType.ToString();
+				? $"{name} ({DataCenter.TargetingType.GetDescription()})"
+				: name;
 		}
 
 		public static string ToSpecialString(this SpecialCommandType specialType)
 		{
-			return specialType.ToString();
+			return Loc.T(specialType.ToString());
 		}
 	}
 }
