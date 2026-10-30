@@ -83,11 +83,11 @@ internal class FullControlWindow : FullCtrlWindow
 	private static readonly StateLink[] Links =
 	[
 		new("##rsr_link_auto",
-			"Auto and Full are linked: choosing Auto here also sets AoE to Full. Click to unlink.",
-			"Link Auto and Full, so choosing Auto here also sets AoE to Full."),
+			Loc.T("Auto and Full are linked: choosing Auto here also sets AoE to Full. Click to unlink."),
+			Loc.T("Link Auto and Full, so choosing Auto here also sets AoE to Full.")),
 		new("##rsr_link_manual",
-			"Manual and Cleave are linked: choosing Manual here also sets AoE to Cleave. Click to unlink.",
-			"Link Manual and Cleave, so choosing Manual here also sets AoE to Cleave."),
+			Loc.T("Manual and Cleave are linked: choosing Manual here also sets AoE to Cleave. Click to unlink."),
+			Loc.T("Link Manual and Cleave, so choosing Manual here also sets AoE to Cleave.")),
 	];
 
 	private static readonly Vector2 DefaultSize = new(700f, 380f);
@@ -253,7 +253,7 @@ internal class FullControlWindow : FullCtrlWindow
 		_actions[2] = SettingsAction;
 
 		var pressed = _fold.DrawBar("##rsr_control_actions", _actions.AsSpan(0, _shownActions), Brand, out var closed,
-			M3.Scheme.SurfaceContainerHigh, "Hide the Control window. Turn it back on in the UI settings.");
+			M3.Scheme.SurfaceContainerHigh, Loc.T("Hide the Control window. Turn it back on in the UI settings."));
 
 		switch (pressed)
 		{
@@ -382,9 +382,9 @@ internal class FullControlWindow : FullCtrlWindow
 	{
 		ReadOnlySpan<M3Segment> labelled =
 		[
-			new(AutoLabel(), FontAwesomeIcon.Play, StateCommandType.Auto.GetDescription()),
-			new(DataCenter.IsHenched ? "Henched" : "Manual", FontAwesomeIcon.HandPointer, StateCommandType.Manual.GetDescription()),
-			new("Off", FontAwesomeIcon.PowerOff, StateCommandType.Off.GetDescription(), M3.Scheme.Error),
+			new(Loc.T(AutoLabel()), FontAwesomeIcon.Play, StateCommandType.Auto.GetDescription()),
+			new(DataCenter.IsHenched ? Loc.T("Henched") : Loc.T("Manual"), FontAwesomeIcon.HandPointer, StateCommandType.Manual.GetDescription()),
+			new(Loc.T("Off"), FontAwesomeIcon.PowerOff, StateCommandType.Off.GetDescription(), M3.Scheme.Error),
 		];
 
 		ReadOnlySpan<M3Segment> compact =
@@ -394,7 +394,8 @@ internal class FullControlWindow : FullCtrlWindow
 			labelled[2] with { Icon = FontAwesomeIcon.None },
 		];
 
-		var aoeWidth = M3Widgets.SegmentedWidth(AoeSegments);
+		var aoeSegments = LocalizeSegments(AoeSegments);
+		var aoeWidth = M3Widgets.SegmentedWidth(aoeSegments);
 		var labelledWidth = MathF.Max(M3Widgets.SegmentedWidth(labelled), aoeWidth);
 		var compactWidth = MathF.Max(M3Widgets.SegmentedWidth(compact), aoeWidth);
 		var smallWidth = SmallSwitchWidth(compact);
@@ -439,7 +440,7 @@ internal class FullControlWindow : FullCtrlWindow
 
 		var aoeTop = linkTop + LinkRowHeight;
 		ImGui.SetCursorScreenPos(origin + new Vector2(0f, aoeTop));
-		var aoe = M3Widgets.SegmentedButtons("##rsr_aoe", AoeSegments, Array.IndexOf(AoeTypes, Service.Config.AoEType), switchWidth, labelFont);
+		var aoe = M3Widgets.SegmentedButtons("##rsr_aoe", aoeSegments, Array.IndexOf(AoeTypes, Service.Config.AoEType), switchWidth, labelFont);
 		if (aoe >= 0)
 		{
 			Service.Config.AoEType = AoeTypes[aoe];
@@ -491,7 +492,7 @@ internal class FullControlWindow : FullCtrlWindow
 			if (caption.X + M3.Space1 <= (columnWidth - size.X) * 0.5f)
 			{
 				drawList.AddText(new Vector2(origin.X, origin.Y + ((rowHeight - caption.Y) * 0.5f)),
-					M3.U32(s.OnSurfaceVariant, 0.9f), "AOE");
+					M3.U32(s.OnSurfaceVariant, 0.9f), Loc.T("AOE"));
 			}
 		}
 
@@ -581,12 +582,21 @@ internal class FullControlWindow : FullCtrlWindow
 		}
 	}
 
+	private static M3Segment[] LocalizeSegments(ReadOnlySpan<M3Segment> segments)
+	{
+		var result = new M3Segment[segments.Length];
+		for (var i = 0; i < segments.Length; i++)
+		{
+			result[i] = segments[i] with { Label = Loc.T(segments[i].Label), Tooltip = Loc.T(segments[i].Tooltip) };
+		}
+		return result;
+	}
 	private static string AutoLabel()
 	{
-		return DataCenter.IsAutoDuty ? "AutoDuty"
-			: DataCenter.IsTargetOnly ? "Target only"
-			: DataCenter.IsPvPStateEnabled ? "PvP"
-			: "Auto";
+		return DataCenter.IsAutoDuty ? Loc.T("AutoDuty")
+			: DataCenter.IsTargetOnly ? Loc.T("Target only")
+			: DataCenter.IsPvPStateEnabled ? Loc.T("PvP")
+			: Loc.T("Auto");
 	}
 
 	#endregion
@@ -602,7 +612,7 @@ internal class FullControlWindow : FullCtrlWindow
 
 	private static float StatusPaneMinimumWidth()
 	{
-		var chips = MathF.Max(M3Widgets.ChipWidth("Burst", FontAwesomeIcon.FireAlt), M3Widgets.ChipWidth("Burst", FontAwesomeIcon.Check));
+		var chips = MathF.Max(M3Widgets.ChipWidth(Loc.T("Burst"), FontAwesomeIcon.FireAlt), M3Widgets.ChipWidth(Loc.T("Burst"), FontAwesomeIcon.Check));
 		chips = MathF.Max(chips, M3Widgets.ChipWidth(DataCenter.TargetingType.GetDescription(), trailingIcon: FontAwesomeIcon.CaretDown));
 		foreach (var type in Service.Config.TargetingTypes)
 		{
@@ -616,7 +626,7 @@ internal class FullControlWindow : FullCtrlWindow
 	{
 		var config = Service.Config;
 
-		Overline("Next action");
+		Overline(Loc.T("Next action"));
 
 		var gcd = ActionUpdater.NextGCDAction;
 		if (ActionIcon.Draw("##next_gcd", gcd, NextGcdSize, config.ShowCooldownsAlways))
@@ -642,7 +652,7 @@ internal class FullControlWindow : FullCtrlWindow
 		bool burst = config.AutoBurst;
 
 		if (M3Widgets.Chip("##rsr_burst", "Burst", burst, burst ? FontAwesomeIcon.Check : FontAwesomeIcon.FireAlt,
-			"Allow the rotation to spend its burst cooldowns."))
+			Loc.T("Allow the rotation to spend its burst cooldowns.")))
 		{
 			config.AutoBurst.Value = !burst;
 		}
@@ -658,7 +668,7 @@ internal class FullControlWindow : FullCtrlWindow
 		}
 
 		if (M3Widgets.Chip("##rsr_targeting", targeting, false, icon,
-			"How Auto mode picks its target. Click to choose from your targeting list.",
+			Loc.T("How Auto mode picks its target. Click to choose from your targeting list."),
 			trailingIcon: FontAwesomeIcon.CaretDown))
 		{
 			ImGui.OpenPopup(TargetingMenuId);
@@ -775,7 +785,7 @@ internal class FullControlWindow : FullCtrlWindow
 			{
 				foreach (var tile in group.Tiles)
 				{
-					labelWidth = MathF.Max(labelWidth, ImGui.CalcTextSize(tile.Label).X);
+					labelWidth = MathF.Max(labelWidth, ImGui.CalcTextSize(Loc.T(tile.Label)).X);
 				}
 			}
 
@@ -801,7 +811,7 @@ internal class FullControlWindow : FullCtrlWindow
 
 		foreach (var group in SpecialGroups)
 		{
-			Overline(group.Title);
+			Overline(Loc.T(group.Title));
 			for (var i = 0; i < group.Tiles.Length; i++)
 			{
 				if (i % columns != 0)
@@ -851,10 +861,10 @@ internal class FullControlWindow : FullCtrlWindow
 		float labelHeight;
 		using (ImRaii.PushFont(M3.LabelSmall))
 		{
-			var labelSize = ImGui.CalcTextSize(tile.Label);
+			var labelSize = ImGui.CalcTextSize(Loc.T(tile.Label));
 			labelHeight = labelSize.Y;
 			drawList.AddText(new Vector2(min.X + ((size.X - labelSize.X) * 0.5f), max.Y - padding.Y - labelSize.Y),
-				M3.U32(active ? accent : s.OnSurfaceVariant, 0.95f * dim), tile.Label);
+				M3.U32(active ? accent : s.OnSurfaceVariant, 0.95f * dim), Loc.T(tile.Label));
 		}
 
 		DrawTileIcons(drawList, tile.Glyph, gcd, ability,

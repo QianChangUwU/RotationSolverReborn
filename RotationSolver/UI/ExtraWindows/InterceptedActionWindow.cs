@@ -52,7 +52,7 @@ internal class InterceptedActionWindow : Window
 		var abilityWidth = FullControlWindow.NextAbilitySize;
 		var totalWidth = gcdWidth + abilityWidth + ImGui.GetStyle().ItemSpacing.X;
 
-		var title = "Intercept System";
+		var title = Loc.T("Intercept System");
 		ImGui.SetCursorPosX(ImGui.GetCursorPosX() + (totalWidth / 2) - (ImGui.CalcTextSize(title).X / 2));
 		ImGui.TextColored(ImGuiColors.DalamudYellow, title);
 
@@ -62,7 +62,7 @@ internal class InterceptedActionWindow : Window
 
 		if (cur == null)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudGrey, "No intercepted actions queued.");
+			ImGui.TextColored(ImGuiColors.DalamudGrey, Loc.T("No intercepted actions queued."));
 			return;
 		}
 

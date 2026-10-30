@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
 using ECommons.GameHelpers;
@@ -189,7 +189,7 @@ internal class NextActionWindow : Window
 	{
 		var s = M3.Scheme;
 		var accent = hint.IsSelf ? s.OnSurfaceVariant : hint.IsCurrent ? s.Success : s.Warning;
-		var tooltip = hint.IsSelf ? null : hint.IsCurrent ? "Already targeted" : "Click to target";
+		var tooltip = hint.IsSelf ? null : hint.IsCurrent ? Loc.T("Already targeted") : Loc.T("Click to target");
 
 		if (!M3Widgets.Pill("##next_action_target", hint.Name, accent, FontAwesomeIcon.Crosshairs, tooltip, interactive: !hint.IsSelf))
 		{

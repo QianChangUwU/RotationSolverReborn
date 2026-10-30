@@ -385,7 +385,7 @@ internal static class ImGuiHelper
 	{
 		ArgumentNullException.ThrowIfNull(reset);
 
-		DrawHotKeysPopup(key, command, ("Reset to Default Value.", reset, []));
+		DrawHotKeysPopup(key, command, (Loc.T("Reset to Default Value."), reset, []));
 	}
 
 	public static void ReactPopup(string key, bool showHand = true)
@@ -532,14 +532,14 @@ internal static class ImGuiHelper
 	{
 		if (type == CombatType.None)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudRed, " None of PvE or PvP!");
+			ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T(" None of PvE or PvP!"));
 			return;
 		}
 
 		var first = true;
 		if (type.HasFlag(CombatType.PvE))
 		{
-			ImGui.TextColored(ImGuiColors.DalamudYellow, " PvE");
+			ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T(" PvE"));
 			first = false;
 		}
 
@@ -550,7 +550,7 @@ internal static class ImGuiHelper
 				ImGui.SameLine();
 			}
 
-			ImGui.TextColored(ImGuiColors.TankBlue, " PvP");
+			ImGui.TextColored(ImGuiColors.TankBlue, Loc.T(" PvP"));
 		}
 	}
 }

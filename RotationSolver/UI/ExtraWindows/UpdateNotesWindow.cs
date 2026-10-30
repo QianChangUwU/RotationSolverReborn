@@ -1,4 +1,4 @@
-using Dalamud.Interface.Textures.TextureWraps;
+﻿using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
@@ -31,6 +31,18 @@ internal sealed class UpdateNotesWindow : Window
 		new("##changelog_kofi", FontAwesomeIcon.MugHot, "Support the developer on Ko-fi"),
 	];
 
+	private static M3Tab[] LocalizedPageTabs => Loc.IsChinese
+		? [new("更新说明", FontAwesomeIcon.ListUl), new("鸣谢", FontAwesomeIcon.Heart)]
+		: PageTabs;
+
+	private static M3WindowAction[] LocalizedLinks => Loc.IsChinese
+		?
+		[
+			new("##changelog_discord", FontAwesomeIcon.Comments, "加入 Discord"),
+			new("##changelog_github", FontAwesomeIcon.Code, "在 GitHub 上查看"),
+			new("##changelog_kofi", FontAwesomeIcon.MugHot, "在 Ko-fi 上支持开发者"),
+		]
+		: Links;
 	private static readonly string[] LinkUrls = ["https://discord.gg/r9V4RHYt6v", GitHubUrl, "https://ko-fi.com/ltscombatreborn"];
 
 	private static readonly M3Tab[] PageTabs =
@@ -171,7 +183,7 @@ internal sealed class UpdateNotesWindow : Window
 
 		if (data.Credits.Categories.Count > 0)
 		{
-			var picked = M3Navigation.Tabs("##changelog_tabs", PageTabs, _tab, secondary: true);
+			var picked = M3Navigation.Tabs("##changelog_tabs", LocalizedPageTabs, _tab, secondary: true);
 			if (picked >= 0)
 			{
 				_tab = picked;
@@ -206,7 +218,7 @@ internal sealed class UpdateNotesWindow : Window
 	private void DrawHeaderActions(float right, float top)
 	{
 		var inset = 14f * M3.Scale;
-		var pressed = M3Widgets.WindowActions("##changelog_actions", new Vector2(right - inset, top + inset), Links, out var closed);
+		var pressed = M3Widgets.WindowActions("##changelog_actions", new Vector2(right - inset, top + inset), LocalizedLinks, out var closed);
 		if (pressed >= 0)
 		{
 			OpenLink(LinkUrls[pressed]);
@@ -284,7 +296,7 @@ internal sealed class UpdateNotesWindow : Window
 
 		var pillsWidth = versionSize.X + (showNew ? M3.Space2 + newSize.X : 0f);
 		ImGui.SetCursorScreenPos(new Vector2(origin.X + width - pillsWidth, origin.Y + ((height - versionSize.Y) * 0.5f)));
-		_ = M3Widgets.Pill("##changelog_version", versionLabel, s.Primary, tooltip: "The version you are running");
+		_ = M3Widgets.Pill("##changelog_version", versionLabel, s.Primary, tooltip: Loc.T("The version you are running"));
 
 		if (showNew)
 		{
@@ -384,8 +396,8 @@ internal sealed class UpdateNotesWindow : Window
 
 		var width = MathF.Min(220f * scale, ImGui.GetContentRegionAvail().X);
 		ImGui.SetCursorPosX((ImGui.GetWindowWidth() - width) * 0.5f);
-		if (M3Widgets.Button("##changelog_got_it", "Got it!", M3ButtonStyle.Filled, FontAwesomeIcon.Check, width,
-			tooltip: "Reopen these notes any time from the About page or with /rotation Changelog."))
+		if (M3Widgets.Button("##changelog_got_it", Loc.T("Got it!"), M3ButtonStyle.Filled, FontAwesomeIcon.Check, width,
+			tooltip: Loc.T("Reopen these notes any time from the About page or with /rotation Changelog.")))
 		{
 			IsOpen = false;
 		}
@@ -400,8 +412,8 @@ internal sealed class UpdateNotesWindow : Window
 		var entries = changelog.Entries;
 		if (entries.Count == 0)
 		{
-			if (M3Widgets.EmptyState("##changelog_empty", "No update notes yet", "Notes for every release are on GitHub.",
-				FontAwesomeIcon.Newspaper, "Open releases"))
+			if (M3Widgets.EmptyState("##changelog_empty", Loc.T("No update notes yet"), Loc.T("Notes for every release are on GitHub."),
+				FontAwesomeIcon.Newspaper, Loc.T("Open releases")))
 			{
 				OpenLink(ReleasesUrl);
 			}
@@ -419,7 +431,7 @@ internal sealed class UpdateNotesWindow : Window
 			DrawEntry(i, entries[i]);
 		}
 
-		if (M3Widgets.Button("##changelog_releases", "Older releases on GitHub", M3ButtonStyle.Text, FontAwesomeIcon.ExternalLinkAlt))
+		if (M3Widgets.Button("##changelog_releases", Loc.T("Older releases on GitHub"), M3ButtonStyle.Text, FontAwesomeIcon.ExternalLinkAlt))
 		{
 			OpenLink(ReleasesUrl);
 		}
@@ -433,7 +445,7 @@ internal sealed class UpdateNotesWindow : Window
 		var isNew = IsNew(entry);
 		var highlighted = isNew || index == 0;
 		var title = string.IsNullOrEmpty(entry.Title) ? entry.DisplayVersion : $"{entry.DisplayVersion} - {entry.Title}";
-		var badge = isNew ? "New" : index == 0 ? "Latest" : null;
+		var badge = isNew ? Loc.T("New") : index == 0 ? Loc.T("Latest") : null;
 
 		using var card = M3ExpandableCard.Begin($"changelog_entry_{index}", title, ref _expanded[index],
 			isNew ? FontAwesomeIcon.Star : FontAwesomeIcon.Tag,
@@ -540,9 +552,9 @@ internal sealed class UpdateNotesWindow : Window
 			}
 		}
 
-		if (M3Widgets.EmptyState("##changelog_thanks", "Thank you",
-			"…and to everyone who tests, reports bugs, translates and helps out on GitHub and Discord.",
-			FontAwesomeIcon.Heart, "All contributors on GitHub"))
+		if (M3Widgets.EmptyState("##changelog_thanks", Loc.T("Thank you"),
+			Loc.T("…and to everyone who tests, reports bugs, translates and helps out on GitHub and Discord."),
+			FontAwesomeIcon.Heart, Loc.T("All contributors on GitHub")))
 		{
 			OpenLink(ContributorsUrl);
 		}

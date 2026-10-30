@@ -37,14 +37,14 @@ public partial class MainWindow
 
 		ImGui.Dummy(new Vector2(0f, M3.Space2));
 
-		if (M3Widgets.Button("##backup_configs", "Back up configs", M3ButtonStyle.Tonal, FontAwesomeIcon.Save))
+		if (M3Widgets.Button("##backup_configs", Loc.T("Back up configs"), M3ButtonStyle.Tonal, FontAwesomeIcon.Save))
 		{
 			Service.Config.Backup();
 		}
 
 		ImGui.SameLine(0f, M3.Space2);
 
-		if (M3Widgets.Button("##restore_configs", "Restore configs", M3ButtonStyle.Outlined, FontAwesomeIcon.UndoAlt))
+		if (M3Widgets.Button("##restore_configs", Loc.T("Restore configs"), M3ButtonStyle.Outlined, FontAwesomeIcon.UndoAlt))
 		{
 			Service.Config.Restore();
 		}

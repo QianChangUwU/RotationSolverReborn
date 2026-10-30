@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
 using ECommons.Logging;
 using ECommons.Reflection;
@@ -13,11 +13,11 @@ public partial class MainWindow
 		var scheme = M3.Scheme;
 
 		_ = M3Widgets.Banner("##autoduty_notice",
-			"While the RSR team has made an effort to keep RSR compatible with AutoDuty, RSR is not designed with botting in mind.",
+			Loc.T("While the RSR team has made an effort to keep RSR compatible with AutoDuty, RSR is not designed with botting in mind."),
 			M3Severity.Warning, FontAwesomeIcon.Robot);
 
 		ImGui.Dummy(new Vector2(0f, M3.Space2));
-		DrawPageIntro("These are the plugins AutoDuty relies on, and their current state.");
+		DrawPageIntro(Loc.T("These are the plugins AutoDuty relies on, and their current state."));
 
 		List<AutoDutyPlugin> pluginsToCheck =
 		[
@@ -68,12 +68,12 @@ public partial class MainWindow
 			if (plugin.Name == "Boss Mod" && isBossModEnabled && isBossModRebornEnabled)
 			{
 				accent = scheme.Warning;
-				advice = "Both Boss Mods cannot be installed and enabled at the same time. Please disable Boss Mod.";
+				advice = Loc.T("Both Boss Mods cannot be installed and enabled at the same time. Please disable Boss Mod.");
 			}
 			else if (plugin.Name == "Boss Mod" && isBossModEnabled)
 			{
 				accent = scheme.Warning;
-				advice = "Please use BossModReborn instead. BMR has specific integration with RSR that improves its ability to react to combat, for example gaze effects.";
+				advice = Loc.T("Please use BossModReborn instead. BMR has specific integration with RSR that improves its ability to react to combat, for example gaze effects.");
 			}
 			else
 			{
@@ -90,7 +90,7 @@ public partial class MainWindow
 
 			ImGui.SameLine(0f, M3.Space2);
 			_ = M3Widgets.Pill($"##autoduty_state_{plugin.Name}",
-				isEnabled ? "Installed and enabled" : isInstalled ? "Installed, not enabled" : "Not installed",
+				isEnabled ? Loc.T("Installed and enabled") : isInstalled ? Loc.T("Installed, not enabled") : Loc.T("Not installed"),
 				accent);
 
 			if (!string.IsNullOrEmpty(advice))
@@ -111,7 +111,7 @@ public partial class MainWindow
 
 			if (DalamudReflector.HasRepo(plugin.Url) && !isInstalled)
 			{
-				if (M3Widgets.Button($"##autoduty_add_plugin_{plugin.Name}", "Add plugin", M3ButtonStyle.Tonal, FontAwesomeIcon.Download))
+				if (M3Widgets.Button($"##autoduty_add_plugin_{plugin.Name}", Loc.T("Add plugin"), M3ButtonStyle.Tonal, FontAwesomeIcon.Download))
 				{
 					PluginLog.Information($"Attempting to add plugin: {plugin.Name} from URL: {plugin.Url}");
 					var pluginName = plugin.Name;
@@ -133,7 +133,7 @@ public partial class MainWindow
 			}
 			else if (!DalamudReflector.HasRepo(plugin.Url))
 			{
-				if (M3Widgets.Button($"##autoduty_add_repo_{plugin.Name}", "Add repository", M3ButtonStyle.Outlined, FontAwesomeIcon.Plus))
+				if (M3Widgets.Button($"##autoduty_add_repo_{plugin.Name}", Loc.T("Add repository"), M3ButtonStyle.Outlined, FontAwesomeIcon.Plus))
 				{
 					PluginLog.Information($"Attempting to add repository: {plugin.Url}");
 					DalamudReflector.AddRepo(plugin.Url, true);

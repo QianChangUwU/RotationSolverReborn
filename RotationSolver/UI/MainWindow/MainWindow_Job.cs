@@ -430,8 +430,8 @@ public partial class MainWindow
 		}
 
 		var enable = rotation.IsEnabled;
-		var enableRow = M3SettingRow.Begin(rotation.Name ?? "Rotation",
-			"Turn this rotation off to stop Rotation Solver from driving it.", M3Widgets.SwitchSize());
+		var enableRow = M3SettingRow.Begin(rotation.Name ?? Loc.T("Rotation"),
+			Loc.T("Turn this rotation off to stop Rotation Solver from driving it."), M3Widgets.SwitchSize());
 		ImGui.SetCursorScreenPos(enableRow.ControlPosition);
 		if (M3Widgets.Switch("##rotation_enabled_switch", ref enable))
 		{
@@ -480,7 +480,7 @@ public partial class MainWindow
 
 		if (Player.Object.IsJobs(Job.DNC))
 		{
-			DrawJobPriorityList("Dance Partner Priority", "DancePartner",
+			DrawJobPriorityList(Loc.T("Dance Partner Priority"), "DancePartner",
 				OtherConfiguration.DancePartnerPriority,
 				OtherConfiguration.ResetDancePartnerPriority,
 				list =>
@@ -492,7 +492,7 @@ public partial class MainWindow
 
 		if (Player.Object.IsJobs(Job.SGE))
 		{
-			DrawJobPriorityList("Kardia Tank Priority", "KardiaTank",
+			DrawJobPriorityList(Loc.T("Kardia Tank Priority"), "KardiaTank",
 				OtherConfiguration.KardiaTankPriority,
 				OtherConfiguration.ResetKardiaTankPriority,
 				list =>
@@ -514,7 +514,7 @@ public partial class MainWindow
 		}
 
 		ImGui.TableNextColumn();
-		DrawJobPriorityList("Spear Card Priority", "Spear",
+		DrawJobPriorityList(Loc.T("Spear Card Priority"), "Spear",
 			OtherConfiguration.TheSpearPriority,
 			OtherConfiguration.ResetTheSpearPriority,
 			list =>
@@ -524,7 +524,7 @@ public partial class MainWindow
 			});
 
 		ImGui.TableNextColumn();
-		DrawJobPriorityList("Balance Card Priority", "Balance",
+		DrawJobPriorityList(Loc.T("Balance Card Priority"), "Balance",
 			OtherConfiguration.TheBalancePriority,
 			OtherConfiguration.ResetTheBalancePriority,
 			list =>

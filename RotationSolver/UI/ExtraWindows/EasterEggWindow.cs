@@ -15,7 +15,7 @@ internal class EasterEggWindow : Window
 	private readonly Cell[] _board = new Cell[9];
 	private bool _playerTurn = true;
 	private bool _gameOver = false;
-	private string _status = "You are X. Click to play.";
+	private string _status = Loc.T("You are X. Click to play.");
 	private readonly float _cellSize = 64f;
 
 	private static readonly Random _rng = new();
@@ -66,7 +66,7 @@ internal class EasterEggWindow : Window
 					if (CheckWin(_board, Cell.X))
 					{
 						_gameOver = true;
-						_status = "You win!";
+						_status = Loc.T("You win!");
 						try
 						{
 							OtherConfiguration.RotationSolverRecord.TicTacToeWinStar = true;
@@ -77,7 +77,7 @@ internal class EasterEggWindow : Window
 					else if (IsDraw(_board))
 					{
 						_gameOver = true;
-						_status = "Draw.";
+						_status = Loc.T("Draw.");
 					}
 					else
 					{
@@ -131,7 +131,7 @@ internal class EasterEggWindow : Window
 		Array.Fill(_board, Cell.Empty);
 		_playerTurn = true;
 		_gameOver = false;
-		_status = "You are X. Click to play.";
+		_status = Loc.T("You are X. Click to play.");
 		_aiBlunderThisGame = _rng.Next(0, 1000) == 0;
 		_aiBlunderUsed = false;
 	}
@@ -170,17 +170,17 @@ internal class EasterEggWindow : Window
 			if (CheckWin(_board, Cell.O))
 			{
 				_gameOver = true;
-				_status = "RSR wins!";
+				_status = Loc.T("RSR wins!");
 			}
 			else if (IsDraw(_board))
 			{
 				_gameOver = true;
-				_status = "Draw.";
+				_status = Loc.T("Draw.");
 			}
 			else
 			{
 				_playerTurn = true;
-				_status = "Your turn.";
+				_status = Loc.T("Your turn.");
 			}
 		}
 		catch (Exception ex)

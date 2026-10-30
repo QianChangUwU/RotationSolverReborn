@@ -3696,5 +3696,14 @@
   "Reset Stop Casting List": "\u91CD\u7F6E\u505C\u6B62\u548F\u5531\u5217\u8868",
   "Reset Tankbuster List": "\u91CD\u7F6E\u5766\u514B\u6B7B\u5211\u5217\u8868",
   "Test AutodutyChangeOperatingModeWithOverrides IPC (AutoDuty, HighHPPercent, AllTargetsCanAttack, others unchanged)": "\u6D4B\u8BD5 AutodutyChangeOperatingModeWithOverrides IPC\uFF08AutoDuty\uFF0CHighHPPercent\uFF0CAllTargetsCanAttack\uFF0C\u5176\u4F59\u4E0D\u53D8\uFF09",
-  "Test ChangeOperatingModeWithOverrides IPC (Auto, AllTargetsCanAttack, TargetFreely on, AutoOffAfterCombat off, NPC heal/raise on)": "\u6D4B\u8BD5 ChangeOperatingModeWithOverrides IPC\uFF08\u81EA\u52A8\uFF0CAllTargetsCanAttack\uFF0C\u81EA\u7531\u76EE\u6807\u5F00\uFF0C\u6218\u6597\u540E\u81EA\u52A8\u5173\u95ED\u5173\uFF0CNPC \u6CBB\u7597/\u590D\u6D3B\u5F00\uFF09"
+  "Test ChangeOperatingModeWithOverrides IPC (Auto, AllTargetsCanAttack, TargetFreely on, AutoOffAfterCombat off, NPC heal/raise on)": "\u6D4B\u8BD5 ChangeOperatingModeWithOverrides IPC\uFF08\u81EA\u52A8\uFF0CAllTargetsCanAttack\uFF0C\u81EA\u7531\u76EE\u6807\u5F00\uFF0C\u6218\u6597\u540E\u81EA\u52A8\u5173\u95ED\u5173\uFF0CNPC \u6CBB\u7597/\u590D\u6D3B\u5F00\uFF09",
+  "Discord": "Discord",
+  "Draw.": "\u5E73\u5C40\u3002",
+  "GitHub": "GitHub",
+  "Ko-fi": "Ko-fi",
+  "Auto and Full are linked: choosing Auto here also sets AoE to Full. Click to unlink.": "\u81EA\u52A8\u548C\u5168\u90E8\u5DF2\u5173\u8054\uFF1A\u5728\u6B64\u9009\u62E9\u81EA\u52A8\u4E5F\u4F1A\u5C06 AOE \u8BBE\u4E3A\u5168\u90E8\u3002\u70B9\u51FB\u53D6\u6D88\u5173\u8054\u3002",
+  "Link Auto and Full, so choosing Auto here also sets AoE to Full.": "\u5173\u8054\u81EA\u52A8\u548C\u5168\u90E8\uFF0C\u5728\u6B64\u9009\u62E9\u81EA\u52A8\u65F6\u4E5F\u4F1A\u5C06 AOE \u8BBE\u4E3A\u5168\u90E8\u3002",
+  "Link Manual and Cleave, so choosing Manual here also sets AoE to Cleave.": "\u5173\u8054\u624B\u52A8\u548C\u987A\u5288\uFF0C\u5728\u6B64\u9009\u62E9\u624B\u52A8\u65F6\u4E5F\u4F1A\u5C06 AOE \u8BBE\u4E3A\u987A\u5288\u3002",
+  "Manual and Cleave are linked: choosing Manual here also sets AoE to Cleave. Click to unlink.": "\u624B\u52A8\u548C\u987A\u5288\u5DF2\u5173\u8054\uFF1A\u5728\u6B64\u9009\u62E9\u624B\u52A8\u4E5F\u4F1A\u5C06 AOE \u8BBE\u4E3A\u987A\u5288\u3002\u70B9\u51FB\u53D6\u6D88\u5173\u8054\u3002",
+  "Records the elemental weaknesses (Lightning, Fire, Ice, Wind) observed on hostiles encountered in Occult Crescent, keyed by their NameId. This is populated automatically while in Occult Crescent.": "\u8BB0\u5F55\u5728\u6708\u9762\u76D1\u89C6\u6240\u906D\u9047\u7684\u654C\u5BF9\u76EE\u6807\u8EAB\u4E0A\u89C2\u5BDF\u5230\u7684\u5143\u7D20\u5F31\u70B9\uFF08\u96F7\u3001\u706B\u3001\u51B0\u3001\u98CE\uFF09\uFF0C\u4EE5 NameId \u4E3A\u952E\u3002\u5904\u4E8E\u6708\u9762\u76D1\u89C6\u6240\u65F6\u4F1A\u81EA\u52A8\u586B\u5145\u3002"
 }

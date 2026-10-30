@@ -519,7 +519,7 @@ internal class ActionTimelineWindow : Window
 		using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Scheme.OnSurfaceVariant);
 		ImGui.TextUnformatted(Describe(item));
 		ImGui.TextUnformatted(item.State == TimelineItemState.Casting
-			? "Casting now"
+			? Loc.T("Casting now")
 			: $"{(now - item.StartTime).TotalSeconds:F1}s ago");
 	}
 

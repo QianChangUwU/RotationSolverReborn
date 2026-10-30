@@ -339,7 +339,7 @@ public partial class MainWindow
 				var filtered = _statusPopupResults;
 				if (filtered.Count == 0)
 				{
-					ImGui.TextColored(ImGuiColors.DalamudRed, "No matching statuses found.");
+					ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("No matching statuses found."));
 					return;
 				}
 
@@ -598,7 +598,7 @@ public partial class MainWindow
 
 					if (shown == 0)
 					{
-						ImGui.TextColored(ImGuiColors.DalamudRed, "No matching actions found.");
+						ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T("No matching actions found."));
 					}
 				}
 			}

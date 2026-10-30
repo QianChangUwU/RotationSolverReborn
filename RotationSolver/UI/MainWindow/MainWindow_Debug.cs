@@ -90,7 +90,7 @@ public partial class MainWindow
 		ImGui.Text(string.Format(Loc.T("Reset Action Configs: {0}"), DataCenter.ResetActionConfigs));
 		if (ImGui.Button(Loc.T("Add Test Warning")))
 		{
-			BasicWarningHelper.AddSystemWarning("This is a test warning.");
+			BasicWarningHelper.AddSystemWarning(Loc.T("This is a test warning."));
 		}
 	}
 
@@ -100,17 +100,17 @@ public partial class MainWindow
 	{
 		var group = new CollapsingHeaderGroup(new()
 	{
-		{() => DataCenter.CurrentRotation != null ? "Loaded Rotation Info" : string.Empty, DrawDebugRotationStatus},
-		{() => DataCenter.CurrentRotation != null ? "Base Rotation Info" : string.Empty, DrawDebugBaseStatus},
-		{() => "Player Status", DrawStatus },
-		{() => "Raise Info", DrawRaiseInfo },
-		{() => "Duty Info", DrawDutyInfo },
-		{() => "Party", DrawParty },
-		{() => "Target Data", DrawTargetData },
-		{() => "Next Action", DrawNextAction },
-		{() => "Last Action", DrawLastAction },
-		{() => "IPC Testing", DrawIPC },
-		{() => "BMR Data", DrawBMRData },
+		{() => DataCenter.CurrentRotation != null ? Loc.T("Loaded Rotation Info") : string.Empty, DrawDebugRotationStatus},
+		{() => DataCenter.CurrentRotation != null ? Loc.T("Base Rotation Info") : string.Empty, DrawDebugBaseStatus},
+		{() => Loc.T("Player Status"), DrawStatus },
+		{() => Loc.T("Raise Info"), DrawRaiseInfo },
+		{() => Loc.T("Duty Info"), DrawDutyInfo },
+		{() => Loc.T("Party"), DrawParty },
+		{() => Loc.T("Target Data"), DrawTargetData },
+		{() => Loc.T("Next Action"), DrawNextAction },
+		{() => Loc.T("Last Action"), DrawLastAction },
+		{() => Loc.T("IPC Testing"), DrawIPC },
+		{() => Loc.T("BMR Data"), DrawBMRData },
 		{() => "Occult Crescent Weaknesses", DrawOccultWeaknesses },
 
 		{() => "Effect", () =>
@@ -122,20 +122,20 @@ public partial class MainWindow
 		{() => "Material 3 Gallery", M3Gallery.Draw },
 	});
 
-		group.SetHeaderIcon("Loaded Rotation Info", FontAwesomeIcon.Sync);
-		group.SetHeaderIcon("Base Rotation Info", FontAwesomeIcon.Cube);
-		group.SetHeaderIcon("Player Status", FontAwesomeIcon.User);
-		group.SetHeaderIcon("Raise Info", FontAwesomeIcon.Ankh);
-		group.SetHeaderIcon("Duty Info", FontAwesomeIcon.Dungeon);
-		group.SetHeaderIcon("Party", FontAwesomeIcon.Users);
-		group.SetHeaderIcon("Target Data", FontAwesomeIcon.Crosshairs);
-		group.SetHeaderIcon("Next Action", FontAwesomeIcon.StepForward);
-		group.SetHeaderIcon("Last Action", FontAwesomeIcon.StepBackward);
-		group.SetHeaderIcon("IPC Testing", FontAwesomeIcon.PlugCircleBolt);
-		group.SetHeaderIcon("BMR Data", FontAwesomeIcon.ChartLine);
-		group.SetHeaderIcon("Occult Crescent Weaknesses", FontAwesomeIcon.Moon);
-		group.SetHeaderIcon("Effect", FontAwesomeIcon.Magic);
-		group.SetHeaderIcon("Material 3 Gallery", FontAwesomeIcon.Palette);
+		group.SetHeaderIcon(Loc.T("Loaded Rotation Info"), FontAwesomeIcon.Sync);
+		group.SetHeaderIcon(Loc.T("Base Rotation Info"), FontAwesomeIcon.Cube);
+		group.SetHeaderIcon(Loc.T("Player Status"), FontAwesomeIcon.User);
+		group.SetHeaderIcon(Loc.T("Raise Info"), FontAwesomeIcon.Ankh);
+		group.SetHeaderIcon(Loc.T("Duty Info"), FontAwesomeIcon.Dungeon);
+		group.SetHeaderIcon(Loc.T("Party"), FontAwesomeIcon.Users);
+		group.SetHeaderIcon(Loc.T("Target Data"), FontAwesomeIcon.Crosshairs);
+		group.SetHeaderIcon(Loc.T("Next Action"), FontAwesomeIcon.StepForward);
+		group.SetHeaderIcon(Loc.T("Last Action"), FontAwesomeIcon.StepBackward);
+		group.SetHeaderIcon(Loc.T("IPC Testing"), FontAwesomeIcon.PlugCircleBolt);
+		group.SetHeaderIcon(Loc.T("BMR Data"), FontAwesomeIcon.ChartLine);
+		group.SetHeaderIcon(Loc.T("Occult Crescent Weaknesses"), FontAwesomeIcon.Moon);
+		group.SetHeaderIcon(Loc.T("Effect"), FontAwesomeIcon.Magic);
+		group.SetHeaderIcon(Loc.T("Material 3 Gallery"), FontAwesomeIcon.Palette);
 
 		return group;
 	}
@@ -147,9 +147,7 @@ public partial class MainWindow
 
 	private static void DrawOccultWeaknesses()
 	{
-		ImGui.TextWrapped(Loc.T("Records the elemental weaknesses (Lightning, Fire, Ice, Wind) observed on hostiles ") +
-			"encountered in Occult Crescent, keyed by their NameId. This is populated automatically while in " +
-			"Occult Crescent.");
+		ImGui.TextWrapped(Loc.T("Records the elemental weaknesses (Lightning, Fire, Ice, Wind) observed on hostiles encountered in Occult Crescent, keyed by their NameId. This is populated automatically while in Occult Crescent."));
 
 		if (ImGui.Button(Loc.T("Open Weakness Data Folder")))
 		{
@@ -233,8 +231,8 @@ public partial class MainWindow
 				}
 			}
 
-			DrawRows("North Horn", OtherConfiguration.NorthHornWeaknessRecords);
-			DrawRows("South Horn", OtherConfiguration.SouthHornWeaknessRecords);
+			DrawRows(Loc.T("North Horn"), OtherConfiguration.NorthHornWeaknessRecords);
+			DrawRows(Loc.T("South Horn"), OtherConfiguration.SouthHornWeaknessRecords);
 		}
 
 		ImGui.Spacing();
@@ -434,10 +432,10 @@ public partial class MainWindow
 					continue;
 				}
 
-				var source = status.SourceId == Player.Object.GameObjectId ? "You" : Svc.Objects.SearchById(status.SourceId) == null ? "None" : "Others";
+				var source = status.SourceId == Player.Object.GameObjectId ? Loc.T("You") : Svc.Objects.SearchById(status.SourceId) == null ? Loc.T("None") : Loc.T("Others");
 				var stacks = Player.Object.StatusStack(true, (StatusID)status.StatusId);
 				var stackDisplay = stacks == byte.MaxValue ? "N/A" : stacks.ToString();
-				var timeDisplay = status.RemainingTime <= 0f ? "Perm" : $"{status.RemainingTime:F1}s";
+				var timeDisplay = status.RemainingTime <= 0f ? Loc.T("Perm") : $"{status.RemainingTime:F1}s";
 
 				ImGui.TableNextRow();
 				_ = ImGui.TableNextColumn();
@@ -817,10 +815,10 @@ public partial class MainWindow
 						continue;
 					}
 
-					var source = status.SourceId == Player.Object.GameObjectId ? "You" : Svc.Objects.SearchById(status.SourceId) == null ? "None" : "Others";
+					var source = status.SourceId == Player.Object.GameObjectId ? Loc.T("You") : Svc.Objects.SearchById(status.SourceId) == null ? Loc.T("None") : Loc.T("Others");
 					var stacks = battleChara.StatusStack(true, (StatusID)status.StatusId);
 					var stackDisplay = stacks == byte.MaxValue ? "N/A" : stacks.ToString();
-					var timeDisplay = status.RemainingTime <= 0f ? "Perm" : $"{status.RemainingTime:F1}s";
+					var timeDisplay = status.RemainingTime <= 0f ? Loc.T("Perm") : $"{status.RemainingTime:F1}s";
 
 					ImGui.TableNextRow();
 					_ = ImGui.TableNextColumn();

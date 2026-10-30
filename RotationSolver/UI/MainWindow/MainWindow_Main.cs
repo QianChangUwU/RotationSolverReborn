@@ -53,14 +53,14 @@ public partial class MainWindow
 
 			ImGui.SameLine(0f, M3.Space2);
 
-			if (M3Widgets.Button("##about_kofi", "Ko-fi", M3ButtonStyle.Tonal, FontAwesomeIcon.MugHot))
+			if (M3Widgets.Button("##about_kofi", Loc.T("Ko-fi"), M3ButtonStyle.Tonal, FontAwesomeIcon.MugHot))
 			{
 				OpenLinkSafely("https://ko-fi.com/ltscombatreborn");
 			}
 
 			ImGui.SameLine(0f, M3.Space2);
 
-			if (M3Widgets.Button("##about_discord", "Discord", M3ButtonStyle.Outlined, FontAwesomeIcon.Comments))
+			if (M3Widgets.Button("##about_discord", Loc.T("Discord"), M3ButtonStyle.Outlined, FontAwesomeIcon.Comments))
 			{
 				OpenLinkSafely("https://discord.gg/r9V4RHYt6v");
 			}
@@ -103,7 +103,7 @@ public partial class MainWindow
 
 	private static void DrawThanksToSupporters()
 	{
-		if (M3Widgets.Button("##join_supporters", "Join this list", M3ButtonStyle.Tonal, FontAwesomeIcon.MugHot))
+		if (M3Widgets.Button("##join_supporters", Loc.T("Join this list"), M3ButtonStyle.Tonal, FontAwesomeIcon.MugHot))
 		{
 			OpenLinkSafely("https://ko-fi.com/ltscombatreborn");
 		}
@@ -158,19 +158,19 @@ public partial class MainWindow
 	{
 		using var style = ImRaii.PushStyle(ImGuiStyleVar.ItemSpacing, new Vector2(0f, 5f));
 
-		M3Widgets.SectionLabel("State");
+		M3Widgets.SectionLabel(Loc.T("State"));
 		DisplayCommandHelp(StateCommandType.Auto);
 		DisplayCommandHelp(StateCommandType.Manual);
 		DisplayCommandHelp(StateCommandType.Off);
 		DisplayCommandHelp(OtherCommandType.Cycle);
 		DisplayCommandHelp(StateCommandType.TargetOnly);
 
-		M3Widgets.SectionLabel("Windows");
+		M3Widgets.SectionLabel(Loc.T("Windows"));
 		DisplayCommandHelp(OtherCommandType.NextAction);
 		DisplayCommandHelp(OtherCommandType.Control);
 		DisplayCommandHelp(OtherCommandType.Changelog);
 
-		M3Widgets.SectionLabel("Special actions");
+		M3Widgets.SectionLabel(Loc.T("Special actions"));
 		DisplayCommandHelp(SpecialCommandType.EndSpecial);
 		DisplayCommandHelp(SpecialCommandType.HealArea);
 		DisplayCommandHelp(SpecialCommandType.HealSingle);
@@ -188,8 +188,8 @@ public partial class MainWindow
 
 	private static void DrawAboutSettingsCommands()
 	{
-		DrawPageIntro("These commands can be used to open or change plugin settings directly from chat or macros.");
-		DrawPageIntro("Right-clicking any action, setting or toggle pops up the macro associated with it.");
+		DrawPageIntro(Loc.T("These commands can be used to open or change plugin settings directly from chat or macros."));
+		DrawPageIntro(Loc.T("Right-clicking any action, setting or toggle pops up the macro associated with it."));
 	}
 
 	private static void DisplayCommandHelp<T>(T commandType) where T : Enum
@@ -298,21 +298,21 @@ public partial class MainWindow
 
 		ImGui.SameLine(0f, M3.Space2);
 
-		if (M3Widgets.Button("##links_github", "GitHub", M3ButtonStyle.Outlined, FontAwesomeIcon.Code))
+		if (M3Widgets.Button("##links_github", Loc.T("GitHub"), M3ButtonStyle.Outlined, FontAwesomeIcon.Code))
 		{
 			OpenLinkSafely($"https://GitHub.com/{Service.USERNAME}/{Service.REPO}");
 		}
 
 		ImGui.SameLine(0f, M3.Space2);
 
-		if (M3Widgets.Button("##links_discord", "Discord", M3ButtonStyle.Outlined, FontAwesomeIcon.Comments))
+		if (M3Widgets.Button("##links_discord", Loc.T("Discord"), M3ButtonStyle.Outlined, FontAwesomeIcon.Comments))
 		{
 			OpenLinkSafely("https://discord.gg/r9V4RHYt6v");
 		}
 
 		ImGui.SameLine(0f, M3.Space2);
 
-		if (M3Widgets.Button("##links_kofi", "Ko-fi", M3ButtonStyle.Outlined, FontAwesomeIcon.MugHot))
+		if (M3Widgets.Button("##links_kofi", Loc.T("Ko-fi"), M3ButtonStyle.Outlined, FontAwesomeIcon.MugHot))
 		{
 			OpenLinkSafely("https://ko-fi.com/ltscombatreborn");
 		}

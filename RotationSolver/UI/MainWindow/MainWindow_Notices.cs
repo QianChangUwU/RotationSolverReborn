@@ -1,4 +1,4 @@
-using ECommons.ExcelServices;
+﻿using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using RebornMaterial;
 using RotationSolver.Data;
@@ -202,7 +202,7 @@ public partial class MainWindow
 			if (DataCenter.DalamudStagingEnabled)
 			{
 				_ = M3Widgets.Banner("##staging_banner",
-					"You are running the staging branch of Dalamud. For best compatibility, use XIVLauncher and switch back to the release branch when one is available for your game version.",
+					Loc.T("You are running the staging branch of Dalamud. For best compatibility, use XIVLauncher and switch back to the release branch when one is available for your game version."),
 					M3Severity.Warning, FontAwesomeIcon.Flask);
 				ImGui.Dummy(new Vector2(0f, M3.Space2));
 				drewAnything = true;

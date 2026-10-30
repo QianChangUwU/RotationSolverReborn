@@ -127,7 +127,7 @@ internal static class ActionContextMenu
 		var enabled = contextAction.IsEnabled;
 		var toggleEntry = new MenuItem
 		{
-			Name = $"{(enabled ? "Disable" : "Enable")} {contextAction.Name}",
+			Name = $"{(enabled ? Loc.T("Disable") : Loc.T("Enable"))} {contextAction.Name}",
 			PrefixChar = 'R',
 			PrefixColor = 545
 		};
