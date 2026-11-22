@@ -1,4 +1,4 @@
-using ECommons.DalamudServices;
+﻿using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using Lumina.Excel.Sheets;
 using RebornMaterial;
@@ -274,7 +274,7 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 
 	protected void RowInteractions(in M3RowInfo row)
 	{
-		RowTooltip(row, "Right-click for the matching chat command.");
+		RowTooltip(row, Loc.T("Right-click for the matching chat command."));
 		ImGuiHelper.ReactPopupAt(row.Hovered, PopupKey, false);
 	}
 

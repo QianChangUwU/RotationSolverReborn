@@ -219,7 +219,7 @@ public partial class MainWindow
 
 		if (!string.IsNullOrEmpty(tooltip))
 		{
-			return tooltip;
+			return Loc.T(tooltip);
 		}
 
 		var configType = config.GetType();
@@ -229,7 +229,7 @@ public partial class MainWindow
 			_tooltipProperties[configType] = tooltipProperty;
 		}
 
-		return tooltipProperty?.GetValue(config) as string;
+		return Loc.T(tooltipProperty?.GetValue(config) as string);
 	}
 
 	private static readonly HashSet<string> _visitingConfigs = new(StringComparer.Ordinal);
@@ -427,8 +427,8 @@ public partial class MainWindow
 		}
 
 		var enable = rotation.IsEnabled;
-		var enableRow = M3SettingRow.Begin(rotation.Name ?? "Rotation",
-			"Turn this rotation off to stop Rotation Solver from driving it.", M3Widgets.SwitchSize());
+		var enableRow = M3SettingRow.Begin(rotation.Name ?? Loc.T("Rotation"),
+			Loc.T("Turn this rotation off to stop Rotation Solver from driving it."), M3Widgets.SwitchSize());
 		ImGui.SetCursorScreenPos(enableRow.ControlPosition);
 		if (M3Widgets.Switch("##rotation_enabled_switch", ref enable))
 		{

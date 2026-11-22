@@ -1376,7 +1376,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		void Copy() => CopyToClipboard(command, string.Format(Loc.T("Copied {0} (a practice command, it does nothing in chat)."), command));
 
 		ImGuiHelper.DrawHotKeysPopup(key, string.Empty,
-			("Reset to Default Value.", reset, []),
+			(Loc.T("Reset to Default Value."), reset, []),
 			($"Execute \"{command}\"", reset, []),
 			($"Copy \"{command}\"", Copy, []));
 

@@ -1,4 +1,4 @@
-using ECommons.GameHelpers;
+﻿using ECommons.GameHelpers;
 using RebornMaterial;
 
 namespace RotationSolver.UI;
@@ -95,7 +95,7 @@ public partial class MainWindow
 		ImGuiHelper.PrepareGroup(key, command, Reset);
 
 		var controlSize = ResolveRotationConfigControlSize(config);
-		var row = M3SettingRow.Begin(config.DisplayName, supporting, controlSize);
+		var row = M3SettingRow.Begin(Loc.T(config.DisplayName), Loc.T(supporting), controlSize);
 		ImGui.SetCursorScreenPos(row.ControlPosition);
 		DrawRotationConfigControl(config, id, controlSize.X);
 

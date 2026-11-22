@@ -371,8 +371,8 @@ internal static class ImGuiHelper
 				}
 				if (!string.IsNullOrEmpty(command))
 				{
-					DrawHotKeys($"Execute \"{command}\"", () => ExecuteCommand(command), showKeys);
-					DrawHotKeys($"Copy \"{command}\"", () => CopyCommand(command), showKeys);
+					DrawHotKeys(string.Format(Loc.T("Execute \"{0}\""), command), () => ExecuteCommand(command), showKeys);
+					DrawHotKeys(string.Format(Loc.T("Copy \"{0}\""), command), () => CopyCommand(command), showKeys);
 				}
 				ImGui.EndTable();
 			}
@@ -383,7 +383,7 @@ internal static class ImGuiHelper
 	{
 		ArgumentNullException.ThrowIfNull(reset);
 
-		DrawHotKeysPopup(key, command, ("Reset to Default Value.", reset, []));
+		DrawHotKeysPopup(key, command, (Loc.T("Reset to Default Value."), reset, []));
 	}
 
 	public static void ReactPopup(string key, bool showHand = true)
