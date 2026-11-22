@@ -1,0 +1,129 @@
+name: Release on version change
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: rsr-release
+  cancel-in-progress: false
+jobs:
+  release:
+    # Optional JSON allowlist, e.g. ["QianChangUwU"]. Empty means any main branch pusher.
+    if: github.ref == 'refs/heads/main' && (vars.RELEASE_USERNAMES == '' || contains(fromJSON(vars.RELEASE_USERNAMES || '[]'), github.actor))
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      published: ${{ steps.publish.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Detect version and existing release
+        id: version
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [xml]$xml = Get-Content Directory.Build.targets
+          $version = [string]$xml.Project.PropertyGroup.Version
+          if ($version -notmatch '^\d+\.\d+\.\d+\.\d+$') { throw "Invalid version: $version" }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          # Listing failures must not be mistaken for a missing release.
+          $json = gh api --paginate "repos/$env:GITHUB_REPOSITORY/releases?per_page=100" --jq '.[] | select(.draft == false) | .tag_name'
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot query releases' }
+          $exists = @($json) -contains "v$version"
+          "exists=$($exists.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          $tag = git rev-parse --verify "refs/tags/v$version^{commit}" 2>$null
+          if ($LASTEXITCODE -eq 0 -and $tag -ne $env:GITHUB_SHA -and !$exists) {
+            throw 'Existing tag points to another commit; bump the version instead'
+          }
+          $global:LASTEXITCODE = 0
+      - uses: actions/setup-python@v5
+        if: steps.version.outputs.exists != 'true'
+        with:
+          python-version: '3.12'
+      - name: Test plugin repository updater
+        if: steps.version.outputs.exists != 'true'
+        run: python -m unittest discover -s .github/tests -v
+      - uses: ./.github/actions/setup
+        if: steps.version.outputs.exists != 'true'
+      - name: Build and validate package
+        if: steps.version.outputs.exists != 'true'
+        shell: pwsh
+        run: ./.github/build.ps1
+      - uses: actions/upload-artifact@v4
+        if: steps.version.outputs.exists != 'true'
+        with:
+          name: RSR-v${{ steps.version.outputs.version }}
+          path: release/*
+          if-no-files-found: error
+      - name: Publish release
+        id: publish
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          EXISTS: ${{ steps.version.outputs.exists }}
+        run: |
+          if ($env:EXISTS -ne 'true') {
+            gh release create "v$env:VERSION" release/latest.zip release/RotationSolver.json release/latest.zip.sha256 release/RotationSolver.json.sha256 --target $env:GITHUB_SHA --title "Rotation Solver Reborn v$env:VERSION" --generate-notes
+            if ($LASTEXITCODE -ne 0) { throw 'Release failed' }
+          }
+          # Reruns can repair repository synchronization without replacing a release.
+          "published=true" >> $env:GITHUB_OUTPUT
+
+  update-plugin-repository:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check repository token
+        id: token
+        env:
+          PLUGIN_REPO_TOKEN: ${{ secrets.PLUGIN_REPO_TOKEN }}
+        run: |
+          if [ -n "$PLUGIN_REPO_TOKEN" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::PLUGIN_REPO_TOKEN is not configured; release is published but pluginmaster sync is skipped."
+          fi
+      - uses: actions/checkout@v4
+        if: steps.token.outputs.available == 'true'
+        with:
+          repository: ${{ vars.PLUGIN_REPOSITORY || 'QianChangUwU/DalamudPlugins' }}
+          token: ${{ secrets.PLUGIN_REPO_TOKEN }}
+          path: dalamud-plugins
+      - name: Download released manifest
+        if: steps.token.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: gh release download "v$VERSION" --repo "$GITHUB_REPOSITORY" --pattern RotationSolver.json --dir released
+      - name: Update pluginmaster
+        if: steps.token.outputs.available == 'true'
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: python3 .github/update_pluginmaster.py dalamud-plugins/pluginmaster.json released/RotationSolver.json "$VERSION" "$GITHUB_REPOSITORY"
+      - name: Commit plugin repository update
+        if: steps.token.outputs.available == 'true'
+        working-directory: dalamud-plugins
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pluginmaster.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update RotationSolver to v$VERSION"
+          git push
