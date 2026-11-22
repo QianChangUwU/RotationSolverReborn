@@ -8,9 +8,16 @@ namespace RotationSolver.Commands
 {
 	public static partial class RSCommands
 	{
-		public static string _stateString = "Off", _specialString = string.Empty;
+		public static string _stateString = string.Empty, _specialString = string.Empty;
 
-		internal static string EntryString => $"{_stateString}{(DataCenter.SpecialTimeLeft < 0 ? string.Empty : $" - {_specialString}: {DataCenter.SpecialTimeLeft:F2}s")}";
+		internal static string EntryString
+		{
+			get
+			{
+				var state = string.IsNullOrEmpty(_stateString) ? Loc.T("Off") : _stateString;
+				return $"{state}{(DataCenter.SpecialTimeLeft < 0 ? string.Empty : $" - {_specialString}: {DataCenter.SpecialTimeLeft:F2}s")}";
+			}
+		}
 
 		private static string _lastToastMessage = string.Empty;
 

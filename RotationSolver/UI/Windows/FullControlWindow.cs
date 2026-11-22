@@ -1,4 +1,4 @@
-using Dalamud.Interface.Textures.TextureWraps;
+﻿using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.DalamudServices;
@@ -380,9 +380,9 @@ internal class FullControlWindow : FullCtrlWindow
 	{
 		ReadOnlySpan<M3Segment> labelled =
 		[
-			new(AutoLabel(), FontAwesomeIcon.Play, StateCommandType.Auto.GetDescription()),
-			new(DataCenter.IsHenched ? "Henched" : "Manual", FontAwesomeIcon.HandPointer, StateCommandType.Manual.GetDescription()),
-			new("Off", FontAwesomeIcon.PowerOff, StateCommandType.Off.GetDescription(), M3.Scheme.Error),
+			new(Loc.T(AutoLabel()), FontAwesomeIcon.Play, StateCommandType.Auto.GetDescription()),
+			new(DataCenter.IsHenched ? Loc.T("Henched") : Loc.T("Manual"), FontAwesomeIcon.HandPointer, StateCommandType.Manual.GetDescription()),
+			new(Loc.T("Off"), FontAwesomeIcon.PowerOff, StateCommandType.Off.GetDescription(), M3.Scheme.Error),
 		];
 
 		ReadOnlySpan<M3Segment> compact =
@@ -581,10 +581,10 @@ internal class FullControlWindow : FullCtrlWindow
 
 	private static string AutoLabel()
 	{
-		return DataCenter.IsAutoDuty ? "AutoDuty"
-			: DataCenter.IsTargetOnly ? "Target only"
-			: DataCenter.IsPvPStateEnabled ? "PvP"
-			: "Auto";
+		return DataCenter.IsAutoDuty ? Loc.T("AutoDuty")
+			: DataCenter.IsTargetOnly ? Loc.T("Target only")
+			: DataCenter.IsPvPStateEnabled ? Loc.T("PvP")
+			: Loc.T("Auto");
 	}
 
 	#endregion

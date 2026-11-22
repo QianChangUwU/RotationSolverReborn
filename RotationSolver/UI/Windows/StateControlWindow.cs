@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using RebornMaterial;
 using RotationSolver.Commands;
@@ -358,7 +358,7 @@ internal class StateControlWindow : Window
 		var tabLabelWidth = 0f;
 		foreach (var option in AoeOptions)
 		{
-			tabLabelWidth = MathF.Max(tabLabelWidth, ImGui.CalcTextSize(option.Label).X);
+			tabLabelWidth = MathF.Max(tabLabelWidth, ImGui.CalcTextSize(Loc.T(option.Label)).X);
 		}
 
 		var tabSegWidth = tabLabelWidth + (28f * scale);
@@ -466,7 +466,7 @@ internal class StateControlWindow : Window
 					ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 				}
 
-				var label = Segments[i].Label;
+				var label = Loc.T(Segments[i].Label);
 				var labelSize = ImGui.CalcTextSize(label);
 				var showIcon = i == current;
 				var contentWidth = labelSize.X + (showIcon ? iconSize + gap : 0f);
@@ -573,7 +573,7 @@ internal class StateControlWindow : Window
 				ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
 			}
 
-			var label = AoeOptions[i].Label;
+			var label = Loc.T(AoeOptions[i].Label);
 			var labelSize = ImGui.CalcTextSize(label);
 			draw.AddText((segMin + segMax - labelSize) * 0.5f, M3.U32(content), label);
 		}
