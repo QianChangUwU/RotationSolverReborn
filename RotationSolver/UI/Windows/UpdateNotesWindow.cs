@@ -39,6 +39,10 @@ internal sealed class UpdateNotesWindow : Window
 		new("Credits", FontAwesomeIcon.Heart),
 	];
 
+	private static M3Tab[] LocalizedPageTabs => Loc.IsChinese
+		? [new("更新说明", FontAwesomeIcon.ListUl), new("鸣谢", FontAwesomeIcon.Heart)]
+		: PageTabs;
+
 	private readonly string _currentVersion = typeof(UpdateNotesWindow).Assembly.GetName().Version?.ToString() ?? "0.0.0.0";
 
 	private readonly M3HeroHeader _hero = new()
@@ -171,7 +175,7 @@ internal sealed class UpdateNotesWindow : Window
 
 		if (data.Credits.Categories.Count > 0)
 		{
-			var picked = M3Navigation.Tabs("##changelog_tabs", PageTabs, _tab, secondary: true);
+			var picked = M3Navigation.Tabs("##changelog_tabs", LocalizedPageTabs, _tab, secondary: true);
 			if (picked >= 0)
 			{
 				_tab = picked;
@@ -221,7 +225,7 @@ internal sealed class UpdateNotesWindow : Window
 	private void DrawIdentity()
 	{
 		const string title = "Rotation Solver Reborn";
-		const string subtitle = "Update Notes";
+		var subtitle = Loc.T("Update Notes");
 
 		var s = M3.Scheme;
 		var scale = M3.Scale;
@@ -297,7 +301,7 @@ internal sealed class UpdateNotesWindow : Window
 
 	private static void DrawWhatsNew(string tagline)
 	{
-		const string label = "What's New";
+		var label = Loc.T("What's New");
 
 		var s = M3.Scheme;
 		var scale = M3.Scale;
@@ -326,7 +330,7 @@ internal sealed class UpdateNotesWindow : Window
 
 		if (!string.IsNullOrEmpty(tagline))
 		{
-			var text = M3Navigation.Truncate(tagline, origin.X + width - x);
+			var text = M3Navigation.Truncate(Loc.T(tagline), origin.X + width - x);
 			var textSize = ImGui.CalcTextSize(text);
 			drawList.AddText(new Vector2(x, origin.Y + ((height - textSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), text);
 		}
@@ -400,8 +404,8 @@ internal sealed class UpdateNotesWindow : Window
 		var entries = changelog.Entries;
 		if (entries.Count == 0)
 		{
-			if (M3Widgets.EmptyState("##changelog_empty", "No update notes yet", "Notes for every release are on GitHub.",
-				FontAwesomeIcon.Newspaper, "Open releases"))
+			if (M3Widgets.EmptyState("##changelog_empty", Loc.T("No update notes yet"), Loc.T("Notes for every release are on GitHub."),
+				FontAwesomeIcon.Newspaper, Loc.T("Open releases")))
 			{
 				OpenLink(ReleasesUrl);
 			}
@@ -432,13 +436,13 @@ internal sealed class UpdateNotesWindow : Window
 		var s = M3.Scheme;
 		var isNew = IsNew(entry);
 		var highlighted = isNew || index == 0;
-		var title = string.IsNullOrEmpty(entry.Title) ? entry.DisplayVersion : $"{entry.DisplayVersion} - {entry.Title}";
-		var badge = isNew ? "New" : index == 0 ? "Latest" : null;
+		var title = string.IsNullOrEmpty(entry.Title) ? entry.DisplayVersion : $"{entry.DisplayVersion} - {Loc.T(entry.Title)}";
+		var badge = isNew ? Loc.T("New") : index == 0 ? Loc.T("Latest") : null;
 
 		using var card = M3ExpandableCard.Begin($"changelog_entry_{index}", title, ref _expanded[index],
 			isNew ? FontAwesomeIcon.Star : FontAwesomeIcon.Tag,
 			highlighted ? s.Primary : s.Secondary,
-			badge, isNew ? s.Success : s.Primary, entry.Date);
+			badge, isNew ? s.Success : s.Primary, Loc.T(entry.Date));
 
 		if (card.Expanded)
 		{
@@ -472,13 +476,13 @@ internal sealed class UpdateNotesWindow : Window
 	{
 		if (!string.IsNullOrEmpty(section.Title))
 		{
-			DrawSectionHeading(section.Title, section.ResolvedIcon);
+			DrawSectionHeading(Loc.T(section.Title), section.ResolvedIcon);
 		}
 
 		using var spacing = ImRaii.PushStyle(ImGuiStyleVar.ItemSpacing, new Vector2(8f, 5f) * M3.Scale);
 		foreach (var item in section.Items)
 		{
-			M3Text.Bullet(item, wrap: false);
+			M3Text.Bullet(Loc.T(item), wrap: false);
 		}
 	}
 
@@ -530,7 +534,7 @@ internal sealed class UpdateNotesWindow : Window
 		for (var i = 0; i < categories.Count; i++)
 		{
 			var category = categories[i];
-			using var card = M3Card.Begin($"changelog_credits_{i}", category.Category, category.ResolvedIcon,
+			using var card = M3Card.Begin($"changelog_credits_{i}", Loc.T(category.Category), category.ResolvedIcon,
 				i % 2 == 0 ? s.Primary : s.Tertiary);
 			using var spacing = ImRaii.PushStyle(ImGuiStyleVar.ItemSpacing, new Vector2(8f, 2f) * M3.Scale);
 
@@ -540,9 +544,9 @@ internal sealed class UpdateNotesWindow : Window
 			}
 		}
 
-		if (M3Widgets.EmptyState("##changelog_thanks", "Thank you",
-			"…and to everyone who tests, reports bugs, translates and helps out on GitHub and Discord.",
-			FontAwesomeIcon.Heart, "All contributors on GitHub"))
+		if (M3Widgets.EmptyState("##changelog_thanks", Loc.T("Thank you"),
+			Loc.T("…and to everyone who tests, reports bugs, translates and helps out on GitHub and Discord."),
+			FontAwesomeIcon.Heart, Loc.T("All contributors on GitHub")))
 		{
 			OpenLink(ContributorsUrl);
 		}
@@ -603,7 +607,7 @@ internal sealed class UpdateNotesWindow : Window
 		var roleRoom = right - (nameX + nameSize.X + (16f * scale));
 		if (!string.IsNullOrEmpty(credit.Role) && roleRoom > 24f * scale)
 		{
-			var role = M3Navigation.Truncate(credit.Role, roleRoom);
+			var role = M3Navigation.Truncate(Loc.T(credit.Role), roleRoom);
 			var roleSize = ImGui.CalcTextSize(role);
 			drawList.AddText(new Vector2(right - roleSize.X, min.Y + ((height - roleSize.Y) * 0.5f)), M3.U32(s.OnSurfaceVariant, 0.9f), role);
 		}
