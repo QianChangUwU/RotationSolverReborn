@@ -1,4 +1,4 @@
-using Dalamud.Interface.Textures.TextureWraps;
+﻿using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
@@ -284,7 +284,7 @@ internal sealed class UpdateNotesWindow : Window
 
 		var pillsWidth = versionSize.X + (showNew ? M3.Space2 + newSize.X : 0f);
 		ImGui.SetCursorScreenPos(new Vector2(origin.X + width - pillsWidth, origin.Y + ((height - versionSize.Y) * 0.5f)));
-		_ = M3Widgets.Pill("##changelog_version", versionLabel, s.Primary, tooltip: "The version you are running");
+		_ = M3Widgets.Pill("##changelog_version", versionLabel, s.Primary, tooltip: Loc.T("The version you are running"));
 
 		if (showNew)
 		{
@@ -384,8 +384,8 @@ internal sealed class UpdateNotesWindow : Window
 
 		var width = MathF.Min(220f * scale, ImGui.GetContentRegionAvail().X);
 		ImGui.SetCursorPosX((ImGui.GetWindowWidth() - width) * 0.5f);
-		if (M3Widgets.Button("##changelog_got_it", "Got it!", M3ButtonStyle.Filled, FontAwesomeIcon.Check, width,
-			tooltip: "Reopen these notes any time from the About page or with /rotation Changelog."))
+		if (M3Widgets.Button("##changelog_got_it", Loc.T("Got it!"), M3ButtonStyle.Filled, FontAwesomeIcon.Check, width,
+			tooltip: Loc.T("Reopen these notes any time from the About page or with /rotation Changelog.")))
 		{
 			IsOpen = false;
 		}
@@ -419,7 +419,7 @@ internal sealed class UpdateNotesWindow : Window
 			DrawEntry(i, entries[i]);
 		}
 
-		if (M3Widgets.Button("##changelog_releases", "Older releases on GitHub", M3ButtonStyle.Text, FontAwesomeIcon.ExternalLinkAlt))
+		if (M3Widgets.Button("##changelog_releases", Loc.T("Older releases on GitHub"), M3ButtonStyle.Text, FontAwesomeIcon.ExternalLinkAlt))
 		{
 			OpenLink(ReleasesUrl);
 		}

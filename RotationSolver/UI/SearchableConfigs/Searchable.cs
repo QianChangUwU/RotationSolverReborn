@@ -184,9 +184,9 @@ internal abstract class Searchable(PropertyInfo property) : ISearchable
 	public JobFilter PvPFilter { get; set; }
 	public JobFilter PvEFilter { get; set; }
 
-	public virtual string SearchingKeys => Name + " " + Description;
-	public virtual string Name => _ui?.Name ?? string.Empty;
-	public virtual string Description => string.IsNullOrEmpty(_ui?.Description) ? string.Empty : _ui.Description;
+	public virtual string SearchingKeys => Name + " " + Description + " " + (_ui?.Name ?? string.Empty) + " " + (_ui?.Description ?? string.Empty);
+	public virtual string Name => Loc.T(_ui?.Name) ?? string.Empty;
+	public virtual string Description => string.IsNullOrEmpty(_ui?.Description) ? string.Empty : Loc.T(_ui.Description) ?? string.Empty;
 
 	public virtual string Filter => _ui?.Filter ?? string.Empty;
 

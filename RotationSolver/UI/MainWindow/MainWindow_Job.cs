@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
@@ -99,7 +99,7 @@ public partial class MainWindow
 					ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.DalamudYellow);
 				}
 
-				ImGui.Text(" " + attr.Type.GetDescription());
+				ImGui.Text(Loc.T(" ") + attr.Type.GetDescription());
 				if (isOnCommand)
 				{
 					ImGui.PopStyleColor();
@@ -546,7 +546,7 @@ public partial class MainWindow
 	private static void DrawJobPriorityList(string title, string id, IEnumerable<Job> priority, Action reset, Action<List<Job>> save)
 	{
 		ImGui.Spacing();
-		ImGui.Text(title);
+		ImGui.Text(Loc.T(title));
 		ImGui.Spacing();
 
 		if (ImGui.Button($"Reset to Default##{id}"))

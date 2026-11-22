@@ -1,4 +1,4 @@
-using Dalamud.Interface.Windowing;
+﻿using Dalamud.Interface.Windowing;
 using RebornMaterial;
 
 namespace RotationSolver.UI;
@@ -44,7 +44,7 @@ public partial class MainWindow
 
 	internal bool IsMinimized => _fold.IsMinimized;
 
-	private M3WindowBrand Brand => new(GetLogoTexture(), "RSR Settings");
+	private M3WindowBrand Brand => new(GetLogoTexture(), Loc.T("RSR Settings"));
 
 	internal void Restore()
 	{

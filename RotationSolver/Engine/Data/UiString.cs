@@ -744,7 +744,7 @@ namespace RotationSolver.Engine.Data
 		{
 			var name = value.ToString();
 			var descString = value.GetType().GetField(name)?.GetCustomAttribute<DescriptionAttribute>()?.Description ?? name;
-			return chinese ? Translate(value, descString) : descString;
+			return chinese ? Loc.T(Translate(value, descString)) ?? descString : descString;
 		}
 
 		private static string Translate(Enum value, string descString)

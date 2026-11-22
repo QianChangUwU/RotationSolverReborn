@@ -118,6 +118,8 @@ public sealed class RotationSolverPlugin : IAsyncDalamudPlugin
 			Service.Config = new Configs();
 		}
 
+		Loc.ClientIsChinese = Svc.ClientState.ClientLanguage.ToString().Contains("Chinese", StringComparison.OrdinalIgnoreCase);
+
 		await OtherConfiguration.InitAsync(cancellationToken);
 
 		try

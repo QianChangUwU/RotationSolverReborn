@@ -1,4 +1,4 @@
-using Dalamud.Interface.Utility.Raii;
+﻿using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Utility;
 using ECommons.ExcelServices;
@@ -453,7 +453,7 @@ internal sealed class FirstStartTutorialWindow : Window
 			if (!compact)
 			{
 				var textX = center.X + radius + (12f * scale);
-				var label = M3Navigation.Truncate(step.Title, MathF.Max(8f * scale, max.X - textX - (10f * scale)));
+				var label = M3Navigation.Truncate(Loc.T(step.Title), MathF.Max(8f * scale, max.X - textX - (10f * scale)));
 				var labelSize = ImGui.CalcTextSize(label);
 				var color = current ? s.OnSecondaryContainer
 					: done ? M3.Alpha(s.OnSurface, 0.9f)
@@ -462,7 +462,7 @@ internal sealed class FirstStartTutorialWindow : Window
 			}
 			else if (hovered)
 			{
-				ImguiTooltips.ShowTooltip($"{i + 1}. {step.Title}");
+				ImguiTooltips.ShowTooltip($"{i + 1}. {Loc.T(step.Title)}");
 			}
 		}
 	}
@@ -531,7 +531,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var diameter = 48f * scale;
 		var textX = origin.X + diameter + (16f * scale);
 		var textWidth = MathF.Max(32f * scale, origin.X + width - textX);
-		var overline = $"{ChapterName(step.Chapter)}".ToUpperInvariant();
+		var overline = $"{Loc.T(ChapterName(step.Chapter))}".ToUpperInvariant();
 
 		float overlineHeight;
 		float titleHeight;
@@ -542,7 +542,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			titleHeight = ImGui.CalcTextSize(step.Title, false, textWidth).Y;
+			titleHeight = ImGui.CalcTextSize(Loc.T(step.Title), false, textWidth).Y;
 		}
 
 		var textHeight = overlineHeight + (4f * scale) + titleHeight;
@@ -562,7 +562,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		using (ImRaii.PushFont(M3.HeadlineSmall))
 		{
-			_ = M3Draw.WrappedText(step.Title, new Vector2(textX, textTop + overlineHeight + (4f * scale)), textWidth, s.OnSurface);
+			_ = M3Draw.WrappedText(Loc.T(step.Title), new Vector2(textX, textTop + overlineHeight + (4f * scale)), textWidth, s.OnSurface);
 		}
 
 		ImGui.SetCursorScreenPos(new Vector2(origin.X, origin.Y + height));
@@ -570,7 +570,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		using (ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f)))
 		{
-			ImGui.TextWrapped(step.Summary);
+			ImGui.TextWrapped(Loc.T(step.Summary));
 		}
 
 		if (step.Pages is { Length: > 0 } pages)
@@ -582,11 +582,11 @@ internal sealed class FirstStartTutorialWindow : Window
 				var page = pages[i];
 				if (i > 0)
 				{
-					FlowSameLine(M3Widgets.ButtonWidth(FontAwesomeIcon.ExternalLinkAlt, page.Label), M3.Space2, right);
+					FlowSameLine(M3Widgets.ButtonWidth(FontAwesomeIcon.ExternalLinkAlt, Loc.T(page.Label)), M3.Space2, right);
 				}
 
-				if (M3Widgets.Button($"##tutorial_open_page_{i}", page.Label, M3ButtonStyle.Tonal, FontAwesomeIcon.ExternalLinkAlt,
-					tooltip: "Opens the settings window on this page. The tutorial stays open."))
+				if (M3Widgets.Button($"##tutorial_open_page_{i}", Loc.T(page.Label), M3ButtonStyle.Tonal, FontAwesomeIcon.ExternalLinkAlt,
+					tooltip: Loc.T("Opens the settings window on this page. The tutorial stays open.")))
 				{
 					RotationSolverPlugin.ShowConfigWindow(page.Tab);
 					page.Then?.Invoke();
@@ -641,7 +641,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		{
 			ImGui.SetCursorScreenPos(new Vector2(origin.X, y));
 			if (M3Widgets.Button("##tutorial_skip", skipLabel, M3ButtonStyle.Text,
-				tooltip: "Close the tutorial. Reopen it any time from the About page."))
+				tooltip: Loc.T("Close the tutorial. Reopen it any time from the About page.")))
 			{
 				IsOpen = false;
 			}
@@ -664,7 +664,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var s = M3.Scheme;
 		var scale = M3.Scale;
-		var label = $"Step {_stepIndex + 1} of {_steps.Length}";
+		var label = string.Format(Loc.T("Step {0} of {1}"), _stepIndex + 1, _steps.Length);
 		var width = MathF.Min(right - left, 320f * scale);
 		left += ((right - left) - width) * 0.5f;
 
@@ -689,7 +689,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var s = M3.Scheme;
 
-		M3Widgets.SectionLabel("How it works");
+		M3Widgets.SectionLabel(Loc.T("How it works"));
 		DrawTiles(
 		[
 			new(FontAwesomeIcon.Eye, "Reads the fight",
@@ -716,13 +716,13 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	private static void DrawAppearance()
 	{
-		using (M3Card.Begin("tutorial_accent", "Accent colour", FontAwesomeIcon.Palette,
-			subtitle: "Every other colour in the interface is derived from this one: surfaces, buttons, highlights and the overlays."))
+		using (M3Card.Begin("tutorial_accent", Loc.T("Accent colour"), FontAwesomeIcon.Palette,
+			subtitle: Loc.T("Every other colour in the interface is derived from this one: surfaces, buttons, highlights and the overlays.")))
 		{
 			DrawAccentPicker();
 		}
 
-		using (M3Card.Begin("tutorial_text", "Text and density", FontAwesomeIcon.Font))
+		using (M3Card.Begin("tutorial_text", Loc.T("Text and density"), FontAwesomeIcon.Font))
 		{
 			DrawTextScaleRow();
 			DrawElementScaleRow();
@@ -734,8 +734,8 @@ internal sealed class FirstStartTutorialWindow : Window
 				Service.Config.ShowHints);
 		}
 
-		if (M3Widgets.Button("##tutorial_appearance_reset", "Reset to defaults", M3ButtonStyle.Text, FontAwesomeIcon.UndoAlt,
-			tooltip: "Puts the accent colour, text size and element size back to how they started."))
+		if (M3Widgets.Button("##tutorial_appearance_reset", Loc.T("Reset to defaults"), M3ButtonStyle.Text, FontAwesomeIcon.UndoAlt,
+			tooltip: Loc.T("Puts the accent colour, text size and element size back to how they started.")))
 		{
 			Service.Config.UiAccentColor = M3.DefaultSeed;
 			Service.Config.UiTextScale = 1f;
@@ -751,7 +751,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var s = M3.Scheme;
 
 		var (state, accent) = CurrentState();
-		_ = M3Widgets.Pill("##tutorial_state", $"Right now: {state}", accent, tooltip: "Updates as the state changes.");
+		_ = M3Widgets.Pill("##tutorial_state", string.Format(Loc.T("Right now: {0}"), state), accent, tooltip: Loc.T("Updates as the state changes."));
 		Gap(12f);
 
 		DrawTiles(
@@ -767,7 +767,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		], 170f);
 
 		Gap(12f);
-		using (M3Card.Begin("tutorial_modes_switching", "Different ways to control RSR autorotation states", FontAwesomeIcon.ToggleOn))
+		using (M3Card.Begin("tutorial_modes_switching", Loc.T("Different ways to control RSR autorotation states"), FontAwesomeIcon.ToggleOn))
 		{
 			DrawBullets(
 				"From chat or a macro: /rotation Auto, /rotation Manual, /rotation TargetOnly and /rotation Off. /rsr works anywhere /rotation does.",
@@ -776,7 +776,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				"The Control window (UI page) puts the state, the rotation's status and the special commands on screen during combat.");
 
 			Gap(4f);
-			if (M3Widgets.Button("##tutorial_open_state_window", "Open the state window", M3ButtonStyle.Tonal, FontAwesomeIcon.ToggleOn))
+			if (M3Widgets.Button("##tutorial_open_state_window", Loc.T("Open the state window"), M3ButtonStyle.Tonal, FontAwesomeIcon.ToggleOn))
 			{
 				RotationSolverPlugin.OpenStateControlWindow();
 			}
@@ -813,7 +813,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		DrawPracticeSettings();
 
 		_ = M3Widgets.Banner("##tutorial_reset_warning",
-			"The skull button at the top right of the settings window resets every RSR setting. It asks first, but there is no undo, so back up from the Extra page before trying it.",
+			Loc.T("The skull button at the top right of the settings window resets every RSR setting. It asks first, but there is no undo, so back up from the Extra page before trying it."),
 			M3Severity.Error, FontAwesomeIcon.Skull);
 	}
 
@@ -843,7 +843,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				or Job.MIN or Job.FSH or Job.BTN;
 
 			_ = nonCombat
-				? M3Widgets.Banner("##tutorial_no_rotation", "You are on a crafting or gathering job. Rotation Solver only drives combat jobs, so switch to one to see its rotation here.",
+				? M3Widgets.Banner("##tutorial_no_rotation", Loc.T("You are on a crafting or gathering job. Rotation Solver only drives combat jobs, so switch to one to see its rotation here."),
 					M3Severity.Info, FontAwesomeIcon.Hammer)
 				: M3Widgets.Banner("##tutorial_no_rotation", UiString.ConfigWindow_NoRotation.GetDescription(),
 					M3Severity.Error, FontAwesomeIcon.ExclamationTriangle);
@@ -899,7 +899,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		ImGui.SetCursorScreenPos(new Vector2(origin.X + width - buttonWidth, origin.Y + ((height - M3Widgets.ButtonHeight) * 0.5f)));
 		if (M3Widgets.Button("##tutorial_switch_rotation", switchLabel, M3ButtonStyle.Tonal, FontAwesomeIcon.Sync,
-			tooltip: "Pick another rotation for this job."))
+			tooltip: Loc.T("Pick another rotation for this job.")))
 		{
 			ImGui.OpenPopup(pickerId);
 		}
@@ -942,14 +942,14 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		DrawAoECard();
 
-		using (M3Card.Begin("tutorial_auto_switch", "Auto switch", FontAwesomeIcon.PowerOff,
-			subtitle: "When RSR switches itself on and off."))
+		using (M3Card.Begin("tutorial_auto_switch", Loc.T("Auto switch"), FontAwesomeIcon.PowerOff,
+			subtitle: Loc.T("When RSR switches itself on and off.")))
 		{
 			DrawSwitch("tutorial_start_on_countdown", "Turn on Auto when a countdown starts",
 				"Switches on as soon as a pull timer begins, so the rotation can time its pre-pull actions.",
 				Service.Config.StartOnCountdown);
 			DrawSwitch("tutorial_off_after_combat", "Turn off after combat",
-				$"Switches off once you have been out of combat for {Service.Config.AutoOffAfterCombatTime:0} seconds. The delay is on the Auto page.",
+				string.Format(Loc.T("Switches off once you have been out of combat for {0:0} seconds. The delay is on the Auto page."), Service.Config.AutoOffAfterCombatTime),
 				Service.Config.AutoOffAfterCombat);
 			DrawSwitch("tutorial_off_when_dead", "Turn off when you die",
 				"Stops RSR when you are knocked out.",
@@ -974,8 +974,8 @@ internal sealed class FirstStartTutorialWindow : Window
 			new("Full", FontAwesomeIcon.Bullseye, "Every AoE action."),
 		];
 
-		using var card = M3Card.Begin("tutorial_auto_aoe", "AoE usage", FontAwesomeIcon.Bullseye,
-			subtitle: "How freely RSR uses area attacks. A macro can change it too, for example /rotation Settings AoEType Cleave.");
+		using var card = M3Card.Begin("tutorial_auto_aoe", Loc.T("AoE usage"), FontAwesomeIcon.Bullseye,
+			subtitle: Loc.T("How freely RSR uses area attacks. A macro can change it too, for example /rotation Settings AoEType Cleave."));
 
 		var current = Service.Config.AoEType switch
 		{
@@ -1010,8 +1010,8 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	private static void DrawTargetStep()
 	{
-		using (M3Card.Begin("tutorial_targeting_rules", "Hostile targeting", FontAwesomeIcon.Crosshairs,
-			subtitle: "In Auto, RSR picks targets by the highlighted rule, and each /rotation Auto moves along the list. Click a rule to make it the active one."))
+		using (M3Card.Begin("tutorial_targeting_rules", Loc.T("Hostile targeting"), FontAwesomeIcon.Crosshairs,
+			subtitle: Loc.T("In Auto, RSR picks targets by the highlighted rule, and each /rotation Auto moves along the list. Click a rule to make it the active one.")))
 		{
 			DrawTargetingRules();
 		}
@@ -1030,7 +1030,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		if (types.Count == 0)
 		{
 			using var color = ImRaii.PushColor(ImGuiCol.Text, M3.Alpha(s.OnSurfaceVariant, 0.95f));
-			ImGui.TextWrapped("The list is empty. RSR fills in its defaults the first time it needs a rule.");
+			ImGui.TextWrapped(Loc.T("The list is empty. RSR fills in its defaults the first time it needs a rule."));
 			return;
 		}
 
@@ -1055,8 +1055,8 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	private static void DrawOverlaysStep()
 	{
-		using (M3Card.Begin("tutorial_overlay_windows", "Windows", FontAwesomeIcon.WindowRestore,
-			subtitle: "Each appears as soon as it is switched on, once a rotation is loaded."))
+		using (M3Card.Begin("tutorial_overlay_windows", Loc.T("Windows"), FontAwesomeIcon.WindowRestore,
+			subtitle: Loc.T("Each appears as soon as it is switched on, once a rotation is loaded.")))
 		{
 			DrawSwitch("tutorial_control_window", "Control window",
 				"The autorotation state, the rotation's live status and one-click special commands.",
@@ -1072,7 +1072,7 @@ internal sealed class FirstStartTutorialWindow : Window
 				Service.Config.OnlyShowWithHostileOrInDuty);
 		}
 
-		using (M3Card.Begin("tutorial_overlay_teaching", "Teaching mode", FontAwesomeIcon.GraduationCap))
+		using (M3Card.Begin("tutorial_overlay_teaching", Loc.T("Teaching mode"), FontAwesomeIcon.GraduationCap))
 		{
 			DrawSwitch("tutorial_teaching_mode", "Highlight the next action on your hotbars",
 				"Lights up the button RSR wants next. Pair it with Target Only mode, where RSR picks targets and you press the buttons, to learn a rotation hands-on.",
@@ -1119,14 +1119,14 @@ internal sealed class FirstStartTutorialWindow : Window
 			DrawMacro(i, StarterMacros[i]);
 		}
 
-		M3Widgets.SectionLabel("Handy commands");
+		M3Widgets.SectionLabel(Loc.T("Handy commands"));
 		for (var i = 0; i < Commands.Length; i++)
 		{
 			var command = Commands[i];
-			if (M3SettingRow.NavigationRow($"##tutorial_command_{i}", command.Command, command.Description,
+			if (M3SettingRow.NavigationRow($"##tutorial_command_{i}", command.Command, Loc.T(command.Description),
 				FontAwesomeIcon.Terminal, FontAwesomeIcon.Copy))
 			{
-				CopyToClipboard(command.Command, $"Copied {command.Command}");
+				CopyToClipboard(command.Command, string.Format(Loc.T("Copied {0}"), command.Command));
 			}
 		}
 
@@ -1137,11 +1137,11 @@ internal sealed class FirstStartTutorialWindow : Window
 	private static void DrawFinishStep()
 	{
 		_ = M3Widgets.Banner("##tutorial_try_it",
-			"Try it on a striking dummy: target one, run /rotation Manual and watch. Run /rotation Off when you are done.",
+			Loc.T("Try it on a striking dummy: target one, run /rotation Manual and watch. Run /rotation Off when you are done."),
 			M3Severity.Success, FontAwesomeIcon.Dumbbell);
 
 		Gap(12f);
-		M3Widgets.SectionLabel("Where next");
+		M3Widgets.SectionLabel(Loc.T("Where next"));
 
 		if (M3SettingRow.NavigationRow("##tutorial_finish_settings", "Open the settings",
 			"All the settings, including the ones this tour skipped.", FontAwesomeIcon.Cog, FontAwesomeIcon.ChevronRight))
@@ -1240,10 +1240,10 @@ internal sealed class FirstStartTutorialWindow : Window
 		float titleHeight;
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			titleHeight = ImGui.CalcTextSize(tile.Title, false, textWidth).Y;
+			titleHeight = ImGui.CalcTextSize(Loc.T(tile.Title), false, textWidth).Y;
 		}
 
-		var bodyHeight = ImGui.CalcTextSize(tile.Text, false, textWidth).Y;
+		var bodyHeight = ImGui.CalcTextSize(Loc.T(tile.Text), false, textWidth).Y;
 		return padding + TileIconDiameter + (10f * scale) + titleHeight + (4f * scale) + bodyHeight + padding;
 	}
 
@@ -1266,15 +1266,15 @@ internal sealed class FirstStartTutorialWindow : Window
 		float titleBottom;
 		using (ImRaii.PushFont(M3.TitleMedium))
 		{
-			titleBottom = M3Draw.WrappedText(tile.Title, new Vector2(min.X + padding, iconMax.Y + (10f * scale)), textWidth, s.OnSurface);
+			titleBottom = M3Draw.WrappedText(Loc.T(tile.Title), new Vector2(min.X + padding, iconMax.Y + (10f * scale)), textWidth, s.OnSurface);
 		}
 
-		_ = M3Draw.WrappedText(tile.Text, new Vector2(min.X + padding, titleBottom + (4f * scale)), textWidth, M3.Alpha(s.OnSurfaceVariant, 0.92f));
+		_ = M3Draw.WrappedText(Loc.T(tile.Text), new Vector2(min.X + padding, titleBottom + (4f * scale)), textWidth, M3.Alpha(s.OnSurfaceVariant, 0.92f));
 	}
 
 	private static void DrawInfoCard(string id, string title, FontAwesomeIcon icon, params ReadOnlySpan<string> bullets)
 	{
-		using var card = M3Card.Begin(id, title, icon);
+		using var card = M3Card.Begin(id, Loc.T(title), icon);
 		DrawBullets(bullets);
 	}
 
@@ -1283,20 +1283,20 @@ internal sealed class FirstStartTutorialWindow : Window
 		using var spacing = ImRaii.PushStyle(ImGuiStyleVar.ItemSpacing, new Vector2(8f, 6f) * M3.Scale);
 		foreach (var item in items)
 		{
-			M3Text.Bullet(item);
+			M3Text.Bullet(Loc.T(item));
 		}
 	}
 
 	private static void DrawNote(string text)
 	{
-		_ = M3Widgets.Banner($"##tutorial_note_{text.GetHashCode()}", text, M3Severity.Info, FontAwesomeIcon.Lightbulb);
+		_ = M3Widgets.Banner($"##tutorial_note_{text.GetHashCode()}", Loc.T(text), M3Severity.Info, FontAwesomeIcon.Lightbulb);
 		Gap(8f);
 	}
 
 	private static void DrawSwitch(string id, string label, string supporting, ConditionBoolean setting)
 	{
 		var value = setting.Value;
-		if (M3Widgets.RowSwitch($"{label}###{id}", ref value, supporting))
+		if (M3Widgets.RowSwitch($"{Loc.T(label)}###{id}", ref value, Loc.T(supporting)))
 		{
 			setting.Value = value;
 		}
@@ -1353,8 +1353,8 @@ internal sealed class FirstStartTutorialWindow : Window
 
 	private static void DrawPracticeSettings()
 	{
-		using var card = M3Card.Begin("tutorial_practice", "Try it here", FontAwesomeIcon.Flask,
-			subtitle: "Practice settings. They behave like the real ones, but change nothing in RSR.");
+		using var card = M3Card.Begin("tutorial_practice", Loc.T("Try it here"), FontAwesomeIcon.Flask,
+			subtitle: Loc.T("Practice settings. They behave like the real ones, but change nothing in RSR."));
 
 		var toggle = M3SettingRow.Begin("Practice toggle", "Right-click this row to see its chat command.", M3Widgets.SwitchSize());
 		_ = M3Widgets.Switch("##tutorial_practice_toggle", ref _practiceToggle);
@@ -1373,7 +1373,7 @@ internal sealed class FirstStartTutorialWindow : Window
 	{
 		var key = $"tutorial_practice_popup_{name}";
 		var command = $"{Service.COMMAND} {OtherCommandType.Settings} {name} {defaultValue}";
-		void Copy() => CopyToClipboard(command, $"Copied {command} (a practice command, it does nothing in chat).");
+		void Copy() => CopyToClipboard(command, string.Format(Loc.T("Copied {0} (a practice command, it does nothing in chat)."), command));
 
 		ImGuiHelper.DrawHotKeysPopup(key, string.Empty,
 			("Reset to Default Value.", reset, []),
@@ -1388,7 +1388,7 @@ internal sealed class FirstStartTutorialWindow : Window
 		var s = M3.Scheme;
 		var scale = M3.Scale;
 
-		using var card = M3Card.Begin($"tutorial_macro_{index}", macro.Title, macro.Icon, style: M3CardStyle.Outlined, subtitle: macro.Description);
+		using var card = M3Card.Begin($"tutorial_macro_{index}", Loc.T(macro.Title), macro.Icon, style: M3CardStyle.Outlined, subtitle: Loc.T(macro.Description));
 
 		var width = MathF.Max(64f * scale, ImGui.GetContentRegionAvail().X - M3Card.RightInset);
 		var copyWidth = M3Widgets.CopyButtonWidth();
@@ -1437,7 +1437,7 @@ internal sealed class FirstStartTutorialWindow : Window
 
 		if (DataCenter.IsTargetOnly)
 		{
-			return ($"Target Only, {DataCenter.TargetingType}", s.Secondary);
+			return (string.Format(Loc.T("Target Only, {0}"), DataCenter.TargetingType), s.Secondary);
 		}
 
 		if (DataCenter.IsAutoDuty)

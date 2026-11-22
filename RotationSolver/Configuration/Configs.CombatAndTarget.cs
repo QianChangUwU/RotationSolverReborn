@@ -102,6 +102,10 @@ internal partial class Configs
 	Filter = UiInformation)]
 	private static readonly bool _changelogPopup = true;
 
+	[UI("UI Language", Filter = UiInformation,
+		Description = "Choose the language used in the plugin UI. \"Follow the client\" uses Chinese on Chinese clients and English otherwise.")]
+	public UILanguage UILanguage { get; set; } = UILanguage.Auto;
+
 	[ConditionBool, UI("Show RSR's state in the server info bar",
 	Filter = UiInformation)]
 	private static readonly bool _showInfoOnDtr = true;

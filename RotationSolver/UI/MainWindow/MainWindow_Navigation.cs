@@ -1,4 +1,4 @@
-using Dalamud.Interface.Colors;
+﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
@@ -301,8 +301,8 @@ public partial class MainWindow
 				}
 
 				ImGui.Separator();
-				ImGui.TextDisabled($"Game version: {attribute.GameVersion}");
-				ImGui.TextDisabled("Right-click to pick a different rotation.");
+				ImGui.TextDisabled(string.Format(Loc.T("Game version: {0}"), attribute.GameVersion));
+				ImGui.TextDisabled(Loc.T("Right-click to pick a different rotation."));
 			});
 		}
 
@@ -495,23 +495,23 @@ public partial class MainWindow
 		}
 		else
 		{
-			_ = diagInfo.AppendLine($"OS Type: {_cachedDiagInfo.Platform}");
-			_ = diagInfo.AppendLine($"FFXIV Version: {_cachedDiagInfo.GameVersion}");
-			_ = diagInfo.AppendLine($"Dalamud Version: {Svc.PluginInterface.GetDalamudVersion().Version.ToString()}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("OS Type: {0}"), _cachedDiagInfo.Platform));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("FFXIV Version: {0}"), _cachedDiagInfo.GameVersion));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Dalamud Version: {0}"), Svc.PluginInterface.GetDalamudVersion().Version.ToString()));
 			_ = diagInfo.AppendLine($"Rotation Solver Reborn v{_cachedDiagInfo.RSRVersion}");
-			_ = diagInfo.AppendLine($"Dalamud Staging: {DataCenter.DalamudStagingEnabled}");
-			_ = diagInfo.AppendLine($"Game Language: {_cachedDiagInfo.Language}");
-			_ = diagInfo.AppendLine($"Update Frequency: {Service.Config.MinUpdatingTime}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Dalamud Staging: {0}"), DataCenter.DalamudStagingEnabled));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Game Language: {0}"), _cachedDiagInfo.Language));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Update Frequency: {0}"), Service.Config.MinUpdatingTime));
 			_ = diagInfo.AppendLine($"Intercept: {Service.Config.InterceptAction3}");
-			_ = diagInfo.AppendLine($"Player Level: {DataCenter.PlayerSyncedLevel()}");
-			_ = diagInfo.AppendLine($"Rotation Name: {_curRotationAttribute?.Name ?? string.Empty}");
-			_ = diagInfo.AppendLine($"Player Job: {Player.Job}");
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Player Level: {0}"), DataCenter.PlayerSyncedLevel()));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Rotation Name: {0}"), _curRotationAttribute?.Name ?? string.Empty));
+			_ = diagInfo.AppendLine(string.Format(Loc.T("Player Job: {0}"), Player.Job));
 			_ = diagInfo.AppendLine($"AutoFaceTargetOnActionSetting: {DataCenter.AutoFaceTargetOnActionSetting()}");
 			var moveModeValue = DataCenter.MoveModeSetting();
 			var moveModeText = moveModeValue switch
 			{
-				0 => "Standard",
-				1 => "Legacy",
+				0 => Loc.T("Standard"),
+				1 => Loc.T("Legacy"),
 				_ => moveModeValue.ToString()
 			};
 			_ = diagInfo.AppendLine($"MoveModeSetting: {moveModeText}");
@@ -521,17 +521,17 @@ public partial class MainWindow
 		if (!string.IsNullOrEmpty(lastFrame))
 		{
 			_ = diagInfo.AppendLine();
-			_ = diagInfo.AppendLine("Last Action Tracer Frame:");
+			_ = diagInfo.AppendLine(Loc.T("Last Action Tracer Frame:"));
 			_ = diagInfo.Append(lastFrame);
 		}
 
 		anyCrash = false;
-		_ = diagInfo.AppendLine("\nPlugins:");
+		_ = diagInfo.AppendLine("\n" + Loc.T("Plugins:"));
 		foreach (var item in PluginCompatibility.IncompatiblePlugins)
 		{
 			if (item.IsEnabled)
 			{
-				var name = item.Name ?? "Unnamed Incompatible Plugin";
+				var name = item.Name ?? Loc.T("Unnamed Incompatible Plugin");
 
 				if (item.Type.HasFlag(CompatibleType.Crash))
 				{

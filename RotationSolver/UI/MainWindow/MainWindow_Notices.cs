@@ -1,4 +1,4 @@
-using ECommons.ExcelServices;
+﻿using ECommons.ExcelServices;
 using ECommons.GameHelpers;
 using RebornMaterial;
 
@@ -172,23 +172,14 @@ public partial class MainWindow
 		{
 			var supporterIndex = _hintRng.Next(_supporters.Length);
 			var supporter = _supporters[supporterIndex];
-			return $"Special thanks to supporter: {supporter}!";
+			return string.Format(Loc.T("Special thanks to supporter: {0}!"), supporter);
 		}
-		if (CNLanguageClient)
+		if (_baseUsageHints == null || _baseUsageHints.Length == 0)
 		{
-			if (_baseUsageHintsCN != null && _baseUsageHintsCN.Length > 0 && index >= 0 && index < _baseUsageHintsCN.Length)
-			{
-				return _baseUsageHintsCN[index];
-			}
+			return Loc.T("Thank you for using Rotation Solver Reborn!") ?? string.Empty;
 		}
-		else
-		{
-			if (_baseUsageHints != null && _baseUsageHints.Length > 0 && index >= 0 && index < _baseUsageHints.Length)
-			{
-				return _baseUsageHints[index];
-			}
-		}
-		return "Thank you for using Rotation Solver Reborn!";
+		var hint = _baseUsageHints[index >= 0 && index < _baseUsageHints.Length ? index : 0];
+		return Loc.T(hint) ?? hint;
 	}
 
 	private bool DrawNotices()
@@ -201,7 +192,7 @@ public partial class MainWindow
 			if (DataCenter.DalamudStagingEnabled)
 			{
 				_ = M3Widgets.Banner("##staging_banner",
-					"You are running the staging branch of Dalamud. For best compatibility, use XIVLauncher and switch back to the release branch when one is available for your game version.",
+					Loc.T("You are running the staging branch of Dalamud. For best compatibility, use XIVLauncher and switch back to the release branch when one is available for your game version."),
 					M3Severity.Warning, FontAwesomeIcon.Flask);
 				ImGui.Dummy(new Vector2(0f, M3.Space2));
 				drewAnything = true;
@@ -255,7 +246,7 @@ public partial class MainWindow
 			return drewAnything;
 		}
 
-		var hints = CNLanguageClient ? _baseUsageHintsCN : _baseUsageHints;
+		var hints = _baseUsageHints;
 		if (hints == null || hints.Length == 0)
 		{
 			return drewAnything;
@@ -290,7 +281,7 @@ public partial class MainWindow
 		}
 
 		if (M3Widgets.Banner("##usage_tip", _cachedTipText ?? string.Empty, M3Severity.Info, FontAwesomeIcon.Lightbulb,
-			CNLanguageClient ? "复制" : "Copy"))
+			Loc.T("Copy")))
 		{
 			try
 			{

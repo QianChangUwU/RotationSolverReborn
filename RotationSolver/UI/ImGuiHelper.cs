@@ -1,4 +1,4 @@
-using Dalamud.Game.ClientState.Keys;
+﻿using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
@@ -64,7 +64,7 @@ internal static class ImGuiHelper
 				ImGui.SameLine();
 				ImGui.Indent(INDENT_WIDTH);
 			}
-			ImGui.Text(" → ");
+			ImGui.Text(Loc.T(" → "));
 			ImGui.SameLine();
 			ImGui.TextWrapped(help);
 			if (sameLine)
@@ -530,14 +530,14 @@ internal static class ImGuiHelper
 	{
 		if (type == CombatType.None)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudRed, " None of PvE or PvP!");
+			ImGui.TextColored(ImGuiColors.DalamudRed, Loc.T(" None of PvE or PvP!"));
 			return;
 		}
 
 		var first = true;
 		if (type.HasFlag(CombatType.PvE))
 		{
-			ImGui.TextColored(ImGuiColors.DalamudYellow, " PvE");
+			ImGui.TextColored(ImGuiColors.DalamudYellow, Loc.T(" PvE"));
 			first = false;
 		}
 
@@ -548,7 +548,7 @@ internal static class ImGuiHelper
 				ImGui.SameLine();
 			}
 
-			ImGui.TextColored(ImGuiColors.TankBlue, " PvP");
+			ImGui.TextColored(ImGuiColors.TankBlue, Loc.T(" PvP"));
 		}
 	}
 }

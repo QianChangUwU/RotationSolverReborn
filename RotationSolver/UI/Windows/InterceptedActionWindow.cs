@@ -62,11 +62,11 @@ internal class InterceptedActionWindow : Window
 
 		if (cur == null)
 		{
-			ImGui.TextColored(ImGuiColors.DalamudGrey, "No intercepted actions queued.");
+			ImGui.TextColored(ImGuiColors.DalamudGrey, Loc.T("No intercepted actions queued."));
 			return;
 		}
 
-		ImGui.TextColored(ImGuiColors.DalamudWhite, "Current Intercepted Action");
+		ImGui.TextColored(ImGuiColors.DalamudWhite, Loc.T("Current Intercepted Action"));
 		FullControlWindow.DrawIAction(cur, gcdWidth, 1);
 	}
 }
