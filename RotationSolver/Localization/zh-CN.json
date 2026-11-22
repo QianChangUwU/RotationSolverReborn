@@ -4128,5 +4128,6 @@
   "Update for patch": "\u7248\u672C\u8865\u4E01\u66F4\u65B0",
   "November 2, 2026": "2026 \u5E74 11 \u6708 2 \u65E5",
   "Misc core things": "\u6742\u9879\u6838\u5FC3\u5185\u5BB9",
-  "Built against the latest dalamud version, updated sourcegen, and updated UI to fix a few bugs.": "\u9488\u5BF9\u6700\u65B0 Dalamud \u7248\u672C\u6784\u5EFA\uFF0C\u66F4\u65B0\u4E86 sourcegen\uFF0C\u5E76\u66F4\u65B0 UI \u4FEE\u590D\u4E86\u4E00\u4E9B bug\u3002"
+  "Built against the latest dalamud version, updated sourcegen, and updated UI to fix a few bugs.": "\u9488\u5BF9\u6700\u65B0 Dalamud \u7248\u672C\u6784\u5EFA\uFF0C\u66F4\u65B0\u4E86 sourcegen\uFF0C\u5E76\u66F4\u65B0 UI \u4FEE\u590D\u4E86\u4E00\u4E9B bug\u3002",
+  "Manual select target": "\u624B\u52A8\u9009\u62E9\u76EE\u6807"
 }

@@ -4,10 +4,12 @@
 	{
 		public static string ToStateString(this StateCommandType stateType)
 		{
-			var name = Loc.T(stateType.ToString());
-			return stateType == StateCommandType.Auto || stateType == StateCommandType.TargetOnly
-				? $"{name} ({DataCenter.TargetingType.GetDescription()})"
-				: name;
+			return stateType switch
+			{
+				StateCommandType.Auto => DataCenter.TargetingType.GetDescription(),
+				StateCommandType.Manual => Loc.T("Manual select target") ?? string.Empty,
+				_ => Loc.T(stateType.ToString()) ?? stateType.ToString(),
+			};
 		}
 
 		public static string ToSpecialString(this SpecialCommandType specialType)
